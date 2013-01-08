@@ -53,11 +53,11 @@ public class Drive extends Subsystem {
     }
     
     public double getLeftEncoderDistance() {
-        return -leftEncoder.get() / 256.0 * 3.5 * 3.14159265;
+        return -leftEncoder.get() / 256.0 * 3.5 * Math.PI;
     }
     
     public double getRightEncoderDistance() {
-        return -rightEncoder.get() / 256.0 * 3.5 * 3.14159265;
+        return -rightEncoder.get() / 256.0 * 3.5 * Math.PI;
     }
     
     public void resetEncoders() {
