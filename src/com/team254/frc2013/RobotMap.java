@@ -20,12 +20,18 @@ public class RobotMap {
     // OI hardware
     public static final int leftJoystickPort = 1;
     public static final int rightJoystickPort = 2;
+    public static final int gamepadPort = 3;
     
     // Robot hardware
     public static final int leftDrivePortA = 5;
     public static final int leftDrivePortB = 4;
     public static final int rightDrivePortA = 6;
     public static final int rightDrivePortB = 7;
+    
+    // Intake rollers (for testing purposes)
+    public static final int intakePortA = 2;
+    public static final int intakePortB = 1;
+    public static final int intakePortC = 10;
     
     // Sensors
     public static final int leftEncoderPortA = 2;

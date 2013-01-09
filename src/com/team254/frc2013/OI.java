@@ -15,13 +15,20 @@ public class OI {
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button
     // number it is.
+    
+    // Joysticks
     public Joystick leftStick = new Joystick(RobotMap.leftJoystickPort);
     public Joystick rightStick = new Joystick(RobotMap.rightJoystickPort);
-    // Joystick stick = new Joystick(port);
-    public Button button = new JoystickButton(leftStick, 1);
     
-
-   // button.whenPressed(new DriveDistanceCommand(100,.5, 10));
+    // Joystick buttons
+    public Button button = new JoystickButton(leftStick, 1);
+    public Button intakeButton = new JoystickButton(rightStick, 1);
+    
+    // Game controller
+    public Joystick gamepad = new Joystick(RobotMap.gamepadPort);
+    
+    
+    // button.whenPressed(new DriveDistanceCommand(100,.5, 10));
         
     // Another type of button you can create is a DigitalIOButton, which is
     // a button or switch hooked up to the cypress module. These are useful if

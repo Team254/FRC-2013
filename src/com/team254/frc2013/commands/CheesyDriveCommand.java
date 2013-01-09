@@ -5,7 +5,6 @@
 package com.team254.frc2013.commands;
 
 import com.team254.lib.Util;
-import com.team254.lib.debug.ThrottledPrinter;
 
 /**
  *
@@ -15,7 +14,6 @@ public class CheesyDriveCommand extends CommandBase {
     
     private double old_wheel_ = 0.0;
     private double quickStopAccumulator_;
-    private ThrottledPrinter printer = new ThrottledPrinter(0.1);
     
     public CheesyDriveCommand() {
         requires(drive);
@@ -36,6 +34,13 @@ public class CheesyDriveCommand extends CommandBase {
         // getX()...not sure yet (untested)
         double wheel = oi.rightStick.getX();
         double throttle = -oi.leftStick.getY();
+        
+         
+        /*
+         * Game controller code
+        double throttle = oi.gamepad.getRawAxis(2);
+        double wheel = oi.gamepad.getRawAxis(4);
+        */
         
         double neg_inertia = wheel - old_wheel_;
         old_wheel_ = wheel; //get wheel

@@ -10,6 +10,7 @@ import com.team254.frc2013.commands.TankDriveCommand;
 import com.team254.lib.Util;
 import com.team254.lib.debug.ThrottledPrinter;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -19,10 +20,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drive extends Subsystem {
 
-    private Victor leftDriveA = new Victor(RobotMap.leftDrivePortA);
-    private Victor leftDriveB = new Victor(RobotMap.leftDrivePortB);
-    private Victor rightDriveA = new Victor(RobotMap.rightDrivePortA);
-    private Victor rightDriveB = new Victor(RobotMap.rightDrivePortB);
+    private Talon leftDriveA = new Talon(RobotMap.leftDrivePortA);
+    private Talon leftDriveB = new Talon(RobotMap.leftDrivePortB);
+    private Talon rightDriveA = new Talon(RobotMap.rightDrivePortA);
+    private Talon rightDriveB = new Talon(RobotMap.rightDrivePortB);
     
     private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderPortA, RobotMap.leftEncoderPortB);
     private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderPortA, RobotMap.rightDrivePortB);

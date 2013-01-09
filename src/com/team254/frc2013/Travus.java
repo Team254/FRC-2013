@@ -8,11 +8,11 @@
 package com.team254.frc2013;
 
 
+import com.team254.frc2013.commands.CommandBase;
+import com.team254.frc2013.commands.ExampleCommand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import com.team254.frc2013.commands.CommandBase;
-import com.team254.frc2013.commands.ExampleCommand;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -56,6 +56,7 @@ public class Travus extends IterativeRobot {
         // this line or comment it out.
         autonomousCommand.cancel();
         System.out.println("I am in Teleop, broseph.");
+        System.out.println("Robot Init! testing talons...");
     }
 
     /**
