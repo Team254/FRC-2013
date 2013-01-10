@@ -27,34 +27,17 @@ public class ProfiledPIDController {
     double t_total;
     double m_setpoint;
     Timer timer = new Timer();
-    PIDSource m_source;
-
-    private class PIDTask extends TimerTask {
-
-        private ProfiledPIDController m_controller;
-
-        public PIDTask(ProfiledPIDController controller) {
-            if (controller == null) {
-                throw new NullPointerException("Given ProfiledPIDController was null");
-            }
-            m_controller = controller;
-        }
-
-        public void run() {
-            m_controller.calculate();
-        }
-    }
+    ProfiledPIDSource m_source;
 
     public ProfiledPIDController(double Kp, double Ki, double Kd, double Kf,
             PIDSource source, PIDOutput output,
             double period) {
         m_period = period;
+        m_source = new ProfiledPIDSource(source, this);
         controller = new PIDController(Kp, Ki,Kd, Kf, source, output,period);
-        m_controlLoop.schedule(new PIDTask(this), 0L, (long) (m_period * 1000));
-        m_source = source;
     }
     
-    private void calculate() {
+    protected void calculate() {
         double t = timer.get();
         double setpoint = controller.getSetpoint();
         if (t < t_to_max_v) { // accelerate up
@@ -81,7 +64,7 @@ public class ProfiledPIDController {
       timer.reset();
       
       // Set setpoint to current value of PIDSource
-      controller.setSetpoint(m_source.pidGet());
+      controller.setSetpoint(m_source.pidGetRaw());
     }
     
 }
