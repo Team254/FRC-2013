@@ -13,7 +13,7 @@ import com.team254.frc2013.commands.ExampleCommand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-
+import java.io.*;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -35,6 +35,20 @@ public class Travus extends IterativeRobot {
 
         // Initialize all subsystems
         CommandBase.init();
+
+	//Initializes Constants
+	BufferedReader inputStream = new BufferedReader(new FileReader("constants.txt"));
+  	String constantLine, name;
+  	double value;
+  	HashMap moddedConstants = new HashMap();
+  	while ((constantLine = inputStream.readLine()) != null) {
+     		String[] splitted = constantLine.split("=");
+      		name = splitted[0].trim();
+      		value = Double.parseDouble(splitted[1].trim());
+      		moddedConstants.put(name, value);
+  	}
+  	RobotMap.set(moddedConstants);
+
     }
 
     public void autonomousInit() {
