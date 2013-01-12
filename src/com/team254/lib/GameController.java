@@ -33,6 +33,8 @@ public class GameController extends Joystick {
     private static final int kGamepadButtonRightStick = 10;
     private static final int kGamepadButtonMode = -1;
     private static final int kGamepadButtonLogitech = -1;
+    private static final int kDPadXAxisNum = 5;
+    private static final int kDPadYAxisNum = 6;
     
     //Gamepad Itself!
     public GameController(int gamepadPort) {
@@ -95,4 +97,54 @@ public class GameController extends Joystick {
             return null;
         }
     }
+    
+    //Get the DPad axis' positions
+    private double getDPadX() {
+      return getRawAxis(kDPadXAxisNum);
+    }
+    
+    private double getDPadY() {
+      return getRawAxis(kDPadYAxisNum);
+    }
+    
+    //DPad - In Betweens 
+    public boolean getDPadUpLeft() {
+      double x = getDPadX();
+      double y = getDPadY();
+      return (x < -0.5 && y < -0.5);
+    }
+    public boolean getDPadDownLeft() {
+      double x = getDPadX();
+      double y = getDPadY();
+      return (x < -0.5 && y > 0.5);
+    }
+    public boolean getDPadDownRight() {
+      double x = getDPadX();
+      double y = getDPadY();
+      return (x > 0.5 && y > 0.5);
+    }
+    public boolean getDPadUpRight() {
+      double x = getDPadX();
+      double y = getDPadY();
+      return (x > 0.5 && y < -0.5);
+    }
+    
+    //DPad - Cardinal Directions
+    public boolean getDPadUp() {
+      double y = getDPadY();
+      return (y < -0.5);
+    }
+    public boolean getDPadLeft() {
+      double x = getDPadX();
+      return (x < -0.5);
+    }
+    public boolean getDPadDown() {
+      double y = getDPadY();
+      return (y > 0.5);
+    }
+    public boolean getDPadRight() {
+      double x = getDPadX();
+      return (x > 0.5);
+    }
+ 
 }
