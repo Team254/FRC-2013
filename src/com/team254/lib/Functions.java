@@ -5,15 +5,15 @@ package com.team254.lib;
  */
 public class Functions {
   /**
-  *  Calculates the sine wave and returns it.
-  */
+   * Calculates the sine wave and returns it.
+   */
   public static double SineWave(double timeSec, double periodSec, double amplitude) {
     return Math.sin(timeSec * 2 * Math.PI / periodSec) * amplitude;
   }
     
   /**
-  *  Calculates the square wave and returns the correct amplitude.
-  */
+   * Calculates the square wave and returns the correct amplitude.
+   */
   public static double SquareWave(double timeSec, double periodSec, double amplitude) {
     int periodMs = (int)(periodSec * 1000);
     int incrementTimeMs = (int)(timeSec * 1000) % periodMs;

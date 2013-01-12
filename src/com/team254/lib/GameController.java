@@ -32,63 +32,63 @@ public class GameController extends Joystick {
   
   /**
    * Constructor that creates a Joystick object.
-	*/
+   */
   public GameController(int gamepadPort) {
     super(gamepadPort);
   }
 
   /**
    * Returns the X position of the left stick.
-	*/
+   */
   public double getLeftX() {
     return getRawAxis(kGamepadAxisLeftStickX);
   }
    
   /**
    * Returns the X position of the right stick.
-	*/
+   */
   public double getRightX() {
     return getRawAxis(kGamepadAxisRightStickX);
   }
 
   /**
    * Returns the Y position of the left stick.
-	*/
+   */
   public double getLeftY() {
     return getRawAxis(kGamepadAxisLeftStickY);
   }
 
   /**
    * Returns the Y position of the right stick.
-	*/
+   */
   public double getRightY(){
     return getRawAxis(kGamepadAxisRightStickY);
   }
 
   /**
    * Checks whether Button A is being pressed and returns true if it is.
-	*/
+   */
   public boolean getButtonStateA() {
     return getRawButton(kGamepadButtonA);
   }
   
   /**
    * Checks whether Button B is being pressed and returns true if it is.
-	*/
+   */
   public boolean getButtonStateB() {
     return getRawButton(kGamepadButtonB);
   }
   
   /**
    * Checks whether Button X is being pressed and returns true if it is.
-	*/
+	 */
   public boolean getButtonStateX() { 
     return getRawButton(kGamepadButtonX);
   }
   
   /**
    * Checks whether Button Y is being pressed and returns true if it is.
-	*/
+	 */
   public boolean getButtonStateY() {
     return getRawButton(kGamepadButtonY);
   }
@@ -96,28 +96,28 @@ public class GameController extends Joystick {
   
   /**
    * Returns an object of Button A.
-	*/
+	 */
   public JoystickButton getButtonA() {
     return new JoystickButton(this, kGamepadButtonA);
   }
   
   /**
    * Returns an object of Button B.
-	*/
+	 */
   public JoystickButton getButtonB() {
     return new JoystickButton(this, kGamepadButtonB);
   }
   
   /**
    * Returns an object of Button X.
-	*/
+	 */
   public JoystickButton getButtonX() {
     return new JoystickButton(this, kGamepadButtonX);
   }
   
   /**
    * Returns an object of Button Y.
-	*/
+	 */
   public JoystickButton getButtonY() {
     return new JoystickButton(this, kGamepadButtonY);
   }
