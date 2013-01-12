@@ -8,12 +8,13 @@
 package com.team254.frc2013;
 
 
+import com.sun.squawk.io.BufferedReader;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.frc2013.commands.ExampleCommand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-
+import java.util.Hashtable;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -35,6 +36,24 @@ public class Travus extends IterativeRobot {
 
         // Initialize all subsystems
         CommandBase.init();
+        
+        // Java ME doesn't like BufferedReader, FileReader, File, & Scanner :(
+        // TODO: figure a way to read files in Java ME; commented out for now
+        /*
+	BufferedReader inputStream = new BufferedReader(new FileReader("constants.txt"));
+        File file = new File("constants.txt");
+        Scanner in = new Scanner(file);
+  	String constantLine, name;
+  	double value;
+  	Hashtable moddedConstants = new Hashtable();
+  	while ((constantLine = inputStream.readLine()) != null) {
+     		String[] splitted = constantLine.split("=");
+      		name = splitted[0].trim();
+      		value = Double.parseDouble(splitted[1].trim());
+      		moddedConstants.put(name, value);
+  	}
+  	RobotMap.set(moddedConstants);
+        */
     }
 
     public void autonomousInit() {
