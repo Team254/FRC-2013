@@ -1,5 +1,7 @@
 package com.team254.frc2013;
 
+import java.util.Hashtable;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -40,22 +42,23 @@ public class RobotMap {
   public static final int rightEncoderPortB = 5;
   
   //Constants
-  public static double driveTest = 2.54;
-}
-
-public static null set(HashMap constants) {
-  /**
-   * For every constant that could be modified at some point
-   * you need to do the following:
-   * 1) create its static variable on top under constants
-   * 2) make an if statement searching the hashmap for
-   *    a key with the same name as the variable name
-   * 3) in the if statement set the variable to the
-   *    value given by the hashmap with its corresponding
-   *    key
-   * 4) Edit Constants.txt for an modifications
-   */
-  if(constants.containsKey("driveTest")) {
-    driveTest = constants.get("driveTest");
+  public static double testConstant = 2.54;
+  
+  public static void set(Hashtable constants) {
+    /**
+     * For every constant that could be modified at some point
+     * you need to do the following:
+     * 1) create its static variable on top under constants
+     * 2) make an if statement searching the Hashtable for
+     *    a key with the same name as the variable name
+     * 3) in the if statement set the variable to the
+     *    value given by the Hashtable with its corresponding
+     *    key
+     * 4) Edit Constants.txt for modifications
+     */
+      if(constants.containsKey("testConstant")) {
+          Double dub = (Double)constants.get("testConstant");
+          testConstant = dub.doubleValue();
+      }
   }
 }
