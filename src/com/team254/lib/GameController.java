@@ -57,30 +57,42 @@ public class GameController extends Joystick {
     }
 
     //Buttons
-    public boolean getButtonStateA() {
-        return getRawButton(kGamepadButtonA);
-    }
-    public boolean getButtonStateB() {
-        return getRawButton(kGamepadButtonB);
-    }
-    public boolean getButtonStateX() { 
-        return getRawButton(kGamepadButtonX);
-    }
-    public boolean getButtonStateY() {
-        return getRawButton(kGamepadButtonY);
+    public boolean getButtonState(String port) {
+        if(port.equals("A")) {
+            return getRawButton(kGamepadButtonA);
+        }
+        else if(port.equals("B")) {
+            return getRawButton(kGamepadButtonB);
+        }
+        else if(port.equals("X")) {
+            return getRawButton(kGamepadButtonX);
+        }
+        else if(port.equals("Y")) {
+            return getRawButton(kGamepadButtonY);
+        }
+        else {
+            System.out.println("Invalid Button Port!");
+            return false;
+        }
     }
 
     //Buttons
-    public JoystickButton getButtonA() {
-        return new JoystickButton(this, kGamepadButtonA);
-    }
-    public JoystickButton getButtonB() {
-        return new JoystickButton(this, kGamepadButtonB);
-    }
-    public JoystickButton getButtonX() {
-        return new JoystickButton(this, kGamepadButtonX);
-    }
-    public JoystickButton getButtonY() {
-        return new JoystickButton(this, kGamepadButtonY);
+    public JoystickButton getButton(String port) {
+        if(port.equals("A")) {
+            return new JoystickButton(this, kGamepadButtonA);
+        }
+        else if(port.equals("B")) {
+            return new JoystickButton(this, kGamepadButtonB);
+        }
+        else if(port.equals("X")) {
+            return new JoystickButton(this, kGamepadButtonX);
+        }
+        else if(port.equals("Y")) {
+            return new JoystickButton(this, kGamepadButtonY);
+        }
+        else {
+            System.out.println("Invalid Button Port!");
+            return null;
+        }
     }
 }
