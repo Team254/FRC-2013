@@ -1,5 +1,8 @@
 package com.team254.lib;
-
+/**
+ *
+ * @author Dorian Chan
+ */
 public class Functions {
     // Sine Wave
     public static double SineWave(double timeSec, double periodSec, double amplitude) {
