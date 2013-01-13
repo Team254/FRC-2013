@@ -11,6 +11,7 @@ package com.team254.frc2013;
 import com.sun.squawk.io.BufferedReader;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.frc2013.commands.ExampleCommand;
+import com.team254.frc2013.commands.auto.ScriptedAutoMode;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -32,7 +33,7 @@ public class Travus extends IterativeRobot {
      */
     public void robotInit() {
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
+        autonomousCommand = new ScriptedAutoMode("test.txt");
 
         // Initialize all subsystems
         CommandBase.init();
