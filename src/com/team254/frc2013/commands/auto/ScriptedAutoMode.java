@@ -27,7 +27,6 @@ public class ScriptedAutoMode extends CommandGroup {
         Vector list = new Vector();
         
         public void addParam(double p) {
-            System.out.println("added param: " + p);
             list.addElement(new Double(p));
         }
         
@@ -70,40 +69,52 @@ public class ScriptedAutoMode extends CommandGroup {
             
             //Other variables for parsing initialized
             String line;
-            boolean foundCmd = false;
+            
             String cmd = "NULL";
-            ParamList params = new ParamList();
-            int lastSpace = 0;
+            
             
             //Goes through the file line by line
             while ((line = buf.readLine()) != null) {
+                boolean foundCmd = false;
+                ParamList params = new ParamList();
+                int lastSpace = 0;
+                line = line + " ";
                 //ensures the line is not a comment
+                System.out.println("Reading line: " + line);
                 if (line.startsWith("#") || line.length() <= 1) {
                     continue;
                 }
                 //Breaks the line down into substrings
-                for (int i = 0; i < line.length(); ++i) {
-                    if (line.charAt(i) == ' ' || i == line.length() - 1) {
+                for (int i = 0; i < line.length(); i++) {
+                    System.out.print("this is: " + line.charAt(i));
+                    if (line.charAt(i) == ' ' || i == line.length()) {
+                        System.out.println(" true");
                         //Assigns the first word in the line to the command variable
                         if (!foundCmd) {
                             cmd = line.substring(0, i).trim();
-                            System.out.println("cmd: " + cmd);
+                            System.out.println("found cmd: " + cmd);
                             foundCmd = true;
                         }
                         //or else makes the word into a double parameter
                         else {
+                            System.out.println("param thing: " + line.substring(lastSpace,i));
                             String param = line.substring(lastSpace,i).trim();
+                            System.out.println("found param: " + param);
                             params.addParam(Double.parseDouble(param));
                         }
                         lastSpace = i;
                     }
+                    else 
+                         System.out.println(" false");
                 }
                 System.out.println("newline");
+                addCommand(cmd, params);
             }
-            addCommand(cmd, params);
-            c.close();
             
+            c.close();
+            System.out.println("done reading");
         } catch (Exception e) {
+            System.out.println("exception throwin'");
         }
     }
     /*
@@ -121,10 +132,13 @@ public class ScriptedAutoMode extends CommandGroup {
      */
     private void addCommand(String cmd, ParamList params) {
         Command c = null;
+        System.out.println("Command: " + cmd);
         if (checkName(cmd, "DRIVE")) {
-            c = new DriveDistanceCommand(params.at(1), params.at(2), params.at(3));
+            System.out.println("Adding a bunch of params: " + params.at(0) +" "  + params.at(1) +" " + params.at(2));
+            c = new DriveDistanceCommand(params.at(0), params.at(1), params.at(2));
         } else if (checkName(cmd, "WAIT")) {
-            c = new WaitCommand(params.at(1));
+            System.out.println("Adding a bunch of params: " + params.at(0));
+            c = new WaitCommand(params.at(0));
         }
         
         if (c != null) {

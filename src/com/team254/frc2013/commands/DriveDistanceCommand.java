@@ -22,7 +22,7 @@ public class DriveDistanceCommand extends CommandBase {
     }
     
     protected void initialize() {
-        setTimeout(timeout);
+        setTimeout(timeout); // need to fix timeout...this doesn't work (probably use Timer)
         drive.startEncoders();
         drive.resetEncoders();
         drive.setMaxSpeed(maxSpeed);
@@ -41,6 +41,8 @@ public class DriveDistanceCommand extends CommandBase {
 
     protected void end() {
         drive.setMaxSpeed(1.0);
+        drive.driveLR(0.0, 0.0);
+        drive.resetEncoders(); 
     }
 
     protected void interrupted() {
