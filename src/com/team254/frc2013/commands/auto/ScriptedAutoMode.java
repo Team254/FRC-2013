@@ -7,6 +7,7 @@ package com.team254.frc2013.commands.auto;
 import com.sun.squawk.io.BufferedReader;
 import com.sun.squawk.microedition.io.FileConnection;
 import com.team254.frc2013.commands.DriveDistanceCommand;
+import com.team254.frc2013.commands.TurnCommand;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import java.io.DataInputStream;
@@ -92,14 +93,11 @@ public class ScriptedAutoMode extends CommandGroup {
                         //Assigns the first word in the line to the command variable
                         if (!foundCmd) {
                             cmd = line.substring(0, i).trim();
-                            System.out.println("found cmd: " + cmd);
                             foundCmd = true;
                         }
                         //or else makes the word into a double parameter
                         else {
-                            System.out.println("param thing: " + line.substring(lastSpace,i));
                             String param = line.substring(lastSpace,i).trim();
-                            System.out.println("found param: " + param);
                             params.addParam(Double.parseDouble(param));
                         }
                         lastSpace = i;
@@ -112,9 +110,9 @@ public class ScriptedAutoMode extends CommandGroup {
             }
             
             c.close();
-            System.out.println("done reading");
+            System.out.println("DONE!");
         } catch (Exception e) {
-            System.out.println("exception throwin'");
+            System.out.println("EXCEPTION!");
         }
     }
     /*
@@ -132,13 +130,16 @@ public class ScriptedAutoMode extends CommandGroup {
      */
     private void addCommand(String cmd, ParamList params) {
         Command c = null;
-        System.out.println("Command: " + cmd);
+        System.out.println("Adding command: " + cmd);
         if (checkName(cmd, "DRIVE")) {
             System.out.println("Adding a bunch of params: " + params.at(0) +" "  + params.at(1) +" " + params.at(2));
             c = new DriveDistanceCommand(params.at(0), params.at(1), params.at(2));
         } else if (checkName(cmd, "WAIT")) {
             System.out.println("Adding a bunch of params: " + params.at(0));
             c = new WaitCommand(params.at(0));
+        } else if (checkName(cmd, "TURN")) {
+            System.out.println("Adding a bunch of params: " + params.at(0) + " " + params.at(1));
+            c = new TurnCommand(params.at(0), params.at(1));
         }
         
         if (c != null) {

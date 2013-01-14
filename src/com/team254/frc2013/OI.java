@@ -1,6 +1,7 @@
 
 package com.team254.frc2013;
 
+import com.team254.lib.GameController;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
@@ -25,7 +26,7 @@ public class OI {
     public Button intakeButton = new JoystickButton(rightStick, 1);
     
     // Game controller
-    public Joystick gamepad = new Joystick(RobotMap.gamepadPort);
+    public GameController gamepad = new GameController(RobotMap.gamepadPort);
     
     
     // button.whenPressed(new DriveDistanceCommand(100,.5, 10));

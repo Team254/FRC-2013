@@ -7,6 +7,7 @@ package com.team254.frc2013.subsystems;
 import com.team254.frc2013.RobotMap;
 import com.team254.frc2013.commands.CheesyDriveCommand;
 import com.team254.frc2013.commands.TankDriveCommand;
+import com.team254.lib.RelativeGyro;
 import com.team254.lib.Util;
 import com.team254.lib.debug.ThrottledPrinter;
 import edu.wpi.first.wpilibj.Encoder;
@@ -27,6 +28,7 @@ public class Drive extends Subsystem {
     
     private Encoder leftEncoder = new Encoder(RobotMap.leftEncoderPortA, RobotMap.leftEncoderPortB);
     private Encoder rightEncoder = new Encoder(RobotMap.rightEncoderPortA, RobotMap.rightDrivePortB);
+    private RelativeGyro gyro = new RelativeGyro(RobotMap.gyroPort);
     
     double maxSpeed = 1.0;
     
@@ -68,5 +70,13 @@ public class Drive extends Subsystem {
     
     public void setMaxSpeed(double speed) {
         maxSpeed = speed;
+    }
+    
+    public double getGyroAngle() {
+        return gyro.getAngle();
+    }
+    
+    public void resetGyro() {
+        gyro.reset();
     }
 }

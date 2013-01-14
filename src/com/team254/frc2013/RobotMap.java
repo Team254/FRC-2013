@@ -40,6 +40,7 @@ public class RobotMap {
   public static final int leftEncoderPortB = 3;
   public static final int rightEncoderPortA = 4;
   public static final int rightEncoderPortB = 5;
+  public static final int gyroPort = 1;
   
   //Constants
   public static double testConstant = 2.54;

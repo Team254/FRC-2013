@@ -4,6 +4,8 @@
  */
 package com.team254.frc2013.commands;
 
+import edu.wpi.first.wpilibj.Timer;
+
 /**
  *
  * @author Richard
@@ -13,6 +15,7 @@ public class DriveDistanceCommand extends CommandBase {
     private double distance;
     private double maxSpeed;
     private double timeout;
+    Timer t = new Timer();
     
     public DriveDistanceCommand(double distance, double maxSpeed, double timeout) {
         this.distance = distance;
@@ -22,10 +25,10 @@ public class DriveDistanceCommand extends CommandBase {
     }
     
     protected void initialize() {
-        setTimeout(timeout); // need to fix timeout...this doesn't work (probably use Timer)
         drive.startEncoders();
         drive.resetEncoders();
         drive.setMaxSpeed(maxSpeed);
+        t.start();
     }
 
     protected void execute() {
@@ -33,7 +36,11 @@ public class DriveDistanceCommand extends CommandBase {
     }
 
     protected boolean isFinished() {
-        if(drive.getLeftEncoderDistance() > distance || drive.getRightEncoderDistance() > distance) {
+        if(t.get() >= timeout) {
+            System.out.println("DriveDistance timed out.");
+            return true;
+        }
+        else if(drive.getLeftEncoderDistance() > distance || drive.getRightEncoderDistance() > distance) {
             return true;
         }
         return false;
@@ -43,6 +50,7 @@ public class DriveDistanceCommand extends CommandBase {
         drive.setMaxSpeed(1.0);
         drive.driveLR(0.0, 0.0);
         drive.resetEncoders(); 
+        t.stop();
     }
 
     protected void interrupted() {
