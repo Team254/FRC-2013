@@ -30,8 +30,8 @@ public class Constant {
   public String getName(){
     return name;
   }
-  public void setVal(Double value){
-    this.value = value;
+  public void setVal(double value){
+    this.value = new Double(value);
   }
 
   public Constant create(String name, double value) {
