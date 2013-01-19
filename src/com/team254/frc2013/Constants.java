@@ -34,50 +34,55 @@ public class Constants {
       myString = myString.substring(index+seperator.length());
       index = myString.indexOf(seperator);
     }
+    node.addElement(myString);
+
     
     String[] retString = new String[node.size()];
     for(int i = 0; i < node.size(); ++i) {
-      retString[i] = node.elementAt(i).toString();
+      retString[i] = (String)node.elementAt(i);
     }
     
     return retString;
   }
 
   public void set(String file) {
-    Vector lines = new Vector(10, 2);
+    Vector lines = new Vector();
     InputStream in = this.getClass().getResourceAsStream(file);
-    byte[] buffer = new byte[1000];
+    byte[] buffer = new byte[255];
     String content = "";
     
     try {
+      
       //Reads everything from the file into one String
       while(in.read(buffer) != -1) {
         content += new String(buffer);
       }
       
-      
       String[] myLines = strSplit(content, "\n");
-      for(int i = 0; i<myLines.length; ++i){
+
+      for(int i = 0; i < myLines.length; ++i){
         String[] line = strSplit(myLines[i], "=");
         lines.addElement(line);
       }
+
       //Removes reference to the object
       myLines = null;
       
-      for(int i = 0; i < constants.size(); ++i) {
-        Constant myConst = (Constant)constants.elementAt(i);
-        for(int f = 0; f < lines.size(); ++f){
-          String[] myLine = (String[])lines.elementAt(i);
+      for(int i = 0; i < constants.size(); ++i) { //For every Constant in constants...
+
+        Constant myConst = (Constant)constants.elementAt(i); //Sets a temp variable to the current constant
+        for(int f = 0; f < lines.size(); ++f){ //For each character
+          
+          String[] myLine = (String[])lines.elementAt(f);
           if(myLine[0].equals(myConst.getName())){
-            myConst.setVal(Double.parseDouble(myLine[0]));
-            break;
+            myConst.setVal(Double.parseDouble(myLine[1]));
           }
         }
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
-  }
+  } 
   
   
 }  
