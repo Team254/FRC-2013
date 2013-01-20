@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
+ * 
  *
  * @author Richard
  */
@@ -56,43 +57,59 @@ public class GameController extends Joystick {
         return getRawAxis(kGamepadAxisRightStickY);
     }
 
-    //Buttons
-    public boolean getButtonState(String port) {
-        if(port.equals("A")) {
-            return getRawButton(kGamepadButtonA);
-        }
-        else if(port.equals("B")) {
-            return getRawButton(kGamepadButtonB);
-        }
-        else if(port.equals("X")) {
-            return getRawButton(kGamepadButtonX);
-        }
-        else if(port.equals("Y")) {
-            return getRawButton(kGamepadButtonY);
-        }
-        else {
-            System.out.println("Invalid Button Port!");
-            return false;
-        }
+    /**
+     * Checks whether Button A is being pressed and returns true if it is.
+     */
+    public boolean getButtonStateA() {
+        return getRawButton(kGamepadButtonA);
     }
 
-    //Buttons
-    public JoystickButton getButton(String port) {
-        if(port.equals("A")) {
-            return new JoystickButton(this, kGamepadButtonA);
-        }
-        else if(port.equals("B")) {
-            return new JoystickButton(this, kGamepadButtonB);
-        }
-        else if(port.equals("X")) {
-            return new JoystickButton(this, kGamepadButtonX);
-        }
-        else if(port.equals("Y")) {
-            return new JoystickButton(this, kGamepadButtonY);
-        }
-        else {
-            System.out.println("Invalid Button Port!");
-            return null;
-        }
+    /**
+    * Checks whether Button B is being pressed and returns true if it is.
+    */
+    public boolean getButtonStateB() {
+        return getRawButton(kGamepadButtonB);
+    }
+
+    /**
+    * Checks whether Button X is being pressed and returns true if it is.
+          */
+    public boolean getButtonStateX() { 
+        return getRawButton(kGamepadButtonX);
+    }
+
+    /**
+    * Checks whether Button Y is being pressed and returns true if it is.
+          */
+    public boolean getButtonStateY() {
+        return getRawButton(kGamepadButtonY);
+    }
+
+    /**
+     * Returns an object of Button A.
+     */
+    public JoystickButton getButtonA() {
+        return new JoystickButton(this, kGamepadButtonA);
+    }
+
+    /**
+     * Returns an object of Button B.
+     */
+    public JoystickButton getButtonB() {
+        return new JoystickButton(this, kGamepadButtonB);
+    }
+
+    /**
+    * Returns an object of Button X.
+    */
+    public JoystickButton getButtonX() {
+        return new JoystickButton(this, kGamepadButtonX);
+    }
+
+    /**
+    * Returns an object of Button Y.
+    */
+    public JoystickButton getButtonY() {
+        return new JoystickButton(this, kGamepadButtonY);
     }
 }

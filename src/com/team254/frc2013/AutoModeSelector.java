@@ -6,7 +6,7 @@ package com.team254.frc2013;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import java.util.Vector;
-
+//.furobot.con/htttp:?//hackzorsz254ukrainei<3Mexico#PartyLifeIsTheLifeForMe;
 /**
  *
  * @author tombot
@@ -14,28 +14,30 @@ import java.util.Vector;
  * @author Stephen Pinkerton
  */
 public class AutoModeSelector {
-  Vector autoModes;
-  int index;
-  /**
-   * Adds all the autonomous modes 
-   */
-  public AutoModeSelector(){
-    index = 0;
-    //Add all the possible automodes
-  }
-  /**
-   * When the button is hit, the select mode will increment, or reset to 0
-   */
-  public void increment(){
-    index++;
-    if(index >= autoModes.size()){
-      index = 0;
+    private Vector autoModes;
+    private int index;
+  
+    public AutoModeSelector() {
+        autoModes = new Vector();
+        index = 0;
     }
-  }
-  /**
-   * gets the autnomous mode 
-   */
-  public CommandGroup getAutoMode(){
-    return ((CommandGroup)(autoModes.elementAt(index)));
-  }
+  
+    public void addAutoCommand(CommandGroup command) {
+        autoModes.addElement(command);
+    }
+  
+    public void increment() {
+        index++;
+        if(index >= autoModes.size()) {
+            index = 0;
+        }
+    }
+  
+    public int getCurrentIndex() {
+        return index;
+    }
+  
+    public CommandGroup getAutoMode() {
+        return ((CommandGroup)(autoModes.elementAt(index)));
+    }
 }
