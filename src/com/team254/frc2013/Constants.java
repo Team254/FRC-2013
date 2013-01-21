@@ -27,7 +27,7 @@ public class Constants {
     constants.addElement(kD);
   }
   
-  public void set(String file) {
+  public void update(String file) {
     Vector lines = new Vector();
     InputStream in = this.getClass().getResourceAsStream(file);
     byte[] buffer = new byte[255];
