@@ -1,6 +1,6 @@
 build
 *.class
-
+*.xml
 # Package Files #
 *.jar
 *.war
