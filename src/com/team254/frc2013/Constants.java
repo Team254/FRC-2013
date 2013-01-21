@@ -5,10 +5,13 @@ package com.team254.frc2013;
  *
  * @author bg
  */
+import com.sun.squawk.microedition.io.FileConnection;
 import com.team254.lib.Constant;
 import com.team254.lib.Util;
+import java.io.DataInputStream;
 import java.io.InputStream;
 import java.util.Vector;
+import javax.microedition.io.Connector;
 public class Constants {
   private Vector constants = new Vector(10,1);
 
@@ -27,15 +30,19 @@ public class Constants {
     constants.addElement(kD);
   }
   
-  public void update(String file) {
+  public void update() {
     Vector lines = new Vector();
-    InputStream in = this.getClass().getResourceAsStream(file);
+    DataInputStream theFile;
+    FileConnection fc;
     byte[] buffer = new byte[255];
     String content = "";
     
     try { 
       //Reads everything from the file into one String
-      while(in.read(buffer) != -1) {
+      fc = (FileConnection)Connector.open("file:///Constants.txt", Connector.READ);
+        
+      theFile = fc.openDataInputStream();
+      while(theFile.read(buffer) != -1) {
         content += new String(buffer);
       }
       

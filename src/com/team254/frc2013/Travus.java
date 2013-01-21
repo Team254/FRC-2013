@@ -9,12 +9,17 @@ package com.team254.frc2013;
 
 
 import com.sun.squawk.io.BufferedReader;
+import com.sun.squawk.microedition.io.FileConnection;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.frc2013.commands.ExampleCommand;
+import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.util.Hashtable;
+import javax.microedition.io.Connector;
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -25,6 +30,7 @@ import java.util.Hashtable;
 public class Travus extends IterativeRobot {
 
     Command autonomousCommand;
+    Constants constants;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -54,6 +60,35 @@ public class Travus extends IterativeRobot {
   	}
   	RobotMap.set(moddedConstants);
         */
+        
+        
+        constants = new Constants();
+        constants.init();
+        
+        constants.update();
+        System.out.println(constants.leftMotorPwm);
+        System.out.println(constants.rightMotorPwm);
+        System.out.println(constants.kD);
+        System.out.println(constants.kI);
+        System.out.println(constants.kP);
+        
+        /*
+        DataInputStream theFile;
+        FileConnection fc;
+        byte[] buffer = new byte[255];
+        String content = "";
+
+        try {
+            fc = (FileConnection)Connector.open("file:///Constants.txt", Connector.READ);
+            theFile = fc.openDataInputStream();
+            while(theFile.read(buffer) != -1) {
+                content += new String(buffer);
+            }
+            System.out.println("STUFF: " + content);
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        }
+        */ 
     }
 
     public void autonomousInit() {

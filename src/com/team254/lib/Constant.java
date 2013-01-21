@@ -37,4 +37,8 @@ public class Constant {
   public Constant create(String name, double value) {
     return new Constant(name, value);
   }
+  
+  public String toString(){
+    return name + ": " + value;   
+  }          
 }
