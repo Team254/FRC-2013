@@ -6,6 +6,7 @@ package com.team254.frc2013;
  * @author bg
  */
 import com.team254.lib.Constant;
+import com.team254.lib.Util;
 import java.io.InputStream;
 import java.util.Vector;
 public class Constants {
@@ -26,56 +27,34 @@ public class Constants {
     constants.addElement(kD);
   }
   
-  public String[] strSplit(String myString, String seperator) {
-    Vector node = new Vector();
-    int index = myString.indexOf(seperator);
-    while (index >= 0) {
-      node.addElement(myString.substring(0, index));
-      myString = myString.substring(index+seperator.length());
-      index = myString.indexOf(seperator);
-    }
-    node.addElement(myString);
-
-    
-    String[] retString = new String[node.size()];
-    for(int i = 0; i < node.size(); ++i) {
-      retString[i] = (String)node.elementAt(i);
-    }
-    
-    return retString;
-  }
-
   public void set(String file) {
     Vector lines = new Vector();
     InputStream in = this.getClass().getResourceAsStream(file);
     byte[] buffer = new byte[255];
     String content = "";
     
-    try {
-      
+    try { 
       //Reads everything from the file into one String
       while(in.read(buffer) != -1) {
         content += new String(buffer);
       }
       
-      String[] myLines = strSplit(content, "\n");
-
+      String[] myLines = Util.split(content, "\n");
       for(int i = 0; i < myLines.length; ++i){
-        String[] line = strSplit(myLines[i], "=");
+        String[] line = Util.split(myLines[i], "=");
         lines.addElement(line);
       }
-
       //Removes reference to the object
       myLines = null;
-      
+  
       for(int i = 0; i < constants.size(); ++i) { //For every Constant in constants...
 
         Constant myConst = (Constant)constants.elementAt(i); //Sets a temp variable to the current constant
         for(int f = 0; f < lines.size(); ++f){ //For each character
-          
           String[] myLine = (String[])lines.elementAt(f);
           if(myLine[0].equals(myConst.getName())){
             myConst.setVal(Double.parseDouble(myLine[1]));
+            break;
           }
         }
       }
