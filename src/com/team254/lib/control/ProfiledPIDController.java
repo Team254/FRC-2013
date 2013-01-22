@@ -1,70 +1,63 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.lib.control;
 
 import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Timer;
-import java.util.TimerTask;
 
 /**
+ * PID controller which uses a trapezoidal velocity profile.
  *
- * @author tombot
+ * @author tom@team254.com (Tom Bottiglieri)
  */
-public class ProfiledPIDController {
-    int i = 0;
-    
-    public PIDController controller;
-    java.util.Timer m_controlLoop;
-    double m_period;
-    double accel;
-    double vel;
-    double t_to_max_v;
-    double t_from_max_v;
-    double t_total;
-    double m_setpoint;
-    Timer timer = new Timer();
-    ProfiledPIDSource m_source;
+public class ProfiledPidController {
+  private int i = 0;
+  private PIDController controller;
+  private double period;
+  private double acceleration;
+  private double velocity;
+  private double timeToMaxVelocity;
+  private double timeFromMaxVelocity;
+  private double timeTotal;
+  private double setpoint;
+  private Timer timer = new Timer();
+  private ProfiledPidSource pidSource;
 
-    public ProfiledPIDController(double Kp, double Ki, double Kd, double Kf,
-            PIDSource source, PIDOutput output,
-            double period) {
-        m_period = period;
-        m_source = new ProfiledPIDSource(source, this);
-        controller = new PIDController(Kp, Ki,Kd, Kf, source, output,period);
+  public ProfiledPidController(double Kp, double Ki, double Kd, double Kf,
+                               PIDSource source, PIDOutput output, double period) {
+    this.period = period;
+    pidSource = new ProfiledPidSource(source, this);
+    controller = new PIDController(Kp, Ki, Kd, Kf, source, output, period);
+  }
+
+  protected void calculate() {
+    double t = timer.get();
+    double setpoint = controller.getSetpoint();
+    if (t < timeToMaxVelocity) {
+      // Accelerate up.
+      setpoint += (acceleration * t) * period;
+    } else if (t < timeFromMaxVelocity) {
+      // Maintain max velocity.
+      setpoint += velocity * period;
+    } else if (t < timeTotal) {
+       // Accelerate down.
+      double decelTime = t - timeFromMaxVelocity;
+      double v = velocity + (-acceleration * decelTime);
+      setpoint += v * period;
     }
-    
-    protected void calculate() {
-        double t = timer.get();
-        double setpoint = controller.getSetpoint();
-        if (t < t_to_max_v) { // accelerate up
-            setpoint += (accel * t) * m_period;
-        }
-        else if (t < t_from_max_v) { // max v
-            setpoint += vel * m_period;
-        }
-        else if (t < t_total) { // accelerate down
-            double m_t = t - t_from_max_v;
-            double v = vel + (-accel * m_t);
-            setpoint += v * m_period;
-        }
-        controller.setSetpoint(setpoint);
-    }
-    
-    public synchronized void setSetpoint(double setpoint) {
-      m_setpoint = setpoint;
-      t_to_max_v = vel / accel;
-      double delta_s_max_v = setpoint - (t_to_max_v * vel);
-      double t_at_max_v = delta_s_max_v / vel;
-      t_from_max_v = t_to_max_v + t_at_max_v;
-      t_total = t_from_max_v + t_to_max_v;    
-      timer.reset();
-      
-      // Set setpoint to current value of PIDSource
-      controller.setSetpoint(m_source.pidGetRaw());
-    }
-    
+    controller.setSetpoint(setpoint);
+  }
+
+  public synchronized void setSetpoint(double setpoint) {
+    this.setpoint = setpoint;
+    timeToMaxVelocity = velocity / acceleration;
+    double deltaPosMaxV = setpoint - (timeToMaxVelocity * velocity);
+    double timeAtMaxV = deltaPosMaxV / velocity;
+    timeFromMaxVelocity = timeToMaxVelocity + timeAtMaxV;
+    timeTotal = timeFromMaxVelocity + timeToMaxVelocity;
+    timer.reset();
+
+    // Set setpoint to current value of PIDSource.
+    controller.setSetpoint(pidSource.pidGetRaw());
+  }
 }

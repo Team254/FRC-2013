@@ -1,28 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.lib.debug;
 
 import edu.wpi.first.wpilibj.Timer;
 
 /**
+ * Limits the rate of printing to one message per a configured period.
  *
- * @author Richard
+ * @author richard@team254.com (Richard Lin)
  */
 public class ThrottledPrinter {
-   
-    private double period;
-    private double lastPrint = 0;
+  private double periodSec;
+  private double lastPrintTimeSec = 0;
 
-    public ThrottledPrinter(double seconds) {
-        period = seconds;
+  public ThrottledPrinter(double periodSec) {
+    this.periodSec = periodSec;
+  }
+
+  public void println(String text) {
+    if (Timer.getFPGATimestamp() - lastPrintTimeSec >= periodSec) {
+      System.out.println(text);
+      lastPrintTimeSec = Timer.getFPGATimestamp();
     }
-    
-    public void print(String text) {
-        if (Timer.getFPGATimestamp() - lastPrint >= period) {
-            System.out.println(text);
-            lastPrint = Timer.getFPGATimestamp();
-        }   
-    }
+  }
 }

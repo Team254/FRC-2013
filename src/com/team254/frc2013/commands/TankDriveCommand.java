@@ -1,37 +1,30 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 /**
+ * Controls the robot drivetrain using the left and right joystick Y axes in a tank scheme.
  *
- * @author Richard
+ * @author richard@team254.com (Richard Lin)
  */
 public class TankDriveCommand extends CommandBase {
+  public TankDriveCommand() {
+    requires(drive);
+  }
 
-    public TankDriveCommand() {
-        requires(drive);
-    }
-    protected void initialize() {
-        drive.setMaxSpeed(1.0);
-        drive.startEncoders();
-    }
+  protected void initialize() {
+  }
 
-    protected void execute() {
-        //XXX Joystick.getY() returns negative for forward motion
-        drive.driveLR(-oi.leftStick.getY(), -oi.rightStick.getY());
-    }
+  protected void execute() {
+    drive.setLeftRightPower(-controlBoard.leftStick.getY(), -controlBoard.rightStick.getY());
+  }
 
-    protected boolean isFinished() {
-        return false;
-    }
+  protected boolean isFinished() {
+    return false;
+  }
 
-    protected void end() {
-        drive.setMaxSpeed(1.0);
-    }
+  protected void end() {
+    drive.setMaxSpeed(1.0);
+  }
 
-    protected void interrupted() {
-    }
-    
+  protected void interrupted() {
+  }
 }

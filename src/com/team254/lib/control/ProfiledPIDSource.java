@@ -1,30 +1,27 @@
-/*
- * ProfiledPIDSource
- */
 package com.team254.lib.control;
 
 import edu.wpi.first.wpilibj.PIDSource;
 
 /**
+ * PID source which uses a trapezoidal velocity profile.
  *
- * @author Tom Bottiglieri
+ * @author tom@team254.com (Tom Bottiglieri)
  */
-public class ProfiledPIDSource implements PIDSource {
+public class ProfiledPidSource implements PIDSource {
+  private PIDSource pidSource;
+  private ProfiledPidController pidController;
 
-    PIDSource m_source;
-    ProfiledPIDController m_controller;
-    
-    ProfiledPIDSource(PIDSource sensor, ProfiledPIDController controller) {
-        m_source = sensor;
-        m_controller = controller;
-    }
-    
-    public double pidGet() {
-        m_controller.calculate();
-        return m_source.pidGet();
-    }
-    
-    public double pidGetRaw() {
-        return m_source.pidGet();
-    }
+  public ProfiledPidSource(PIDSource sensor, ProfiledPidController controller) {
+    pidSource = sensor;
+    pidController = controller;
+  }
+
+  public double pidGet() {
+    pidController.calculate();
+    return pidSource.pidGet();
+  }
+
+  public double pidGetRaw() {
+    return pidSource.pidGet();
+  }
 }
