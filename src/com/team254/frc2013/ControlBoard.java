@@ -1,6 +1,6 @@
 package com.team254.frc2013;
 
-import com.team254.lib.Gamepad;
+import com.team254.frc2013.lib.Gamepad;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**

@@ -1,4 +1,4 @@
-package com.team254.lib;
+package com.team254.frc2013.lib;
 
 /**
  * Contains math functions for generating square and sine waves.

@@ -1,4 +1,4 @@
-package com.team254.lib.debug;
+package com.team254.frc2013.lib;
 
 import edu.wpi.first.wpilibj.Timer;
 

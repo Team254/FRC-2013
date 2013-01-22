@@ -1,4 +1,4 @@
-package com.team254.lib;
+package com.team254.frc2013.lib;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
