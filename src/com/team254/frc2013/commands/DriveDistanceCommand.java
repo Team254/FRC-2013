@@ -1,58 +1,40 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-
 /**
+ * Controls the robot drivetrain to drive a certain distance.
  *
- * @author Richard
+ * @author richard@team254.com (Richard Lin)
  */
 public class DriveDistanceCommand extends CommandBase {
-    
-    private double distance;
-    private double maxSpeed;
-    private double timeout;
-    Timer t = new Timer();
-    
-    public DriveDistanceCommand(double distance, double maxSpeed, double timeout) {
-        this.distance = distance;
-        this.maxSpeed = maxSpeed;
-        this.timeout = timeout;
-        requires(drive);
-    }
-    
-    protected void initialize() {
-        drive.startEncoders();
-        drive.resetEncoders();
-        drive.setMaxSpeed(maxSpeed);
-        t.start();
-    }
+  private double distance;
+  private double speed;
+  private double timeout;
 
-    protected void execute() {
-        drive.driveLR(1.0, 1.0);
-    }
+  public DriveDistanceCommand(double distance, double speed, double timeout) {
+    this.distance = distance;
+    this.speed = speed;
+    this.timeout = timeout;
+    requires(drive);
+  }
 
-    protected boolean isFinished() {
-        if(t.get() >= timeout) {
-            System.out.println("DriveDistance timed out.");
-            return true;
-        }
-        else if(drive.getLeftEncoderDistance() > distance || drive.getRightEncoderDistance() > distance) {
-            return true;
-        }
-        return false;
-    }
+  protected void initialize() {
+    setTimeout(timeout);
+    drive.resetEncoders();
+    drive.setMaxSpeed(speed);
+  }
 
-    protected void end() {
-        drive.setMaxSpeed(1.0);
-        drive.driveLR(0.0, 0.0);
-        drive.resetEncoders(); 
-        t.stop();
-    }
+  protected void execute() {
+    drive.setLeftRightPower(speed, speed);
+  }
 
-    protected void interrupted() {
-    }
+  protected boolean isFinished() {
+    return drive.getLeftEncoderDistance() > distance || drive.getRightEncoderDistance() > distance;
+  }
+
+  protected void end() {
+    drive.setLeftRightPower(0, 0);
+  }
+
+  protected void interrupted() {
+  }
 }
