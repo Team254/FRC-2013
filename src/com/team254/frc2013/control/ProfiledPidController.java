@@ -4,13 +4,14 @@ import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.PIDOutput;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.tables.ITable;
 
 /**
  * PID controller which uses a trapezoidal velocity profile.
  *
  * @author tom@team254.com (Tom Bottiglieri)
  */
-public class ProfiledPidController {
+public class ProfiledPIDController {
   private int i = 0;
   private PIDController controller;
   private double period;
@@ -21,18 +22,31 @@ public class ProfiledPidController {
   private double timeTotal;
   private double setpoint;
   private Timer timer = new Timer();
-  private ProfiledPidSource pidSource;
+  private ProfiledPIDSource pidSource;
 
-  public ProfiledPidController(double Kp, double Ki, double Kd, double Kf,
+  public ProfiledPIDController(double Kp, double Ki, double Kd, double Kf,
                                PIDSource source, PIDOutput output, double period) {
     this.period = period;
-    pidSource = new ProfiledPidSource(source, this);
+    pidSource = new ProfiledPIDSource(source, this);
     controller = new PIDController(Kp, Ki, Kd, Kf, source, output, period);
   }
 
+  public ProfiledPIDController(double p, double i, double d, double f, PIDSource source, PIDOutput output) {
+      controller = new PIDController(p, i, d, f, source, output);
+  }
+  
+  public ProfiledPIDController(double p, double i, double d, PIDSource source, PIDOutput output) {
+      controller = new PIDController(p, i, d, source, output);
+  }
+  
+  public ProfiledPIDController(double p, double i, double d, PIDSource source, PIDOutput output, double period) {
+      controller = new PIDController(p, i, d, source, output, period);
+  }
+
+
   protected void calculate() {
     double t = timer.get();
-    double setpoint = controller.getSetpoint();
+    setpoint = controller.getSetpoint();
     if (t < timeToMaxVelocity) {
       // Accelerate up.
       setpoint += (acceleration * t) * period;
@@ -60,4 +74,36 @@ public class ProfiledPidController {
     // Set setpoint to current value of PIDSource.
     controller.setSetpoint(pidSource.pidGetRaw());
   }
+
+    boolean onTarget() {
+        return controller.onTarget();
+    }
+
+    void setPercentTolerance(double p) {
+        controller.setPercentTolerance(p);
+    }
+
+    void enable() {
+        controller.enable();
+    }
+
+    void disable() {
+        controller.disable();
+    }
+
+    void initTable(ITable table) {
+        controller.initTable(table);
+    }
+
+    void setAbsoluteTolerance(double t) {
+        controller.setAbsoluteTolerance(t);
+    }
+
+    void setInputRange(double minimumInput, double maximumInput) {
+        controller.setInputRange(minimumInput, maximumInput);
+    }
+
+    double getSetpoint() {
+        return controller.getSetpoint();
+    }
 }

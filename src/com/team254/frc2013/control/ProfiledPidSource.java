@@ -7,11 +7,14 @@ import edu.wpi.first.wpilibj.PIDSource;
  *
  * @author tom@team254.com (Tom Bottiglieri)
  */
-public class ProfiledPidSource implements PIDSource {
+public class ProfiledPIDSource implements PIDSource {
   private PIDSource pidSource;
-  private ProfiledPidController pidController;
+  private ProfiledPIDController pidController;
+  
+  public ProfiledPIDSource() {
+  }
 
-  public ProfiledPidSource(PIDSource sensor, ProfiledPidController controller) {
+  public ProfiledPIDSource(PIDSource sensor, ProfiledPIDController controller) {
     pidSource = sensor;
     pidController = controller;
   }
