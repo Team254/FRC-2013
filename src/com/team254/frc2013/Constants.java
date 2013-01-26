@@ -28,12 +28,18 @@ public class Constants {
   public static final Constant leftDrivePortB = new Constant("leftDrivePortB", 4);
   public static final Constant rightDrivePortA = new Constant("rightDrivePortA", 6);
   public static final Constant rightDrivePortB = new Constant("rightDrivePortB", 7);
-
+  public static final Constant frontShooterPort = new Constant("frontShooterPort", 8); // arbitrary
+  public static final Constant backShooterPort = new Constant("backShooterPort", 9); // arbitrary
+  
   // Sensor mappings
   public static final Constant leftEncoderPortA = new Constant("leftEncoderPortA", 2);
   public static final Constant leftEncoderPortB = new Constant("leftEncoderPortB", 3);
   public static final Constant rightEncoderPortA = new Constant("rightEncoderPortA", 4);
   public static final Constant rightEncoderPortB = new Constant("rightEncoderPortB", 5);
+  public static final Constant frontEncoderPortA = new Constant("frontEncoderPortA", 6);
+  public static final Constant frontEncoderPortB = new Constant("frontEncoderPortB", 7);
+  public static final Constant backEncoderPortA = new Constant("backEncoderPortA", 8);
+  public static final Constant backEncoderPortB = new Constant("backEncoderPortB", 9);
 
   static {
     // Set any overridden constants from the file on startup.

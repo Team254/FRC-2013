@@ -5,6 +5,7 @@ import com.team254.frc2013.commands.DriveDistanceCommand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  * Main class of the robot.
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Travus extends IterativeRobot {
   private Command autonomousCommand;
+  private ControlLoops loops = new ControlLoops(1.0 / 100.0);
 
   /**
    * Called when the robot is first started up and should be used for any initialization code.
@@ -20,6 +22,7 @@ public class Travus extends IterativeRobot {
   public void robotInit() {
     // Initialize all subsystems.
     CommandBase.init();
+    autonomousCommand = new WaitCommand(1.0);
   }
 
   /**
