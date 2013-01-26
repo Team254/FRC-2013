@@ -1,8 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.team254.lib;
+package com.team254.frc2013.lib;
 
 /**
  *
@@ -140,10 +136,11 @@ public class Matrix {
     int k = 0;
     for (int i = 0; i < height; i++) {
       for (int j = 0; j < width; j++,k++) {
-        if(k >= values.length)
+        if(k >= values.length) {
            return;
-        else
+        } else {
           data[i][j] = values[k];
+        }
       }
     }
   }
