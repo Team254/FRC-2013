@@ -3,6 +3,7 @@ package com.team254.frc2013.commands;
 import com.team254.frc2013.Constants;
 import edu.wpi.first.wpilibj.command.Command;
 import com.team254.frc2013.ControlBoard;
+import com.team254.frc2013.OperatorControlHelper;
 import com.team254.frc2013.subsystems.Drive;
 import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Compressor;
@@ -24,7 +25,11 @@ public abstract class CommandBase extends Command {
     // This MUST be here. If the OI creates Commands (which it very likely will), constructing it
     // during the construction of CommandBase (from which commands extend), subsystems are not
     // guaranteed to be yet. Thus, their requires() statements may grab null pointers.
+
+    // Set up operator controls
     controlBoard = new ControlBoard();
+    OperatorControlHelper.setupOperationMap(controlBoard);
+  
     compressor.start();
   }
 }

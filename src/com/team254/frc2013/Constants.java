@@ -29,6 +29,7 @@ public class Constants {
   public static final Constant rightDrivePortA = new Constant("rightDrivePortA", 6);
   public static final Constant rightDrivePortB = new Constant("rightDrivePortB", 7);
   public static final Constant frontShooterPort = new Constant("frontShooterPort", 8); // arbitrary
+  public static final Constant frontShooterPortB = new Constant("frontShooterPortB", 3); // arbitrary
   public static final Constant backShooterPort = new Constant("backShooterPort", 9); // arbitrary
   
   // Solenoids
