@@ -18,8 +18,8 @@ public class Matrix {
    * @param cols: number of columns
    */
   public Matrix(int rows, int cols) {
-    this.width = rows;
-    this.height = cols;
+    this.width = cols;
+    this.height = rows;
     this.data = new double[height][width];
   }
 
@@ -168,7 +168,7 @@ public class Matrix {
       theMatrix += "| ";
       for (int j = 0; j < width; j++) {
         theMatrix += Double.toString(data[i][j]);
-        if (j == width) {
+        if (j == width-1) {
           theMatrix += " |";
         } else {
           theMatrix += ", ";
