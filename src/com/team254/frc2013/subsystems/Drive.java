@@ -5,6 +5,7 @@ import com.team254.frc2013.commands.CheesyDriveCommand;
 import com.team254.frc2013.lib.ThrottledPrinter;
 import com.team254.frc2013.lib.Util;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -25,8 +26,13 @@ public class Drive extends Subsystem {
           Constants.leftEncoderPortB.getInt());
   private Encoder rightEncoder = new Encoder(Constants.rightEncoderPortA.getInt(),
           Constants.rightEncoderPortB.getInt());
+  
+  // Shifter
+  Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
 
   private double maxSpeed = 1.0;
+  private boolean isHighGear = true;
+
   private ThrottledPrinter printer = new ThrottledPrinter(0.1);
 
   public Drive() {
@@ -43,8 +49,6 @@ public class Drive extends Subsystem {
   public void setLeftRightPower(double leftPower, double rightPower) {
     leftPower = Util.limit(leftPower, maxSpeed);
     rightPower = Util.limit(rightPower, maxSpeed);
-    printer.println("Left Pow: " + leftPower + ", right: " + rightPower + "\nEncoder: " +
-        getLeftEncoderDistance());
     leftDriveA.set(leftPower);
     leftDriveB.set(leftPower);
     rightDriveA.set(-rightPower);
@@ -66,5 +70,14 @@ public class Drive extends Subsystem {
 
   public void setMaxSpeed(double speed) {
     maxSpeed = speed;
+  }
+  
+  public void shift(boolean highGear) {
+    isHighGear = highGear;
+    shifter.set(isHighGear);
+  }
+  
+  public boolean isHighGear() {
+    return isHighGear;
   }
 }

@@ -19,8 +19,9 @@ public class CheesyDriveCommand extends CommandBase {
   }
 
   protected void execute() {
-    boolean isQuickTurn = true;
-    boolean isHighGear = true;
+    boolean isQuickTurn = controlBoard.getQuickTurn();
+    boolean isHighGear = controlBoard.getHighGear();
+    drive.shift(isHighGear);
 
     double wheelNonLinearity;
 

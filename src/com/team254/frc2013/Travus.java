@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class Travus extends IterativeRobot {
   private Command autonomousCommand;
-  private ControlLoops loops = new ControlLoops(1.0 / 100.0);
+  private ControlLoops loops = new ControlLoops(1.0 / 1.0);
 
   /**
    * Called when the robot is first started up and should be used for any initialization code.
