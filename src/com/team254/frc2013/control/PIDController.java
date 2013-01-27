@@ -21,7 +21,7 @@ public class PIDController extends Controller implements Sendable {
   double errorSum;
   double lastError;
 
-  public PIDController(PIDGains gains, ControlSource source, ControlOutput output, String name) {
+  public PIDController(String name, PIDGains gains, ControlSource source, ControlOutput output) {
     super(name);
     this.gains = gains;
     this.source = source;
