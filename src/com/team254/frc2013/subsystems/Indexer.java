@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
+ * Class representing the indexing mechanism for the shooter.
  *
- * @author Richard
+ * @author art.kalb96@gmail.com (Arthur Kalb)
  */
 public class Indexer extends Subsystem{
 

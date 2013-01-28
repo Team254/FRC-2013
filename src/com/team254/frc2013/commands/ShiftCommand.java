@@ -1,14 +1,11 @@
-/*
- * ShiftCommand(highGear)
- * Shifts the drive gearbox high or low
- */
 package com.team254.frc2013.commands;
 
 /**
- *
- * @author Tom Bottiglieri
+ * Shifts the drive gearbox into high or low gear.
+ * 
+ * @author tom@team254.com (Tom Bottiglieri)
  */
-public class ShiftCommand  extends CommandBase {
+public class ShiftCommand extends CommandBase {
   boolean highGear = false;
 
   public ShiftCommand(boolean highGear) {

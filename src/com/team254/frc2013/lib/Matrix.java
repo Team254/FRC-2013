@@ -1,6 +1,7 @@
 package com.team254.frc2013.lib;
 
 /**
+ * Represents a matrix with standard operations.
  *
  * @author stephen@team254.com (Stephen Pinkerton)
  * @author jonathanc@team254.com (Jonathan Chang)

@@ -5,6 +5,7 @@
 package com.team254.frc2013.control;
 
 /**
+ * Interface for subsystem outputs.
  *
  * @author Richard
  */

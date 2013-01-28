@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
- * Contains functions for use with the Logitech controller.
+ * Contains functions for use with the Logitech F310 controller.
  *
  * @author articgrayling8x8@gmail.com (Dorian Chan)
  * @author kevinsundar@gmail.com (Kevin Vincent)
@@ -97,38 +97,6 @@ public class Gamepad extends Joystick {
     return getRawButton(BUTTON_Y);
   }
 
-  //Buttons
-  public boolean getButtonState(String port) {
-    if (port.equals("A")) {
-      return getRawButton(BUTTON_A);
-    } else if (port.equals("B")) {
-      return getRawButton(BUTTON_B);
-    } else if (port.equals("X")) {
-      return getRawButton(BUTTON_X);
-    } else if (port.equals("Y")) {
-      return getRawButton(BUTTON_Y);
-    } else {
-      System.out.println("Invalid Button Port!");
-      return false;
-    }
-  }
-
-  //Buttons
-  public JoystickButton getButton(String port) {
-    if (port.equals("A")) {
-      return new JoystickButton(this, BUTTON_A);
-    } else if (port.equals("B")) {
-      return new JoystickButton(this, BUTTON_B);
-    } else if (port.equals("X")) {
-      return new JoystickButton(this, BUTTON_X);
-    } else if (port.equals("Y")) {
-      return new JoystickButton(this, BUTTON_Y);
-    } else {
-      System.out.println("Invalid Button Port!");
-      return null;
-    }
-  }
-
   /**
    * Returns an object of Button A.
    */
@@ -157,7 +125,9 @@ public class Gamepad extends Joystick {
     return new JoystickButton(this, BUTTON_Y);
   }
 
-  //Get the DPad axis' positions
+  /**
+   * Return the DPad axis positions.
+   */
   private double getDPadX() {
     return getRawAxis(kDPadXAxisNum);
   }
@@ -166,7 +136,9 @@ public class Gamepad extends Joystick {
     return getRawAxis(kDPadYAxisNum);
   }
 
-  //DPad - In Betweens
+  /**
+   * DPad - in between.
+   */
   public boolean getDPadUpLeft() {
     double x = getDPadX();
     double y = getDPadY();
@@ -191,7 +163,9 @@ public class Gamepad extends Joystick {
     return (x > 0.5 && y < -0.5);
   }
 
-  //DPad - Cardinal Directions
+  /**
+   * DPad - cardinal directions.
+   */
   public boolean getDPadUp() {
     double y = getDPadY();
     return (y < -0.5);

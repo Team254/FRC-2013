@@ -28,12 +28,10 @@ public class Drive extends Subsystem {
           Constants.rightEncoderPortB.getInt());
   
   // Shifter
-  Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
+  private Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
 
   private double maxSpeed = 1.0;
   private boolean isHighGear = true;
-
-  private ThrottledPrinter printer = new ThrottledPrinter(0.1);
 
   public Drive() {
     super();

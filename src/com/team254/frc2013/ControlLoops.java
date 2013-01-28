@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013;
 
 import com.team254.frc2013.control.Controller;
@@ -9,7 +5,7 @@ import java.util.TimerTask;
 
 /**
  *
- * @author Richard
+ * @author richard@team254.com (Richard Lin)
  */
 public class ControlLoops {
   java.util.Timer controlLoop;

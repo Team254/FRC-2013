@@ -1,14 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
- *
- * @author tombot
+ * Controls the shooter wheel to spin at a certain speed.
+ * 
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class ShooterSpeedCommand extends CommandBase {
   private double speed;

@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.control;
 
 /**
+ * Controller that outputs indefinitely at a certain goal while enabled.
  *
- * @author tombot
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class OpenLoopController extends Controller {
 
@@ -27,10 +24,12 @@ public class OpenLoopController extends Controller {
   }
 
   public void update() {
-    if (enabled)
+    if (enabled) {
       output.set(value);
-    else
+    }
+    else {
       output.set(0);
+    }
   }
 
   public void setGoal(double goal) {

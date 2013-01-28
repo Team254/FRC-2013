@@ -1,18 +1,16 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.control;
 
 import java.util.Vector;
 
 /**
+ * Base class for all controllers.
  *
- * @author Richard
+ * @author richard@tean254.com (Richard Lin)
  */
 public abstract class Controller {
   private static Vector controllers = new Vector();
   private String name;
+  boolean enabled;
   
   public Controller(String name) {
     controllers.addElement(this);
@@ -29,9 +27,17 @@ public abstract class Controller {
     }
   }
   
-  public abstract void enable();
+  public void enable() {
+    enabled = true;
+  }
   
-  public abstract void disable();
+  public void disable() {
+    enabled = false;
+  }
+  
+  public boolean isEnabled() {
+    return enabled;
+  }
   
   public abstract void update();
   

@@ -1,13 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.control;
 
 /**
+ * Interface for subsystem inputs.
  *
- * @author Richard
+ * @author richard@team254.com (Richard Lin)
  */
 public interface ControlSource {
   public double get();
+  public void updateFilter();
 }

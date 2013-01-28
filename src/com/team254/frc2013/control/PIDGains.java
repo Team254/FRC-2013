@@ -1,12 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.control;
 
 /**
+ * Keeps track of the proportional, integral, and derivative
+ * terms of a PID controller.
  *
- * @author Richard
+ * @author richard@team254.com (Richard Lin)
  */
 public class PIDGains {
   private double kP;

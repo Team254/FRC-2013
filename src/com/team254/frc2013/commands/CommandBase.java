@@ -1,12 +1,12 @@
 package com.team254.frc2013.commands;
 
 import com.team254.frc2013.Constants;
-import edu.wpi.first.wpilibj.command.Command;
 import com.team254.frc2013.ControlBoard;
 import com.team254.frc2013.OperatorControlHelper;
 import com.team254.frc2013.subsystems.Drive;
 import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Base class for all commands. All atomic commands should subclass CommandBase.
