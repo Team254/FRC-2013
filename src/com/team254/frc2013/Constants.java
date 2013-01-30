@@ -46,6 +46,7 @@ public class Constants {
   public static final Constant frontEncoderPortB = new Constant("frontEncoderPortB", 7);
   public static final Constant backEncoderPortA = new Constant("backEncoderPortA", 8);
   public static final Constant backEncoderPortB = new Constant("backEncoderPortB", 9);
+  public static final Constant gyroPort = new Constant("gyroPort", 1);
 
   static {
     // Set any overridden constants from the file on startup.

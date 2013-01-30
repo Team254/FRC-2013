@@ -5,6 +5,7 @@ import com.team254.frc2013.commands.CheesyDriveCommand;
 import com.team254.frc2013.lib.ThrottledPrinter;
 import com.team254.frc2013.lib.Util;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -29,7 +30,7 @@ public class Drive extends Subsystem {
   
   // Shifter
   private Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
-
+  private Gyro gyro = new Gyro(Constants.gyroPort.getInt());
   private double maxSpeed = 1.0;
   private boolean isHighGear = true;
 
@@ -60,7 +61,11 @@ public class Drive extends Subsystem {
   public double getRightEncoderDistance() {
     return -rightEncoder.get() / 256.0 * 3.5 * Math.PI;
   }
-
+  
+  public double getGyroAngle(){
+    return gyro.getAngle();
+  }
+  
   public void resetEncoders() {
     leftEncoder.reset();
     rightEncoder.reset();

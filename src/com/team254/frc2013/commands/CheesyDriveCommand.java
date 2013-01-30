@@ -88,7 +88,6 @@ public class CheesyDriveCommand extends CommandBase {
     } else {
       negInertiaAccumulator = 0;
     }
-
     linearPower = throttle;
 
     // Quickturn!
