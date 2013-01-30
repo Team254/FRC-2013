@@ -219,4 +219,15 @@ public class Matrix {
   public int getWidth() {
     return width;
   }
+  /**
+   * Creates a carbon copy of the Matrix
+   * @return a new Matrix with the same dimensions and respective elements
+   */
+  public Matrix clone(){
+      Matrix m = new Matrix(this.height,this.width);
+      for(int i = 0; i < data.length; i++){
+          m.flashMatrix(data[i]);
+      }
+      return m;
+  }
 }
