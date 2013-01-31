@@ -62,13 +62,17 @@ public class Drive extends Subsystem {
     return -rightEncoder.get() / 256.0 * 3.5 * Math.PI;
   }
   
-  public double getGyroAngle(){
-    return gyro.getAngle();
-  }
-  
   public void resetEncoders() {
     leftEncoder.reset();
     rightEncoder.reset();
+  }
+  
+  public double getGyroAngle() {
+    return gyro.getAngle();
+  }
+  
+  public void resetGyro() {
+    gyro.reset();
   }
 
   public void setMaxSpeed(double speed) {

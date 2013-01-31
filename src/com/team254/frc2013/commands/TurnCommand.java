@@ -3,6 +3,7 @@ package com.team254.frc2013.commands;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
+ * Controls the robot drivetrain to spin in place with a specified angle.
  *
  * @author richard@team254.com (Richard Lin)
  */
@@ -36,10 +37,10 @@ public class TurnCommand extends CommandBase {
   // Called repeatedly when this Command is scheduled to run
   protected void execute() {
     if(isRight) {
-      drive.driveLR(1.0, -1.0);
+      drive.setLeftRightPower(1.0, -1.0);
     }
     else {
-      drive.driveLR(-1.0, 1.0);
+      drive.setLeftRightPower(-1.0, 1.0);
     }
     //System.out.println("Current angle: " + drive.getGyroAngle() + ", goal: " + angle);
   }

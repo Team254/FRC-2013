@@ -4,6 +4,7 @@ import com.team254.frc2013.control.Controller;
 import java.util.TimerTask;
 
 /**
+ * Updates all controllers, while operating on a given period.
  *
  * @author richard@team254.com (Richard Lin)
  */
