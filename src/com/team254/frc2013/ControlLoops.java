@@ -1,6 +1,6 @@
 package com.team254.frc2013;
 
-import com.team254.frc2013.control.Controller;
+import com.team254.lib.control.Controller;
 import java.util.TimerTask;
 
 /**

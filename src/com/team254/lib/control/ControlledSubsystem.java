@@ -1,4 +1,4 @@
-package com.team254.frc2013.control;
+package com.team254.lib.control;
 
 /**
  * Interface for subsystems with a control scheme.

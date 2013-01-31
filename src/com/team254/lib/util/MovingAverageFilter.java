@@ -1,4 +1,4 @@
-package com.team254.frc2013.lib;
+package com.team254.lib.util;
 
 /**
  * Filter that returns the average of the inputs as an output.

@@ -1,6 +1,7 @@
-package com.team254.frc2013.lib;
+package com.team254.lib.control;
 
-import com.team254.frc2013.lib.Matrix;
+import com.team254.lib.util.Matrix;
+import com.team254.lib.util.Matrix;
 /**
  *
  * @author Matthew Koken

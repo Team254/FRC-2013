@@ -1,6 +1,6 @@
 package com.team254.frc2013.commands;
 
-import com.team254.frc2013.lib.Util;
+import com.team254.lib.util.Util;
 
 /**
  * Controls the robot drivetrain using the standard Team 254 scheme.

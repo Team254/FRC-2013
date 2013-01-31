@@ -1,4 +1,4 @@
-package com.team254.frc2013.lib;
+package com.team254.lib.util;
 
 /**
  * Represents a matrix with standard operations.

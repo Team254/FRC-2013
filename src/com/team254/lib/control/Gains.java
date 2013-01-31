@@ -1,5 +1,5 @@
 
-package com.team254.frc2013.lib;
+package com.team254.lib.control;
 
 /**
  *

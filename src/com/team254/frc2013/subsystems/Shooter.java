@@ -1,14 +1,14 @@
 package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
-import com.team254.frc2013.control.BangBangController;
-import com.team254.frc2013.control.ControlOutput;
-import com.team254.frc2013.control.ControlSource;
-import com.team254.frc2013.control.ControlledSubsystem;
-import com.team254.frc2013.control.OpenLoopController;
-import com.team254.frc2013.control.PIDController;
-import com.team254.frc2013.control.PIDGains;
-import com.team254.frc2013.lib.MovingAverageFilter;
+import com.team254.lib.control.impl.BangBangController;
+import com.team254.lib.control.ControlOutput;
+import com.team254.lib.control.ControlSource;
+import com.team254.lib.control.ControlledSubsystem;
+import com.team254.lib.control.OpenLoopController;
+import com.team254.lib.control.impl.PIDController;
+import com.team254.lib.control.PIDGains;
+import com.team254.lib.util.MovingAverageFilter;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;

@@ -1,5 +1,9 @@
-package com.team254.frc2013.control;
+package com.team254.lib.control.impl;
 
+import com.team254.lib.control.ControlOutput;
+import com.team254.lib.control.ControlSource;
+import com.team254.lib.control.Controller;
+import com.team254.lib.control.PIDGains;
 import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.parsing.IUtility;

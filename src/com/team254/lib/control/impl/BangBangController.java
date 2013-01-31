@@ -2,8 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.team254.frc2013.control;
+package com.team254.lib.control.impl;
 
+import com.team254.lib.control.ControlOutput;
+import com.team254.lib.control.ControlSource;
+import com.team254.lib.control.Controller;
 import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.tables.ITable;

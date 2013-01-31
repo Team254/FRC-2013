@@ -1,7 +1,7 @@
 package com.team254.frc2013;
 
 import com.sun.squawk.microedition.io.FileConnection;
-import com.team254.frc2013.lib.Util;
+import com.team254.lib.util.Util;
 import java.io.DataInputStream;
 import java.util.Vector;
 import javax.microedition.io.Connector;

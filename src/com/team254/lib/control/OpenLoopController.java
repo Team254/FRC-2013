@@ -1,4 +1,4 @@
-package com.team254.frc2013.control;
+package com.team254.lib.control;
 
 /**
  * Controller that outputs indefinitely at a certain goal while enabled.

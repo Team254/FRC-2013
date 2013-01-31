@@ -1,4 +1,4 @@
-package com.team254.frc2013.control;
+package com.team254.lib.control;
 
 import java.util.Vector;
 
@@ -10,7 +10,7 @@ import java.util.Vector;
 public abstract class Controller {
   private static Vector controllers = new Vector();
   private String name;
-  boolean enabled;
+  protected boolean enabled;
   
   public Controller(String name) {
     controllers.addElement(this);

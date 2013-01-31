@@ -2,8 +2,8 @@ package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
 import com.team254.frc2013.commands.CheesyDriveCommand;
-import com.team254.frc2013.lib.ThrottledPrinter;
-import com.team254.frc2013.lib.Util;
+import com.team254.lib.util.ThrottledPrinter;
+import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
