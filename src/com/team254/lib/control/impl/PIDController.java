@@ -44,7 +44,8 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
     double dError = error - lastError;
     double d = gains.getD() * dError;
     lastError = error;
-    output.set(p + i + d);
+    double ff = gains.getF() * goal;
+    output.set(ff + p + i + d);
     SmartDashboard.putData(this);
   }
 
@@ -90,6 +91,7 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
       table.putNumber("p", gains.getP());
       table.putNumber("i", gains.getI());
       table.putNumber("d", gains.getD());
+      table.putNumber("f", gains.getF());
       table.putNumber("goal", goal);
       table.putNumber("source", source.get());
       table.putBoolean("enabled", isEnabled());
