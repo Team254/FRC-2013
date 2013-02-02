@@ -31,7 +31,7 @@ public class Constants {
   public static final Constant frontShooterPort = new Constant("frontShooterPort", 8); // arbitrary
   public static final Constant frontShooterPortB = new Constant("frontShooterPortB", 3); // arbitrary
   public static final Constant backShooterPort = new Constant("backShooterPort", 9); // arbitrary
-  
+  public static final Constant intakePort = new Constant("intakePort", 1);
   // Solenoids
   public static final Constant pressureSwitch = new Constant("pressureSwitch",  14);
   public static final Constant compressorRelay = new Constant("compressorRelay", 8);

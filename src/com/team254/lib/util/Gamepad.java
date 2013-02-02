@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 /**
  * Contains functions for use with the Logitech F310 controller.
  *
+ * @author art.kalb96@gmail.com (Arthur Kalb)
  * @author articgrayling8x8@gmail.com (Dorian Chan)
  * @author kevinsundar@gmail.com (Kevin Vincent)
  */
@@ -31,8 +32,6 @@ public class Gamepad extends Joystick {
   private static final int BUTTON_RIGHT_STICK = 10;
   private static final int BUTTON_MODE = -1;
   private static final int BUTTON_LOGITECH = -1;
-  private static final int kDPadXAxisNum = 5;
-  private static final int kDPadYAxisNum = 6;
 
   /**
    * Constructor that creates a Joystick object.
@@ -128,61 +127,46 @@ public class Gamepad extends Joystick {
   /**
    * Return the DPad axis positions.
    */
-  private double getDPadX() {
-    return getRawAxis(kDPadXAxisNum);
-  }
-
-  private double getDPadY() {
-    return getRawAxis(kDPadYAxisNum);
+  public double getDPadX() {
+    return getRawAxis(AXIS_DPAD);
   }
 
   /**
-   * DPad - in between.
+   * DPad Left and Right only
+   * WPILIB cannot access the vertical axis of the Logitech Game Controller Dpad
    */
-  public boolean getDPadUpLeft() {
-    double x = getDPadX();
-    double y = getDPadY();
-    return (x < -0.5 && y < -0.5);
-  }
-
-  public boolean getDPadDownLeft() {
-    double x = getDPadX();
-    double y = getDPadY();
-    return (x < -0.5 && y > 0.5);
-  }
-
-  public boolean getDPadDownRight() {
-    double x = getDPadX();
-    double y = getDPadY();
-    return (x > 0.5 && y > 0.5);
-  }
-
-  public boolean getDPadUpRight() {
-    double x = getDPadX();
-    double y = getDPadY();
-    return (x > 0.5 && y < -0.5);
-  }
-
-  /**
-   * DPad - cardinal directions.
-   */
-  public boolean getDPadUp() {
-    double y = getDPadY();
-    return (y < -0.5);
-  }
 
   public boolean getDPadLeft() {
     double x = getDPadX();
     return (x < -0.5);
   }
 
-  public boolean getDPadDown() {
-    double y = getDPadY();
-    return (y > 0.5);
-  }
-
   public boolean getDPadRight() {
     double x = getDPadX();
     return (x > 0.5);
+  }
+  
+  /**
+   * Gets the state of the Start button
+   * @return the state of the Start button
+   */
+  public boolean getStartButton(){
+    return getRawButton(BUTTON_START);
+  }
+  
+  /**
+   * Gets the state of the left shoulder
+   * @return the state of the left shoulder 
+   */
+  public boolean getLeftShoulder() {
+    return getRawButton(BUTTON_SHOULDER_LEFT);
+  }
+  
+  /**
+   * Gets the state of the right shoulder
+   * @return the state of the right shoulder
+   */
+  public boolean getRightShoulder() {
+    return getRawButton(BUTTON_SHOULDER_RIGHT);
   }
 }
