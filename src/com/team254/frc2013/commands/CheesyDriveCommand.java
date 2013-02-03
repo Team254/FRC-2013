@@ -10,6 +10,7 @@ import com.team254.lib.util.Util;
 public class CheesyDriveCommand extends CommandBase {
   private double oldWheel = 0.0;
   private double quickStopAccumulator;
+  private double deadband = 0.1;
 
   public CheesyDriveCommand() {
     requires(drive);
@@ -25,9 +26,9 @@ public class CheesyDriveCommand extends CommandBase {
 
     double wheelNonLinearity;
 
-    double wheel = controlBoard.rightStick.getX();
-    double throttle = -controlBoard.leftStick.getY();  // getY() returns negative for forward
-
+    double wheel = handleDeadband(controlBoard.rightStick.getX(), deadband);
+    double throttle = handleDeadband(controlBoard.leftStick.getY(), deadband);
+    System.out.println("Throttle: " + throttle + ", wheel: " + wheel);
     double negInertia = wheel - oldWheel;
     oldWheel = wheel;
 
@@ -145,5 +146,9 @@ public class CheesyDriveCommand extends CommandBase {
   }
 
   protected void interrupted() {
+  }
+  
+  public double handleDeadband(double val, double deadband) {
+    return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
   }
 }

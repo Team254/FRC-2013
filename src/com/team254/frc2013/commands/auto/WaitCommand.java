@@ -19,7 +19,7 @@ public class WaitCommand extends Command {
   }
 
   protected void execute() {
-    //System.out.println("Waiting... curr: " + t.get() + ", max: " + timeout);
+    System.out.println("Waiting... curr: " + t.get() + ", max: " + timeout);
   }
 
   protected boolean isFinished() {

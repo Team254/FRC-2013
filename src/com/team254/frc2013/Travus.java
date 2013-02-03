@@ -2,8 +2,10 @@ package com.team254.frc2013;
 
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.frc2013.commands.DriveDistanceCommand;
+import com.team254.frc2013.commands.IntakeTimedCommand;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
@@ -22,7 +24,13 @@ public class Travus extends IterativeRobot {
   public void robotInit() {
     // Initialize all subsystems.
     CommandBase.init();
-    autonomousCommand = new WaitCommand(1.0);
+    autonomousCommand = new DriveDistanceCommand(12, 1, 10);
+    /*
+    autonomousCommand = new CommandGroup();
+    ((CommandGroup)autonomousCommand).addParallel(new DriveDistanceCommand(1200, 1, 5));
+    ((CommandGroup)autonomousCommand).addSequential(new WaitCommand(1));
+    ((CommandGroup)autonomousCommand).addSequential(new IntakeTimedCommand(1, 2));
+    */
   }
 
   /**
@@ -30,6 +38,7 @@ public class Travus extends IterativeRobot {
    */
   public void autonomousInit() {
     autonomousCommand = new DriveDistanceCommand(12, 1, 10);
+    autonomousCommand.start();
   }
 
   /**

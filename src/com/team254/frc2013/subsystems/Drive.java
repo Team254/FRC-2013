@@ -2,7 +2,6 @@ package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
 import com.team254.frc2013.commands.CheesyDriveCommand;
-import com.team254.lib.util.ThrottledPrinter;
 import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -19,8 +18,10 @@ public class Drive extends Subsystem {
   // PWM channels
   private Talon leftDriveA = new Talon(Constants.leftDrivePortA.getInt());
   private Talon leftDriveB = new Talon(Constants.leftDrivePortB.getInt());
+  private Talon leftDriveC = new Talon(Constants.leftDrivePortC.getInt());
   private Talon rightDriveA = new Talon(Constants.rightDrivePortA.getInt());
   private Talon rightDriveB = new Talon(Constants.rightDrivePortB.getInt());
+  private Talon rightDriveC = new Talon(Constants.rightDrivePortC.getInt());
 
   // Sensors
   private Encoder leftEncoder = new Encoder(Constants.leftEncoderPortA.getInt(),
@@ -50,8 +51,10 @@ public class Drive extends Subsystem {
     rightPower = Util.limit(rightPower, maxSpeed);
     leftDriveA.set(leftPower);
     leftDriveB.set(leftPower);
+    leftDriveC.set(leftPower);
     rightDriveA.set(-rightPower);
     rightDriveB.set(-rightPower);
+    rightDriveC.set(-rightPower);
   }
 
   public double getLeftEncoderDistance() {

@@ -1,5 +1,7 @@
 package com.team254.frc2013.commands;
 
+import edu.wpi.first.wpilibj.Timer;
+
 /**
  * Controls the robot drivetrain to drive a certain distance.
  *
@@ -9,6 +11,7 @@ public class DriveDistanceCommand extends CommandBase {
   private double distance;
   private double speed;
   private double timeout;
+  private Timer t = new Timer();
 
   public DriveDistanceCommand(double distance, double speed, double timeout) {
     this.distance = distance;
@@ -18,9 +21,9 @@ public class DriveDistanceCommand extends CommandBase {
   }
 
   protected void initialize() {
-    setTimeout(timeout);
     drive.resetEncoders();
     drive.setMaxSpeed(speed);
+    t.start();
   }
 
   protected void execute() {
@@ -28,7 +31,9 @@ public class DriveDistanceCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return drive.getLeftEncoderDistance() > distance || drive.getRightEncoderDistance() > distance;
+    return (drive.getLeftEncoderDistance() > distance || 
+            drive.getRightEncoderDistance() > distance) || 
+            t.get() > timeout;
   }
 
   protected void end() {

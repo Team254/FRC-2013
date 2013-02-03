@@ -24,13 +24,16 @@ public class Constants {
   public static final Constant gamepadPort = new Constant("gamepadPort", 3);
 
   // Speed controller mappings
-  public static final Constant leftDrivePortA = new Constant("leftDrivePortA", 5);
-  public static final Constant leftDrivePortB = new Constant("leftDrivePortB", 4);
-  public static final Constant rightDrivePortA = new Constant("rightDrivePortA", 6);
-  public static final Constant rightDrivePortB = new Constant("rightDrivePortB", 7);
-  public static final Constant frontShooterPort = new Constant("frontShooterPort", 8); // arbitrary
-  public static final Constant frontShooterPortB = new Constant("frontShooterPortB", 3); // arbitrary
-  public static final Constant backShooterPort = new Constant("backShooterPort", 9); // arbitrary
+  public static final Constant leftDrivePortA = new Constant("leftDrivePortA", 6);
+  public static final Constant leftDrivePortB = new Constant("leftDrivePortB", 7);
+  public static final Constant leftDrivePortC = new Constant("leftDrivePortC", 8);
+  public static final Constant rightDrivePortA = new Constant("rightDrivePortA", 3);
+  public static final Constant rightDrivePortB = new Constant("rightDrivePortB", 4);
+  public static final Constant rightDrivePortC = new Constant("rightDrivePortC", 5);
+  
+  public static final Constant frontShooterPort = new Constant("frontShooterPort", 9); // arbitrary
+  public static final Constant frontShooterPortB = new Constant("frontShooterPortB", 2); // arbitrary
+  public static final Constant backShooterPort = new Constant("backShooterPort", 10); // arbitrary
   public static final Constant intakePort = new Constant("intakePort", 1);
   // Solenoids
   public static final Constant pressureSwitch = new Constant("pressureSwitch",  14);
