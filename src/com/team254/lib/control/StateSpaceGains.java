@@ -2,11 +2,12 @@
 package com.team254.lib.control;
 
 /**
+ * Contains the gains for the state space controller.
  *
- * @author Matthew Koken
- * @author Arthur Kalb
+ * @author maskoken@gmail.com (Matthew Koken)
+ * @author art.kalb96@gmail.com (Arthur Kalb)
  */
-public class StateSpaceGains implements Gains{
+public class StateSpaceGains implements Gains {
     double[] A;
     double[] B;
     double[] C;

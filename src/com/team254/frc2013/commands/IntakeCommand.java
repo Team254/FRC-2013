@@ -2,12 +2,12 @@ package com.team254.frc2013.commands;
 
 /**
  * Sends power to the intake based on gamepad control.
+ * The gamepad control scheme is temporary.
  * 
- * @author Arthur Kalb
+ * @author art.kalb96@gmail.com (Arthur Kalb)
  */
 public class IntakeCommand extends CommandBase {
   private double value = 0.0;
-  //Tolerance of power control, may be changed
   private double increment = 0.005;
   
   public IntakeCommand() {
@@ -43,5 +43,4 @@ public class IntakeCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
 }

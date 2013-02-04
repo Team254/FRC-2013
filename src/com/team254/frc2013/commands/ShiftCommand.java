@@ -29,5 +29,4 @@ public class ShiftCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
 }

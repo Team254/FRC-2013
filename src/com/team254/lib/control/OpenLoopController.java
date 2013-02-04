@@ -6,10 +6,10 @@ package com.team254.lib.control;
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class OpenLoopController extends Controller {
-
   ControlOutput output;
   private double value;
   private boolean enabled = true;
+  
   public OpenLoopController(String name, ControlOutput output) {
     super(name);
     this.output = output;

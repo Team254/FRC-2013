@@ -1,11 +1,10 @@
-
 package com.team254.lib.control;
 
 /**
  *
- * @author Matthew Koken
- * @author Tombot
+ * @author maskoken@gmail.com (Matthew Koken)
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public interface Gains {
-    boolean updated();
+  boolean updated();
 }

@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.tables.ITableListener;
 /**
  * Controller that uses a PID control scheme.
  *
- * @author Travus
+ * @author richard@team254.com (Richard Lin)
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class PIDController extends Controller implements IUtility, LiveWindowSendable, NamedSendable {
   PIDGains gains;
@@ -99,13 +100,13 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
     }
   }
 
-    public ITable getTable() {
-      return table;
-    }
+  public ITable getTable() {
+    return table;
+  }
 
-    public String getSmartDashboardType() {
-      return "PIDController";
-    }
+  public String getSmartDashboardType() {
+    return "PIDController";
+  }
 
   public void updateTable() {
   }

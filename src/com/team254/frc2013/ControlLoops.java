@@ -1,6 +1,7 @@
 package com.team254.frc2013;
 
 import com.team254.lib.control.Controller;
+import java.util.Timer;
 import java.util.TimerTask;
 
 /**
@@ -9,7 +10,7 @@ import java.util.TimerTask;
  * @author richard@team254.com (Richard Lin)
  */
 public class ControlLoops {
-  java.util.Timer controlLoop;
+  Timer controlLoop;
   double period;
   protected boolean enabled = true;
   
@@ -29,7 +30,7 @@ public class ControlLoops {
   }
   
   public ControlLoops(double period) {
-    controlLoop = new java.util.Timer();
+    controlLoop = new Timer();
     this.period = period;
     controlLoop.schedule(new ControllerTask(this), 0L, (long) (this.period * 1000));
   }

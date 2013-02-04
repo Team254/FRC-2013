@@ -3,6 +3,7 @@ package com.team254.frc2013.commands.auto;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * Tells the robot to wait for a specified amount of time.
  *
  * @author tom@team254.com (Tom Bottiglieri)
  */

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  * @author art.kalb96@gmail.com (Arthur Kalb)
  */
-public class Indexer extends Subsystem{
+public class Indexer extends Subsystem {
 
   protected void initDefaultCommand() {
   }

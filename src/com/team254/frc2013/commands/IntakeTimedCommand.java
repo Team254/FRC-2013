@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 /**
+ * Controls the intake to run with a certain power for a specified amount of time.
  *
- * @author Richard
- * @author Arthur
+ * @author art.kalb96@gmail.com (Arthur Kalb)
  */
 public class IntakeTimedCommand extends CommandBase {
   private double power = 0.0;

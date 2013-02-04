@@ -1,12 +1,12 @@
 package com.team254.lib.control;
 
 import com.team254.lib.util.Matrix;
-import com.team254.lib.util.Matrix;
+
 /**
  *
- * @author Matthew Koken
- * @author Dorian Chan
- * @author Arthur Kalb
+ * @author maskoken@gmail.com (Matthew Koken)
+ * @author articgrayling8x8@gmail.com (Dorian Chan)
+ * @author art.kalb96@gmail.com (Arthur Kalb)
  * 
  */
 public abstract class StateSpaceController {
@@ -16,8 +16,8 @@ public abstract class StateSpaceController {
     StateSpaceGains gains;
     double rate = 50.0;
     
-    //State matrices
-    //Todo: rename matrices
+    // State matrices
+    // TODO: rename matrices
     protected Matrix A;
     protected Matrix B;
     protected Matrix C;
@@ -26,7 +26,8 @@ public abstract class StateSpaceController {
     protected Matrix K;
     protected Matrix R;
     protected Matrix Y;
-    //Additional state matrices
+    
+    // Additional state matrices
     protected Matrix X;
     protected Matrix X_hat;
     protected Matrix U;
@@ -41,13 +42,12 @@ public abstract class StateSpaceController {
     protected Matrix U_temp;
 
     public StateSpaceController(int nIn, int nOut, int nStates, StateSpaceGains ssg, double period) {
-        //super(period);
         numIn = nIn;
         numOut = nOut;
         numStates = nStates;
         gains = ssg;
         
-        //initialiaze matrices
+        // Initialiaze matrices.
         A = new Matrix(numStates, numStates);
         B = new Matrix(numStates, numOut);
         C = new Matrix(numOut, numStates);
@@ -76,8 +76,8 @@ public abstract class StateSpaceController {
         U_temp = U.clone();
         U_temp.multiplyMatrix(K);
 
-        for(int i=0; i < numOut; i++) {
-            double u_i = U.getValue(0,i)+i;
+        for(int i = 0; i < numOut; i++) {
+            double u_i = U.getValue(0, i) + i;
             double u_max = U_max.getValue(0, i);
             double u_min = U_min.getValue(0, i);
             if (u_i > u_max) {
@@ -101,5 +101,4 @@ public abstract class StateSpaceController {
         b_u = X_hat.clone();
         b_u.addMatrix(xhatp1);
     }
-    
 }

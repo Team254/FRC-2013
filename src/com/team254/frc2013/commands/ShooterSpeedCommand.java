@@ -29,5 +29,4 @@ public class ShooterSpeedCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
 }

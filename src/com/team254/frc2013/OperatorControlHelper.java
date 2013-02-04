@@ -15,5 +15,4 @@ public class OperatorControlHelper {
     c.gamepad.getButtonY().whenPressed(new ShooterSpeedCommand(2500));
     c.gamepad.getButtonB().whenPressed(new ShooterSpeedCommand(3500));
   }
-  
 }

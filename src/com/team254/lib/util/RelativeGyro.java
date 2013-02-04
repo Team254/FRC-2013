@@ -3,6 +3,8 @@ package com.team254.lib.util;
 import edu.wpi.first.wpilibj.Gyro;
 
 /**
+ * Subclass of a WPILib gyro that can keep track of both absolute and relative
+ * angle after a reset().
  *
  * @author richard@team254.com (Richard Lin)
  */

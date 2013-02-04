@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.lib.control.impl;
 
 import com.team254.lib.control.ControlOutput;
@@ -17,7 +13,6 @@ import edu.wpi.first.wpilibj.tables.ITable;
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class BangBangController extends Controller implements NamedSendable {
-  
   private ControlSource source;
   private ControlOutput output;
   private double goal;
@@ -61,5 +56,4 @@ public class BangBangController extends Controller implements NamedSendable {
   public String getSmartDashboardType() {
     return "BangBangController";
   }
-  
 }
