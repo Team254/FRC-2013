@@ -31,10 +31,11 @@ public class Constants {
   public static final Constant rightDrivePortB = new Constant("rightDrivePortB", 4);
   public static final Constant rightDrivePortC = new Constant("rightDrivePortC", 5);
   
-  public static final Constant frontShooterPort = new Constant("frontShooterPort", 9); // arbitrary
-  public static final Constant frontShooterPortB = new Constant("frontShooterPortB", 2); // arbitrary
-  public static final Constant backShooterPort = new Constant("backShooterPort", 10); // arbitrary
-  public static final Constant intakePort = new Constant("intakePort", 1);
+  public static final Constant frontShooterPort = new Constant("frontShooterPort", 9); // TBD
+  public static final Constant frontShooterPortB = new Constant("frontShooterPortB", 2); // TBD
+  public static final Constant backShooterPort = new Constant("backShooterPort", 10); // TBD
+  public static final Constant intakePort = new Constant("intakePort", 1); // TBD
+  
   // Solenoids
   public static final Constant pressureSwitch = new Constant("pressureSwitch",  14);
   public static final Constant compressorRelay = new Constant("compressorRelay", 8);
@@ -86,7 +87,8 @@ public class Constants {
         // Extract the key and value.
         String[] line = Util.split(lines[i], "=");
         if (line.length != 2) {
-          System.out.println("Error: invalid constants file line: " + lines[i]);
+          System.out.println("Error: invalid constants file line: " +
+                            (lines[i].length() == 0 ? "(empty line)" : lines[i]));
           continue;
         }
 

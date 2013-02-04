@@ -4,8 +4,6 @@
  */
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-
 /**
  *
  * @author Richard
@@ -13,17 +11,16 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class IntakeTimedCommand extends CommandBase {
   private double power = 0.0;
-  private double time = 0.0;
-  private Timer t = new Timer();
+  private double timeout = 0.0;
   
-  public IntakeTimedCommand(double power,double time){
-    this.time = time;
+  public IntakeTimedCommand(double power, double timeout) {
+    this.timeout = timeout;
     this.power = power;
     requires(intake);
   }
 
   protected void initialize() {
-    t.start();
+    setTimeout(timeout);
   }
 
   protected void execute() {
@@ -31,7 +28,7 @@ public class IntakeTimedCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return t.get() >= time;
+    return isTimedOut();
   }
 
   protected void end() {

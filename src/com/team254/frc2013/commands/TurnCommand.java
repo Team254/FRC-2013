@@ -1,18 +1,14 @@
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-
 /**
  * Controls the robot drivetrain to spin in place with a specified angle.
  *
  * @author richard@team254.com (Richard Lin)
  */
 public class TurnCommand extends CommandBase {
-
   double oldAngle;
   double angle;
   double timeout;
-  Timer t = new Timer();
   boolean isRight;
 
   public TurnCommand(double angle, double timeout) {
@@ -21,20 +17,13 @@ public class TurnCommand extends CommandBase {
     this.timeout = timeout;
   }
 
-  // Called just before this Command runs the first time
   protected void initialize() {
     drive.resetGyro();
     oldAngle = drive.getGyroAngle();
-    t.start();
-    if(angle > 0) {
-      isRight = true;
-    }
-    else {
-      isRight = false;
-    }
+    setTimeout(timeout);
+    isRight = angle > 0 ? true : false;
   }
 
-  // Called repeatedly when this Command is scheduled to run
   protected void execute() {
     if(isRight) {
       drive.setLeftRightPower(1.0, -1.0);
@@ -45,26 +34,13 @@ public class TurnCommand extends CommandBase {
     //System.out.println("Current angle: " + drive.getGyroAngle() + ", goal: " + angle);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
-  protected boolean isFinished() {
-    if(t.get() > timeout) {
-      //System.out.println("Turn has timed out.");
-      t.stop();
-      return true;
-    }
-    else if(drive.getGyroAngle() > angle) {
-      //System.out.println("Turn completed!");
-      return true;
-    }
-    return false;
+  protected boolean isFinished() {    
+    return (drive.getGyroAngle() > angle) || isTimedOut();
   }
 
-  // Called once after isFinished returns true
   protected void end() {
   }
 
-  // Called when another command which requires one or more of the same
-  // subsystems is scheduled to run
   protected void interrupted() {
   }
 }
