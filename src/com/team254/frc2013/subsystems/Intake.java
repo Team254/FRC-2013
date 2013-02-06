@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  * Class designed to control the intake mechanism.
  * 
- * @author Arthur Kalb
+ * @author art.kalb96@gmail.com (Arthur Kalb)
  */
 public class Intake extends Subsystem implements ControlledSubsystem {
   private Talon intakeMotor = new Talon(Constants.intakePort.getInt());

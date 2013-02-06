@@ -19,6 +19,8 @@ import javax.microedition.io.Connector;
  *
  * @author tom@team254.com (Tom Bottiglieri)
  * @author art.kalb96@gmail.com (Arthur Kalb)
+ * @author stephen@team254.com (Stephen Pinkerton)
+ * @author jonathanc@team254.com (Jonathan Chang)
  */
 public class ScriptedAutoMode extends CommandGroup {
 
@@ -68,22 +70,21 @@ public class ScriptedAutoMode extends CommandGroup {
     String url = "file:///" + fileName;
 
     try {
-      //Gets the file and reader set up
+      //Get the file and reader set up
       FileConnection c = (FileConnection) Connector.open(url);
       BufferedReader buf = new BufferedReader(new InputStreamReader(c.openInputStream()));
 
-      //Other variables for parsing initialized
+      //Initialize other variables for parsing
       String line;
       
       boolean isParallel = false;
       String cmd = "NULL";
 
-      //Goes through the file line by line
+      //Go through the file line by line
       while ((line = buf.readLine()) != null) {
         ParamList params = new ParamList();
-        //ensures the line is not a comment
-        System.out.println("Reading line: " + line);
-        //Breaks the line down into substrings
+        
+        //Detect command type (comment / parallel / sequential)
         String[] cmdParams = Util.split(line, " ");
         if (line.length() <= 1) {
           continue;
@@ -94,12 +95,13 @@ public class ScriptedAutoMode extends CommandGroup {
         } else if (cmdParams[0].trim().equals("S")) {
           isParallel = false;
         }
+        System.out.println("Line: " + line);
         cmd = cmdParams[1].trim();
         for (int i = 2; i < cmdParams.length; i++) {
           params.addParam(Double.parseDouble(cmdParams[i].trim()));
         }
-        System.out.println("newline");
         addCommand(cmd, params, isParallel);
+        //end processing the line
       }
 
       c.close();
@@ -126,24 +128,29 @@ public class ScriptedAutoMode extends CommandGroup {
   */
   private void addCommand(String cmd, ParamList params, boolean isParallel) {
     Command c = null;
-    System.out.println("Adding command: " + cmd);
+    //Process command
+    System.out.println("Command: " + cmd);
     if (checkName(cmd, "DRIVE")) {
-      System.out.println("Adding a bunch of params: " + params.at(0) +" "  + params.at(1) +" " + params.at(2));
+      System.out.println("Params: " + params.at(0) + " "  + params.at(1) + " " + params.at(2));
       c = new DriveDistanceCommand(params.at(0), params.at(1), params.at(2));
     } else if (checkName(cmd, "WAIT")) {
-      System.out.println("Adding a bunch of params: " + params.at(0));
+      System.out.println("Params: " + params.at(0));
       c = new WaitCommand(params.at(0));
     } else if (checkName(cmd, "TURN")) {
-      System.out.println("Adding a bunch of params: " + params.at(0) + " " + params.at(1));
+      System.out.println("Params: " + params.at(0) + " " + params.at(1));
       c = new TurnCommand(params.at(0), params.at(1));
     }
 
+    //Process command type
     if (c != null) {
       if(!isParallel) {
         addSequential(c);
+        System.out.println("Type: " + c.getName());
       } else {
         addParallel(c);
+        System.out.println("Type: " + c.getName());
       }
+      System.out.println("---");
     }
   }
 }
