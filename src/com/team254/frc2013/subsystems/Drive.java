@@ -56,6 +56,21 @@ public class Drive extends Subsystem {
     rightDriveB.set(-rightPower);
     rightDriveC.set(-rightPower);
   }
+  
+  public void setMotor(int portNum, double power) {
+    if(portNum == 3)
+      rightDriveA.set(power);
+    else if(portNum == 4)
+      rightDriveB.set(power);
+    else if(portNum == 5)
+      rightDriveC.set(power);
+    else if(portNum == 6)
+      leftDriveA.set(power);
+    else if(portNum == 7)
+      leftDriveB.set(power);
+    else if(portNum == 8)
+      leftDriveC.set(power);
+  }
 
   public double getLeftEncoderDistance() {
     return -leftEncoder.get() / 256.0 * 3.5 * Math.PI;
