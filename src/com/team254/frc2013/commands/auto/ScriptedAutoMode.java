@@ -7,6 +7,7 @@ import com.sun.squawk.io.BufferedReader;
 import com.sun.squawk.microedition.io.FileConnection;
 import com.team254.frc2013.commands.DriveDistanceCommand;
 import com.team254.frc2013.commands.TurnCommand;
+import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import java.io.DataInputStream;
@@ -73,43 +74,32 @@ public class ScriptedAutoMode extends CommandGroup {
 
       //Other variables for parsing initialized
       String line;
-
+      
+      boolean isParallel = false;
       String cmd = "NULL";
 
       //Goes through the file line by line
       while ((line = buf.readLine()) != null) {
-        boolean foundCmd = false;
         ParamList params = new ParamList();
-        int lastSpace = 0;
-        line = line + " ";
         //ensures the line is not a comment
         System.out.println("Reading line: " + line);
-        if (line.startsWith("#") || line.length() <= 1) {
-          continue;
-        }
         //Breaks the line down into substrings
-        for (int i = 0; i < line.length(); i++) {
-          System.out.print("this is: " + line.charAt(i));
-          if (line.charAt(i) == ' ' || i == line.length()) {
-            System.out.println(" true");
-            //Assigns the first word in the line to the command variable
-            if (!foundCmd) {
-              cmd = line.substring(0, i).trim();
-              foundCmd = true;
-            }
-            //or else makes the word into a double parameter
-            else {
-              String param = line.substring(lastSpace,i).trim();
-              params.addParam(Double.parseDouble(param));
-            }
-            lastSpace = i;
-          }
-          else {
-            System.out.println(" false");
-          }
+        String[] cmdParams = Util.split(line, " ");
+        if (line.length() <= 1) {
+          continue;
+        } else if (cmdParams[0].trim().equals("#")) {
+          continue;
+        } else if (cmdParams[0].trim().equals("P")) {
+          isParallel = true;
+        } else if (cmdParams[0].trim().equals("S")) {
+          isParallel = false;
+        }
+        cmd = cmdParams[1].trim();
+        for (int i = 2; i < cmdParams.length; i++) {
+          params.addParam(Double.parseDouble(cmdParams[i].trim()));
         }
         System.out.println("newline");
-        addCommand(cmd, params);
+        addCommand(cmd, params, isParallel);
       }
 
       c.close();
@@ -134,7 +124,7 @@ public class ScriptedAutoMode extends CommandGroup {
   * @param cmd The command which the robot will run
   * @param params The List of parameters
   */
-  private void addCommand(String cmd, ParamList params) {
+  private void addCommand(String cmd, ParamList params, boolean isParallel) {
     Command c = null;
     System.out.println("Adding command: " + cmd);
     if (checkName(cmd, "DRIVE")) {
@@ -149,7 +139,11 @@ public class ScriptedAutoMode extends CommandGroup {
     }
 
     if (c != null) {
-      addSequential(c);
+      if(!isParallel) {
+        addSequential(c);
+      } else {
+        addParallel(c);
+      }
     }
   }
 }
