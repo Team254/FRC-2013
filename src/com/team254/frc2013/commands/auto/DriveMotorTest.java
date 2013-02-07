@@ -1,22 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-//Ports 3,4,5,6,7,8
 package com.team254.frc2013.commands.auto;
 
 import com.team254.frc2013.commands.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
-//import java.util.Timer;
 
 /**
  *
- * @author Matthew Koken
+ * @author maskoken@gmail.com (Matthew Koken)
  */
 
 public class DriveMotorTest extends CommandBase{
-    Timer timer = new Timer();
-    int currMotor = 3;
+    private Timer timer = new Timer();
+    private int currMotor = 3;
+    
     public DriveMotorTest() {
       requires(drive);
     }
@@ -37,10 +32,12 @@ public class DriveMotorTest extends CommandBase{
     }
 
     protected boolean isFinished() {
-      if(currMotor == 9)
+      if(currMotor == 9) {
         return true;
-      else
+      }
+      else {
         return false;
+      }
     }
 
     protected void end() {
