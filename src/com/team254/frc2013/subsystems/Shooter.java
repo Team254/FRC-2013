@@ -29,26 +29,28 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Shooter extends Subsystem implements ControlledSubsystem {
   private Victor frontMotor = new Victor(Constants.frontShooterPort.getInt());
-  private Solenoid loader = new Solenoid(1);
+  private Solenoid loader = new Solenoid(Constants.shooterLoaderPort.getInt());
   
   private Counter frontEncoder = new Counter(Constants.frontEncoderPortA.getInt());
   private Counter backEncoder = new Counter(Constants.backEncoderPortA.getInt());
   
   private BangBangController wheelController;
 
+  // Load a frisbee into shooter by retracting the piston
   public void load() {
     loader.set(false);
+  }
+  
+  // Extend piston to prepare for loading in another frisbee
+  public void extend() {
+    loader.set(true);
   }
   
   public void setState(boolean isEnabled) {
     loader.set(isEnabled);
     //insert shooter logic here
   }
-  
-  public void numatExtend() {
-    loader.set(true);
-  }
-  
+
   public boolean getLoaderState() {
     return loader.get();
   }

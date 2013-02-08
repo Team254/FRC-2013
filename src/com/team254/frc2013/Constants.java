@@ -40,8 +40,9 @@ public class Constants {
   public static final Constant pressureSwitch = new Constant("pressureSwitch",  14);
   public static final Constant compressorRelay = new Constant("compressorRelay", 8);
   public static final Constant shifterPort = new Constant("shifterPort", 8);
-  public static final Constant indexPortL = new Constant("indexPortL", 1); //port tbd
-  public static final Constant indexPortR = new Constant("indexPortR", 2); //port tbd
+  public static final Constant indexPortL = new Constant("indexPortL", 1); // TBD
+  public static final Constant indexPortR = new Constant("indexPortR", 2); // TBD
+  public static final Constant shooterLoaderPort = new Constant("shooterLoaderPort", 3); // TBD
   
   // Sensor mappings
   public static final Constant leftEncoderPortA = new Constant("leftEncoderPortA", 1);
