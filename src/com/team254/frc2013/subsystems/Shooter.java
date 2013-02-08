@@ -11,6 +11,7 @@ import com.team254.lib.control.PIDGains;
 import com.team254.lib.util.MovingAverageFilter;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
@@ -23,15 +24,35 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  *
  * @author richard@team254.com (Richard Lin)
  * @author tom@team254.com (Tom Bottiglieri)
+ * @author eric.vanlare14@bcp.org (Eric van Lare)
+ * @author eliwu26@gmail.com (Elias Wu)
  */
 public class Shooter extends Subsystem implements ControlledSubsystem {
   private Victor frontMotor = new Victor(Constants.frontShooterPort.getInt());
+  private Solenoid loader = new Solenoid(1);
   
   private Counter frontEncoder = new Counter(Constants.frontEncoderPortA.getInt());
   private Counter backEncoder = new Counter(Constants.backEncoderPortA.getInt());
   
   private BangBangController wheelController;
 
+  public void load() {
+    loader.set(false);
+  }
+  
+  public void setState(boolean isEnabled) {
+    loader.set(isEnabled);
+    //insert shooter logic here
+  }
+  
+  public void numatExtend() {
+    loader.set(true);
+  }
+  
+  public boolean getLoaderState() {
+    return loader.get();
+  }
+  
   public void update() {
   }
   
@@ -83,5 +104,4 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
   
   protected void initDefaultCommand() {
   }
-  
 }
