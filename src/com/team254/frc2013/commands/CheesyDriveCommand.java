@@ -10,8 +10,8 @@ import com.team254.lib.util.Util;
 public class CheesyDriveCommand extends CommandBase {
   private double oldWheel = 0.0;
   private double quickStopAccumulator;
-  private double throttleDeadband = 0.1;
-  private double wheelDeadband = 0.1;
+  private double throttleDeadband = 0.02;
+  private double wheelDeadband = 0.02;
 
   public CheesyDriveCommand() {
     requires(drive);
