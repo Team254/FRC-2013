@@ -1,5 +1,10 @@
 package com.team254.frc2013.commands;
 
+import com.team254.frc2013.Constants;
+import com.team254.lib.control.ControlSource;
+import com.team254.lib.control.PIDGains;
+import com.team254.lib.control.impl.PIDController;
+import com.team254.lib.util.ThrottledPrinter;
 import com.team254.lib.util.Util;
 
 /**
@@ -12,12 +17,14 @@ public class CheesyDriveCommand extends CommandBase {
   private double quickStopAccumulator;
   private double throttleDeadband = 0.02;
   private double wheelDeadband = 0.02;
+  ThrottledPrinter p = new ThrottledPrinter(.1);
 
   public CheesyDriveCommand() {
     requires(drive);
   }
 
   protected void initialize() {
+    drive.openLoop() ;
   }
 
   protected void execute() {
@@ -29,19 +36,20 @@ public class CheesyDriveCommand extends CommandBase {
 
     double wheel = handleDeadband(controlBoard.rightStick.getX(), wheelDeadband);
     double throttle = handleDeadband(controlBoard.leftStick.getY(), throttleDeadband);
-    System.out.println("Throttle: " + throttle + ", wheel: " + wheel);
+   // System.out.println("Throttle: " + throttle + ", wheel: " + wheel);
+
     double negInertia = wheel - oldWheel;
     oldWheel = wheel;
-
+/*
     if (isHighGear) {
-      wheelNonLinearity = 0.9;
+      wheelNonLinearity = 0.6;
       // Apply a sin function that's scaled to make it feel better.
       wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) /
           Math.sin(Math.PI / 2.0 * wheelNonLinearity);
       wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) /
           Math.sin(Math.PI / 2.0 * wheelNonLinearity);
     } else {
-      wheelNonLinearity = 0.8;
+      wheelNonLinearity = 0.5;
       // Apply a sin function that's scaled to make it feel better.
       wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) /
           Math.sin(Math.PI / 2.0 * wheelNonLinearity);
@@ -50,6 +58,9 @@ public class CheesyDriveCommand extends CommandBase {
       wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) /
           Math.sin(Math.PI / 2.0 * wheelNonLinearity);
     }
+
+*/
+    
 
     double leftPwm, rightPwm, overPower;
     double sensitivity = 1.7;
@@ -62,7 +73,7 @@ public class CheesyDriveCommand extends CommandBase {
     double negInertiaScalar;
     if (isHighGear) {
       negInertiaScalar = 5.0;
-      sensitivity = 1.2;
+      sensitivity = Constants.sensitivityHigh.getDouble();
     } else {
       if (wheel * negInertia > 0) {
         negInertiaScalar = 2.5;
@@ -73,10 +84,10 @@ public class CheesyDriveCommand extends CommandBase {
           negInertiaScalar = 3.0;
         }
       }
-      sensitivity = 1.10;
+      sensitivity = Constants.sensitivityLow.getDouble();
 
       if (Math.abs(throttle) > 0.1) {
-        sensitivity = 1 - (1 - sensitivity) / Math.abs(throttle);
+       // sensitivity = 1.0 - (1.0 - sensitivity) / Math.abs(throttle);
       }
     }
     double negInertiaPower = negInertia * negInertiaScalar;
@@ -136,7 +147,7 @@ public class CheesyDriveCommand extends CommandBase {
       rightPwm = -1.0;
     }
     
-    System.out.println("Setting left: " + leftPwm + ", right: " + rightPwm);
+    //System.out.println("Setting left: " + leftPwm + ", right: " + rightPwm);
     drive.setLeftRightPower(leftPwm, rightPwm);
   }
 

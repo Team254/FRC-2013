@@ -54,7 +54,19 @@ public class Constants {
   public static final Constant backEncoderPortA = new Constant("backEncoderPortA", 8); // TBD
   public static final Constant backEncoderPortB = new Constant("backEncoderPortB", 9); // TBD
   public static final Constant gyroPort = new Constant("gyroPort", 1);
-
+  
+  // Drive tuning
+  public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .6);
+  public static final Constant sensitivityLow = new Constant("sensitivityLow", .5);
+  
+  public static final Constant driveStraightKP = new Constant("driveStraightKP", 1.0/26.0);
+  public static final Constant driveStraightKI = new Constant("driveStraightKI", .0005);
+  public static final Constant driveStraightKD = new Constant("driveStraightKD", 0.0);
+  
+  public static final Constant driveTurnKP = new Constant("driveTurnKP", 0.0);
+  public static final Constant driveTurnKI = new Constant("driveTurnKI", 0.0);
+  public static final Constant driveTurnKD = new Constant("driveTurnKD", 0.0);
+  
   static {
     // Set any overridden constants from the file on startup.
     readConstantsFromFile();
@@ -95,16 +107,20 @@ public class Constants {
           continue;
         }
 
+        boolean found = false;
         // Search through the constants until we find one with the same name.
         for (int j = 0; j < constants.size(); j++) {
           Constant constant = (Constant)constants.elementAt(j);
           if (constant.getName().compareTo(line[0]) == 0) {
+            System.out.println("Setting " + constant.getName() + " to " + Double.parseDouble(line[1]));
             constant.setVal(Double.parseDouble(line[1]));
+            found = true;
             break;
           }
         }
 
-        System.out.println("Error: the constant doesn't exist: " + lines[i]);
+        if (!found)
+          System.out.println("Error: the constant doesn't exist: " + lines[i]);
       }
     } catch (Exception e) {
       e.printStackTrace();

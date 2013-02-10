@@ -1,5 +1,7 @@
 package com.team254.lib.control;
 
+import com.team254.frc2013.Constants.Constant;
+
 /**
  * Keeps track of the proportional, integral, and derivative
  * terms of a PID controller.
@@ -7,43 +9,61 @@ package com.team254.lib.control;
  * @author richard@team254.com (Richard Lin)
  */
 public class PIDGains {
-  private double kP;
-  private double kI;
-  private double kD;
-  private double kF;
+  Constant kP;
+  Constant kI;
+  Constant kD;
+  Constant kF;
 
-  public PIDGains(double p, double i, double d, double f) {
+  public PIDGains(Constant p, Constant i, Constant d, Constant f) {
     set(p, i, d, f);
   }
 
-  public PIDGains(double p, double i, double d) {
+  public PIDGains(Constant p, Constant i, Constant d) {
     set(p, i, d);
   }
 
-  public final void set(double p, double i, double d) {
-    set(p, i, d, 0);
+  public final void set(Constant p, Constant i, Constant d) {
+    set(p, i, d, new Constant("nullFF", 0));
   }
 
-  public final void set(double p, double i, double d, double f) {
-    kP = p;
-    kI = i;
-    kD = d;
-    kF = f;
+  public final void set(Constant p, Constant i, Constant d, Constant f) {
+    Constant nullConstant = new Constant("nullPID", 0);
+    if (p != null)
+      kP = p;
+    else kP = nullConstant;
+ 
+    if (i != null)
+      kI = i;
+    else kI = nullConstant;
+ 
+    if (d != null)
+      kD = d;
+    else kD = nullConstant;
+    
+    if (f != null)
+      kF = f;
+    else kF = nullConstant;;
+  }
+  
+  public final void set(double p, double i, double d) {
+    kP.setVal(p);
+    kI.setVal(i);
+    kD.setVal(d);
   }
 
   public double getP() {
-    return kP;
+    return kP.getDouble();
   }
 
   public double getI() {
-    return kI;
+    return kI.getDouble();
   }
   
   public double getD() {
-    return kD;
+    return kD.getDouble();
   }
 
   public double getF() {
-    return kF;
+    return kF.getDouble();
   }
 }

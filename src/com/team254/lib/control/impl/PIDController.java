@@ -24,7 +24,10 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
   double goal;
   double errorSum;
   double lastError;
-  double lastSource;
+  double lastDeltaError;
+  double lastSource, lastOut;
+  double minIError = 10.0;
+  double onTargetError = 1.0, onTargetDeltaError = 0.05;
 
   public PIDController(String name, PIDGains gains, ControlSource source, ControlOutput output) {
     super(name);
@@ -40,22 +43,39 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
     lastSource = source.get();
     double error = goal - lastSource;
     double p = gains.getP() * error;
-    errorSum += error;
+    if (Math.abs(error) < minIError)
+      errorSum += error;
     double i = gains.getI() * errorSum;
     double dError = error - lastError;
     double d = gains.getD() * dError;
     lastError = error;
     double ff = gains.getF() * goal;
-    output.set(ff + p + i + d);
+    if (enabled) {
+      double out = ff + p + i + d;
+      output.set(out);
+      lastOut = out;
+    }
+    lastDeltaError = dError;
     SmartDashboard.putData(this);
   }
 
   public void setGoal(double goal) {
+    errorSum = 0;
     this.goal = goal;
+    output.set(0);
   }
   
   public double getGoal(double goal) {
     return this.goal;
+  }
+  
+  void setErrorBounds(double onTargetError, double onTargetDeltaError) {
+    this.onTargetDeltaError = onTargetDeltaError;
+    this.onTargetError = onTargetError;
+  }
+  
+  void setMinI(double minI) {
+    this.minIError = minI;
   }
 
   private ITableListener listener = new ITableListener() {
@@ -113,8 +133,13 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
 
   public void startLiveWindowMode() {
     disable();
-  }
+  } 
 
   public void stopLiveWindowMode() {
+  }
+
+  public boolean onTarget() {
+    boolean done = !enabled || (Math.abs(goal - lastSource) < onTargetError) && (Math.abs(lastDeltaError) < onTargetDeltaError);
+    return done;
   }
 }

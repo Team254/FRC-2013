@@ -20,21 +20,22 @@ public class DriveDistanceCommand extends CommandBase {
   protected void initialize() {
     drive.resetEncoders();
     drive.setMaxSpeed(speed);
+    drive.setGoal(distance, 0);
     setTimeout(timeout);
   }
 
   protected void execute() {
-    drive.setLeftRightPower(speed, speed);
+    
   }
 
   protected boolean isFinished() {
-    return (drive.getLeftEncoderDistance() > distance || 
-            drive.getRightEncoderDistance() > distance) || 
-            isTimedOut();
+    return (drive.onTarget() ||
+            isTimedOut());
   }
 
   protected void end() {
     drive.setLeftRightPower(0, 0);
+    drive.setMaxSpeed(1.0);
   }
 
   protected void interrupted() {

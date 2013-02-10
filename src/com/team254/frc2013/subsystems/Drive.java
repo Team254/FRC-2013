@@ -2,6 +2,10 @@ package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
 import com.team254.frc2013.commands.CheesyDriveCommand;
+import com.team254.lib.control.ControlOutput;
+import com.team254.lib.control.ControlSource;
+import com.team254.lib.control.PIDGains;
+import com.team254.lib.control.impl.PIDController;
 import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -31,9 +35,54 @@ public class Drive extends Subsystem {
   
   // Shifter
   private Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
-  private Gyro gyro = new Gyro(Constants.gyroPort.getInt());
+  private Gyro gyro = new Gyro(1);//Constants.gyroPort.getInt());
   private double maxSpeed = 1.0;
   private boolean isHighGear = true;
+  
+    
+  protected class DriveControlSource implements ControlSource{
+    boolean straight = true;
+    DriveControlSource(boolean straight) {
+      this.straight = straight;
+    }
+    
+    public double get() {
+      // This is super hacky.
+      if (straight) {
+        return (getLeftEncoderDistance() + getRightEncoderDistance()) / 2.0;
+      } else {
+        return getGyroAngle();
+      }
+    }
+
+    public void updateFilter() {
+    }
+  }
+  
+  double lastStraight = 0;
+  double lastTurn = 0;
+  protected class DriveControlOutput implements ControlOutput {
+    boolean straight;
+    DriveControlOutput(boolean straight) {
+      this.straight = straight;
+    }
+
+    public void set(double value) {
+      if (straight) {
+        lastStraight = -value; // Why is this negative?
+      } else {
+        lastTurn = value;
+      }
+      setLeftRightPower(lastStraight + lastTurn, lastStraight - lastTurn);
+    }
+  }
+
+  PIDController straightController = new PIDController("straightController", 
+          new PIDGains(Constants.driveStraightKP, Constants.driveStraightKI, Constants.driveStraightKD), 
+          new DriveControlSource(true), new DriveControlOutput(true));
+  PIDController turnController = new PIDController("turnController", 
+          new PIDGains(Constants.driveTurnKP, Constants.driveTurnKI, Constants.driveTurnKD), 
+          new DriveControlSource(false), new DriveControlOutput(false));;
 
   public Drive() {
     super();
@@ -77,7 +126,7 @@ public class Drive extends Subsystem {
   }
 
   public double getRightEncoderDistance() {
-    return -rightEncoder.get() / 256.0 * 3.5 * Math.PI;
+    return rightEncoder.get() / 256.0 * 3.5 * Math.PI;
   }
   
   public void resetEncoders() {
@@ -104,5 +153,26 @@ public class Drive extends Subsystem {
   
   public boolean isHighGear() {
     return isHighGear;
+  }
+  
+  public void openLoop() {
+    straightController.disable();
+    setLeftRightPower(0,0);
+  }
+  
+  public void setGoal(double distance, double angle) {
+    resetGyro();
+    resetEncoders();
+    straightController.setGoal(distance);
+    if (distance != 0)
+      straightController.enable();
+    else
+      straightController.disable();
+    turnController.setGoal(angle);
+    turnController.enable();
+  }
+  
+  public boolean onTarget() {
+    return straightController.onTarget() && turnController.onTarget();
   }
 }
