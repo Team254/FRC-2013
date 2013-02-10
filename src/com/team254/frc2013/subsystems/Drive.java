@@ -157,6 +157,7 @@ public class Drive extends Subsystem {
   
   public void openLoop() {
     straightController.disable();
+    turnController.disable();
     setLeftRightPower(0,0);
   }
   
