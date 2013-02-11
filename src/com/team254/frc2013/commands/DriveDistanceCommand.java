@@ -29,13 +29,15 @@ public class DriveDistanceCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return (drive.onTarget() ||
+    boolean done = (drive.onTarget() ||
             isTimedOut());
+    if (done)
+      System.out.println("DD DONE!");
+    return done; 
   }
 
   protected void end() {
     drive.setLeftRightPower(0, 0);
-    drive.setMaxSpeed(1.0);
   }
 
   protected void interrupted() {

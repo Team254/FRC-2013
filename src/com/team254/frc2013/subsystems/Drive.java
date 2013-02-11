@@ -6,6 +6,7 @@ import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.impl.PIDController;
+import com.team254.lib.control.impl.ProfiledPIDController;
 import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -14,7 +15,7 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- * Class representing the drivetrain and managing its motors and sensors.
+ * Class representing the drive train and managing its motors and sensors.
  *
  * @author richard@team254.com (Richard Lin)
  */
@@ -36,7 +37,6 @@ public class Drive extends Subsystem {
   // Shifter
   private Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
   private Gyro gyro = new Gyro(1);//Constants.gyroPort.getInt());
-  private double maxSpeed = 1.0;
   private boolean isHighGear = true;
   
     
@@ -77,9 +77,11 @@ public class Drive extends Subsystem {
     }
   }
 
-  PIDController straightController = new PIDController("straightController", 
+  ProfiledPIDController straightController = new ProfiledPIDController("straightController", 
           new PIDGains(Constants.driveStraightKP, Constants.driveStraightKI, Constants.driveStraightKD), 
-          new DriveControlSource(true), new DriveControlOutput(true));
+          new DriveControlSource(true), new DriveControlOutput(true),
+          6*12.0, .75); // Half a second to accelerate to 5.0 ft/s
+
   PIDController turnController = new PIDController("turnController", 
           new PIDGains(Constants.driveTurnKP, Constants.driveTurnKI, Constants.driveTurnKD), 
           new DriveControlSource(false), new DriveControlOutput(false));;
@@ -88,6 +90,7 @@ public class Drive extends Subsystem {
     super();
     leftEncoder.start();
     rightEncoder.start();
+    openLoop();
   }
 
   protected void initDefaultCommand() {
@@ -96,8 +99,6 @@ public class Drive extends Subsystem {
   }
 
   public void setLeftRightPower(double leftPower, double rightPower) {
-    leftPower = Util.limit(leftPower, maxSpeed);
-    rightPower = Util.limit(rightPower, maxSpeed);
     leftDriveA.set(leftPower);
     leftDriveB.set(leftPower);
     leftDriveC.set(leftPower);
@@ -137,30 +138,30 @@ public class Drive extends Subsystem {
   public double getGyroAngle() {
     return gyro.getAngle();
   }
-  
+
   public void resetGyro() {
     gyro.reset();
   }
 
   public void setMaxSpeed(double speed) {
-    maxSpeed = speed;
+    straightController.setMaxVelocity(speed);
   }
-  
+
   public void shift(boolean highGear) {
     isHighGear = highGear;
     shifter.set(isHighGear);
   }
-  
+
   public boolean isHighGear() {
     return isHighGear;
   }
-  
+
   public void openLoop() {
     straightController.disable();
     turnController.disable();
     setLeftRightPower(0,0);
   }
-  
+
   public void setGoal(double distance, double angle) {
     resetGyro();
     resetEncoders();

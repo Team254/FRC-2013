@@ -54,13 +54,13 @@ public class Travus extends IterativeRobot {
     //autonomousCommand = new DriveDistanceCommand(12, 1, 10);
     autonomousCommand = new CommandGroup();
     //autonomousCommand.addSequential(new TurnAngleCommand(90 * (test ? 1 : -1),5));
-    autonomousCommand.addSequential(new DriveDistanceCommand(140, .35, 6));
+    autonomousCommand.addSequential(new DriveDistanceCommand(140, 5*12, 6));
     autonomousCommand.addSequential(new WaitCommand(1));
     //autonomousCommand.addSequential(new DriveDistanceCommand(110, 1, 2));
    // autonomousCommand.addSequential(new WaitCommand(3));
-    autonomousCommand.addSequential(new DriveDistanceCommand(-45, 1, 2));
+    autonomousCommand.addSequential(new DriveDistanceCommand(-138, 13*12, 6));
     autonomousCommand.addSequential(new WaitCommand(3));
-    autonomousCommand.addSequential(new TurnAngleCommand(90 * (test ? 1 : -1),5));
+    //autonomousCommand.addSequential(new TurnAngleCommand(90 * (test ? 1 : -1),5));
    /* autonomousCommand.addSequential(new DriveDistanceCommand(48, 1, 10));
     autonomousCommand.addSequential(new WaitCommand(3));
     autonomousCommand.addSequential(new DriveDistanceCommand(-48, 1, 10));*/

@@ -9,7 +9,7 @@ import java.util.Vector;
  */
 public abstract class Controller {
   private static Vector controllers = new Vector();
-  private String name;
+  protected String name;
   protected boolean enabled;
   
   public Controller(String name) {

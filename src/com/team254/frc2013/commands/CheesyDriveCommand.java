@@ -40,7 +40,7 @@ public class CheesyDriveCommand extends CommandBase {
 
     double negInertia = wheel - oldWheel;
     oldWheel = wheel;
-/*
+
     if (isHighGear) {
       wheelNonLinearity = 0.6;
       // Apply a sin function that's scaled to make it feel better.
@@ -58,9 +58,6 @@ public class CheesyDriveCommand extends CommandBase {
       wheel = Math.sin(Math.PI / 2.0 * wheelNonLinearity * wheel) /
           Math.sin(Math.PI / 2.0 * wheelNonLinearity);
     }
-
-*/
-    
 
     double leftPwm, rightPwm, overPower;
     double sensitivity = 1.7;

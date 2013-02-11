@@ -65,7 +65,11 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
     output.set(0);
   }
   
-  public double getGoal(double goal) {
+  public void setGoalRaw(double goal) {
+    this.goal = goal;
+  }
+  
+  public double getGoal() {
     return this.goal;
   }
   
@@ -140,6 +144,8 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
 
   public boolean onTarget() {
     boolean done = !enabled || (Math.abs(goal - lastSource) < onTargetError) && (Math.abs(lastDeltaError) < onTargetDeltaError);
+    if (done)
+      System.out.println(name + " DONE");
     return done;
   }
 }
