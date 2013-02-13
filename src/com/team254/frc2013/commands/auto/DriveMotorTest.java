@@ -22,7 +22,7 @@ public class DriveMotorTest extends CommandBase{
 
     protected void execute() {
        drive.setMotor(currMotor, 1.0);
-       if(timer.get() > 5.0) {
+       if(timer.get() > 5000000.0) {
          //if uSec, then 5000000
          drive.setMotor(currMotor, 0.0);
          currMotor++;       
