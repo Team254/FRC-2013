@@ -21,16 +21,25 @@ public class DriveMotors extends Subsystem{
   private boolean isDriveMode = true;
   
   public void driveLR(double leftPower, double rightPower){
-    leftDriveA.set(leftPower);
-    leftDriveB.set(leftPower);
-    leftDriveC.set(leftPower);
-    rightDriveA.set(rightPower);
-    rightDriveB.set(rightPower);
-    rightDriveC.set(rightPower);
+    if (isDriveMode) {
+      leftDriveA.set(leftPower);
+      leftDriveB.set(leftPower);
+      leftDriveC.set(leftPower);
+      rightDriveA.set(rightPower);
+      rightDriveB.set(rightPower);
+      rightDriveC.set(rightPower);
+    }
   }
   
   public void set(double allPower){
-    driveLR(allPower, -allPower);
+    if (!isDriveMode) {
+      leftDriveA.set(allPower);
+      leftDriveB.set(allPower);
+      leftDriveC.set(allPower);
+      rightDriveA.set(-allPower);
+      rightDriveB.set(-allPower);
+      rightDriveC.set(-allPower);
+    }
   }
   
   public void setMotor(int portNum, double power) {
