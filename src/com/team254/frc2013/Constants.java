@@ -44,6 +44,8 @@ public class Constants {
   public static final Constant indexPortL = new Constant("indexPortL", 1); // TBD
   public static final Constant indexPortR = new Constant("indexPortR", 2); // TBD
   public static final Constant shooterLoaderPort = new Constant("shooterLoaderPort", 3); // TBD
+  public static final Constant hangerPortA = new Constant("hangerPortA", 4); // TBD
+  public static final Constant hangerPortB = new Constant("hangerPortB", 5); // TBD
   
   // Sensor mappings
   public static final Constant leftEncoderPortA = new Constant("leftEncoderPortA", 1);

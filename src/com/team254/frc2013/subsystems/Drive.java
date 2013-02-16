@@ -20,13 +20,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author richard@team254.com (Richard Lin)
  */
 public class Drive extends Subsystem {
-  // PWM channels
-  private Talon leftDriveA = new Talon(Constants.leftDrivePortA.getInt());
-  private Talon leftDriveB = new Talon(Constants.leftDrivePortB.getInt());
-  private Talon leftDriveC = new Talon(Constants.leftDrivePortC.getInt());
-  private Talon rightDriveA = new Talon(Constants.rightDrivePortA.getInt());
-  private Talon rightDriveB = new Talon(Constants.rightDrivePortB.getInt());
-  private Talon rightDriveC = new Talon(Constants.rightDrivePortC.getInt());
+  
+  private DriveMotors motors;
 
   // Sensors
   private Encoder leftEncoder = new Encoder(Constants.leftEncoderPortA.getInt(),
@@ -40,7 +35,7 @@ public class Drive extends Subsystem {
   private boolean isHighGear = true;
   
     
-  protected class DriveControlSource implements ControlSource{
+  protected class DriveControlSource implements ControlSource {
     boolean straight = true;
     DriveControlSource(boolean straight) {
       this.straight = straight;
@@ -86,8 +81,9 @@ public class Drive extends Subsystem {
           new PIDGains(Constants.driveTurnKP, Constants.driveTurnKI, Constants.driveTurnKD), 
           new DriveControlSource(false), new DriveControlOutput(false));;
 
-  public Drive() {
+  public Drive(DriveMotors motors) {
     super();
+    this.motors = motors;
     leftEncoder.start();
     rightEncoder.start();
     openLoop();
@@ -99,27 +95,11 @@ public class Drive extends Subsystem {
   }
 
   public void setLeftRightPower(double leftPower, double rightPower) {
-    leftDriveA.set(leftPower);
-    leftDriveB.set(leftPower);
-    leftDriveC.set(leftPower);
-    rightDriveA.set(-rightPower);
-    rightDriveB.set(-rightPower);
-    rightDriveC.set(-rightPower);
+    motors.driveLR(leftPower, -rightPower);
   }
   
-  public void setMotor(int portNum, double power) {
-    if(portNum == 3)
-      rightDriveA.set(power);
-    else if(portNum == 4)
-      rightDriveB.set(power);
-    else if(portNum == 5)
-      rightDriveC.set(power);
-    else if(portNum == 6)
-      leftDriveA.set(power);
-    else if(portNum == 7)
-      leftDriveB.set(power);
-    else if(portNum == 8)
-      leftDriveC.set(power);
+  public void setMotor(int portNumber, double power) {
+    motors.setMotor(portNumber, power);
   }
 
   public double getLeftEncoderDistance() {

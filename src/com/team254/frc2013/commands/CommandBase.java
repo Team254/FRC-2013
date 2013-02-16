@@ -4,6 +4,8 @@ import com.team254.frc2013.Constants;
 import com.team254.frc2013.ControlBoard;
 import com.team254.frc2013.OperatorControlHelper;
 import com.team254.frc2013.subsystems.Drive;
+import com.team254.frc2013.subsystems.DriveMotors;
+import com.team254.frc2013.subsystems.Hanger;
 import com.team254.frc2013.subsystems.Intake;
 import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Compressor;
@@ -18,7 +20,9 @@ public abstract class CommandBase extends Command {
   public static ControlBoard controlBoard;
 
   // Declare a single static instance of each subsystem here.
-  public static Drive drive = new Drive();
+  public static DriveMotors motors = new DriveMotors();
+  public static Drive drive = new Drive(motors);
+  public static Hanger hanger = new Hanger(motors);
   public static Shooter shooter = new Shooter();
   public static Compressor compressor = new Compressor(Constants.pressureSwitch.getInt(), 
                                                        Constants.compressorRelay.getInt());
