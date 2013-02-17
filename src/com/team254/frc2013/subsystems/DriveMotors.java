@@ -15,8 +15,7 @@ public class DriveMotors extends Subsystem{
   private Talon leftDriveB = new Talon(Constants.leftDrivePortB.getInt());
   private Talon leftDriveC = new Talon(Constants.leftDrivePortC.getInt());
   private Talon rightDriveA = new Talon(Constants.rightDrivePortA.getInt());
-  private Talon rightDriveB = new Talon(Constants.rightDrivePortB.getInt());
-  private Talon rightDriveC = new Talon(Constants.rightDrivePortC.getInt());
+  private Talon rightDriveBC = new Talon(Constants.rightDrivePortBC.getInt());
   
   private boolean isDriveMode = true;
   
@@ -26,8 +25,7 @@ public class DriveMotors extends Subsystem{
       leftDriveB.set(leftPower);
       leftDriveC.set(leftPower);
       rightDriveA.set(rightPower);
-      rightDriveB.set(rightPower);
-      rightDriveC.set(rightPower);
+      rightDriveBC.set(rightPower);
     }
   }
   
@@ -37,29 +35,25 @@ public class DriveMotors extends Subsystem{
       leftDriveB.set(allPower);
       leftDriveC.set(allPower);
       rightDriveA.set(-allPower);
-      rightDriveB.set(-allPower);
-      rightDriveC.set(-allPower);
+      rightDriveBC.set(-allPower);
     }
   }
   
   public void setMotor(int portNum, double power) {
-    if(portNum == 1) {
-      rightDriveA.set(power);
-    }
-    else if(portNum == 2) {
-      rightDriveB.set(power);
-    }
-    else if(portNum == 3) {
-      rightDriveC.set(power);
-    }
-    else if(portNum == 4) {
+    if(portNum == 3) {
       leftDriveA.set(power);
     }
-    else if(portNum == 5) {
+    else if(portNum == 4) {
       leftDriveB.set(power);
     }
-    else if(portNum == 6) {
+    else if(portNum == 5) {
       leftDriveC.set(power);
+    }
+    else if(portNum == 6) {
+      rightDriveA.set(power);
+    }
+    else if(portNum == 7) {
+      rightDriveBC.set(power);
     }
   }
   

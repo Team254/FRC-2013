@@ -3,7 +3,7 @@ package com.team254.frc2013.subsystems;
 import com.team254.frc2013.Constants;
 import com.team254.frc2013.commands.IntakeCommand;
 import com.team254.lib.control.ControlledSubsystem;
-import edu.wpi.first.wpilibj.Encoder;
+import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -26,12 +26,12 @@ public class Intake extends Subsystem implements ControlledSubsystem {
   } 
   
   public void setIntakePower(double power){
-    double output = Math.abs(power) > 1 ? Math.abs(power) / power : power;
-    intakePivotMotor.set(output);
+    double output = Util.limit(power, 1.0);
+    intakeMotor.set(output);
   }
   
   public void raiseIntake(double power){
-    double output = Math.abs(power) > 1 ? Math.abs(power) / power : power;
+    double output = Util.limit(power, 1.0);
     intakePivotMotor.set(output);
   }
 }

@@ -24,19 +24,17 @@ public class Constants {
   public static final Constant gamepadPort = new Constant("gamepadPort", 3);
 
   // Speed controller mappings
-  public static final Constant leftDrivePortA = new Constant("leftDrivePortA", 6);
-  public static final Constant leftDrivePortB = new Constant("leftDrivePortB", 7);
-  public static final Constant leftDrivePortC = new Constant("leftDrivePortC", 8);
-  public static final Constant rightDrivePortA = new Constant("rightDrivePortA", 3);
-  public static final Constant rightDrivePortB = new Constant("rightDrivePortB", 4);
-  public static final Constant rightDrivePortC = new Constant("rightDrivePortC", 5);
+  public static final Constant leftDrivePortA = new Constant("leftDrivePortA", 3);
+  public static final Constant leftDrivePortB = new Constant("leftDrivePortB", 4);
+  public static final Constant leftDrivePortC = new Constant("leftDrivePortC", 5);
+  public static final Constant rightDrivePortA = new Constant("rightDrivePortA", 6);
+  public static final Constant rightDrivePortBC = new Constant("rightDrivePortBC", 7);
   
-  public static final Constant conveyorPort = new Constant("conveyorPort", 3); // FIX ME :D
-  public static final Constant frontShooterPort = new Constant("frontShooterPort", 9); // TBD
-  public static final Constant frontShooterPortB = new Constant("frontShooterPortB", 2); // TBD
-  public static final Constant backShooterPort = new Constant("backShooterPort", 10); // TBD
-  public static final Constant intakePort = new Constant("intakePort", 1); // TBD
-  public static final Constant intakePivotPort = new Constant("intakePivotPort", 10); //TBD
+  public static final Constant intakePivotPort = new Constant("intakePivotPort", 1);
+  public static final Constant intakePort = new Constant("intakePort", 2);
+  public static final Constant conveyorPort = new Constant("conveyorPort", 8);
+  public static final Constant frontShooterPort = new Constant("frontShooterPort", 9);
+  public static final Constant backShooterPort = new Constant("backShooterPort", 10);
   
   // Solenoids
   public static final Constant pressureSwitch = new Constant("pressureSwitch",  14);

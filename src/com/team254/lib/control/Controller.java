@@ -1,5 +1,6 @@
 package com.team254.lib.control;
 
+import com.team254.frc2013.ControlUpdater;
 import java.util.Vector;
 
 /**
@@ -7,12 +8,13 @@ import java.util.Vector;
  *
  * @author richard@tean254.com (Richard Lin)
  */
-public abstract class Controller {
+public abstract class Controller implements Updatable {
   private static Vector controllers = new Vector();
   protected String name;
   protected boolean enabled;
   
   public Controller(String name) {
+    ControlUpdater.getInstance().add(this);
     controllers.addElement(this);
     this.name = name;
   }

@@ -20,7 +20,6 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class Travus extends IterativeRobot {
   private CommandGroup autonomousCommand = new CommandGroup();
-  private ControlLoops loops = new ControlLoops(1.0 / 100.0);
   boolean test = true;
 
   /**
@@ -29,6 +28,7 @@ public class Travus extends IterativeRobot {
   public void robotInit() {
     // Initialize all subsystems.
     CommandBase.init();
+    ControlUpdater.getInstance().start();
     //autonomousCommand = new ScriptedAutoMode("caleb.txt");
     /*
     autonomousCommand = new CommandGroup();
