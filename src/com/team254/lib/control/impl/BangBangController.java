@@ -56,4 +56,8 @@ public class BangBangController extends Controller implements NamedSendable {
   public String getSmartDashboardType() {
     return "BangBangController";
   }
+
+  public double getGoal() {
+    return this.goal;
+  }
 }

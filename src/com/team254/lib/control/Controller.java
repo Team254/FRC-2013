@@ -42,4 +42,6 @@ public abstract class Controller {
   public abstract void update();
   
   public abstract void setGoal(double goal);
+  
+  public abstract double getGoal();
 }

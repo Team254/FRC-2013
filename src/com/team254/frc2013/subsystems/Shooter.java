@@ -28,13 +28,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * @author eliwu26@gmail.com (Elias Wu)
  */
 public class Shooter extends Subsystem implements ControlledSubsystem {
-  private Victor frontMotor = new Victor(Constants.frontShooterPort.getInt());
+  private Talon frontMotor = new Talon(Constants.frontShooterPort.getInt());
+  private Talon backMotor = new Talon(Constants.backShooterPort.getInt());
   private Solenoid loader = new Solenoid(Constants.shooterLoaderPort.getInt());
   
-  private Counter frontEncoder = new Counter(Constants.frontEncoderPortA.getInt());
-  private Counter backEncoder = new Counter(Constants.backEncoderPortA.getInt());
+  private Counter frontSensor = new Counter(Constants.frontEncoderPortA.getInt());
+  private Counter backSensor = new Counter(Constants.backEncoderPortA.getInt());
   
-  private BangBangController wheelController;
+  private BangBangController frontController;
+  private BangBangController backController;
 
   // Load a frisbee into shooter by retracting the piston
   public void load() {
@@ -49,6 +51,13 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
   public void setState(boolean isEnabled) {
     loader.set(isEnabled);
     //insert shooter logic here
+    if (isEnabled) {
+      frontController.enable();
+      backController.enable();
+    } else {
+      frontController.disable();
+      backController.disable();
+    }
   }
 
   public boolean getLoaderState() {
@@ -73,8 +82,8 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
     public void updateFilter() {
       int kCountsPerRev = 32;
       double rpm = 60.0 / (counter.getPeriod() * (double)kCountsPerRev);
-      if (rpm < 7000.0) {
-        curVel = filter.calculate(rpm);
+      if (rpm < 14000.0) {
+       // curVel = filter.calculate(rpm); // probably dont want to filter bang bang
       }
     }
   }
@@ -94,15 +103,34 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
   
   public Shooter() {
     super();
-    frontEncoder.start();
-    backEncoder.start();
-    wheelController = new BangBangController("ShooterWheel", new ShooterControlSource(frontEncoder),
+    frontSensor.start();
+    backSensor.start();
+    frontController = new BangBangController("FrontShooter", new ShooterControlSource(frontSensor),
+            new ShooterControlOutput(frontMotor));
+    backController = new BangBangController("FrontShooter", new ShooterControlSource(frontSensor),
             new ShooterControlOutput(frontMotor));
   }
   
   public void setSpeed(double speed) {
-    wheelController.setGoal(speed);
+    frontController.setGoal(speed);
+    backController.setGoal(speed/4.0);
   }
+  
+    
+  public void setSpeeds(double fspeed, double bspeed) {
+    frontController.setGoal(fspeed);
+    backController.setGoal(bspeed);
+  }
+  
+  public double getFrontGoal() {
+    return frontController.getGoal();
+  }
+    
+  public double getBackGoal() {
+    return backController.getGoal();
+  }
+  
+  
   
   protected void initDefaultCommand() {
   }

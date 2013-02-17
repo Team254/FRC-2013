@@ -35,6 +35,10 @@ public class OpenLoopController extends Controller {
   public void setGoal(double goal) {
     value = goal;
   }
+
+  public double getGoal() {
+    return value;
+  }
   
   
 }

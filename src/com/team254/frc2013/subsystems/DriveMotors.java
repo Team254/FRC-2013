@@ -43,22 +43,22 @@ public class DriveMotors extends Subsystem{
   }
   
   public void setMotor(int portNum, double power) {
-    if(portNum == 3) {
+    if(portNum == 1) {
       rightDriveA.set(power);
     }
-    else if(portNum == 4) {
+    else if(portNum == 2) {
       rightDriveB.set(power);
     }
-    else if(portNum == 5) {
+    else if(portNum == 3) {
       rightDriveC.set(power);
     }
-    else if(portNum == 6) {
+    else if(portNum == 4) {
       leftDriveA.set(power);
     }
-    else if(portNum == 7) {
+    else if(portNum == 5) {
       leftDriveB.set(power);
     }
-    else if(portNum == 8) {
+    else if(portNum == 6) {
       leftDriveC.set(power);
     }
   }
