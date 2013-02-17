@@ -31,6 +31,7 @@ public class Constants {
   public static final Constant rightDrivePortB = new Constant("rightDrivePortB", 4);
   public static final Constant rightDrivePortC = new Constant("rightDrivePortC", 5);
   
+  public static final Constant conveyorPort = new Constant("conveyorPort", 3); // FIX ME :D
   public static final Constant frontShooterPort = new Constant("frontShooterPort", 9); // TBD
   public static final Constant frontShooterPortB = new Constant("frontShooterPortB", 2); // TBD
   public static final Constant backShooterPort = new Constant("backShooterPort", 10); // TBD

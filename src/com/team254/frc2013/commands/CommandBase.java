@@ -3,6 +3,7 @@ package com.team254.frc2013.commands;
 import com.team254.frc2013.Constants;
 import com.team254.frc2013.ControlBoard;
 import com.team254.frc2013.OperatorControlHelper;
+import com.team254.frc2013.subsystems.Conveyor;
 import com.team254.frc2013.subsystems.Drive;
 import com.team254.frc2013.subsystems.DriveMotors;
 import com.team254.frc2013.subsystems.Hanger;
@@ -27,6 +28,7 @@ public abstract class CommandBase extends Command {
   public static Compressor compressor = new Compressor(Constants.pressureSwitch.getInt(), 
                                                        Constants.compressorRelay.getInt());
   public static Intake intake = new Intake();
+  public static Conveyor conveyor = new Conveyor();
   
   public static void init() {
     // This MUST be here. If the OI creates Commands (which it very likely will), constructing it

@@ -16,6 +16,7 @@ public class TestOutputsCommand extends CommandBase {
     requires(shooter);
     requires(motors);
     requires(intake);
+    requires(conveyor);
   }
 
   protected void execute() {
@@ -31,6 +32,8 @@ public class TestOutputsCommand extends CommandBase {
     
     intake.setIntakePower(val);
     intake.raiseIntake(val);
+    
+    conveyor.setMotor(val);
     
     shooter.setSpeed(10000);
   }

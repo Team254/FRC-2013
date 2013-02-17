@@ -3,6 +3,7 @@ package com.team254.frc2013;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.frc2013.commands.DriveDistanceCommand;
 import com.team254.frc2013.commands.IntakeTimedCommand;
+import com.team254.frc2013.commands.TestOutputsCommand;
 import com.team254.frc2013.commands.TurnAngleCommand;
 import com.team254.frc2013.commands.auto.DriveMotorTest;
 import com.team254.frc2013.commands.auto.ScriptedAutoMode;
@@ -51,8 +52,10 @@ public class Travus extends IterativeRobot {
    * Called once at the start of the autonomous period.
    */
   public void autonomousInit() {
+    
     //autonomousCommand = new DriveDistanceCommand(12, 1, 10);
     autonomousCommand = new CommandGroup();
+    /*
     //autonomousCommand.addSequential(new TurnAngleCommand(90 * (test ? 1 : -1),5));
     autonomousCommand.addSequential(new DriveDistanceCommand(140, 5*12, 6));
     autonomousCommand.addSequential(new WaitCommand(1));
@@ -61,11 +64,14 @@ public class Travus extends IterativeRobot {
     autonomousCommand.addSequential(new DriveDistanceCommand(-138, 13*12, 6));
     autonomousCommand.addSequential(new WaitCommand(3));
     //autonomousCommand.addSequential(new TurnAngleCommand(90 * (test ? 1 : -1),5));
-   /* autonomousCommand.addSequential(new DriveDistanceCommand(48, 1, 10));
+   autonomousCommand.addSequential(new DriveDistanceCommand(48, 1, 10));
     autonomousCommand.addSequential(new WaitCommand(3));
-    autonomousCommand.addSequential(new DriveDistanceCommand(-48, 1, 10));*/
+    autonomousCommand.addSequential(new DriveDistanceCommand(-48, 1, 10));
     test = !test;
+    */
+    autonomousCommand.addSequential(new TestOutputsCommand());
     autonomousCommand.start();
+   
   }
 
   /**
