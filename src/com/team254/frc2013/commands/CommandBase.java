@@ -11,6 +11,7 @@ import com.team254.frc2013.subsystems.Indexer;
 import com.team254.frc2013.subsystems.Intake;
 import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -27,8 +28,9 @@ public abstract class CommandBase extends Command {
   public static Hanger hanger = new Hanger(motors);
   public static Shooter shooter = new Shooter();
   public static Indexer indexer = new Indexer();
-  public static Compressor compressor = new Compressor(Constants.pressureSwitch.getInt(), 
-     Constants.compressorRelay.getInt());
+ // public static Compressor compressor = new Compressor(Constants.pressureSwitch.getInt(), 
+  //   Constants.compressorRelay.getInt());
+  public static Relay r = new Relay(Constants.compressorRelay.getInt());
   public static Intake intake = new Intake();
   public static Conveyor conveyor = new Conveyor();
   
@@ -40,7 +42,7 @@ public abstract class CommandBase extends Command {
     // Set up operator controls
     controlBoard = new ControlBoard();
     OperatorControlHelper.setupOperationMap(controlBoard);
-
-    compressor.start();
+    r.set(Relay.Value.kForward);
+   // compressor.start();
   }
 }

@@ -55,6 +55,10 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
     angle.set(high);
   }
   
+  public boolean isHighAngle() {
+    return angle.get();
+  }
+  
   public void setState(boolean isEnabled) {
     loader.set(isEnabled);
     //insert shooter logic here
@@ -104,7 +108,7 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
     }
     
     public void set(double value) {
-      sc.set(value);
+      sc.set(-value);
     } 
   }
   
@@ -114,7 +118,7 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
     backSensor.start();
     frontController = new BangBangController("FrontShooter", new ShooterControlSource(frontSensor),
             new ShooterControlOutput(frontMotor));
-    backController = new BangBangController("FrontShooter", new ShooterControlSource(frontSensor),
+    backController = new BangBangController("BackShooter", new ShooterControlSource(backSensor),
             new ShooterControlOutput(backMotor));
     
     frontController.enable();

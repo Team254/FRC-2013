@@ -40,12 +40,12 @@ public class Constants {
   public static final Constant pressureSwitch = new Constant("pressureSwitch",  14);
   public static final Constant compressorRelay = new Constant("compressorRelay", 8);
 
-  public static final Constant shifterPort = new Constant("shifterPort", 1);
-  public static final Constant ptoPort = new Constant("ptoPort", 2);
+  public static final Constant shifterPort = new Constant("shifterPort", 8);
+  public static final Constant ptoPort = new Constant("ptoPort", 7);
   public static final Constant indexerPort = new Constant("indexerPort", 3); // TBD
-  public static final Constant shooterLoaderPort = new Constant("shooterLoaderPort", 4); // TBD
-  public static final Constant shooterAnglePort = new Constant("shooterAnglePort", 5);
-  public static final Constant hangerPort = new Constant("hangerPort", 6); // TBD
+  public static final Constant shooterLoaderPort = new Constant("shooterLoaderPort", 5); // TBD
+  public static final Constant shooterAnglePort = new Constant("shooterAnglePort", 6);
+  public static final Constant hangerPort = new Constant("hangerPort", 2); // TBD
   
   
   // Sensor mappings
