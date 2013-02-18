@@ -33,8 +33,8 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
   private Solenoid loader = new Solenoid(Constants.shooterLoaderPort.getInt());
   private Solenoid angle = new Solenoid(Constants.shooterAnglePort.getInt());
   
-  private Counter frontSensor = new Counter(Constants.frontEncoderPortA.getInt());
-  private Counter backSensor = new Counter(Constants.backEncoderPortA.getInt());
+  public Counter frontSensor = new Counter(Constants.frontEncoderPort.getInt());
+  public Counter backSensor = new Counter(Constants.backEncoderPort.getInt());
   
   private BangBangController frontController;
   private BangBangController backController;
@@ -92,6 +92,7 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
       if (rpm < 14000.0) {
        // curVel = filter.calculate(rpm); // probably dont want to filter bang bang
       }
+      curVel = rpm;
     }
   }
   
@@ -103,7 +104,6 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
     }
     
     public void set(double value) {
-      value = -value; // XXX remove for 2013
       sc.set(value);
     } 
   }
@@ -116,6 +116,9 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
             new ShooterControlOutput(frontMotor));
     backController = new BangBangController("FrontShooter", new ShooterControlSource(frontSensor),
             new ShooterControlOutput(backMotor));
+    
+    frontController.enable();
+    backController.enable();
   }
   
   public void setSpeed(double speed) {
@@ -125,12 +128,8 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
   
     
   public void setSpeeds(double fspeed, double bspeed) {
-    //frontController.setGoal(fspeed);
-    //backController.setGoal(bspeed);
-    this.fspeed = fspeed;
-    this.bspeed = bspeed;
-    frontMotor.set(fspeed);
-    backMotor.set(bspeed);
+    frontController.setGoal(fspeed);
+    backController.setGoal(bspeed);
   }
   
   public void setRawPwm(double val) {
@@ -141,11 +140,11 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
   }
   
   public double getFrontGoal() {
-    return fspeed; //frontController.getGoal();
+    return frontController.getGoal();
   }
     
   public double getBackGoal() {
-    return bspeed; //backController.getGoal();
+    return backController.getGoal();
   }
   
   

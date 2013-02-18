@@ -18,15 +18,15 @@ public class IntakeCommand extends CommandBase {
   }
 
   protected void execute() {
-    if(controlBoard.gamepad.getStartButton()){
+    if(controlBoard.gamepad.getStartButton().get()){
       value = 0.0;
     } else if(controlBoard.gamepad.getDPadLeft()){
       value = -1.0;
     } else if(controlBoard.gamepad.getDPadRight()){
       value = 1.0;
-    } else if(controlBoard.gamepad.getRightShoulder()){
+    } else if(controlBoard.gamepad.getRightShoulder().get()){
       value += increment;
-    } else if(controlBoard.gamepad.getLeftShoulder()){
+    } else if(controlBoard.gamepad.getLeftShoulder().get()){
       value -= increment;
     }
     value = Math.abs(value) > 1.0 ? Math.abs(value) / value : value;

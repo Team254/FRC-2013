@@ -96,7 +96,7 @@ public class Drive extends Subsystem {
   }
 
   public void setLeftRightPower(double leftPower, double rightPower) {
-    motors.driveLR(leftPower, -rightPower);
+    motors.driveLR(-leftPower, rightPower); // changed from + - for comp bot
   }
   
   public void setMotor(int portNumber, double power) {

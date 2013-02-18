@@ -56,10 +56,8 @@ public class Constants {
   public static final Constant rightEncoderPortB = new Constant("rightEncoderPortB", 4);
   
   // Shooter encoders
-  public static final Constant frontEncoderPortA = new Constant("frontEncoderPortA", 6); // TBD
-  public static final Constant frontEncoderPortB = new Constant("frontEncoderPortB", 7); // TBD
-  public static final Constant backEncoderPortA = new Constant("backEncoderPortA", 8); // TBD
-  public static final Constant backEncoderPortB = new Constant("backEncoderPortB", 9); // TBD
+  public static final Constant frontEncoderPort = new Constant("frontEncoderPort", 5); // TBD
+  public static final Constant backEncoderPort = new Constant("backEncoderPort", 6); // TBD
   public static final Constant gyroPort = new Constant("gyroPort", 1);
   
   // Drive tuning

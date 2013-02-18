@@ -1,6 +1,7 @@
 package com.team254.lib.util;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -20,16 +21,18 @@ public class Gamepad extends Joystick {
   private static final int AXIS_DPAD = 6;
 
   // Gamepad buttons
-  private static final int BUTTON_A = 1; // Bottom Button
-  private static final int BUTTON_B = 2; // Right Button
-  private static final int BUTTON_X = 3; // Left Button
-  private static final int BUTTON_Y = 4; // Top Button
+  private static final int BUTTON_A = 2;
+  private static final int BUTTON_B = 3;
+  private static final int BUTTON_X = 1;
+  private static final int BUTTON_Y = 4;
   private static final int BUTTON_SHOULDER_LEFT = 5;
   private static final int BUTTON_SHOULDER_RIGHT = 6;
-  private static final int BUTTON_BACK = 7;
-  private static final int BUTTON_START = 8;
-  private static final int BUTTON_LEFT_STICK = 9;
-  private static final int BUTTON_RIGHT_STICK = 10;
+  private static final int BUTTON_TRIGGER_LEFT = 7;
+  private static final int BUTTON_TRIGGER_RIGHT = 8;
+  private static final int BUTTON_BACK = 9;
+  private static final int BUTTON_START = 10;
+  private static final int BUTTON_LEFT_STICK = 11;
+  private static final int BUTTON_RIGHT_STICK = 12;
   private static final int BUTTON_MODE = -1;
   private static final int BUTTON_LOGITECH = -1;
 
@@ -150,23 +153,35 @@ public class Gamepad extends Joystick {
    * Gets the state of the Start button
    * @return the state of the Start button
    */
-  public boolean getStartButton(){
-    return getRawButton(BUTTON_START);
+  public JoystickButton getStartButton(){
+    return new JoystickButton(this, BUTTON_START);
+  }
+  
+  public JoystickButton getBackButton() {
+    return new JoystickButton(this, BUTTON_BACK);
   }
   
   /**
    * Gets the state of the left shoulder
    * @return the state of the left shoulder 
    */
-  public boolean getLeftShoulder() {
-    return getRawButton(BUTTON_SHOULDER_LEFT);
+  public JoystickButton getLeftShoulder() {
+    return new JoystickButton(this, BUTTON_SHOULDER_LEFT);
   }
   
   /**
    * Gets the state of the right shoulder
    * @return the state of the right shoulder
    */
-  public boolean getRightShoulder() {
-    return getRawButton(BUTTON_SHOULDER_RIGHT);
+  public JoystickButton getRightShoulder() {
+    return new JoystickButton(this, BUTTON_SHOULDER_RIGHT);
+  }
+  
+  public JoystickButton getLeftStickClick() {
+    return new JoystickButton(this, BUTTON_LEFT_STICK);
+  }
+  
+  public JoystickButton getRightStickClick() {
+    return new JoystickButton(this, BUTTON_RIGHT_STICK);
   }
 }

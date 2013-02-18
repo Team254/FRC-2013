@@ -19,7 +19,6 @@ public class Intake extends Subsystem implements ControlledSubsystem {
   private Talon intakePivotMotor = new Talon(Constants.intakePivotPort.getInt());
  
   protected void initDefaultCommand() {
-    setDefaultCommand(new IntakeCommand());
   }
 
   public void update() {
@@ -27,6 +26,7 @@ public class Intake extends Subsystem implements ControlledSubsystem {
   
   public void setIntakePower(double power){
     double output = Util.limit(power, 1.0);
+    System.out.println("Setting intake power: " + output);
     intakeMotor.set(output);
   }
   

@@ -92,6 +92,7 @@ public class Travus extends IterativeRobot {
    * Called periodically during the teleoperated period.
    */
   public void teleopPeriodic() {
+    //System.out.println(CommandBase.shooter.frontSensor.get() + " " + CommandBase.shooter.backSensor.get());
     Scheduler.getInstance().run();
   }
 }

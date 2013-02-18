@@ -24,11 +24,13 @@ public class BangBangController extends Controller implements NamedSendable {
   }
 
   public void update() {
-    if (!enabled)
+   
+    if (!isEnabled())
       return;
     source.updateFilter();
     double s = source.get();
-    SmartDashboard.putNumber("vel", s);
+        SmartDashboard.putNumber(name + " rpm", s);
+    SmartDashboard.putNumber(name + " goal", goal);
     if (s >= goal) {
       output.set(0.0);
     }

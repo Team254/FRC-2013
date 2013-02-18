@@ -14,15 +14,18 @@ public class IncrementShooterSpeedCommand extends CommandBase {
   double f,b;
   public IncrementShooterSpeedCommand(double frontDelta, double backDelta) {
     f = frontDelta;
-    b = backDelta;   
-  }
-
-  protected void initialize() {
+    b = backDelta;
     requires(shooter);
   }
 
+  protected void initialize() {
+  }
+
   protected void execute() {
-    shooter.setSpeeds(shooter.getFrontGoal() + f, shooter.getBackGoal() + b);
+    double fg = shooter.getFrontGoal() + f;
+    double bg = shooter.getBackGoal() + b;
+    shooter.setSpeeds(fg, bg);
+    System.out.println("Shooter goals " + fg + " " + bg );
   }
 
   protected boolean isFinished() {
