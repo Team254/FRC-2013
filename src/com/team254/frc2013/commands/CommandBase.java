@@ -7,6 +7,7 @@ import com.team254.frc2013.subsystems.Conveyor;
 import com.team254.frc2013.subsystems.Drive;
 import com.team254.frc2013.subsystems.DriveMotors;
 import com.team254.frc2013.subsystems.Hanger;
+import com.team254.frc2013.subsystems.Indexer;
 import com.team254.frc2013.subsystems.Intake;
 import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Compressor;
@@ -25,8 +26,9 @@ public abstract class CommandBase extends Command {
   public static Drive drive = new Drive(motors);
   public static Hanger hanger = new Hanger(motors);
   public static Shooter shooter = new Shooter();
+  public static Indexer indexer = new Indexer();
   public static Compressor compressor = new Compressor(Constants.pressureSwitch.getInt(), 
-                                                       Constants.compressorRelay.getInt());
+     Constants.compressorRelay.getInt());
   public static Intake intake = new Intake();
   public static Conveyor conveyor = new Conveyor();
   
@@ -38,7 +40,7 @@ public abstract class CommandBase extends Command {
     // Set up operator controls
     controlBoard = new ControlBoard();
     OperatorControlHelper.setupOperationMap(controlBoard);
-  
+
     compressor.start();
   }
 }

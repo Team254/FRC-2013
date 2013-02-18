@@ -10,35 +10,21 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author calebnelson@gmail.com (Caleb Nelson)
  */
 public class Indexer extends Subsystem {
-  private Solenoid pistonL = new Solenoid(Constants.indexPortL.getInt());
-  private Solenoid pistonR = new Solenoid(Constants.indexPortR.getInt());
+  private Solenoid piston = new Solenoid(Constants.indexerPort.getInt());
   
   protected void initDefaultCommand() {    
   }
   
   public void togglePistons() {
-    pistonL.set(!pistonL.get());
-    pistonR.set(!pistonR.get());
+    piston.set(!piston.get());
   }
   
   public boolean setPistons(boolean target) {
-    pistonL.set(target);
-    pistonR.set(target);
+    piston.set(target);
     return target;
   }
   
   public boolean getPistons(){
-    if (pistonL.get() != pistonR.get()) {
-      if (pistonL.get()) {
-        pistonL.set(false);
-      }
-      if (pistonR.get()) {
-        pistonR.set(false);
-      }
-      return false;
-    }
-    else {
-      return pistonL.get();
-    }
+    return piston.get();
   }
 }

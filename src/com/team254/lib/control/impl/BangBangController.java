@@ -24,6 +24,8 @@ public class BangBangController extends Controller implements NamedSendable {
   }
 
   public void update() {
+    if (!enabled)
+      return;
     source.updateFilter();
     double s = source.get();
     SmartDashboard.putNumber("vel", s);

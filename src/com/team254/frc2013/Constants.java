@@ -39,18 +39,23 @@ public class Constants {
   // Solenoids
   public static final Constant pressureSwitch = new Constant("pressureSwitch",  14);
   public static final Constant compressorRelay = new Constant("compressorRelay", 8);
-  public static final Constant shifterPort = new Constant("shifterPort", 8);
-  public static final Constant indexPortL = new Constant("indexPortL", 1); // TBD
-  public static final Constant indexPortR = new Constant("indexPortR", 2); // TBD
-  public static final Constant shooterLoaderPort = new Constant("shooterLoaderPort", 3); // TBD
-  public static final Constant hangerPortA = new Constant("hangerPortA", 4); // TBD
-  public static final Constant hangerPortB = new Constant("hangerPortB", 5); // TBD
+
+  public static final Constant shifterPort = new Constant("shifterPort", 1);
+  public static final Constant ptoPort = new Constant("ptoPort", 2);
+  public static final Constant indexerPort = new Constant("indexerPort", 3); // TBD
+  public static final Constant shooterLoaderPort = new Constant("shooterLoaderPort", 4); // TBD
+  public static final Constant shooterAnglePort = new Constant("shooterAnglePort", 5);
+  public static final Constant hangerPort = new Constant("hangerPort", 6); // TBD
+  
   
   // Sensor mappings
+  // Drive encoders
   public static final Constant leftEncoderPortA = new Constant("leftEncoderPortA", 1);
   public static final Constant leftEncoderPortB = new Constant("leftEncoderPortB", 2);
   public static final Constant rightEncoderPortA = new Constant("rightEncoderPortA", 3);
   public static final Constant rightEncoderPortB = new Constant("rightEncoderPortB", 4);
+  
+  // Shooter encoders
   public static final Constant frontEncoderPortA = new Constant("frontEncoderPortA", 6); // TBD
   public static final Constant frontEncoderPortB = new Constant("frontEncoderPortB", 7); // TBD
   public static final Constant backEncoderPortA = new Constant("backEncoderPortA", 8); // TBD

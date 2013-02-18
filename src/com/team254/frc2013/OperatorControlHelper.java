@@ -11,9 +11,9 @@ import com.team254.frc2013.commands.ShooterSpeedCommand;
 public class OperatorControlHelper {
   
   public static void setupOperationMap(ControlBoard c) {
-    c.gamepad.getButtonA().whenPressed(new IncrementShooterSpeedCommand(50,0));
-    c.gamepad.getButtonB().whenPressed(new IncrementShooterSpeedCommand(-50,0));
-    c.gamepad.getButtonX().whenPressed(new IncrementShooterSpeedCommand(0,50));
-    c.gamepad.getButtonY().whenPressed(new IncrementShooterSpeedCommand(0,-50));
+    c.gamepad.getButtonA().whenPressed(new IncrementShooterSpeedCommand(.1,0));
+    c.gamepad.getButtonB().whenPressed(new IncrementShooterSpeedCommand(-.1,0));
+    c.gamepad.getButtonX().whenPressed(new IncrementShooterSpeedCommand(0,.1));
+    c.gamepad.getButtonY().whenPressed(new IncrementShooterSpeedCommand(0,-.1));
   }
 }

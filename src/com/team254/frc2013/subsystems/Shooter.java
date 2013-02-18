@@ -31,12 +31,15 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
   private Talon frontMotor = new Talon(Constants.frontShooterPort.getInt());
   private Talon backMotor = new Talon(Constants.backShooterPort.getInt());
   private Solenoid loader = new Solenoid(Constants.shooterLoaderPort.getInt());
+  private Solenoid angle = new Solenoid(Constants.shooterAnglePort.getInt());
   
   private Counter frontSensor = new Counter(Constants.frontEncoderPortA.getInt());
   private Counter backSensor = new Counter(Constants.backEncoderPortA.getInt());
   
   private BangBangController frontController;
   private BangBangController backController;
+  
+  double fspeed, bspeed;
 
   // Load a frisbee into shooter by retracting the piston
   public void load() {
@@ -46,6 +49,10 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
   // Extend piston to prepare for loading in another frisbee
   public void extend() {
     loader.set(true);
+  }
+  
+  public void setHighAngle(boolean high) {
+    angle.set(high);
   }
   
   public void setState(boolean isEnabled) {
@@ -108,7 +115,7 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
     frontController = new BangBangController("FrontShooter", new ShooterControlSource(frontSensor),
             new ShooterControlOutput(frontMotor));
     backController = new BangBangController("FrontShooter", new ShooterControlSource(frontSensor),
-            new ShooterControlOutput(frontMotor));
+            new ShooterControlOutput(backMotor));
   }
   
   public void setSpeed(double speed) {
@@ -118,16 +125,27 @@ public class Shooter extends Subsystem implements ControlledSubsystem {
   
     
   public void setSpeeds(double fspeed, double bspeed) {
-    frontController.setGoal(fspeed);
-    backController.setGoal(bspeed);
+    //frontController.setGoal(fspeed);
+    //backController.setGoal(bspeed);
+    this.fspeed = fspeed;
+    this.bspeed = bspeed;
+    frontMotor.set(fspeed);
+    backMotor.set(bspeed);
+  }
+  
+  public void setRawPwm(double val) {
+    frontController.disable();
+    backController.disable();
+    frontMotor.set(val);
+    backMotor.set(val);
   }
   
   public double getFrontGoal() {
-    return frontController.getGoal();
+    return fspeed; //frontController.getGoal();
   }
     
   public double getBackGoal() {
-    return backController.getGoal();
+    return bspeed; //backController.getGoal();
   }
   
   

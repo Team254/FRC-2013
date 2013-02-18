@@ -69,7 +69,6 @@ public class Travus extends IterativeRobot {
     autonomousCommand.addSequential(new DriveDistanceCommand(-48, 1, 10));
     test = !test;
     */
-    autonomousCommand.addSequential(new TestOutputsCommand());
     autonomousCommand.start();
    
   }

@@ -11,19 +11,23 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Hanger extends Subsystem {
   private DriveMotors motors;
-  private Solenoid hangerSolenoidA = new Solenoid(Constants.hangerPortA.getInt());
-  private Solenoid hangerSolenoidB = new Solenoid(Constants.hangerPortB.getInt());
+  private Solenoid hangerSolenoidA = new Solenoid(Constants.hangerPort.getInt());
+  private Solenoid pto = new Solenoid(Constants.ptoPort.getInt());
   
   public Hanger(DriveMotors motors) {
     this.motors = motors;
   }
   
-  public void toggleHook(boolean isToggled) {
-    hangerSolenoidA.set(isToggled);
-    hangerSolenoidB.set(isToggled);
+  public void setHookUp(boolean isUp) {
+    hangerSolenoidA.set(isUp);
   }
+  
   public void climb(double power) {
     motors.set(power);
+  }
+  
+  public void setPto(boolean on) {
+    pto.set(on);
   }
 
   protected void initDefaultCommand() {

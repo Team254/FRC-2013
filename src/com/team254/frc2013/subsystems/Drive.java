@@ -24,11 +24,12 @@ public class Drive extends Subsystem {
   private DriveMotors motors;
 
   // Sensors
-  private Encoder leftEncoder = new Encoder(Constants.leftEncoderPortA.getInt(),
-          Constants.leftEncoderPortB.getInt());
   private Encoder rightEncoder = new Encoder(Constants.rightEncoderPortA.getInt(),
           Constants.rightEncoderPortB.getInt());
   
+  private Encoder leftEncoder = new Encoder(Constants.leftEncoderPortA.getInt(),
+          Constants.leftEncoderPortB.getInt());
+
   // Shifter
   private Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
   private Gyro gyro = new Gyro(1);//Constants.gyroPort.getInt());
