@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  * @author eliwu26@gmail.com (Elias Wu)
  */
-public class DriveMotors extends Subsystem{
+public class DriveGearbox extends Subsystem{
   private Talon leftDriveA = new Talon(Constants.leftDrivePortA.getInt());
   private Talon leftDriveB = new Talon(Constants.leftDrivePortB.getInt());
   private Talon leftDriveC = new Talon(Constants.leftDrivePortC.getInt());

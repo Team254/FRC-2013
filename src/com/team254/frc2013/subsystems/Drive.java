@@ -21,7 +21,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Drive extends Subsystem {
   
-  private DriveMotors motors;
+  private DriveGearbox motors;
 
   // Sensors
   private Encoder rightEncoder = new Encoder(Constants.rightEncoderPortA.getInt(),
@@ -82,7 +82,7 @@ public class Drive extends Subsystem {
           new PIDGains(Constants.driveTurnKP, Constants.driveTurnKI, Constants.driveTurnKD), 
           new DriveControlSource(false), new DriveControlOutput(false));;
 
-  public Drive(DriveMotors motors) {
+  public Drive(DriveGearbox motors) {
     super();
     this.motors = motors;
     leftEncoder.start();

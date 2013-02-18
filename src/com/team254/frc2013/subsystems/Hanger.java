@@ -10,11 +10,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author eliwu26@gmail.com (Elias Wu)
  */
 public class Hanger extends Subsystem {
-  private DriveMotors motors;
+  private DriveGearbox motors;
   private Solenoid hangerSolenoidA = new Solenoid(Constants.hangerPort.getInt());
   private Solenoid pto = new Solenoid(Constants.ptoPort.getInt());
   
-  public Hanger(DriveMotors motors) {
+  public Hanger(DriveGearbox motors) {
     this.motors = motors;
   }
   
