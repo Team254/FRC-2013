@@ -1,3 +1,4 @@
+# Build and config files #
 build
 *.class
 *.xml
@@ -5,3 +6,5 @@ build
 *.jar
 *.war
 *.ear
+# OS Files #
+*.DS_Store
