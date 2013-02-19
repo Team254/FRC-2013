@@ -61,7 +61,7 @@ public class ControlUpdater {
   public void add(Updatable system) {
     systems.addElement(system);
   }
-  
+
   public void setPeriod(double period) {
     this.period = period;
     stop();

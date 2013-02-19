@@ -28,7 +28,7 @@ public class CheesyDriveCommand extends CommandBase {
   }
 
   protected void execute() {
-    p.println(intake.getEncoderCount() + "");
+   // p.println(intake.getEncoderCount() + "");
    // p.println(drive.getLeftEncoderDistance() + " " + drive.getRightEncoderDistance());
     boolean isQuickTurn = controlBoard.getQuickTurn();
     boolean isHighGear = controlBoard.getHighGear();
@@ -37,7 +37,7 @@ public class CheesyDriveCommand extends CommandBase {
     double wheelNonLinearity;
 
     double wheel = handleDeadband(controlBoard.rightStick.getX(), wheelDeadband);
-    double throttle = handleDeadband(controlBoard.leftStick.getY(), throttleDeadband);
+    double throttle = -handleDeadband(controlBoard.leftStick.getY(), throttleDeadband);
    // System.out.println("Throttle: " + throttle + ", wheel: " + wheel);
 
     double negInertia = wheel - oldWheel;
@@ -147,6 +147,7 @@ public class CheesyDriveCommand extends CommandBase {
     }
     
     //System.out.println("Setting left: " + leftPwm + ", right: " + rightPwm);
+    p.println(leftPwm + " " + rightPwm);
     drive.setLeftRightPower(leftPwm, rightPwm);
   }
 
