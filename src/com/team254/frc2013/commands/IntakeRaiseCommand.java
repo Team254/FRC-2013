@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 /**
+ * Raises the intake.
  *
- * @author Richard
+ * @author richard@team254.com (Richard Lin)
  */
 public class IntakeRaiseCommand extends CommandBase {
 

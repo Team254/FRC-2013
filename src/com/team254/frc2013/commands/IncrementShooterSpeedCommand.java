@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Will update both shooters to increase or decrease values
- * @author tombot
+ * Updates both shooters to increase or decrease values.
+ * 
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class IncrementShooterSpeedCommand extends CommandBase {
   double f,b;

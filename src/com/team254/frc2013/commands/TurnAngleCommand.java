@@ -1,8 +1,9 @@
 package com.team254.frc2013.commands;
 
 /**
- * Rotate the drivebase a specific angle in specific amount of time
- * @author tombot
+ * Rotates the drivebase a specific angle in specific amount of time
+ * 
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class TurnAngleCommand extends CommandBase {
   

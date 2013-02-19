@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.lib.control.impl;
 
 import com.team254.lib.control.ControlOutput;
@@ -10,8 +6,17 @@ import com.team254.lib.control.PIDGains;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
+ * Represents trapezoidal velocity control.
+ * Constant acceleration until target (max) velocity is reached, sets acceleration to zero
+ * for a calculated time, then decelerates at a constant deceleration with a slope equal to
+ * the negative slope of the initial acceleration.
+ *     _____
+ *    /     \
+ *   /       \
+ *  /         \
+ * /___________\
  *
- * @author tombot
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class ProfiledPIDController extends PIDController {
   private double acceleration;

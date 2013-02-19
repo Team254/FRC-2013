@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013;
 
 /**
- * Contains message types and their corresponding IDs
+ * Contains message types and their corresponding IDs.
  *
  * @author stephen@team254.com (Stephen Pinkerton)
  */

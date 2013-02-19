@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 /**
- * Runs the intake a specific power
- * @author Richard
+ * Runs the intake a specific power.
+ *
+ * @author richard@team254.com (Richard Lin)
  */
 public class IntakeSpeedCommand extends CommandBase {
   private double speed; 

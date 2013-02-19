@@ -1,16 +1,15 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.team254.lib.util;
 
 /**
- * @author art.kalb96@gmail.com
+ * Interface for subsystems to listen for Messages.
+ *
+ * @author art.kalb96@gmail.com (Art Kalb)
  * @author stephen@team254.com (Stephen Pinkerton)
  */
 public interface Listener {
   /*
-   * Should receive and handle message
+   * Receives and handle messages.
    */
   public void receive(int key, double value);
 

@@ -4,8 +4,9 @@ package com.team254.frc2013.commands;
 import com.team254.lib.util.Util;
 
 /**
- * Runs the conveyor a specified power
- * @author Richard
+ * Runs the conveyor a specified power.
+ * 
+ * @author richard@team254.com (Richard Lin)
  */
 public class SetConveyorCommand extends CommandBase {
   private double speed;

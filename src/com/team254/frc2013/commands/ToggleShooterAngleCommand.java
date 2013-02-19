@@ -2,7 +2,8 @@ package com.team254.frc2013.commands;
 
 /**
  * Changes the state of the shooter angle
- * @author tombot
+ * 
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 
 public class ToggleShooterAngleCommand extends CommandBase {

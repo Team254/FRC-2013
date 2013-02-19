@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 /**
+ * Tests all robot subsystems to make sure they are working
  *
- * @author tombot
+ * @author tom@team254.com (Tom Bottiglieri) 
  */
 public class TestOutputsCommand extends CommandBase {
   double val;

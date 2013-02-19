@@ -1,4 +1,3 @@
-
 package com.team254.lib.control;
 
 /**

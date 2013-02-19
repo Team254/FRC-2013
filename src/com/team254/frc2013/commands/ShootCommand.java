@@ -1,9 +1,9 @@
-
 package com.team254.frc2013.commands;
 
 /**
+ * Loads a disc into the shooter and fires it.
  *
- * @author tombot
+ * @author tom@team254.com (Tom Bottiglieri) 
  */
 public class ShootCommand extends CommandBase {
 
