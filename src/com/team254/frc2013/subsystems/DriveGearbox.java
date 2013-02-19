@@ -1,6 +1,7 @@
 package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -17,8 +18,23 @@ public class DriveGearbox extends Subsystem{
   private Talon rightDriveA = new Talon(Constants.rightDrivePortA.getInt());
   private Talon rightDriveBC = new Talon(Constants.rightDrivePortBC.getInt());
   
+    // Sensors
+  private Encoder rightEncoder = new Encoder(Constants.rightEncoderPortA.getInt(),
+          Constants.rightEncoderPortB.getInt());
+  
+  private Encoder leftEncoder = new Encoder(Constants.leftEncoderPortA.getInt(),
+          Constants.leftEncoderPortB.getInt());
+  
   private boolean isDriveMode = true;
   
+  public Encoder getLeftEncoder() {
+    return leftEncoder;
+  }
+  
+  public Encoder getRightEncoder() {
+    return rightEncoder;
+  }
+
   public void driveLR(double leftPower, double rightPower){
     if (isDriveMode) {
       leftDriveA.set(leftPower);

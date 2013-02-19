@@ -7,6 +7,7 @@ import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.impl.PIDController;
 import com.team254.lib.control.impl.ProfiledPIDController;
+import com.team254.lib.util.RelativeEncoder;
 import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -22,18 +23,14 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drive extends Subsystem {
   
   private DriveGearbox motors;
-
-  // Sensors
-  private Encoder rightEncoder = new Encoder(Constants.rightEncoderPortA.getInt(),
-          Constants.rightEncoderPortB.getInt());
-  
-  private Encoder leftEncoder = new Encoder(Constants.leftEncoderPortA.getInt(),
-          Constants.leftEncoderPortB.getInt());
-
+  RelativeEncoder leftEncoder = new RelativeEncoder(motors.getLeftEncoder());
+  RelativeEncoder rightEncoder = new RelativeEncoder(motors.getRightEncoder());
+ 
   // Shifter
   private Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
   private Gyro gyro = new Gyro(1);//Constants.gyroPort.getInt());
   private boolean isHighGear = true;
+  
   
     
   protected class DriveControlSource implements ControlSource {
@@ -104,7 +101,7 @@ public class Drive extends Subsystem {
   }
 
   public double getLeftEncoderDistance() {
-    return -leftEncoder.get() / 256.0 * 3.5 * Math.PI;
+    return leftEncoder.get() / 256.0 * 3.5 * Math.PI;
   }
 
   public double getRightEncoderDistance() {
