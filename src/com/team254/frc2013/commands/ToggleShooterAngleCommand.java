@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 /**
- *
+ * Changes the state of the shooter angle
  * @author tombot
  */
 

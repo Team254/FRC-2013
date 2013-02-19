@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 /**
- *
+ * Rotate the drivebase a specific angle in specific amount of time
  * @author tombot
  */
 public class TurnAngleCommand extends CommandBase {

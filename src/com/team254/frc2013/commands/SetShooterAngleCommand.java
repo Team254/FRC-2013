@@ -5,7 +5,7 @@
 package com.team254.frc2013.commands;
 
 /**
- *
+ * Pushes up the angle piston
  * @author tombot
  */
 public class SetShooterAngleCommand extends CommandBase {

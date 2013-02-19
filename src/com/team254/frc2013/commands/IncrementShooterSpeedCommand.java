@@ -7,7 +7,7 @@ package com.team254.frc2013.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Will update both shooters to increase or decrease values
  * @author tombot
  */
 public class IncrementShooterSpeedCommand extends CommandBase {
@@ -20,7 +20,9 @@ public class IncrementShooterSpeedCommand extends CommandBase {
 
   protected void initialize() {
   }
-
+  /*
+   * Does the incrementing
+   */
   protected void execute() {
     double fg = shooter.getFrontGoal() + f;
     double bg = shooter.getBackGoal() + b;

@@ -5,7 +5,7 @@
 package com.team254.frc2013.commands;
 
 /**
- *
+ * Runs the intake a specific power
  * @author Richard
  */
 public class IntakeSpeedCommand extends CommandBase {

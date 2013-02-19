@@ -16,7 +16,9 @@ public class IntakeCommand extends CommandBase {
   
   protected void initialize() {
   }
-
+  /*
+   * Tests the intake from gamepad controls
+   */
   protected void execute() {
     if(controlBoard.gamepad.getStartButton().get()){
       value = 0.0;
