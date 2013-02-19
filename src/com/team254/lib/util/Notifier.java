@@ -12,10 +12,22 @@ import java.util.Vector;
  */
 public class Notifier {
 
-  private Hashtable listeners;
-
-  public Notifier() {
+  private static Hashtable listeners;
+  private static Notifier instance;
+  
+  private Notifier() {
     listeners = new Hashtable();
+  }
+
+  /**
+   * Ensures Notifier is a singleton and returns the instance
+   * @return: instance of Notifier
+   */
+  public static Notifier getInstance() {
+    if(instance == null) {
+      instance = new Notifier();
+    }
+    return instance;
   }
 
   /**
@@ -23,10 +35,12 @@ public class Notifier {
    * @param key: the hash table key that points to a vector of listeners
    * @param value: the value of the message
    */
-  public void publish(Integer key, double value) {
+  public static void publish(Integer key, double value) {
     Vector v = (Vector)listeners.get(key);
-    for (int i = 0; i < v.size(); i++) {
-      ((Listener)(v.elementAt(i))).receive(key.intValue(),value);
+    if(v != null){
+      for (int i = 0; i < v.size(); i++) {
+        ((Listener)(v.elementAt(i))).receive(key.intValue(),value);
+      }
     }
   }
   
@@ -35,7 +49,7 @@ public class Notifier {
    * @param key: message key to subscribe the listener to
    * @param listener: the listener to subscribe to the message key
    */
-  public void subscribe(Integer key, Listener listener) {
+  public static void subscribe(Integer key, Listener listener) {
     if (listeners.get(key) == null) {
       listeners.put(key, new Vector());
     }
@@ -47,7 +61,7 @@ public class Notifier {
    * @param key: message key to unsubscribe the listener from
    * @param listener: the listener being unsubscribed from the message key
    */
-  public void unsubscribe(Integer key, Listener listener){
+  public static void unsubscribe(Integer key, Listener listener){
     Vector v = (Vector)listeners.get(key);
     if(v != null) {
       v.removeElement(listener);
