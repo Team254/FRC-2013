@@ -60,6 +60,9 @@ public class Constants {
   public static final Constant backEncoderPort = new Constant("backEncoderPort", 6); // TBD
   public static final Constant gyroPort = new Constant("gyroPort", 1);
   
+  // Intake encoder
+  public static final Constant intakeEncoderPort = new Constant("intakeEncoderPort", 7); // TBD
+  
   // Drive tuning
   public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .6);
   public static final Constant sensitivityLow = new Constant("sensitivityLow", .5);
@@ -71,6 +74,14 @@ public class Constants {
   public static final Constant driveTurnKP = new Constant("driveTurnKP", 0.0);
   public static final Constant driveTurnKI = new Constant("driveTurnKI", 0.0);
   public static final Constant driveTurnKD = new Constant("driveTurnKD", 0.0);
+  
+  public static final Constant hangerKP = new Constant("hangerKP", 0.0);
+  public static final Constant hangerKI = new Constant("hangerKI", 0.0);
+  public static final Constant hangerKD = new Constant("hangerKD", 0.0);
+  
+  public static final Constant intakeKP = new Constant("intakeKP", 0.0);
+  public static final Constant intakeKI = new Constant("intakeKI", 0.0);
+  public static final Constant intakeKD = new Constant("intakeKD", 0.0);
   
   static {
     // Set any overridden constants from the file on startup.
