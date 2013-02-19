@@ -21,7 +21,7 @@ public class Hanger extends PeriodicSubsystem {
   private Solenoid hangerSolenoid = new Solenoid(Constants.hangerPort.getInt());
   
   PIDGains gains = new PIDGains(Constants.hangerKP, Constants.hangerKI, Constants.hangerKD);
-  RelativeEncoder encoder = new RelativeEncoder(motors.getLeftEncoder());
+  RelativeEncoder encoder;
 
   private class HangerControlSource implements ControlSource {
     public double get() {
@@ -47,9 +47,12 @@ public class Hanger extends PeriodicSubsystem {
   
   public Hanger(DriveGearbox motors) {
     this.motors = motors;
+    encoder = new RelativeEncoder(motors.getLeftEncoder());
+    encoder.start();
   }
   
   public void setHookUp(boolean isUp) {
+    System.out.println("Setting hooks: " + isUp);
     hangerSolenoid.set(isUp);
   }
   
@@ -77,13 +80,13 @@ public class Hanger extends PeriodicSubsystem {
   public void update() {
     switch(state) {
       case STATE_IDLE:
-        setHookUp(false);
+       // setHookUp(false);
         break;
       case STATE_FIRST_UP:
-        setHookUp(true);
+     //   setHookUp(true);
         break;
       case STATE_FIRST_HANG:
-        setHookUp(false);
+   //     setHookUp(false);
         break;
       default:
         break;

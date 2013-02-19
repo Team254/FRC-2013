@@ -23,8 +23,8 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Drive extends Subsystem {
   
   private DriveGearbox motors;
-  RelativeEncoder leftEncoder = new RelativeEncoder(motors.getLeftEncoder());
-  RelativeEncoder rightEncoder = new RelativeEncoder(motors.getRightEncoder());
+  RelativeEncoder leftEncoder;
+  RelativeEncoder rightEncoder;
  
   // Shifter
   private Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
@@ -82,6 +82,8 @@ public class Drive extends Subsystem {
   public Drive(DriveGearbox motors) {
     super();
     this.motors = motors;
+    leftEncoder = new RelativeEncoder(motors.getLeftEncoder());
+    rightEncoder = new RelativeEncoder(motors.getRightEncoder());
     leftEncoder.start();
     rightEncoder.start();
     openLoop();

@@ -1,9 +1,14 @@
 package com.team254.lib.util;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import javax.microedition.io.Connector;
+import javax.microedition.io.ServerSocketConnection;
 import javax.microedition.io.SocketConnection;
+import javax.microedition.io.StreamConnection;
+import javax.microedition.io.StreamConnectionNotifier;
 
 /**
  * TCP witchcraft.
@@ -24,15 +29,18 @@ public class PIDTuner {
   }
   
   public boolean pushData(double setpoint, double value, double control) {
-    SocketConnection socketConnect = null;
+    ServerSocketConnection socket = null;
     OutputStream output = null;
     boolean successful = true;
-
+        
+    /*
     try {
       String address = "socket://" + HOST_ADDRESS + ":" + PORT_NUMBER;
       String message = "Stuff: " + setpoint + "," + value + "," + control;
+      
       System.out.println("Establishing connection...");
-      socketConnect = (SocketConnection) Connector.open(address);
+      socket = (ServerSocketConnection) Connector.open(address);
+      socketConnect = (SocketConnection) socket.acceptAndOpen();
       System.out.print("OK\nOpening output stream...");
       output = socketConnect.openOutputStream();
       System.out.print("OK\nWriting to output stream...");
@@ -54,5 +62,56 @@ public class PIDTuner {
       }
     }
     return successful;
+    */
+    
+    try {
+      socket = (ServerSocketConnection) Connector.open("serversocket://:8000"); 
+      while(true) { 
+        SocketConnection socketConnect = (SocketConnection) socket.acceptAndOpen(); 
+        Connection c = new Connection(socketConnect); 
+        c.start(); 
+      } 
+    } catch (IOException e) {
+       System.out.println("ERROR: " + e.getMessage());
+    }
+    return successful;
+  }
+  
+  private class Connection extends Thread {
+    private SocketConnection client;
+    
+    public Connection(SocketConnection client) {
+      this.client = client;
+    }
+    
+    public void run() {
+      PrintStream out = null;
+      OutputStream output = null;
+      try {
+        out = new PrintStream(client.openOutputStream());
+        output = client.openOutputStream();
+        String message = "Call me maybe";
+        
+        // Writing methpo
+        out.println(message);
+        
+        output.write(message.getBytes());
+        output.flush();
+        
+      } catch(Throwable ioe) {
+        
+      } finally {
+        try {
+          if(out != null) {
+            out.close();
+          }
+          if(client != null) {
+            client.close();
+          }
+        } catch(IOException ioe){
+          System.out.println(ioe.getMessage());
+        }
+      }
+    }
   }
 }

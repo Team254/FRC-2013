@@ -184,4 +184,12 @@ public class Gamepad extends Joystick {
   public JoystickButton getRightStickClick() {
     return new JoystickButton(this, BUTTON_RIGHT_STICK);
   }
+  
+  public JoystickButton getLeftTriggerClick() {
+    return new JoystickButton(this, BUTTON_TRIGGER_LEFT);
+  }
+  
+  public JoystickButton getRightTriggerClick() {
+    return new JoystickButton(this, BUTTON_TRIGGER_RIGHT);
+  }
 }

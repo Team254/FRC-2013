@@ -37,7 +37,7 @@ public class Constants {
   public static final Constant backShooterPort = new Constant("backShooterPort", 10);
   
   // Solenoids
-  public static final Constant pressureSwitch = new Constant("pressureSwitch",  14);
+  public static final Constant pressureSwitch = new Constant("pressureSwitch",  9);
   public static final Constant compressorRelay = new Constant("compressorRelay", 8);
 
   public static final Constant shifterPort = new Constant("shifterPort", 8);
@@ -45,7 +45,7 @@ public class Constants {
   public static final Constant indexerPort = new Constant("indexerPort", 3); // TBD
   public static final Constant shooterLoaderPort = new Constant("shooterLoaderPort", 5); // TBD
   public static final Constant shooterAnglePort = new Constant("shooterAnglePort", 6);
-  public static final Constant hangerPort = new Constant("hangerPort", 2); // TBD
+  public static final Constant hangerPort = new Constant("hangerPort", 4); // TBD
   
   
   // Sensor mappings
@@ -61,7 +61,8 @@ public class Constants {
   public static final Constant gyroPort = new Constant("gyroPort", 1);
   
   // Intake encoder
-  public static final Constant intakeEncoderPort = new Constant("intakeEncoderPort", 7); // TBD
+  public static final Constant intakeEncoderPortA = new Constant("intakeEncoderPortA", 7); // TBD
+  public static final Constant intakeEncoderPortB = new Constant("intakeEncoderPortB", 8);
   
   // Drive tuning
   public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .6);

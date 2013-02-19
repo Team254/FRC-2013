@@ -28,6 +28,7 @@ public class CheesyDriveCommand extends CommandBase {
   }
 
   protected void execute() {
+    p.println(intake.getEncoderCount() + "");
    // p.println(drive.getLeftEncoderDistance() + " " + drive.getRightEncoderDistance());
     boolean isQuickTurn = controlBoard.getQuickTurn();
     boolean isHighGear = controlBoard.getHighGear();
