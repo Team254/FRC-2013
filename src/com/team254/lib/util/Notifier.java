@@ -12,7 +12,7 @@ import java.util.Vector;
  */
 public class Notifier {
 
-  private static Hashtable listeners;
+  private Hashtable listeners;
   private static Notifier instance;
   
   private Notifier() {
@@ -36,7 +36,7 @@ public class Notifier {
    * @param value: the value of the message
    */
   public static void publish(Integer key, double value) {
-    Vector v = (Vector)listeners.get(key);
+    Vector v = (Vector)getInstance().listeners.get(key);
     if(v != null){
       for (int i = 0; i < v.size(); i++) {
         ((Listener)(v.elementAt(i))).receive(key.intValue(),value);
@@ -50,10 +50,10 @@ public class Notifier {
    * @param listener: the listener to subscribe to the message key
    */
   public static void subscribe(Integer key, Listener listener) {
-    if (listeners.get(key) == null) {
-      listeners.put(key, new Vector());
+    if (getInstance().listeners.get(key) == null) {
+      getInstance().listeners.put(key, new Vector());
     }
-    ((Vector)listeners.get(key)).addElement(listener);
+    ((Vector)getInstance().listeners.get(key)).addElement(listener);
   }
 
   /**
@@ -62,7 +62,7 @@ public class Notifier {
    * @param listener: the listener being unsubscribed from the message key
    */
   public static void unsubscribe(Integer key, Listener listener){
-    Vector v = (Vector)listeners.get(key);
+    Vector v = (Vector)getInstance().listeners.get(key);
     if(v != null) {
       v.removeElement(listener);
     }

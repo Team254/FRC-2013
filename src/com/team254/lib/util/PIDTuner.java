@@ -18,7 +18,6 @@ import javax.microedition.io.StreamConnectionNotifier;
  */
 public class PIDTuner {
   private static PIDTuner instance = null;
-  private final String HOST_ADDRESS = "10.2.54.125"; // ?
   private final int PORT_NUMBER = 41234; // ?
   
   public static PIDTuner getInstance() {
@@ -28,10 +27,8 @@ public class PIDTuner {
     return instance;
   }
   
-  public boolean pushData(double setpoint, double value, double control) {
+  public void pushData(double setpoint, double value, double control) {
     ServerSocketConnection socket = null;
-    OutputStream output = null;
-    boolean successful = true;
         
     /*
     try {
@@ -65,7 +62,7 @@ public class PIDTuner {
     */
     
     try {
-      socket = (ServerSocketConnection) Connector.open("serversocket://:8000"); 
+      socket = (ServerSocketConnection) Connector.open("serversocket://:" + PORT_NUMBER); 
       while(true) { 
         SocketConnection socketConnect = (SocketConnection) socket.acceptAndOpen(); 
         Connection c = new Connection(socketConnect); 
@@ -74,7 +71,6 @@ public class PIDTuner {
     } catch (IOException e) {
        System.out.println("ERROR: " + e.getMessage());
     }
-    return successful;
   }
   
   private class Connection extends Thread {
@@ -99,7 +95,7 @@ public class PIDTuner {
         output.flush();
         
       } catch(Throwable ioe) {
-        
+        System.out.println(ioe.getMessage());
       } finally {
         try {
           if(out != null) {
