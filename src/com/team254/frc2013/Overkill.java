@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  *
  * @author richard@team254.com (Richard Lin)
  */
-public class Travus extends IterativeRobot {
+public class Overkill extends IterativeRobot {
   private CommandGroup autonomousCommand = new CommandGroup();
   //public AnalogChannel distance = new AnalogChannel(2); 
   boolean test = true;

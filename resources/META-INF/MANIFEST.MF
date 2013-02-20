@@ -1,6 +1,6 @@
 MIDlet-Name: FRC2013
 MIDlet-Version: 1.0.0
 MIDlet-Vendor: FIRST
-MIDlet-1: Travus, , com.team254.frc2013.Travus
+MIDlet-1: Overkill, , com.team254.frc2013.Overkill
 MicroEdition-Profile: IMP-1.0
 MicroEdition-Configuration: CLDC-1.1
