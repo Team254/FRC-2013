@@ -31,9 +31,9 @@ public class OperatorControlHelper {
     c.gamepad.getRightShoulder().whenPressed(new SetConveyorCommand(1.0));
     c.gamepad.getRightShoulder().whenReleased(new SetConveyorCommand(0.0));
     
-    c.gamepad.getLeftStickClick().whenPressed(new IntakeSpeedCommand(1.0));
+    c.gamepad.getLeftStickClick().whenPressed(new IntakeSpeedCommand(-1.0));
     c.gamepad.getLeftStickClick().whenReleased(new IntakeSpeedCommand(0.0));
-    c.gamepad.getRightStickClick().whenPressed(new IntakeSpeedCommand(-1.0));
+    c.gamepad.getRightStickClick().whenPressed(new IntakeSpeedCommand(1.0));
     c.gamepad.getRightStickClick().whenReleased(new IntakeSpeedCommand(0.0));
     
     c.gamepad.getLeftTriggerClick().whenPressed(new HangerHookCommand(true));
