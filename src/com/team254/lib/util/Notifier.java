@@ -14,6 +14,9 @@ import java.util.Vector;
  */
 public class Notifier {
 
+  public static void subscribe(int SHOT_TAKEN) {
+  }
+
   private Hashtable listeners;
   private static Notifier instance;
   
