@@ -146,8 +146,6 @@ public class CheesyDriveCommand extends CommandBase {
       rightPwm = -1.0;
     }
     
-    //System.out.println("Setting left: " + leftPwm + ", right: " + rightPwm);
-    p.println(leftPwm + " " + rightPwm);
     drive.setLeftRightPower(leftPwm, rightPwm);
   }
 

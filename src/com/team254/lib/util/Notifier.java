@@ -14,6 +14,9 @@ import java.util.Vector;
  */
 public class Notifier {
 
+  public static void subscribe(int SHOT_TAKEN) {
+  }
+
   private Hashtable listeners;
   private static Notifier instance;
   
@@ -46,6 +49,10 @@ public class Notifier {
     }
   }
   
+  public static void publish(int key) {
+    Notifier.publish(key, 1.0);
+  }
+
   /**
    * Subscribes a listener to a specific message.
    * @param key: message key to subscribe the listener to
