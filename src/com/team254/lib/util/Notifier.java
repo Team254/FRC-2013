@@ -46,6 +46,10 @@ public class Notifier {
     }
   }
   
+  public static void publish(int key) {
+    Notifier.publish(key, 1.0);
+  }
+
   /**
    * Subscribes a listener to a specific message.
    * @param key: message key to subscribe the listener to
