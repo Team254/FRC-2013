@@ -64,6 +64,9 @@ public class Constants {
   public static final Constant intakeEncoderPortA = new Constant("intakeEncoderPortA", 7); // TBD
   public static final Constant intakeEncoderPortB = new Constant("intakeEncoderPortB", 8);
   
+  // Indexer
+  public static final Constant discSensorPort = new Constant("discSensorPort", 2);
+  
   // Drive tuning
   public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .6);
   public static final Constant sensitivityLow = new Constant("sensitivityLow", .5);
