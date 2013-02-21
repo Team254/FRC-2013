@@ -45,7 +45,7 @@ public class TestOutputsCommand extends CommandBase {
     shooter.extend();
     hanger.setHookUp(true);
     hanger.setPto(true);
-    indexer.setPistons(true);
+    indexer.setPistonDown(true);
     
     
     //shooter.setRawPwm(1);

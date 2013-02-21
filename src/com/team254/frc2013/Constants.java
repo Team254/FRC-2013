@@ -47,6 +47,18 @@ public class Constants {
   public static final Constant shooterAnglePort = new Constant("shooterAnglePort", 6);
   public static final Constant hangerPort = new Constant("hangerPort", 4); // TBD
   
+  // ControlBboard mappings
+  public static final Constant autonSelectControlPort = new Constant("autonSelectControlPort",11);
+  public static final Constant unjamControlPort = new Constant("unjamControlPort", 10);
+  public static final Constant shootControlPort = new Constant("shootControlPort", 9);
+  public static final Constant autoShootControlPort = new Constant("autoShootControlPort", 8);
+  public static final Constant intakeControlPort = new Constant("intakeControlPort", 7);
+  public static final Constant increaseControlPort = new Constant("increaseControlPort", 6);
+  public static final Constant decreaseControlPort = new Constant("decreaseControlPort", 5);
+  public static final Constant keyFarControlPort = new Constant("keyFarControlPort", 4);
+  public static final Constant keyCloseControlPort = new Constant("keyCloseControlPort", 3);
+  public static final Constant farFenderControlPort = new Constant("farFenderControlPort", 2);
+  public static final Constant fenderControlPort= new Constant("fenderControlPort", 1);
   
   // Sensor mappings
   // Drive encoders
@@ -63,6 +75,9 @@ public class Constants {
   // Intake encoder
   public static final Constant intakeEncoderPortA = new Constant("intakeEncoderPortA", 7); // TBD
   public static final Constant intakeEncoderPortB = new Constant("intakeEncoderPortB", 8);
+  
+  // Indexer
+  public static final Constant discSensorPort = new Constant("discSensorPort", 2);
   
   // Drive tuning
   public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .6);

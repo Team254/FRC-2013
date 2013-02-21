@@ -7,6 +7,7 @@ import com.team254.frc2013.commands.TestOutputsCommand;
 import com.team254.frc2013.commands.TurnAngleCommand;
 import com.team254.frc2013.commands.auto.DriveMotorTest;
 import com.team254.frc2013.commands.auto.ScriptedAutoMode;
+import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -19,7 +20,7 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  *
  * @author richard@team254.com (Richard Lin)
  */
-public class Travus extends IterativeRobot {
+public class Overkill extends IterativeRobot {
   private CommandGroup autonomousCommand = new CommandGroup();
   //public AnalogChannel distance = new AnalogChannel(2); 
   boolean test = true;
@@ -29,6 +30,7 @@ public class Travus extends IterativeRobot {
    */
   public void robotInit() {
     // Initialize all subsystems.
+    PIDTuner.getInstance().start();
     CommandBase.init();
     ControlUpdater.getInstance().start();
     //autonomousCommand = new ScriptedAutoMode("caleb.txt");
@@ -94,8 +96,6 @@ public class Travus extends IterativeRobot {
    * Called periodically during the teleoperated period.
    */
   public void teleopPeriodic() {
-    //System.out.println(CommandBase.shooter.frontSensor.get() + " " + CommandBase.shooter.backSensor.get());
     Scheduler.getInstance().run();
-    //System.out.println("Voltage: "+distance.getVoltage()+" Value: "+distance.getValue());
   }
 }
