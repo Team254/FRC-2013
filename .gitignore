@@ -2,9 +2,11 @@
 build
 *.class
 *.xml
-# Package Files #
+# Package files #
 *.jar
 *.war
 *.ear
-# OS Files #
+# OS files #
 *.DS_Store
+# Node dependencies #
+ui/node_modules/*
