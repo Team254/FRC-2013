@@ -1,26 +1,27 @@
 package com.team254.frc2013.commands;
 
 /**
- * Raises the intake.
- * TODO: Modify for autonomous usage.
+ * Enables or disables PTO in the drive gearboxes.
  *
  * @author richard@team254.com (Richard Lin)
  */
-public class IntakeRaiseCommand extends CommandBase {
-
-  public IntakeRaiseCommand() {
-    requires(intake);
+public class SetPtoCommand extends CommandBase{
+  private boolean on;
+  
+  public SetPtoCommand(boolean on) {
+    this.on = on;
+    requires(hanger);
   }
   
   protected void initialize() {
   }
 
   protected void execute() {
-    //intake.raiseIntake(controlBoard.gamepad.getRightY() / 2.0);
+    hanger.setPto(on);
   }
 
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   protected void end() {

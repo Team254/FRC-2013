@@ -8,7 +8,6 @@ import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.control.impl.ProfiledPIDController;
 import com.team254.lib.util.RelativeEncoder;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Controls the climbing and hanging mechanism.
@@ -19,9 +18,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Hanger extends PeriodicSubsystem {
   private DriveGearbox motors;
   private Solenoid hangerSolenoid = new Solenoid(Constants.hangerPort.getInt());
+  private Solenoid pto = new Solenoid(Constants.ptoPort.getInt());
+  private RelativeEncoder encoder;
   
   PIDGains gains = new PIDGains(Constants.hangerKP, Constants.hangerKI, Constants.hangerKD);
-  RelativeEncoder encoder;
+  ProfiledPIDController controller = new ProfiledPIDController("Hanger", gains, new HangerControlSource(), 
+          new HangerControlOutput(), .5, .5);
 
   private class HangerControlSource implements ControlSource {
     public double get() {
@@ -35,11 +37,6 @@ public class Hanger extends PeriodicSubsystem {
     }
   }
   
-  ProfiledPIDController controller = new ProfiledPIDController("Hanger", gains, new HangerControlSource(), 
-          new HangerControlOutput(), .5, .5);
-
-  private Solenoid pto = new Solenoid(Constants.ptoPort.getInt());
-
   int state;
   private static final int STATE_IDLE = 0;
   private static final int STATE_FIRST_UP = 1;
@@ -62,19 +59,22 @@ public class Hanger extends PeriodicSubsystem {
   
   public void setPto(boolean on) {
     pto.set(on);
+    motors.setDriveMode(!on);
   }
 
   protected void initDefaultCommand() {
   }
   
   public void prepareClimb() {
-    if (state == STATE_IDLE)
+    if (state == STATE_IDLE) {
       state = STATE_FIRST_UP;
+    }
   }
   
   public void startClimb() {
-    if (state == STATE_FIRST_UP)
-      state = STATE_FIRST_HANG; 
+    if (state == STATE_FIRST_UP) {
+      state = STATE_FIRST_HANG;
+    } 
   }
 
   public void update() {

@@ -47,7 +47,7 @@ public class Constants {
   public static final Constant shooterAnglePort = new Constant("shooterAnglePort", 6);
   public static final Constant hangerPort = new Constant("hangerPort", 4); // TBD
   
-  // ControlBboard mappings
+  // Operator control mappings
   public static final Constant autonSelectControlPort = new Constant("autonSelectControlPort",11);
   public static final Constant unjamControlPort = new Constant("unjamControlPort", 10);
   public static final Constant shootControlPort = new Constant("shootControlPort", 9);
@@ -58,7 +58,10 @@ public class Constants {
   public static final Constant keyFarControlPort = new Constant("keyFarControlPort", 4);
   public static final Constant keyCloseControlPort = new Constant("keyCloseControlPort", 3);
   public static final Constant farFenderControlPort = new Constant("farFenderControlPort", 2);
-  public static final Constant fenderControlPort= new Constant("fenderControlPort", 1);
+  public static final Constant fenderControlPort = new Constant("fenderControlPort", 1);
+  public static final Constant shooterOnPort = new Constant("shooterOnPort", 3);
+  public static final Constant intakeUpPort = new Constant("intakeUpPort", 4);
+  public static final Constant intakeDownPort = new Constant("intakeDownPort", 12);
   
   // Sensor mappings
   // Drive encoders
