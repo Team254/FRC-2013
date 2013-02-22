@@ -4,8 +4,8 @@ import com.team254.frc2013.commands.CommandBase;
 import com.team254.frc2013.commands.HangerHookCommand;
 import com.team254.frc2013.commands.IncrementShooterSpeedCommand;
 import com.team254.frc2013.commands.IntakeSpeedCommand;
-import com.team254.frc2013.commands.SetConveyorCommand;
-import com.team254.frc2013.commands.SetShooterAngleCommand;
+import com.team254.frc2013.commands.ConveyorSpeedCommand;
+import com.team254.frc2013.commands.ShooterAngleCommand;
 import com.team254.frc2013.commands.ShootCommand;
 import com.team254.frc2013.commands.ShooterSpeedCommand;
 import com.team254.frc2013.commands.ToggleShooterAngleCommand;
@@ -26,10 +26,10 @@ public class OperatorControlHelper {
     c.gamepad.getStartButton().whenPressed(new ShootCommand());
     c.gamepad.getBackButton().whenPressed(new ToggleShooterAngleCommand());
     
-    c.gamepad.getLeftShoulder().whenPressed(new SetConveyorCommand(-1.0));
-    c.gamepad.getLeftShoulder().whenReleased(new SetConveyorCommand(0.0));
-    c.gamepad.getRightShoulder().whenPressed(new SetConveyorCommand(1.0));
-    c.gamepad.getRightShoulder().whenReleased(new SetConveyorCommand(0.0));
+    c.gamepad.getLeftShoulder().whenPressed(new ConveyorSpeedCommand(-1.0));
+    c.gamepad.getLeftShoulder().whenReleased(new ConveyorSpeedCommand(0.0));
+    c.gamepad.getRightShoulder().whenPressed(new ConveyorSpeedCommand(1.0));
+    c.gamepad.getRightShoulder().whenReleased(new ConveyorSpeedCommand(0.0));
     
     c.gamepad.getLeftStickClick().whenPressed(new IntakeSpeedCommand(-1.0));
     c.gamepad.getLeftStickClick().whenReleased(new IntakeSpeedCommand(0.0));

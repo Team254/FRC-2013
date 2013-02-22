@@ -7,7 +7,8 @@ package com.team254.lib.util;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- *
+ * Compensates for "jumps" in analog signals sources
+ * 
  * @author tombot
  */
 public class Debouncer {

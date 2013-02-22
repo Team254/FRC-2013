@@ -1,7 +1,6 @@
 package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
-import com.team254.frc2013.commands.IntakeCommand;
 import com.team254.frc2013.commands.IntakeRaiseCommand;
 import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;

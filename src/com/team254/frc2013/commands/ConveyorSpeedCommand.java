@@ -8,10 +8,10 @@ import com.team254.lib.util.Util;
  * 
  * @author richard@team254.com (Richard Lin)
  */
-public class SetConveyorCommand extends CommandBase {
+public class ConveyorSpeedCommand extends CommandBase {
   private double speed;
   
-  public SetConveyorCommand(double speed) {
+  public ConveyorSpeedCommand(double speed) {
     this.speed = Util.limit(speed, 1.0);
     requires(conveyor);
   }

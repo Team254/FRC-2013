@@ -5,8 +5,14 @@ package com.team254.frc2013.commands.auto;
 
 import com.sun.squawk.io.BufferedReader;
 import com.sun.squawk.microedition.io.FileConnection;
+import com.team254.frc2013.commands.ConveyorTimedCommand;
 import com.team254.frc2013.commands.DriveDistanceCommand;
-import com.team254.frc2013.commands.TurnCommand;
+import com.team254.frc2013.commands.IndexerCommand;
+import com.team254.frc2013.commands.IntakeTimedCommand;
+import com.team254.frc2013.commands.ShooterAngleCommand;
+import com.team254.frc2013.commands.ShootCommand;
+import com.team254.frc2013.commands.ShooterSpeedCommand;
+import com.team254.frc2013.commands.TurnAngleCommand;
 import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -16,7 +22,8 @@ import java.util.Vector;
 import javax.microedition.io.Connector;
 
 /**
- *
+ * Reads commands from a text file and adds them to the autonomous queue
+ * 
  * @author tom@team254.com (Tom Bottiglieri)
  * @author art.kalb96@gmail.com (Arthur Kalb)
  * @author stephen@team254.com (Stephen Pinkerton)
@@ -138,7 +145,25 @@ public class ScriptedAutoMode extends CommandGroup {
       c = new WaitCommand(params.at(0));
     } else if (checkName(cmd, "TURN")) {
       System.out.println("Params: " + params.at(0) + " " + params.at(1));
-      c = new TurnCommand(params.at(0), params.at(1));
+      c = new TurnAngleCommand(params.at(0), params.at(1));
+    } else if(checkName(cmd, "INTAKE_TIMED")) {
+      System.out.println("Params: " + params.at(0) + " " + params.at(1));
+      c = new IntakeTimedCommand(params.at(0), params.at(1));
+    } else if(checkName(cmd, "CONVEYOR_TIMED")) {
+      System.out.println("Params: " + params.at(0) + " " + params.at(1));
+      c = new ConveyorTimedCommand(params.at(0), params.at(1));
+    } else if(checkName(cmd, "SHOOTER_ANGLE")) {
+      System.out.println("Params: " + params.at(0));
+      c = new ShooterAngleCommand(params.at(0));
+    } else if(checkName(cmd, "SHOOTER_SPEED")) {
+      System.out.println("Params: " + params.at(0));
+      c = new ShooterSpeedCommand(params.at(0));
+    } else if(checkName(cmd, "SHOOT")) {
+      System.out.println("Params: N/A");
+      c = new ShootCommand();
+    } else if(checkName(cmd, "INDEX")) {
+      System.out.println("Params: N/A");
+      c = new IndexerCommand();
     }
 
     //Process command type

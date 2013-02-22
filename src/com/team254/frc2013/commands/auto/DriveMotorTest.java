@@ -4,7 +4,8 @@ import com.team254.frc2013.commands.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- *
+ * Runs each drive motor for 5 seconds
+ * 
  * @author maskoken@gmail.com (Matthew Koken)
  */
 

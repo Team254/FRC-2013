@@ -2,6 +2,7 @@ package com.team254.frc2013.commands;
 
 /**
  * Raises the intake.
+ * TODO: Modify for autonomous usage.
  *
  * @author richard@team254.com (Richard Lin)
  */

@@ -5,12 +5,18 @@ package com.team254.frc2013.commands;
  *
  * @author tom@team254.com (Tom Bottiglieri)
  */
-public class SetShooterAngleCommand extends CommandBase {
+public class ShooterAngleCommand extends CommandBase {
   boolean up;
-  public SetShooterAngleCommand(boolean up) {
+  public ShooterAngleCommand(boolean up) {
     this.up = up;
     requires(shooter);
   }
+  
+  public ShooterAngleCommand(double up) {
+    this.up = !(up == 0.0);
+    requires(shooter);
+  }
+  
   protected void initialize() {
   }
 
