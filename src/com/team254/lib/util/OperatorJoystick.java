@@ -2,6 +2,7 @@ package com.team254.lib.util;
 
 import com.team254.frc2013.Constants;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 
@@ -11,9 +12,9 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
  * @author richard@team254.com (Richard Lin)
  */
 public class OperatorJoystick extends Joystick {
-  public PtoSwitch ptoSwitch = new PtoSwitch();
+  public ShooterOnSwitch shooterOnSwitch = new ShooterOnSwitch();
   public ControlLoopsSwitch controlLoopsSwitch = new ControlLoopsSwitch();
-  public StartHangSwitch brakeSwitch = new StartHangSwitch();
+  public StartHangSwitch startHangSwitch = new StartHangSwitch();
   public IntakeUpSwitch intakeUpSwitch = new IntakeUpSwitch();
   public IntakeDownSwitch intakeDownSwitch = new IntakeDownSwitch();
   public Hang20Switch hang20Switch = new Hang20Switch();
@@ -23,45 +24,64 @@ public class OperatorJoystick extends Joystick {
     super(port);
   }
   
-  public class PtoSwitch extends Trigger {    
+  public class ShooterOnSwitch extends Button {    
     public boolean get() {
       return getShooterSwitch();
     }
   }
   
-  public class ControlLoopsSwitch extends Trigger {
+  public Button getShooterOnSwitch() {
+    return shooterOnSwitch;
+  }
+  
+  public Button getControlLoopsSwitch() {
+    return controlLoopsSwitch;
+  }
+  
+  public Button getStartHangSwitch() {
+    return startHangSwitch;
+  }
+  public Button getIntakeUpSwitch() {
+    return intakeUpSwitch;
+  }
+  
+  public Button getIntakeDownSwitch() {
+    return intakeDownSwitch;
+  }
+  
+  public class ControlLoopsSwitch extends Button {
     public boolean get() {
-      return getControlLoopsSwitch();
+      return getControlLoopsSwitchState();
     }
   }
   
-  public class StartHangSwitch extends Trigger {
+  public class StartHangSwitch extends Button {
     public boolean get() {
-      return getStartHangSwitch();
+      return getStartHangSwitchState();
     }
   }
   
-  public class IntakeUpSwitch extends Trigger {
+  public class IntakeUpSwitch extends Button {
     public boolean get() {
       return getIntakePositionSwitch() == 1;
     }
   }
   
-  public class IntakeDownSwitch extends Trigger {
+  public class IntakeDownSwitch extends Button {
     public boolean get() {
       return getIntakePositionSwitch() == -1;
     }
   }
     
-  public class Hang20Switch extends Trigger {
+  public class Hang20Switch extends Button {
     public boolean get() {
-      return getHang10ButtonState() && !getHang30ButtonState();
+      return getHang20ButtonState() && !getHang30ButtonState();
     }
   }
   
-  public class Hang30Switch extends Trigger {
+  public class Hang30Switch extends Button {
     public boolean get() {
-      return getHang10ButtonState() && getHang30ButtonState();
+      return getHang20ButtonState() && getHang30ButtonState();
     }
   }
   
@@ -125,11 +145,11 @@ public class OperatorJoystick extends Joystick {
     return new JoystickButton(this, Constants.hang30ControlPort.getInt());
   }
 
-  public boolean getHang10ButtonState() {
+  public boolean getHang20ButtonState() {
     return this.getRawButton(Constants.hang10ControlPort.getInt());
   }
 
-  public JoystickButton getHang10Button() {
+  public JoystickButton getHang20Button() {
     return new JoystickButton(this, Constants.hang10ControlPort.getInt());
   }
   
@@ -169,11 +189,11 @@ public class OperatorJoystick extends Joystick {
     return this.getRawAxis(Constants.shooterOnPort.getInt()) < 0.0;
   }
   
-  public boolean getControlLoopsSwitch() {
+  public boolean getControlLoopsSwitchState() {
     return this.getX() < -0.75;
   }
 
-  public boolean getStartHangSwitch() {
+  public boolean getStartHangSwitchState() {
     return this.getY() < 0.0;
   }
 }
