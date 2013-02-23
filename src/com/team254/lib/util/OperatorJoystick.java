@@ -13,9 +13,11 @@ import edu.wpi.first.wpilibj.buttons.Trigger;
 public class OperatorJoystick extends Joystick {
   public PtoSwitch ptoSwitch = new PtoSwitch();
   public ControlLoopsSwitch controlLoopsSwitch = new ControlLoopsSwitch();
-  public BrakeSwitch brakeSwitch = new BrakeSwitch();
+  public StartHangSwitch brakeSwitch = new StartHangSwitch();
   public IntakeUpSwitch intakeUpSwitch = new IntakeUpSwitch();
   public IntakeDownSwitch intakeDownSwitch = new IntakeDownSwitch();
+  public Hang20Switch hang20Switch = new Hang20Switch();
+  public Hang30Switch hang30Switch = new Hang30Switch();
   
   public OperatorJoystick(int port) {
     super(port);
@@ -33,9 +35,9 @@ public class OperatorJoystick extends Joystick {
     }
   }
   
-  public class BrakeSwitch extends Trigger {
+  public class StartHangSwitch extends Trigger {
     public boolean get() {
-      return getBrakeSwitch();
+      return getStartHangSwitch();
     }
   }
   
@@ -48,6 +50,18 @@ public class OperatorJoystick extends Joystick {
   public class IntakeDownSwitch extends Trigger {
     public boolean get() {
       return getIntakePositionSwitch() == -1;
+    }
+  }
+    
+  public class Hang20Switch extends Trigger {
+    public boolean get() {
+      return getHang10ButtonState() && !getHang30ButtonState();
+    }
+  }
+  
+  public class Hang30Switch extends Trigger {
+    public boolean get() {
+      return getHang10ButtonState() && getHang30ButtonState();
     }
   }
   
@@ -159,7 +173,7 @@ public class OperatorJoystick extends Joystick {
     return this.getX() < -0.75;
   }
 
-  public boolean getBrakeSwitch() {
+  public boolean getStartHangSwitch() {
     return this.getY() < 0.0;
   }
 }
