@@ -7,6 +7,8 @@ import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.control.impl.ProfiledPIDController;
 import com.team254.lib.util.RelativeEncoder;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -17,7 +19,7 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class Hanger extends PeriodicSubsystem {
   private DriveGearbox motors;
-  private Solenoid hangerSolenoid = new Solenoid(Constants.hangerPort.getInt());
+  private DoubleSolenoid hangerSolenoid = new DoubleSolenoid(Constants.hangerExtendedPort.getInt(), Constants.hangerRetractedPort.getInt());
   private Solenoid pto = new Solenoid(Constants.ptoPort.getInt());
   private RelativeEncoder encoder;
   
@@ -48,8 +50,8 @@ public class Hanger extends PeriodicSubsystem {
     encoder.start();
   }
   
-  public void setHookUp(boolean isUp) {
-    System.out.println("Setting hooks: " + isUp);
+  public void setHookUp(Value isUp) {
+    System.out.println("Setting hooks: " + isUp.toString());
     hangerSolenoid.set(isUp);
   }
   

@@ -1,5 +1,8 @@
 package com.team254.frc2013.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+
 /**
  * Tests all robot subsystems to make sure they are working
  *
@@ -43,7 +46,7 @@ public class TestOutputsCommand extends CommandBase {
     drive.shift(true);
     shooter.setHighAngle(true);
     shooter.extend();
-    hanger.setHookUp(true);
+    hanger.setHookUp(Value.kForward);
     hanger.setPto(true);
     indexer.setPistonDown(true);
     

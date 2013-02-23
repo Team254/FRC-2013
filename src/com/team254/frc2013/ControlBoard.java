@@ -21,6 +21,6 @@ public class ControlBoard {
   }
   
   public boolean getHighGear() {
-    return !rightStick.getRawButton(3);
+    return !leftStick.getRawButton(3);
   }
 }

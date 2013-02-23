@@ -71,28 +71,28 @@ public class OperatorJoystick extends Joystick {
     return new JoystickButton(this, Constants.autonSelectControlPort.getInt());
   }
   
-  public boolean getUnjamButtonState() {
-    return this.getRawButton(Constants.unjamControlPort.getInt());
+  public boolean getConveyOutButtonState() {
+    return this.getRawButton(Constants.conveyOutControlPort.getInt());
   }
 
-  public JoystickButton getUnjamButton() {
-    return new JoystickButton(this, Constants.unjamControlPort.getInt());
+  public JoystickButton getConveyOutButton() {
+    return new JoystickButton(this, Constants.conveyOutControlPort.getInt());
   }
   
-  public boolean getShootButtonState() {
-    return this.getRawButton(Constants.shootControlPort.getInt());
+  public boolean getConveyorButtonState() {
+    return this.getRawButton(Constants.conveyorControlPort.getInt());
   }
 
-  public JoystickButton getShootButton() {
-    return new JoystickButton(this, Constants.shootControlPort.getInt());
+  public JoystickButton getConveyorButton() {
+    return new JoystickButton(this, Constants.conveyorControlPort.getInt());
   }
   
-  public boolean getAutoShootButtonState() {
-    return this.getRawButton(Constants.autoShootControlPort.getInt());
+  public boolean getIntakeOutButtonState() {
+    return this.getRawButton(Constants.intakeOutControlPort.getInt());
   }
 
-  public JoystickButton getAutoShootButton() {
-    return new JoystickButton(this, Constants.autoShootControlPort.getInt());
+  public JoystickButton getIntakeOutButton() {
+    return new JoystickButton(this, Constants.intakeOutControlPort.getInt());
   }
 
   public boolean getIntakeButtonState() {
@@ -103,52 +103,52 @@ public class OperatorJoystick extends Joystick {
     return new JoystickButton(this, Constants.intakeControlPort.getInt());
   }
 
-  public boolean getIncreaseButtonState() {
-    return this.getRawButton(Constants.increaseControlPort.getInt());
+  public boolean getHang30ButtonState() {
+    return this.getRawButton(Constants.hang30ControlPort.getInt());
   }
 
-  public JoystickButton getIncreaseButton() {
-    return new JoystickButton(this, Constants.increaseControlPort.getInt());
+  public JoystickButton getHang30Button() {
+    return new JoystickButton(this, Constants.hang30ControlPort.getInt());
   }
 
-  public boolean getDecreaseButtonState() {
-    return this.getRawButton(Constants.decreaseControlPort.getInt());
+  public boolean getHang10ButtonState() {
+    return this.getRawButton(Constants.hang10ControlPort.getInt());
   }
 
-  public JoystickButton getDecreaseButton() {
-    return new JoystickButton(this, Constants.decreaseControlPort.getInt());
+  public JoystickButton getHang10Button() {
+    return new JoystickButton(this, Constants.hang10ControlPort.getInt());
   }
   
-  public boolean getKeyFarButtonState() {
-    return this.getRawButton(Constants.keyFarControlPort.getInt());
+  public boolean getFarButtonState() {
+    return this.getRawButton(Constants.farControlPort.getInt());
   }
 
-  public JoystickButton getKeyFarButton() {
-    return new JoystickButton(this, Constants.keyFarControlPort.getInt());
+  public JoystickButton getFarButton() {
+    return new JoystickButton(this, Constants.farControlPort.getInt());
   }
   
-  public boolean getKeyCloseButtonState() {
-    return this.getRawButton(Constants.keyCloseControlPort.getInt());
+  public boolean getMiddleButtonState() {
+    return this.getRawButton(Constants.middleControlPort.getInt());
   }
 
-  public JoystickButton getKeyCloseButton() {
-    return new JoystickButton(this, Constants.keyCloseControlPort.getInt());
+  public JoystickButton getMiddleButton() {
+    return new JoystickButton(this, Constants.middleControlPort.getInt());
   }
   
-  public boolean getFarFenderButtonState() {
-    return this.getRawButton(Constants.farFenderControlPort.getInt());
+  public boolean getCloseButtonState() {
+    return this.getRawButton(Constants.closeControlPort.getInt());
   }
 
-  public JoystickButton getFarFenderButton() {
-    return new JoystickButton(this, Constants.farFenderControlPort.getInt());
+  public JoystickButton getCloseButton() {
+    return new JoystickButton(this, Constants.closeControlPort.getInt());
   }
   
-  public boolean getFenderButtonState() {
-    return this.getRawButton(Constants.fenderControlPort.getInt());
+  public boolean getShootButtonState() {
+    return this.getRawButton(Constants.shootControlPort.getInt());
   }
 
-  public JoystickButton getFenderButton() {
-    return new JoystickButton(this, Constants.fenderControlPort.getInt());
+  public JoystickButton getShootButton() {
+    return new JoystickButton(this, Constants.shootControlPort.getInt());
   }
   
   public boolean getShooterSwitch() {

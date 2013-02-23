@@ -16,22 +16,22 @@ import com.team254.frc2013.commands.ToggleShooterAngleCommand;
 public class OperatorControlHelper {
   
   public static void setupOperationMap(ControlBoard c) {
-    c.operatorJoystick.getKeyFarButton().whenPressed(new IncrementShooterSpeedCommand(200,0));
-    c.operatorJoystick.getKeyCloseButton().whenPressed(new IncrementShooterSpeedCommand(-200,0));
-    c.operatorJoystick.getFarFenderButton().whenPressed(new IncrementShooterSpeedCommand(0,100));
-    c.operatorJoystick.getFenderButton().whenPressed(new IncrementShooterSpeedCommand(0,-100));
+    c.operatorJoystick.getFarButton().whenPressed(new IncrementShooterSpeedCommand(200,0));
+    c.operatorJoystick.getMiddleButton().whenPressed(new IncrementShooterSpeedCommand(-200,0));
+    c.operatorJoystick.getCloseButton().whenPressed(new IncrementShooterSpeedCommand(0,100));
+    c.operatorJoystick.getShootButton().whenPressed(new IncrementShooterSpeedCommand(0, -100));
     
-    c.operatorJoystick.getIncreaseButton().whenPressed(new ShootCommand());
-    c.operatorJoystick.getDecreaseButton().whenPressed(new ToggleShooterAngleCommand());
+    c.operatorJoystick.getHang30Button().whenPressed(new ShootCommand());
+    c.operatorJoystick.getHang10Button().whenPressed(new ToggleShooterAngleCommand());
     
-    c.operatorJoystick.getShootButton().whenPressed(new ConveyorSpeedCommand(1.0));
-    c.operatorJoystick.getShootButton().whenReleased(new ConveyorSpeedCommand(0.0));
-    c.operatorJoystick.getUnjamButton().whenPressed(new ConveyorSpeedCommand(-1.0));
-    c.operatorJoystick.getUnjamButton().whenReleased(new ConveyorSpeedCommand(0.0));
+    c.operatorJoystick.getConveyorButton().whenPressed(new ConveyorSpeedCommand(1.0));
+    c.operatorJoystick.getConveyorButton().whenReleased(new ConveyorSpeedCommand(0.0));
+    c.operatorJoystick.getConveyOutButton().whenPressed(new ConveyorSpeedCommand(-1.0));
+    c.operatorJoystick.getConveyOutButton().whenReleased(new ConveyorSpeedCommand(0.0));
     
-    c.operatorJoystick.getAutoShootButton().whenPressed(new IntakeSpeedCommand(1.0));
-    c.operatorJoystick.getAutoShootButton().whenReleased(new IntakeSpeedCommand(0.0));
-    c.operatorJoystick.getIntakeButton().whenPressed(new IntakeSpeedCommand(-1.0));
+    c.operatorJoystick.getIntakeOutButton().whenPressed(new IntakeSpeedCommand(-1.0));
+    c.operatorJoystick.getIntakeOutButton().whenReleased(new IntakeSpeedCommand(0.0));
+    c.operatorJoystick.getIntakeButton().whenPressed(new IntakeSpeedCommand(1.0));
     c.operatorJoystick.getIntakeButton().whenReleased(new IntakeSpeedCommand(0.0));
     
     c.operatorJoystick.getAutonSelectButton().whenPressed(new HangerHookCommand(true));

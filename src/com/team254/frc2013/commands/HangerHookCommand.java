@@ -1,5 +1,8 @@
 package com.team254.frc2013.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+
 /**
  * Controls the first-stage hanger hook
  * 
@@ -19,7 +22,10 @@ public class HangerHookCommand extends CommandBase {
   }
 
   protected void execute() {
-    hanger.setHookUp(up);
+    if(up)
+      hanger.setHookUp(Value.kForward);
+    else
+      hanger.setHookUp(Value.kReverse);
   }
 
   protected boolean isFinished() {
@@ -27,6 +33,8 @@ public class HangerHookCommand extends CommandBase {
   }
 
   protected void end() {
+    hanger.setHookUp(Value.kOff);
+    //May need to change
   }
 
   protected void interrupted() {
