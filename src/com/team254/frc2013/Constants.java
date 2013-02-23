@@ -24,14 +24,15 @@ public class Constants {
   public static final Constant gamepadPort = new Constant("gamepadPort", 3);
 
   // Speed controller mappings
+  public static final Constant intakePivotPort = new Constant("intakePivotPort", 1);
+  public static final Constant intakePort = new Constant("intakePort", 2);
+  
   public static final Constant leftDrivePortA = new Constant("leftDrivePortA", 3);
   public static final Constant leftDrivePortB = new Constant("leftDrivePortB", 4);
   public static final Constant leftDrivePortC = new Constant("leftDrivePortC", 5);
   public static final Constant rightDrivePortA = new Constant("rightDrivePortA", 6);
   public static final Constant rightDrivePortBC = new Constant("rightDrivePortBC", 7);
   
-  public static final Constant intakePivotPort = new Constant("intakePivotPort", 1);
-  public static final Constant intakePort = new Constant("intakePort", 2);
   public static final Constant conveyorPort = new Constant("conveyorPort", 8);
   public static final Constant frontShooterPort = new Constant("frontShooterPort", 9);
   public static final Constant backShooterPort = new Constant("backShooterPort", 10);
@@ -42,14 +43,12 @@ public class Constants {
 
   public static final Constant shifterPort = new Constant("shifterPort", 8);
   public static final Constant ptoPort = new Constant("ptoPort", 7);
-  public static final Constant indexerPort = new Constant("indexerPort", 2);
-  public static final Constant shooterLoaderPort = new Constant("shooterLoaderPort", 5);
   public static final Constant shooterAnglePort = new Constant("shooterAnglePort", 6);
-  public static final Constant hangerExtendedPort = new Constant("hangerExtendedPort", 3);
+  public static final Constant shooterLoaderPort = new Constant("shooterLoaderPort", 5);
   public static final Constant hangerRetractedPort = new Constant("hangerRetractedPort", 4);
-  public static final Constant converoyPort = new Constant("conveyorPort", 1);
-
-  
+  public static final Constant hangerExtendedPort = new Constant("hangerExtendedPort", 3);
+  public static final Constant indexerPort = new Constant("indexerPort", 2);
+  public static final Constant conveyorSolenoidPort = new Constant("conveyorSolenoidPort", 1);
   
   // Operator control mappings
   public static final Constant autonSelectControlPort = new Constant("autonSelectControlPort",11);
@@ -68,6 +67,9 @@ public class Constants {
   public static final Constant intakeDownPort = new Constant("intakeDownPort", 12);
   
   // Sensor mappings
+  public static final Constant gyroPort = new Constant("gyroPort", 1);
+  public static final Constant discSensorPort = new Constant("discSensorPort", 2);
+  
   // Drive encoders
   public static final Constant leftEncoderPortA = new Constant("leftEncoderPortA", 1);
   public static final Constant leftEncoderPortB = new Constant("leftEncoderPortB", 2);
@@ -75,16 +77,12 @@ public class Constants {
   public static final Constant rightEncoderPortB = new Constant("rightEncoderPortB", 4);
   
   // Shooter encoders
-  public static final Constant frontEncoderPort = new Constant("frontEncoderPort", 5); // TBD
-  public static final Constant backEncoderPort = new Constant("backEncoderPort", 6); // TBD
-  public static final Constant gyroPort = new Constant("gyroPort", 1);
+  public static final Constant frontEncoderPort = new Constant("frontEncoderPort", 5);
+  public static final Constant backEncoderPort = new Constant("backEncoderPort", 6);
   
   // Intake encoder
-  public static final Constant intakeEncoderPortA = new Constant("intakeEncoderPortA", 7); // TBD
+  public static final Constant intakeEncoderPortA = new Constant("intakeEncoderPortA", 7);
   public static final Constant intakeEncoderPortB = new Constant("intakeEncoderPortB", 8);
-  
-  // Indexer
-  public static final Constant discSensorPort = new Constant("discSensorPort", 2);
   
   // Drive tuning
   public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .6);
