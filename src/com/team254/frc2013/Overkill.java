@@ -1,14 +1,10 @@
 package com.team254.frc2013;
 
 import com.team254.frc2013.commands.CommandBase;
-import com.team254.frc2013.commands.TestOutputsCommand;
 import com.team254.lib.util.PIDTuner;
-import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  * Main class of the robot.
@@ -16,9 +12,8 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  * @author richard@team254.com (Richard Lin)
  */
 public class Overkill extends IterativeRobot {
-  private CommandGroup autonomousCommand = new CommandGroup();
-  //public AnalogChannel distance = new AnalogChannel(2); 
-  boolean test = true;
+  private AutoModeSelector autoModeSelector;
+  private boolean lastAutonSelectButton;
 
   /**
    * Called when the robot is first started up and should be used for any initialization code.
@@ -28,33 +23,38 @@ public class Overkill extends IterativeRobot {
     PIDTuner.getInstance().start();
     CommandBase.init();
     ControlUpdater.getInstance().start();
-    //autonomousCommand = new ScriptedAutoMode("caleb.txt");
-    /*
-    autonomousCommand = new CommandGroup();
-    ((CommandGroup)autonomousCommand).addParallel(new DriveDistanceCommand(1200, 1, 5));
-    ((CommandGroup)autonomousCommand).addSequential(new WaitCommand(1));
-    ((CommandGroup)autonomousCommand).addSequential(new IntakeTimedCommand(1, 2));
-    */
-    CommandGroup g;
+
+    // Set up autonomous modes.
+    autoModeSelector = new AutoModeSelector();
+    CommandGroup testAutoMode1 = new CommandGroup();
+    autoModeSelector.addAutoCommand("Test 1", testAutoMode1);
+    CommandGroup testAutoMode2 = new CommandGroup();
+    autoModeSelector.addAutoCommand("Test 2", testAutoMode2);
+    lastAutonSelectButton = CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState();
   }
 
   public void disabledInit() {
-    autonomousCommand.cancel();
     System.out.println("Disabled init.. reloading constants...");
     Constants.readConstantsFromFile();
   }
-  
+
   public void disabledPeriodic() {
+    boolean autonSelectButton =
+        CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState();
+    if (autonSelectButton && !lastAutonSelectButton) {
+      autoModeSelector.increment();
+    }
+    lastAutonSelectButton = autonSelectButton;
   }
-  
+
   /**
    * Called once at the start of the autonomous period.
    */
   public void autonomousInit() {
-    
+
     //autonomousCommand = new DriveDistanceCommand(12, 1, 10);
-    autonomousCommand = new CommandGroup();
-    autonomousCommand.addSequential(new TestOutputsCommand());
+    //autonomousCommand = new CommandGroup();
+    //autonomousCommand.addSequential(new TestOutputsCommand());
     /*
     //autonomousCommand.addSequential(new TurnAngleCommand(90 * (test ? 1 : -1),5));
     autonomousCommand.addSequential(new DriveDistanceCommand(140, 5*12, 6));
@@ -69,8 +69,7 @@ public class Overkill extends IterativeRobot {
     autonomousCommand.addSequential(new DriveDistanceCommand(-48, 1, 10));
     test = !test;
     */
-    autonomousCommand.start();
-   
+    autoModeSelector.getCurrentAutoMode().start();
   }
 
   /**
@@ -85,7 +84,7 @@ public class Overkill extends IterativeRobot {
    */
   public void teleopInit() {
     // Make sure that the autonomous stops running when teleop begins.
-    autonomousCommand.cancel();
+    autoModeSelector.getCurrentAutoMode().cancel();
   }
 
   /**

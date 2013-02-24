@@ -1,5 +1,6 @@
 package com.team254.frc2013;
 
+import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import java.util.Vector;
 
@@ -11,31 +12,48 @@ import java.util.Vector;
  * @author art.kalb96@gmail.com (Arthur Kalb)
  * @author stephen@team254.com (Stephen Pinkerton)
  */
-public class AutoModeSelector {
+public final class AutoModeSelector {
   private Vector autoModes;
   private int index;
+  private DriverStationLCD lcd;
 
   public AutoModeSelector() {
     autoModes = new Vector();
-    index = 0;
+    addAutoCommand("None", new CommandGroup());
+    index = -1;
+    lcd = DriverStationLCD.getInstance();
+    increment();
   }
 
-  public void addAutoCommand(CommandGroup command) {
-    autoModes.addElement(command);
+  public void addAutoCommand(String name, CommandGroup command) {
+    autoModes.addElement(new AutoMode(name, command));
   }
 
   public void increment() {
     index++;
-    if(index >= autoModes.size()) {
-        index = 0;
+    if (index >= autoModes.size()) {
+      index = 0;
     }
+    lcd.println(DriverStationLCD.Line.kUser1, 1, "                                       ");
+    lcd.println(DriverStationLCD.Line.kUser1, 1, "A: " + getCurrentName());
+    lcd.updateLCD();
   }
 
-  public int getCurrentIndex() {
-    return index;
+  public String getCurrentName() {
+    return ((AutoMode)autoModes.elementAt(index)).name;
   }
 
-  public CommandGroup getAutoMode() {
-    return ((CommandGroup)(autoModes.elementAt(index)));
+  public CommandGroup getCurrentAutoMode() {
+    return ((AutoMode)autoModes.elementAt(index)).command;
+  }
+
+  private static class AutoMode {
+    public String name;
+    public CommandGroup command;
+
+    public AutoMode(String name, CommandGroup command) {
+      this.name = name;
+      this.command = command;
+    }
   }
 }
