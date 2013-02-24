@@ -102,9 +102,9 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
 
   // State machine
   public void update() {
-    p.println(loadState + " " + discSensor.getValue());
+    //p.println(loadState + " " + discSensor.getValue());
     int nextState = loadState;
-    boolean hasDisk = debouncer.update(discSensor.getValue() > 400);
+    boolean hasDisk = true;//debouncer.update(discSensor.getValue() > 400);
     switch (loadState) {
       case 0: // frisbee loaded
         setIndexerUp(true);

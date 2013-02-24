@@ -30,7 +30,7 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
   private Talon intakeMotor = new Talon(Constants.intakePort.getInt());
   private Talon intakePivotMotor = new Talon(Constants.intakePivotPort.getInt());
   private Encoder encoder = new Encoder(Constants.intakeEncoderPortA.getInt(),
-          Constants.intakeEncoderPortB.getInt(), false, Encoder.EncodingType.k4X); // encoder or counter?
+          Constants.intakeEncoderPortB.getInt()); // encoder or counter?
   
   PIDGains gains = new PIDGains(Constants.intakeKP, Constants.intakeKI, Constants.intakeKD);
   PIDController controller = new PIDController("Intake", gains, new IntakeControlSource(), new IntakeControlOutput());

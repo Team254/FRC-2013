@@ -42,6 +42,7 @@ public class Drive extends Subsystem {
     public double get() {
       // This is super hacky.
       if (straight) {
+        System.out.println("e: " + (getLeftEncoderDistance() + getRightEncoderDistance()) / 2.0);
         return (getLeftEncoderDistance() + getRightEncoderDistance()) / 2.0;
       } else {
         return getGyroAngle();
@@ -145,7 +146,7 @@ public class Drive extends Subsystem {
   public void setGoal(double distance, double angle) {
     resetGyro();
     resetEncoders();
-    straightController.setGoal(distance);
+    straightController.setGoal(-distance);
     if (distance != 0)
       straightController.enable();
     else
