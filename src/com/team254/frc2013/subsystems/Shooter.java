@@ -38,23 +38,23 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   private Talon backMotor = new Talon(Constants.backShooterPort.getInt());
   private Solenoid loader = new Solenoid(Constants.shooterLoaderPort.getInt());
   private Solenoid angle = new Solenoid(Constants.shooterAnglePort.getInt());
-  
+
   public Counter frontSensor = new Counter(Constants.frontEncoderPort.getInt());
   public Counter backSensor = new Counter(Constants.backEncoderPort.getInt());
-  
+
   private BangBangController frontController;
   private BangBangController backController;
-  
+
   private Solenoid indexer = new Solenoid(Constants.indexerPort.getInt());
   Debouncer debouncer = new Debouncer(.125);
   AnalogChannel discSensor = new AnalogChannel(Constants.discSensorPort.getInt());
   ThrottledPrinter p = new ThrottledPrinter(.1);
-  
+
   double fspeed, bspeed;
   int loadState = 0;
   boolean wantShoot = false;
   Timer stateTimer = new Timer();
-  
+
   public void setIndexerUp(boolean up) {
     indexer.set(!up);
   }
@@ -63,27 +63,27 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   public void load() {
     loader.set(false);
   }
-  
+
   // Extend piston to prepare for loading in another frisbee
   public void extend() {
     loader.set(true);
   }
-  
+
   public boolean tryShoot() {
     if (loadState == 0) {
       wantShoot = true;
     }
     return loadState == 0;
   }
-  
+
   public void setHighAngle(boolean high) {
     angle.set(high);
   }
-  
+
   public boolean isHighAngle() {
     return angle.get();
   }
-  
+
   public void setState(boolean isEnabled) {
     loader.set(isEnabled);
     //insert shooter logic here
@@ -99,7 +99,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   public boolean getLoaderState() {
     return loader.get();
   }
-  
+
   // State machine
   public void update() {
     p.println(loadState + " " + discSensor.getValue());
@@ -121,7 +121,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
           Notifier.publish(Messages.SHOT_TAKEN);
         }
         break;
-      case 2: 
+      case 2:
         setIndexerUp(false);
         if (stateTimer.get() > .2)
           nextState++;
@@ -133,10 +133,6 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
         break;
       case 4:
         if (hasDisk)
-          nextState++;
-        break;
-      case 5:
-        if (stateTimer.get() > .3)
           nextState = 0;
         break;
       default:
@@ -148,7 +144,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
       loadState = nextState;
     }
   }
-  
+
   private class ShooterControlSource implements ControlSource {
     Counter counter;
     double curVel;
@@ -156,7 +152,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
     public ShooterControlSource(Counter c) {
       this.counter = c;
     }
-    
+
     public double get() {
       return curVel;
     }
@@ -170,19 +166,19 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
       curVel = rpm;
     }
   }
-  
+
   private class ShooterControlOutput implements ControlOutput {
     SpeedController sc;
-    
+
     public ShooterControlOutput(SpeedController sc) {
       this.sc = sc;
     }
-    
+
     public void set(double value) {
       sc.set(-value);
-    } 
+    }
   }
-  
+
   public Shooter() {
     super();
     frontSensor.start();
@@ -191,39 +187,39 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
             new ShooterControlOutput(frontMotor));
     backController = new BangBangController("BackShooter", new ShooterControlSource(backSensor),
             new ShooterControlOutput(backMotor));
-    
+
     frontController.enable();
     backController.enable();
     stateTimer.start();
   }
-  
+
   public void setSpeed(double speed) {
     setSpeeds(speed,speed);
   }
-  
-    
+
+
   public void setSpeeds(double fspeed, double bspeed) {
     fspeed = (fspeed < 0) ? 0 : fspeed;
     bspeed = (bspeed < 0) ? 0 : bspeed;
     frontController.setGoal(fspeed);
     backController.setGoal(bspeed);
   }
-  
+
   public void setRawPwm(double val) {
     frontController.disable();
     backController.disable();
     frontMotor.set(val);
     backMotor.set(val);
   }
-  
+
   public double getFrontGoal() {
     return frontController.getGoal();
   }
-    
+
   public double getBackGoal() {
     return backController.getGoal();
   }
-  
+
   protected void initDefaultCommand() {
   }
 }
