@@ -8,12 +8,15 @@ import com.team254.lib.control.ControlledSubsystem;
 import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.control.impl.PIDController;
+import com.team254.lib.util.Debouncer;
 import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Class designed to control the intake mechanism.
@@ -26,16 +29,16 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
   private Talon intakeMotor = new Talon(Constants.intakePort.getInt());
   private Talon intakePivotMotor = new Talon(Constants.intakePivotPort.getInt());
   private Encoder encoder = new Encoder(Constants.intakeEncoderPortA.getInt(),
-          Constants.intakeEncoderPortB.getInt()); // encoder or counter?
+          Constants.intakeEncoderPortB.getInt(), false, Encoder.EncodingType.k4X); // encoder or counter?
   
   PIDGains gains = new PIDGains(Constants.intakeKP, Constants.intakeKI, Constants.intakeKD);
   PIDController controller = new PIDController("Intake", gains, new IntakeControlSource(), new IntakeControlOutput());
   
-  boolean foundHome = true;
+  boolean foundHome = false;
   double lastSensor = 0;
   Timer homeDriveTimer = new Timer();
-  Timer homeSettleTimer = new Timer();
-
+  boolean firstTimeHoming = true;
+  Debouncer encoderReset = new Debouncer(.2);
   private class IntakeControlSource implements ControlSource {
     public double get() {
       return encoder.get();
@@ -57,22 +60,29 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
   }
 
   public void update() {
-   /* if (!foundHome) {
-      int s = encoder.get();
-      homeDriveTimer.start();
-      homeSettleTimer.start();
-      System.out.println(homeDriveTimer.get() + " " + homeSettleTimer.get());
-      if (homeDriveTimer.get() < .25) {
-        setRawIntakePower(.25);
+    System.out.println(encoder.get() + " " + homeDriveTimer.get() + " ");
+    
+    SmartDashboard.putData("intake encoder", encoder);
+    int s = encoder.get();
+    if (!foundHome && DriverStation.getInstance().isEnabled()) {
+      if (firstTimeHoming) {
+        homeDriveTimer.start();
+        firstTimeHoming = false;
       }
-      if (lastSensor != s)
-        homeSettleTimer.reset();
-      if (homeSettleTimer.get() > .4) {
-        foundHome = true;
-        encoder.reset();
+      System.out.println(homeDriveTimer.get() + " ");
+      if (homeDriveTimer.get() < .3) {
+        raiseIntake(-.4);
+      } else {
+        raiseIntake(0);
       }
-      lastSensor = s;
-    }*/
+    } else {
+      homeDriveTimer.reset();
+    }
+    if (encoderReset.update(encoder.get() < 0)) {
+      encoder.reset();
+    }
+    
+    
   } 
   
   public void setIntakePower(double power){

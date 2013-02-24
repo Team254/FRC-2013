@@ -1,12 +1,6 @@
 package com.team254.frc2013;
 
 import com.team254.frc2013.commands.CommandBase;
-import com.team254.frc2013.commands.DriveDistanceCommand;
-import com.team254.frc2013.commands.IntakeTimedCommand;
-import com.team254.frc2013.commands.TestOutputsCommand;
-import com.team254.frc2013.commands.TurnAngleCommand;
-import com.team254.frc2013.commands.auto.DriveMotorTest;
-import com.team254.frc2013.commands.auto.ScriptedAutoMode;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.IterativeRobot;
