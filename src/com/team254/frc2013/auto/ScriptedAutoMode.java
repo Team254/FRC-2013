@@ -1,8 +1,9 @@
 /*
  * ScriptedAutoMode builds a sequential auto mode from a script file
  */
-package com.team254.frc2013.commands.auto;
+package com.team254.frc2013.auto;
 
+import com.team254.frc2013.commands.WaitCommand;
 import com.sun.squawk.io.BufferedReader;
 import com.sun.squawk.microedition.io.FileConnection;
 import com.team254.frc2013.commands.ConveyorTimedCommand;
@@ -23,7 +24,7 @@ import javax.microedition.io.Connector;
 
 /**
  * Reads commands from a text file and adds them to the autonomous queue
- * 
+ *
  * @author tom@team254.com (Tom Bottiglieri)
  * @author art.kalb96@gmail.com (Arthur Kalb)
  * @author stephen@team254.com (Stephen Pinkerton)
@@ -83,14 +84,14 @@ public class ScriptedAutoMode extends CommandGroup {
 
       //Initialize other variables for parsing
       String line;
-      
+
       boolean isParallel = false;
       String cmd = "NULL";
 
       //Go through the file line by line
       while ((line = buf.readLine()) != null) {
         ParamList params = new ParamList();
-        
+
         //Detect command type (comment / parallel / sequential)
         String[] cmdParams = Util.split(line, " ");
         if (line.length() <= 1) {

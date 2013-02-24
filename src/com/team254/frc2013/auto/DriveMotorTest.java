@@ -1,22 +1,22 @@
-package com.team254.frc2013.commands.auto;
+package com.team254.frc2013.auto;
 
 import com.team254.frc2013.commands.CommandBase;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Runs each drive motor for 5 seconds
- * 
+ *
  * @author maskoken@gmail.com (Matthew Koken)
  */
 
 public class DriveMotorTest extends CommandBase{
     private Timer timer = new Timer();
     private int currMotor = 3;
-    
+
     public DriveMotorTest() {
       requires(drive);
     }
-  
+
     protected void initialize() {
       timer.start();
     }
@@ -26,7 +26,7 @@ public class DriveMotorTest extends CommandBase{
        if(timer.get() > 5000000.0) {
          //if uSec, then 5000000
          drive.setMotor(currMotor, 0.0);
-         currMotor++;       
+         currMotor++;
          timer.reset();
          timer.start();
        }
@@ -46,5 +46,5 @@ public class DriveMotorTest extends CommandBase{
 
     protected void interrupted() {
     }
-    
+
 }

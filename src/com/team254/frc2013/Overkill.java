@@ -1,11 +1,9 @@
 package com.team254.frc2013;
 
+import com.team254.frc2013.auto.SevenDiscAutoMode;
 import com.team254.frc2013.commands.CommandBase;
-import com.team254.frc2013.commands.SevenDiskAuto;
-import com.team254.frc2013.commands.TestOutputsCommand;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
@@ -28,11 +26,7 @@ public class Overkill extends IterativeRobot {
 
     // Set up autonomous modes.
     autoModeSelector = new AutoModeSelector();
-    CommandGroup testAutoMode1 = new CommandGroup();
-    autoModeSelector.addAutoCommand("Test 1", testAutoMode1);
-    CommandGroup testAutoMode2 = new CommandGroup();
-    autoModeSelector.addAutoCommand("Test 2", testAutoMode2);
-    lastAutonSelectButton = CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState();
+    autoModeSelector.addAutoCommand("7 Disc", new SevenDiscAutoMode());
   }
 
   public void disabledInit() {
@@ -53,23 +47,6 @@ public class Overkill extends IterativeRobot {
    * Called once at the start of the autonomous period.
    */
   public void autonomousInit() {
-
-    //autonomousCommand = new DriveDistanceCommand(12, 1, 10);
-    autonomousCommand = new SevenDiskAuto();
-    /*
-    //autonomousCommand.addSequential(new TurnAngleCommand(90 * (test ? 1 : -1),5));
-    autonomousCommand.addSequential(new DriveDistanceCommand(140, 5*12, 6));
-    autonomousCommand.addSequential(new WaitCommand(1));
-    //autonomousCommand.addSequential(new DriveDistanceCommand(110, 1, 2));
-   // autonomousCommand.addSequential(new WaitCommand(3));
-    autonomousCommand.addSequential(new DriveDistanceCommand(-138, 13*12, 6));
-    autonomousCommand.addSequential(new WaitCommand(3));
-    //autonomousCommand.addSequential(new TurnAngleCommand(90 * (test ? 1 : -1),5));
-   autonomousCommand.addSequential(new DriveDistanceCommand(48, 1, 10));
-    autonomousCommand.addSequential(new WaitCommand(3));
-    autonomousCommand.addSequential(new DriveDistanceCommand(-48, 1, 10));
-    test = !test;
-    */
     autoModeSelector.getCurrentAutoMode().start();
   }
 

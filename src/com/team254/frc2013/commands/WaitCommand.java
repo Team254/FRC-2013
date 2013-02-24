@@ -1,4 +1,4 @@
-package com.team254.frc2013.commands.auto;
+package com.team254.frc2013.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
