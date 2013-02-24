@@ -13,19 +13,18 @@ public class ShootCommand extends CommandBase {
   
   protected void initialize() {
     System.out.println("SHOOTING!");
-    setTimeout(1.0);
+    //setTimeout(.3);
   }
 
   protected void execute() {
-    shooter.extend();
+    shooter.tryShoot();
   }
 
   protected boolean isFinished() {
-    return isTimedOut();
+    return true;
   }
 
   protected void end() {
-    shooter.load();
   }
 
   protected void interrupted() {

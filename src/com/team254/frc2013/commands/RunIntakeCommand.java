@@ -20,7 +20,7 @@ public class RunIntakeCommand extends CommandBase {
 
   protected void execute() {
     intake.setIntakePower(speed);
-    conveyor.setMotor(speed);
+    conveyor.setMotor(speed * .6);
   }
 
   protected boolean isFinished() {

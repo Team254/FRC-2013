@@ -9,6 +9,7 @@ import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.control.impl.PIDController;
 import com.team254.lib.util.Debouncer;
+import com.team254.lib.util.ThrottledPrinter;
 import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -39,6 +40,9 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
   Timer homeDriveTimer = new Timer();
   boolean firstTimeHoming = true;
   Debouncer encoderReset = new Debouncer(.2);
+  
+  ThrottledPrinter p = new ThrottledPrinter(.5);
+  
   private class IntakeControlSource implements ControlSource {
     public double get() {
       return encoder.get();
@@ -60,10 +64,11 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
   }
 
   public void update() {
-    System.out.println(encoder.get() + " " + homeDriveTimer.get() + " ");
+    //System.out.println(encoder.get() + " " + homeDriveTimer.get() + " ");
     
     SmartDashboard.putData("intake encoder", encoder);
     int s = encoder.get();
+   // p.println("e: " + encoder.get());
     if (!foundHome && DriverStation.getInstance().isEnabled()) {
       if (firstTimeHoming) {
         homeDriveTimer.start();
@@ -74,11 +79,13 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
         raiseIntake(-.4);
       } else {
         raiseIntake(0);
+        foundHome = true;
       }
     } else {
       homeDriveTimer.reset();
     }
     if (encoderReset.update(encoder.get() < 0)) {
+      System.out.println("Reset intake encoder");
       encoder.reset();
     }
     

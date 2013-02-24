@@ -19,7 +19,6 @@ public class TestOutputsCommand extends CommandBase {
     requires(intake);
     requires(conveyor);
     requires(hanger);
-    requires(indexer);
   }
 
   protected void initialize() {
@@ -46,10 +45,10 @@ public class TestOutputsCommand extends CommandBase {
     drive.shift(true);
     shooter.setHighAngle(true);
     shooter.extend();
-    hanger.setHookUp(Value.kForward);
+    hanger.setHookUp(Value.kReverse);
     hanger.setPto(true);
-    indexer.setPistonDown(true);
-    
+  //  indexer.setPistonDown(true);
+    conveyor.setSolenoidState(true);
     
     //shooter.setRawPwm(1);
     //shooter.setSpeed(10000);
@@ -61,7 +60,7 @@ public class TestOutputsCommand extends CommandBase {
   }
 
   protected void end() {
-    shooter.setSpeed(0);
+    //shooter.setSpeed(0);
   }
 
   protected void interrupted() {

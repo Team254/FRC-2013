@@ -14,13 +14,17 @@ import edu.wpi.first.wpilibj.Timer;
 public class Debouncer {
   Timer t = new Timer();
   double time;
+  boolean first = true;
  
   public Debouncer(double time) {
     this.time = time;
   }
  
   public boolean update(boolean val) {
-    t.start();
+    if (first) {
+      first = false;
+      t.start();
+    }
     if(!val) {
       t.reset();
     }

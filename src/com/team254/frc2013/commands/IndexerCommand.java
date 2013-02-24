@@ -8,14 +8,14 @@ package com.team254.frc2013.commands;
 public class IndexerCommand extends CommandBase {
   
   public IndexerCommand() {
-    requires(indexer);
+    //requires(indexer);
   }
   
   protected void initialize() {
   }
 
   protected void execute() {
-    indexer.setPistonDown(false);
+   // indexer.setPistonDown(false);
   }
 
   protected boolean isFinished() {
@@ -23,7 +23,7 @@ public class IndexerCommand extends CommandBase {
   }
 
   protected void end() {
-    indexer.setPistonDown(true);
+   // indexer.setPistonDown(true);
   }
 
   protected void interrupted() {

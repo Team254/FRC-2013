@@ -1,6 +1,7 @@
 package com.team254.frc2013;
 
 import com.team254.frc2013.commands.CommandBase;
+import com.team254.frc2013.commands.TestOutputsCommand;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -53,6 +54,7 @@ public class Overkill extends IterativeRobot {
     
     //autonomousCommand = new DriveDistanceCommand(12, 1, 10);
     autonomousCommand = new CommandGroup();
+    autonomousCommand.addSequential(new TestOutputsCommand());
     /*
     //autonomousCommand.addSequential(new TurnAngleCommand(90 * (test ? 1 : -1),5));
     autonomousCommand.addSequential(new DriveDistanceCommand(140, 5*12, 6));

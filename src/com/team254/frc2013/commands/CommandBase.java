@@ -7,11 +7,11 @@ import com.team254.frc2013.subsystems.Conveyor;
 import com.team254.frc2013.subsystems.Drive;
 import com.team254.frc2013.subsystems.DriveGearbox;
 import com.team254.frc2013.subsystems.Hanger;
-import com.team254.frc2013.subsystems.Indexer;
 import com.team254.frc2013.subsystems.Intake;
 import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -27,7 +27,6 @@ public abstract class CommandBase extends Command {
   public static Drive drive = new Drive(motors);
   public static Hanger hanger = new Hanger(motors);
   public static Shooter shooter = new Shooter();
-  public static Indexer indexer = new Indexer();
   public static Compressor compressor = new Compressor(Constants.pressureSwitch.getInt(), 
      Constants.compressorRelay.getInt());
   //public static Relay r = new Relay(Constants.compressorRelay.getInt());

@@ -6,8 +6,10 @@ import com.team254.frc2013.commands.IncrementShooterSpeedCommand;
 import com.team254.frc2013.commands.IntakeSpeedCommand;
 import com.team254.frc2013.commands.PrintCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
+import com.team254.frc2013.commands.SetIndexerCommand;
 import com.team254.frc2013.commands.SetPtoCommand;
 import com.team254.frc2013.commands.ShootCommand;
+import com.team254.frc2013.commands.ShooterSpeedCommand;
 import com.team254.frc2013.commands.ToggleShooterAngleCommand;
 
 
@@ -20,12 +22,12 @@ import com.team254.frc2013.commands.ToggleShooterAngleCommand;
 public class OperatorControlHelper {
   
   public static void setupOperationMap(ControlBoard c) {
-    c.operatorJoystick.getFarButton().whenPressed(new IncrementShooterSpeedCommand(200,0));
-    c.operatorJoystick.getMiddleButton().whenPressed(new IncrementShooterSpeedCommand(-200,0));
-    c.operatorJoystick.getCloseButton().whenPressed(new IncrementShooterSpeedCommand(0,100));
-    c.operatorJoystick.getShootButton().whenPressed(new IncrementShooterSpeedCommand(0, -100));
+    c.operatorJoystick.getFarButton().whenPressed(new IncrementShooterSpeedCommand(250,0));
+    c.operatorJoystick.getMiddleButton().whenPressed(new IncrementShooterSpeedCommand(-250,0));
+    c.operatorJoystick.getCloseButton().whenPressed(new IncrementShooterSpeedCommand(0,250));
+    c.operatorJoystick.getShootButton().whenPressed(new IncrementShooterSpeedCommand(0, -250));
     
-    c.operatorJoystick.getHang30Button().whenPressed(new PrintCommand("dsfsadffda"));
+    c.operatorJoystick.getHang30Button().whenPressed(new ShootCommand());
    // c.operatorJoystick.getHang30Button().whenPressed(new ShootCommand());
     c.operatorJoystick.getHang20Button().whenPressed(new ToggleShooterAngleCommand());
     
@@ -42,8 +44,8 @@ public class OperatorControlHelper {
     c.operatorJoystick.getAutonSelectButton().whenPressed(new HangerHookCommand(true));
     c.operatorJoystick.getAutonSelectButton().whenReleased(new HangerHookCommand(false));
     
-    c.operatorJoystick.getShooterOnSwitch().whenActive(new SetPtoCommand(true));
-    c.operatorJoystick.getShooterOnSwitch().whenInactive(new SetPtoCommand(false));
+    c.operatorJoystick.getShooterOnSwitch().whenPressed(new ShooterSpeedCommand(13000));
+    c.operatorJoystick.getShooterOnSwitch().whenReleased(new ShooterSpeedCommand(0));
     
     /*
     c.operatorJoystick.getFarButton().whenPressed(new PrintCommand("Far"));
