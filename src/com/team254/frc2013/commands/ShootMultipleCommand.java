@@ -31,10 +31,11 @@ public class ShootMultipleCommand extends CommandBase implements Listener {
   }
 
   protected boolean isFinished() {
-    return (taken == num) || isTimedOut();
+    return (taken >= num) || isTimedOut();
   }
 
   protected void end() {
+    taken = 0;
   }
 
   protected void interrupted() {
