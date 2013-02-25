@@ -19,8 +19,8 @@ public class DriveDistanceCommand extends CommandBase {
 
   protected void initialize() {
     drive.resetEncoders();
-    drive.setMaxSpeed(speed);
-    drive.setGoal(distance, 0);
+    drive.setMaxSpeed(speed*12); // Drive controller works in inches
+    drive.setGoal(distance*12, 0); // Drive controller works in inches
     setTimeout(timeout);
   }
 

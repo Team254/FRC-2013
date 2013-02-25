@@ -17,8 +17,8 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new WaitCommand(.5));
     addSequential(new ShootMultipleCommand(3));
     addSequential(new RunIntakeCommand(1.0));
-    addSequential(new DriveDistanceCommand(7.2 * 12, 4 * 12, 4));
-    addSequential(new DriveDistanceCommand(-3.5 * 12, 5 * 12, 2.0));
+    addSequential(new DriveDistanceCommand(7.2, 4 , 4));
+    addSequential(new DriveDistanceCommand(-3.5, 5, 2.0));
     addSequential(new ShootMultipleCommand(3));
   }
 }

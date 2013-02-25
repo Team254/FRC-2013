@@ -18,7 +18,7 @@ public class FiveDiscAutoMode extends CommandGroup {
     addSequential(new WaitCommand(.5));
     addSequential(new ShootMultipleCommand(3));
     addSequential(new RunIntakeCommand(1.0));
-    addSequential(new DriveDistanceCommand(3 * 12, 4 * 12, 4));
+    addSequential(new DriveDistanceCommand(3, 4, 4));
     addSequential(new ShootMultipleCommand(3));
   }
 }
