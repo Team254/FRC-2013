@@ -1,7 +1,6 @@
 package com.team254.frc2013;
 
 import com.team254.lib.util.Gamepad;
-import com.team254.lib.util.OperatorJoystick;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
