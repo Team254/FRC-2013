@@ -1,5 +1,6 @@
 package com.team254.frc2013;
 
+import com.team254.frc2013.auto.FiveDiscAutoMode;
 import com.team254.frc2013.auto.SevenDiscAutoMode;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.lib.util.PIDTuner;
@@ -28,6 +29,7 @@ public class Overkill extends IterativeRobot {
     // Set up autonomous modes.
     autoModeSelector = new AutoModeSelector();
     autoModeSelector.addAutoCommand("7 Disc", new SevenDiscAutoMode());
+    autoModeSelector.addAutoCommand("5 Disc", new FiveDiscAutoMode());
   }
 
   public void disabledInit() {
@@ -77,13 +79,16 @@ public class Overkill extends IterativeRobot {
   }
 
   private void updateLCD(){
-    String driveEncoders = "LE: " + CommandBase.drive.getLeftEncoderDistance();
-    driveEncoders += " RE: " + CommandBase.drive.getRightEncoderDistance();
+    String driveEncoders = "LE: " + Math.floor(CommandBase.drive.getLeftEncoderDistance());
+    driveEncoders += " RE: " + Math.floor(CommandBase.drive.getRightEncoderDistance());
     DriverStationLCD lcd = DriverStationLCD.getInstance();
     lcd.println(DriverStationLCD.Line.kUser2, 1, driveEncoders + "     ");
     lcd.println(DriverStationLCD.Line.kUser3, 1,
                 "Gyro: " + Math.floor(CommandBase.drive.getGyroAngle() * 100) / 100);
     lcd.println(DriverStationLCD.Line.kUser4, 1, "IE: " + CommandBase.intake.getEncoderCount());
+    lcd.println(DriverStationLCD.Line.kUser5, 1,
+                "FS: " + CommandBase.shooter.getFrontCounter() + " BS: " +
+                    CommandBase.shooter.getBackCounter());
     lcd.updateLCD();
   }
 }

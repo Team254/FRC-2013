@@ -21,28 +21,28 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author richard@team254.com (Richard Lin)
  */
 public class Drive extends Subsystem {
-  
+
   private DriveGearbox motors;
   RelativeEncoder leftEncoder;
   RelativeEncoder rightEncoder;
- 
+
   // Shifter
   private Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
   private Gyro gyro = new Gyro(1);//Constants.gyroPort.getInt());
   private boolean isHighGear = true;
-  
-  
-    
+
+
+
   protected class DriveControlSource implements ControlSource {
     boolean straight = true;
     DriveControlSource(boolean straight) {
       this.straight = straight;
     }
-    
+
     public double get() {
       // This is super hacky.
       if (straight) {
-        System.out.println("e: " + (getLeftEncoderDistance() + getRightEncoderDistance()) / 2.0);
+        //System.out.println("e: " + (getLeftEncoderDistance() + getRightEncoderDistance()) / 2.0);
         return (getLeftEncoderDistance() + getRightEncoderDistance()) / 2.0;
       } else {
         return getGyroAngle();
@@ -52,7 +52,7 @@ public class Drive extends Subsystem {
     public void updateFilter() {
     }
   }
-  
+
   double lastStraight = 0;
   double lastTurn = 0;
   protected class DriveControlOutput implements ControlOutput {
@@ -63,7 +63,7 @@ public class Drive extends Subsystem {
 
     public void set(double value) {
       if (straight) {
-        lastStraight = -value; // Why is this negative?
+        lastStraight = value; // Why is this negative?
       } else {
         lastTurn = value;
       }
@@ -71,13 +71,13 @@ public class Drive extends Subsystem {
     }
   }
 
-  ProfiledPIDController straightController = new ProfiledPIDController("straightController", 
-          new PIDGains(Constants.driveStraightKP, Constants.driveStraightKI, Constants.driveStraightKD), 
+  ProfiledPIDController straightController = new ProfiledPIDController("straightController",
+          new PIDGains(Constants.driveStraightKP, Constants.driveStraightKI, Constants.driveStraightKD),
           new DriveControlSource(true), new DriveControlOutput(true),
           6*12.0, .75); // Half a second to accelerate to 5.0 ft/s
 
-  PIDController turnController = new PIDController("turnController", 
-          new PIDGains(Constants.driveTurnKP, Constants.driveTurnKI, Constants.driveTurnKD), 
+  PIDController turnController = new PIDController("turnController",
+          new PIDGains(Constants.driveTurnKP, Constants.driveTurnKI, Constants.driveTurnKD),
           new DriveControlSource(false), new DriveControlOutput(false));;
 
   public Drive(DriveGearbox motors) {
@@ -98,7 +98,7 @@ public class Drive extends Subsystem {
   public void setLeftRightPower(double leftPower, double rightPower) {
     motors.driveLR(leftPower, -rightPower); // changed from + - for comp bot
   }
-  
+
   public void setMotor(int portNumber, double power) {
     motors.setMotor(portNumber, power);
   }
@@ -110,12 +110,12 @@ public class Drive extends Subsystem {
   public double getRightEncoderDistance() {
     return rightEncoder.get() / 256.0 * 3.5 * Math.PI;
   }
-  
+
   public void resetEncoders() {
     leftEncoder.reset();
     rightEncoder.reset();
   }
-  
+
   public double getGyroAngle() {
     return gyro.getAngle();
   }
@@ -146,7 +146,7 @@ public class Drive extends Subsystem {
   public void setGoal(double distance, double angle) {
     resetGyro();
     resetEncoders();
-    straightController.setGoal(-distance);
+    straightController.setGoal(distance);
     if (distance != 0)
       straightController.enable();
     else
@@ -154,7 +154,7 @@ public class Drive extends Subsystem {
     turnController.setGoal(angle);
     turnController.enable();
   }
-  
+
   public boolean onTarget() {
     return straightController.onTarget() && turnController.onTarget();
   }

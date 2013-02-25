@@ -25,7 +25,7 @@ public class DriveDistanceCommand extends CommandBase {
   }
 
   protected void execute() {
-    
+
   }
 
   protected boolean isFinished() {
@@ -33,11 +33,12 @@ public class DriveDistanceCommand extends CommandBase {
             isTimedOut());
     if (done)
       System.out.println("DD DONE!");
-    return done; 
+    return done;
   }
 
   protected void end() {
     drive.setLeftRightPower(0, 0);
+    drive.setGoal(0,0);
   }
 
   protected void interrupted() {

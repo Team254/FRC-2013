@@ -29,17 +29,18 @@ public class ProfiledPIDController extends PIDController {
   private double lastTime = 0;
   double origGoal;
   double sign = 1;
-  
+
   public ProfiledPIDController(String name, PIDGains gains, ControlSource source, ControlOutput output, double maxV, double timeToMaxV) {
     super(name, gains, source, output);
     velocity = maxV;
     acceleration = maxV / timeToMaxV;
   }
-  
+
   public void update() {
     if (enabled) {
       double t = timer.get();
       setpoint = getGoal();
+      System.out.println(getGoal() + " " + source.get());
       double period = t - lastTime;
       if (t < timeToMaxVelocity) {
         // Accelerate up.
@@ -58,7 +59,7 @@ public class ProfiledPIDController extends PIDController {
     }
     super.update();
   }
-  
+
   public void setGoal(double goal) {
     setpoint = goal;
     origGoal = goal;
@@ -73,13 +74,13 @@ public class ProfiledPIDController extends PIDController {
     lastTime = timer.get();
     // Set setpoint to current value of PIDSource.
     super.setGoal(source.get());
-    
+
   }
-  
+
   public void setMaxVelocity(double v) {
     velocity = v;
   }
-  
+
   public boolean onTarget() {
     boolean done = !enabled || (Math.abs(origGoal - lastSource) < onTargetError) && (Math.abs(lastDeltaError) < onTargetDeltaError);
     if (done)
