@@ -1,6 +1,5 @@
 package com.team254.lib.control;
 
-import com.team254.frc2013.ControlUpdater;
 import java.util.Vector;
 
 /**

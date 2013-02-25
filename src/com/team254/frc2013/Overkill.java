@@ -1,5 +1,6 @@
 package com.team254.frc2013;
 
+import com.team254.lib.control.ControlUpdater;
 import com.team254.frc2013.auto.FiveDiscAutoMode;
 import com.team254.frc2013.auto.SevenDiscAutoMode;
 import com.team254.frc2013.commands.CommandBase;
