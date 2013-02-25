@@ -1,4 +1,7 @@
-package com.team254.lib.control;
+package com.team254.lib.control.impl;
+
+import com.team254.lib.control.ControlOutput;
+import com.team254.lib.control.Controller;
 
 /**
  * Controller that outputs indefinitely at a certain goal while enabled.

@@ -6,7 +6,7 @@ import com.team254.lib.control.impl.BangBangController;
 import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.ControlledSubsystem;
-import com.team254.lib.control.OpenLoopController;
+import com.team254.lib.control.impl.OpenLoopController;
 import com.team254.lib.control.impl.PIDController;
 import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.PeriodicSubsystem;
