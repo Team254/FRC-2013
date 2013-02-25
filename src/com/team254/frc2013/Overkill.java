@@ -3,6 +3,7 @@ package com.team254.frc2013;
 import com.team254.frc2013.auto.SevenDiscAutoMode;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.lib.util.PIDTuner;
+import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -41,6 +42,7 @@ public class Overkill extends IterativeRobot {
       autoModeSelector.increment();
     }
     lastAutonSelectButton = autonSelectButton;
+    updateLCD();
   }
 
   /**
@@ -55,6 +57,7 @@ public class Overkill extends IterativeRobot {
    */
   public void autonomousPeriodic() {
     Scheduler.getInstance().run();
+    updateLCD();
   }
 
   /**
@@ -70,5 +73,17 @@ public class Overkill extends IterativeRobot {
    */
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    updateLCD();
+  }
+
+  private void updateLCD(){
+    String driveEncoders = "LE: " + CommandBase.drive.getLeftEncoderDistance();
+    driveEncoders += " RE: " + CommandBase.drive.getRightEncoderDistance();
+    DriverStationLCD lcd = DriverStationLCD.getInstance();
+    lcd.println(DriverStationLCD.Line.kUser2, 1, driveEncoders + "     ");
+    lcd.println(DriverStationLCD.Line.kUser3, 1,
+                "Gyro: " + Math.floor(CommandBase.drive.getGyroAngle() * 100) / 100);
+    lcd.println(DriverStationLCD.Line.kUser4, 1, "IE: " + CommandBase.intake.getEncoderCount());
+    lcd.updateLCD();
   }
 }

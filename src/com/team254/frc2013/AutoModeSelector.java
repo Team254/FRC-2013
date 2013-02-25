@@ -35,7 +35,7 @@ public final class AutoModeSelector {
       index = 0;
     }
     lcd.println(DriverStationLCD.Line.kUser1, 1, "                                       ");
-    lcd.println(DriverStationLCD.Line.kUser1, 1, "A: " + getCurrentName());
+    lcd.println(DriverStationLCD.Line.kUser1, 1, "Auto: " + getCurrentName());
     lcd.updateLCD();
   }
 
