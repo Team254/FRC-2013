@@ -19,15 +19,18 @@ public final class AutoModeSelector {
 
   public AutoModeSelector() {
     autoModes = new Vector();
-    addAutoCommand("None", new CommandGroup());
+    addAutoCommand("None", CommandGroup.class);
     index = -1;
     lcd = DriverStationLCD.getInstance();
     increment();
   }
-
-  public void addAutoCommand(String name, CommandGroup command) {
-    autoModes.addElement(new AutoMode(name, command));
+  
+  void addAutoCommand(String name, Class cmd) {
+    autoModes.addElement(new AutoMode(name, cmd));
+    if (autoModes.size() == 1)
+      increment(); // Don't start on none!
   }
+
 
   public void increment() {
     index++;
@@ -44,14 +47,24 @@ public final class AutoModeSelector {
   }
 
   public CommandGroup getCurrentAutoMode() {
-    return ((AutoMode)autoModes.elementAt(index)).command;
+    CommandGroup ret;
+    try {
+      AutoMode m = (AutoMode)autoModes.elementAt(index);
+      ret = (CommandGroup) m.command.newInstance();
+    } catch (InstantiationException ex) {
+      ret = new CommandGroup();
+    } catch (IllegalAccessException ex) {
+      ret = new CommandGroup();
+    }
+    return ret;
   }
+
 
   private static class AutoMode {
     public String name;
-    public CommandGroup command;
+    public Class command;
 
-    public AutoMode(String name, CommandGroup command) {
+    public AutoMode(String name, Class command) {
       this.name = name;
       this.command = command;
     }

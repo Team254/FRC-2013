@@ -4,6 +4,7 @@ import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.Controller;
 import com.team254.lib.control.PIDGains;
+import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.parsing.IUtility;
@@ -28,6 +29,7 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
   double lastSource, lastOut;
   double minIError = 10.0;
   double onTargetError = 1.0, onTargetDeltaError = 0.05;
+  ThrottledPrinter printer = new ThrottledPrinter(.1);
 
   public PIDController(String name, PIDGains gains, ControlSource source, ControlOutput output) {
     super(name);
@@ -41,6 +43,7 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
 
   public void update() {
     lastSource = source.get();
+    double out = 0;
     double error = goal - lastSource;
     double p = gains.getP() * error;
     if (Math.abs(error) < minIError)
@@ -51,12 +54,13 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
     lastError = error;
     double ff = gains.getF() * goal;
     if (enabled) {
-      double out = ff + p + i + d;
+      out = ff + p + i + d;
       output.set(out);
       lastOut = out;
     }
     lastDeltaError = dError;
     SmartDashboard.putData(this);
+    
   }
 
   public void setGoal(double goal) {

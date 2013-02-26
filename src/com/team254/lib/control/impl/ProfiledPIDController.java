@@ -40,7 +40,7 @@ public class ProfiledPIDController extends PIDController {
     if (enabled) {
       double t = timer.get();
       setpoint = getGoal();
-      System.out.println(getGoal() + " " + source.get());
+      //System.out.println(getGoal() + " " + source.get());
       double period = t - lastTime;
       if (t < timeToMaxVelocity) {
         // Accelerate up.

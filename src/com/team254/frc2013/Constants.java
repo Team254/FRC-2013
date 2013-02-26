@@ -85,24 +85,24 @@ public class Constants extends ConstantsBase {
   public static final Constant intakeEncoderPortB = new Constant("intakeEncoderPortB", 8);
   
   // Drive tuning
-  public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .6);
-  public static final Constant sensitivityLow = new Constant("sensitivityLow", .5);
+  public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .85);
+  public static final Constant sensitivityLow = new Constant("sensitivityLow", .7);
   
-  public static final Constant driveStraightKP = new Constant("driveStraightKP", 1.0/26.0);
+  public static final Constant driveStraightKP = new Constant("driveStraightKP", 0.014);
   public static final Constant driveStraightKI = new Constant("driveStraightKI", .0005);
-  public static final Constant driveStraightKD = new Constant("driveStraightKD", 0.0);
+  public static final Constant driveStraightKD = new Constant("driveStraightKD", 0.02);
   
-  public static final Constant driveTurnKP = new Constant("driveTurnKP", 0.0);
-  public static final Constant driveTurnKI = new Constant("driveTurnKI", 0.0);
-  public static final Constant driveTurnKD = new Constant("driveTurnKD", 0.0);
+  public static final Constant driveTurnKP = new Constant("driveTurnKP", 0.02);
+  public static final Constant driveTurnKI = new Constant("driveTurnKI", 0.0005);
+  public static final Constant driveTurnKD = new Constant("driveTurnKD", 0.025);
   
   public static final Constant hangerKP = new Constant("hangerKP", 0.0);
   public static final Constant hangerKI = new Constant("hangerKI", 0.0);
   public static final Constant hangerKD = new Constant("hangerKD", 0.0);
   
-  public static final Constant intakeKP = new Constant("intakeKP", 0.0);
+  public static final Constant intakeKP = new Constant("intakeKP", 0.09);
   public static final Constant intakeKI = new Constant("intakeKI", 0.0);
-  public static final Constant intakeKD = new Constant("intakeKD", 0.0);
+  public static final Constant intakeKD = new Constant("intakeKD", 0.24);
   
   static {
     // Set any overridden constants from the file on startup.

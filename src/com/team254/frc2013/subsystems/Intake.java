@@ -8,15 +8,14 @@ import com.team254.lib.control.ControlledSubsystem;
 import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.control.impl.PIDController;
+import com.team254.lib.control.impl.ProfiledPIDController;
 import com.team254.lib.util.Debouncer;
 import com.team254.lib.util.ThrottledPrinter;
 import com.team254.lib.util.Util;
-import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -30,32 +29,40 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
   private Talon intakeMotor = new Talon(Constants.intakePort.getInt());
   private Talon intakePivotMotor = new Talon(Constants.intakePivotPort.getInt());
   private Encoder encoder = new Encoder(Constants.intakeEncoderPortA.getInt(),
-          Constants.intakeEncoderPortB.getInt()); // encoder or counter?
+          Constants.intakeEncoderPortB.getInt(), false, Encoder.EncodingType.k4X); // encoder or counter?
   
   PIDGains gains = new PIDGains(Constants.intakeKP, Constants.intakeKI, Constants.intakeKD);
   PIDController controller = new PIDController("Intake", gains, new IntakeControlSource(), new IntakeControlOutput());
   
   boolean foundHome = false;
-  double lastSensor = 0;
+  double lastSensor = 100;
   Timer homeDriveTimer = new Timer();
   boolean firstTimeHoming = true;
-  Debouncer encoderReset = new Debouncer(.2);
+  Debouncer encoderReset = new Debouncer(.5);
   
   ThrottledPrinter p = new ThrottledPrinter(.5);
   
   private class IntakeControlSource implements ControlSource {
     public double get() {
-      return encoder.get();
+      return encoder.getDistance();
     }
     public void updateFilter() { } 
   }
   private class IntakeControlOutput implements ControlOutput {
     public void set(double value) {
-      //intakePivotMotor.set(value);
+      if (foundHome) {
+        //value = (value < -.4) ? -.4 : value; // lets not drive down 
+        if (encoder.getDistance() > 90.0 && value > 0)
+          value /= 2.0;
+        else if (encoder.getDistance() < 90 && value < 0)
+          value /= 2.0;
+        setPivot(value);
+      }
     }
   }
   
   public Intake() {
+    encoder.setDistancePerPulse(360.0/256.0);
     encoder.start();
   }
   
@@ -67,46 +74,50 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
     //System.out.println(encoder.get() + " " + homeDriveTimer.get() + " ");
     
     SmartDashboard.putData("intake encoder", encoder);
-    int s = encoder.get();
-   // p.println("e: " + encoder.get());
+    double s = encoder.getDistance();
+    //p.println("e: " + s);
     if (!foundHome && DriverStation.getInstance().isEnabled()) {
       if (firstTimeHoming) {
         homeDriveTimer.start();
         firstTimeHoming = false;
       }
       System.out.println(homeDriveTimer.get() + " ");
-      if (homeDriveTimer.get() < .3) {
-        raiseIntake(-.4);
+      if (homeDriveTimer.get() < .4) {
+        setRawPivot(-.4);
       } else {
-        raiseIntake(0);
-        foundHome = true;
+        setRawPivot(0);
+        if (encoderReset.update(Math.abs(s - lastSensor) < 1.5)) {
+          System.out.println("Reset intake encoder");
+          foundHome = true;
+          encoder.reset();
+        }
       }
     } else {
       homeDriveTimer.reset();
     }
-    if (encoderReset.update(encoder.get() < 0)) {
-      System.out.println("Reset intake encoder");
-      encoder.reset();
-    }
-    
-    
+    lastSensor = s;
   } 
   
   public void setIntakePower(double power){
-    if (foundHome)
-      setRawIntakePower(power);
-  }
-  
-  private void setRawIntakePower(double power) {
     double output = Util.limit(power, 1.0);
     intakeMotor.set(output);
   }
   
-  public void raiseIntake(double power){
+  
+  private void setPivot(double power){
+    if (foundHome) {
+      setRawPivot(power);
+    }
+  }
+  
+  private void setRawPivot(double power) {
     double output = Util.limit(power, 1.0);
     intakePivotMotor.set(output);
   }
   
+  public void setIntakeAngle(double angle) {
+    controller.setGoal(angle);
+  }
   public int getEncoderCount() {
     return encoder.get();
   }

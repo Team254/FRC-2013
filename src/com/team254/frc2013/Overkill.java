@@ -7,6 +7,7 @@ import com.team254.frc2013.commands.CommandBase;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
@@ -17,6 +18,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class Overkill extends IterativeRobot {
   private AutoModeSelector autoModeSelector;
   private boolean lastAutonSelectButton;
+  private CommandGroup autoCmd = new CommandGroup();
 
   /**
    * Called when the robot is first started up and should be used for any initialization code.
@@ -29,8 +31,8 @@ public class Overkill extends IterativeRobot {
 
     // Set up autonomous modes.
     autoModeSelector = new AutoModeSelector();
-    autoModeSelector.addAutoCommand("7 Disc", new SevenDiscAutoMode());
-    autoModeSelector.addAutoCommand("5 Disc", new FiveDiscAutoMode());
+    autoModeSelector.addAutoCommand("7 Disc", SevenDiscAutoMode.class);
+    autoModeSelector.addAutoCommand("5 Disc", FiveDiscAutoMode.class);
   }
 
   public void disabledInit() {
@@ -52,7 +54,8 @@ public class Overkill extends IterativeRobot {
    * Called once at the start of the autonomous period.
    */
   public void autonomousInit() {
-    autoModeSelector.getCurrentAutoMode().start();
+    autoCmd = autoModeSelector.getCurrentAutoMode();
+    autoCmd.start();
   }
 
   /**
@@ -68,7 +71,7 @@ public class Overkill extends IterativeRobot {
    */
   public void teleopInit() {
     // Make sure that the autonomous stops running when teleop begins.
-    autoModeSelector.getCurrentAutoMode().cancel();
+    autoCmd.cancel();
   }
 
   /**
