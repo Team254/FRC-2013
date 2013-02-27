@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class FiveDiscAutoMode extends CommandGroup {
   public FiveDiscAutoMode() {
-    addSequential(new ShooterSpeedCommand(12000));
+    addSequential(new ShooterSpeedCommand(12000, false));
     addSequential(new WaitCommand(.5));
     addSequential(new ShootMultipleCommand(3));
     addSequential(new RunIntakeCommand(1.0));

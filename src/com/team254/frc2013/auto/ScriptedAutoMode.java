@@ -158,7 +158,7 @@ public class ScriptedAutoMode extends CommandGroup {
       c = new ShooterAngleCommand(params.at(0));
     } else if(checkName(cmd, "SHOOTER_SPEED")) {
       System.out.println("Params: " + params.at(0));
-      c = new ShooterSpeedCommand(params.at(0));
+      c = new ShooterSpeedCommand(params.at(0),true);
     } else if(checkName(cmd, "SHOOT")) {
       System.out.println("Params: N/A");
       c = new ShootCommand();

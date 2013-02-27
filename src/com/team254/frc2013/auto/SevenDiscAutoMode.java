@@ -13,12 +13,14 @@ import edu.wpi.first.wpilibj.command.WaitCommand;
  */
 public class SevenDiscAutoMode extends CommandGroup {
   public SevenDiscAutoMode() {
-    addSequential(new ShooterSpeedCommand(12000));
+    addSequential(new ShooterSpeedCommand(12000, false));
     addSequential(new WaitCommand(.5));
     addSequential(new ShootMultipleCommand(3));
     addSequential(new RunIntakeCommand(1.0));
-    addSequential(new DriveDistanceCommand(7.2, 4 , 4));
-    addSequential(new DriveDistanceCommand(-3.5, 5, 2.0));
+    addSequential(new DriveDistanceCommand(11.3, 5.5 , 4));
+    addSequential(new ShooterSpeedCommand(12000, true));
+    addSequential(new DriveDistanceCommand(-3.0, 8, 2.3));
+    addSequential(new WaitCommand(.5));
     addSequential(new ShootMultipleCommand(3));
   }
 }

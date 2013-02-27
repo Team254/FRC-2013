@@ -32,7 +32,7 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
           Constants.intakeEncoderPortB.getInt(), false, Encoder.EncodingType.k4X); // encoder or counter?
   
   PIDGains gains = new PIDGains(Constants.intakeKP, Constants.intakeKI, Constants.intakeKD);
-  PIDController controller = new PIDController("Intake", gains, new IntakeControlSource(), new IntakeControlOutput());
+  ProfiledPIDController controller = new ProfiledPIDController("Intake", gains, new IntakeControlSource(), new IntakeControlOutput(),90.0,.25);
   
   boolean foundHome = false;
   double lastSensor = 100;

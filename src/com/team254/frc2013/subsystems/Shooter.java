@@ -128,7 +128,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
         break;
       case 3:
         load();
-        if (stateTimer.get() > .9)
+        if (stateTimer.get() > .5)
           nextState++;
         break;
       case 4:

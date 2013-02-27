@@ -19,10 +19,10 @@ import com.team254.frc2013.commands.ToggleShooterAngleCommand;
 public class OperatorControlHelper {
 
   public static void setupOperationMap(ControlBoard c) {
-    /*c.operatorJoystick.getFarButton().whenPressed(new SetIntakePositionCommand(105));
+    c.operatorJoystick.getFarButton().whenPressed(new SetIntakePositionCommand(105));
     c.operatorJoystick.getMiddleButton().whenPressed(new SetIntakePositionCommand(80));
     c.operatorJoystick.getCloseButton().whenPressed(new SetIntakePositionCommand(45));
-    c.operatorJoystick.getShootButton().whenPressed(new SetIntakePositionCommand(0));*/
+    c.operatorJoystick.getShootButton().whenPressed(new SetIntakePositionCommand(0));
 
     c.operatorJoystick.getHang30Button().whenPressed(new ShootCommand());
    // c.operatorJoystick.getHang30Button().whenPressed(new ShootCommand());
@@ -41,10 +41,10 @@ public class OperatorControlHelper {
     c.operatorJoystick.getAutonSelectButton().whenPressed(new HangerHookCommand(true));
     c.operatorJoystick.getAutonSelectButton().whenReleased(new HangerHookCommand(false));
 
-    c.operatorJoystick.getShooterOnSwitch().whenActive(new ShooterSpeedCommand(13000));
-    c.operatorJoystick.getShooterOnSwitch().whenInactive(new ShooterSpeedCommand(0));
+    c.operatorJoystick.getShooterOnSwitch().whenActive(new ShooterSpeedCommand(13000, true));
+    c.operatorJoystick.getShooterOnSwitch().whenInactive(new ShooterSpeedCommand(0, false));
     
-    c.operatorJoystick.getIntakeUpSwitch().whenActive(new SetIntakePositionCommand(115));
+  /*  c.operatorJoystick.getIntakeUpSwitch().whenActive(new SetIntakePositionCommand(115));
     c.operatorJoystick.getIntakeUpSwitch().whenReleased(new SetIntakePositionCommand(90));
     c.operatorJoystick.getIntakeDownSwitch().whenReleased(new SetIntakePositionCommand(90));
     c.operatorJoystick.getIntakeDownSwitch().whenActive(new SetIntakePositionCommand(0));

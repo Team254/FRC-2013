@@ -27,8 +27,7 @@ public final class AutoModeSelector {
   
   void addAutoCommand(String name, Class cmd) {
     autoModes.addElement(new AutoMode(name, cmd));
-    if (autoModes.size() == 1)
-      increment(); // Don't start on none!
+
   }
 
 

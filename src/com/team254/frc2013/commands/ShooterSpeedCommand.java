@@ -7,16 +7,19 @@ package com.team254.frc2013.commands;
  */
 public class ShooterSpeedCommand extends CommandBase {
   private double speed;
+  private boolean isUp;
   
-  public ShooterSpeedCommand(double speed) {
+  public ShooterSpeedCommand(double speed, boolean isUp) {
     requires(shooter);
     this.speed = speed;
+    this.isUp = isUp;
   }
-  
+    
   protected void initialize() {
   }
 
   protected void execute() {
+    shooter.setHighAngle(isUp);
     shooter.setSpeed(speed);
   }
 

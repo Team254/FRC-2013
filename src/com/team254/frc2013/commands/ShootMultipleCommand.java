@@ -18,7 +18,7 @@ public class ShootMultipleCommand extends CommandBase implements Listener {
   public ShootMultipleCommand(int num) {
     this.num = num;
     requires(shooter);
-    setTimeout(num * 2.0);    
+    setTimeout(num * 1.2);    
   }
 
   
