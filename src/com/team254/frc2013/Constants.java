@@ -52,16 +52,16 @@ public class Constants extends ConstantsBase {
   
   // Operator control mappings
   public static final Constant autonSelectControlPort = new Constant("autonSelectControlPort",11);
-  public static final Constant conveyOutControlPort = new Constant("unjamControlPort", 10);
-  public static final Constant conveyorControlPort = new Constant("shootControlPort", 9);
-  public static final Constant intakeOutControlPort = new Constant("autoShootControlPort", 8);
+  public static final Constant conveyOutControlPort = new Constant("conveyOutControlPort", 10);
+  public static final Constant conveyorControlPort = new Constant("conveyorControlPort", 9);
+  public static final Constant intakeOutControlPort = new Constant("intakeOutControlPort", 8);
   public static final Constant intakeControlPort = new Constant("intakeControlPort", 7);
-  public static final Constant hang30ControlPort = new Constant("increaseControlPort", 6);
-  public static final Constant hang10ControlPort = new Constant("decreaseControlPort", 5);
-  public static final Constant farControlPort = new Constant("keyFarControlPort", 4);
-  public static final Constant middleControlPort = new Constant("keyCloseControlPort", 3);
-  public static final Constant closeControlPort = new Constant("farFenderControlPort", 2);
-  public static final Constant shootControlPort = new Constant("fenderControlPort", 1);
+  public static final Constant hang30ControlPort = new Constant("hang30ControlPort", 6);
+  public static final Constant hang10ControlPort = new Constant("hang10ControlPort", 5);
+  public static final Constant farControlPort = new Constant("farControlPort", 4);
+  public static final Constant middleControlPort = new Constant("middleControlPort", 3);
+  public static final Constant closeControlPort = new Constant("closeControlPort", 2);
+  public static final Constant shootControlPort = new Constant("shootControlPort", 1);
   public static final Constant shooterOnPort = new Constant("shooterOnPort", 3);
   public static final Constant intakeUpPort = new Constant("intakeUpPort", 4);
   public static final Constant intakeDownPort = new Constant("intakeDownPort", 12);

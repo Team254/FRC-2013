@@ -24,9 +24,14 @@ public class OperatorControlHelper {
     c.operatorJoystick.getCloseButton().whenPressed(new SetIntakePositionCommand(45));
     c.operatorJoystick.getShootButton().whenPressed(new SetIntakePositionCommand(0));
 
-    c.operatorJoystick.getHang30Button().whenPressed(new ShootCommand());
+    //c.operatorJoystick.getHang30Button().whenPressed(new ShootCommand());
    // c.operatorJoystick.getHang30Button().whenPressed(new ShootCommand());
-    c.operatorJoystick.getHang20Button().whenPressed(new ToggleShooterAngleCommand());
+    //c.operatorJoystick.getHang20Button().whenPressed(new ToggleShooterAngleCommand());
+    
+    c.operatorJoystick.getFarButton().whenPressed(new ShooterSpeedCommand(13000, false));
+    //c.operatorJoystick.getMiddleButton().whenPressed(new PrintCommand("Mid"));
+    c.operatorJoystick.getCloseButton().whenPressed(new ShooterSpeedCommand(13000, true));
+    c.operatorJoystick.getShootButton().whenPressed(new ShootCommand());
 
     c.operatorJoystick.getConveyorButton().whenPressed(new ConveyorSpeedCommand(1.0));
     c.operatorJoystick.getConveyorButton().whenReleased(new ConveyorSpeedCommand(0.0));
@@ -41,8 +46,8 @@ public class OperatorControlHelper {
     c.operatorJoystick.getAutonSelectButton().whenPressed(new HangerHookCommand(true));
     c.operatorJoystick.getAutonSelectButton().whenReleased(new HangerHookCommand(false));
 
-    c.operatorJoystick.getShooterOnSwitch().whenActive(new ShooterSpeedCommand(13000, true));
-    c.operatorJoystick.getShooterOnSwitch().whenInactive(new ShooterSpeedCommand(0, false));
+    c.operatorJoystick.getShooterOnSwitch().whenActive(new ShooterSpeedCommand(13000));
+    c.operatorJoystick.getShooterOnSwitch().whenInactive(new ShooterSpeedCommand(0));
     
   /*  c.operatorJoystick.getIntakeUpSwitch().whenActive(new SetIntakePositionCommand(115));
     c.operatorJoystick.getIntakeUpSwitch().whenReleased(new SetIntakePositionCommand(90));
