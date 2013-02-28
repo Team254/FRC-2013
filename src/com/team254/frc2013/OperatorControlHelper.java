@@ -46,12 +46,11 @@ public class OperatorControlHelper {
     c.operatorJoystick.getShooterOnSwitch().whenActive(new ShooterSpeedCommand(13000));
     c.operatorJoystick.getShooterOnSwitch().whenInactive(new ShooterSpeedCommand(0));
 
-  /*  c.operatorJoystick.getIntakeUpSwitch().whenActive(new SetIntakePositionCommand(115));
+    /*c.operatorJoystick.getIntakeUpSwitch().whenActive(new SetIntakePositionCommand(115));
     c.operatorJoystick.getIntakeUpSwitch().whenReleased(new SetIntakePositionCommand(90));
     c.operatorJoystick.getIntakeDownSwitch().whenReleased(new SetIntakePositionCommand(90));
     c.operatorJoystick.getIntakeDownSwitch().whenActive(new SetIntakePositionCommand(0));
 
-    /*
     c.operatorJoystick.getFarButton().whenPressed(new PrintCommand("Far"));
     c.operatorJoystick.getMiddleButton().whenPressed(new PrintCommand("Mid"));
     c.operatorJoystick.getCloseButton().whenPressed(new PrintCommand("Close"));
