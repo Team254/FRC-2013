@@ -11,6 +11,7 @@ import java.util.Vector;
  * @author tom@team254.com (Tom Bottiglieri)
  * @author art.kalb96@gmail.com (Arthur Kalb)
  * @author stephen@team254.com (Stephen Pinkerton)
+ * @author pat@team254.com (Patrick Fairbank)
  */
 public final class AutoModeSelector {
   private Vector autoModes;
@@ -24,7 +25,7 @@ public final class AutoModeSelector {
     lcd = DriverStationLCD.getInstance();
     increment();
   }
-  
+
   void addAutoCommand(String name, Class cmd) {
     autoModes.addElement(new AutoMode(name, cmd));
   }
@@ -43,27 +44,24 @@ public final class AutoModeSelector {
     return ((AutoMode)autoModes.elementAt(index)).name;
   }
 
-  public CommandGroup getCurrentAutoMode() {
-    CommandGroup ret;
+  public CommandGroup getCurrentAutoModeNewInstance() {
     try {
       AutoMode m = (AutoMode)autoModes.elementAt(index);
-      ret = (CommandGroup) m.command.newInstance();
+      return (CommandGroup)m.commandGroupType.newInstance();
     } catch (InstantiationException ex) {
-      ret = new CommandGroup();
+      return new CommandGroup();
     } catch (IllegalAccessException ex) {
-      ret = new CommandGroup();
+      return new CommandGroup();
     }
-    return ret;
   }
-
 
   private static class AutoMode {
     public String name;
-    public Class command;
+    public Class commandGroupType;
 
-    public AutoMode(String name, Class command) {
+    public AutoMode(String name, Class commandGroupType) {
       this.name = name;
-      this.command = command;
+      this.commandGroupType = commandGroupType;
     }
   }
 }

@@ -19,7 +19,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class Overkill extends IterativeRobot {
   private AutoModeSelector autoModeSelector;
   private boolean lastAutonSelectButton;
-  private CommandGroup autoCmd = new CommandGroup();
+  private CommandGroup currentAutoMode;
   private Timer shootTimer = new Timer();
 
   /**
@@ -56,8 +56,8 @@ public class Overkill extends IterativeRobot {
    * Called once at the start of the autonomous period.
    */
   public void autonomousInit() {
-    autoCmd = autoModeSelector.getCurrentAutoMode();
-    autoCmd.start();
+    currentAutoMode = autoModeSelector.getCurrentAutoModeNewInstance();
+    currentAutoMode.start();
   }
 
   /**
@@ -73,7 +73,9 @@ public class Overkill extends IterativeRobot {
    */
   public void teleopInit() {
     // Make sure that the autonomous stops running when teleop begins.
-    autoCmd.cancel();
+    if (currentAutoMode != null) {
+      currentAutoMode.cancel();
+    }
   }
 
   /**
