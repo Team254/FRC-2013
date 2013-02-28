@@ -2,12 +2,11 @@ package com.team254.frc2013;
 
 import com.team254.frc2013.commands.ConveyorSpeedCommand;
 import com.team254.frc2013.commands.HangerHookCommand;
-//import com.team254.frc2013.commands.IncrementShooterSpeedCommand;
+import com.team254.frc2013.commands.IndexerCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.SetIntakePositionCommand;
 import com.team254.frc2013.commands.ShootCommand;
 import com.team254.frc2013.commands.ShooterSpeedCommand;
-//import com.team254.frc2013.commands.ToggleShooterAngleCommand;
 
 /**
  * Maps operator control buttons to a specified command.
@@ -23,8 +22,8 @@ public class OperatorControlHelper {
     c.operatorJoystick.getShootButton().whenPressed(new SetIntakePositionCommand(0));
 
     //c.operatorJoystick.getHang30Button().whenPressed(new ShootCommand());
-    //c.operatorJoystick.getHang30Button().whenPressed(new ShootCommand());
-    //c.operatorJoystick.getHang20Button().whenPressed(new ToggleShooterAngleCommand());
+    c.operatorJoystick.getHang20Button().whenPressed(new IndexerCommand(false));
+    c.operatorJoystick.getHang20Button().whenReleased(new IndexerCommand(true));
 
     c.operatorJoystick.getFarButton().whenPressed(new ShooterSpeedCommand(13000, false));
     c.operatorJoystick.getMiddleButton().whenPressed(new ShooterSpeedCommand(13000, true));

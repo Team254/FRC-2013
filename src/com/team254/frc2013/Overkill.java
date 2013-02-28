@@ -7,6 +7,7 @@ import com.team254.frc2013.commands.CommandBase;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -19,6 +20,7 @@ public class Overkill extends IterativeRobot {
   private AutoModeSelector autoModeSelector;
   private boolean lastAutonSelectButton;
   private CommandGroup autoCmd = new CommandGroup();
+  private Timer shootTimer = new Timer();
 
   /**
    * Called when the robot is first started up and should be used for any initialization code.
@@ -81,12 +83,12 @@ public class Overkill extends IterativeRobot {
     Scheduler.getInstance().run();
 
     if (CommandBase.controlBoard.operatorJoystick.getHang30ButtonState()) {
+      shootTimer.start();
       CommandBase.shooter.extend();
-    } else {
+    } else if (shootTimer.get() > 0.3) {
       CommandBase.shooter.load();
+      shootTimer.reset();
     }
-    CommandBase.shooter.setIndexerUp(
-        !CommandBase.controlBoard.operatorJoystick.getHang20ButtonState());
 
     updateLCD();
   }
@@ -102,6 +104,8 @@ public class Overkill extends IterativeRobot {
     lcd.println(DriverStationLCD.Line.kUser5, 1,
                 "FS: " + CommandBase.shooter.getFrontCounter() + " BS: " +
                     CommandBase.shooter.getBackCounter());
+    lcd.println(DriverStationLCD.Line.kUser6, 1,
+                "PSI: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + "     ");
     lcd.updateLCD();
   }
 }

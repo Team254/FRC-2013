@@ -164,7 +164,7 @@ public class ScriptedAutoMode extends CommandGroup {
       c = new ShootCommand();
     } else if(checkName(cmd, "INDEX")) {
       System.out.println("Params: N/A");
-      c = new IndexerCommand();
+//      c = new IndexerCommand();
     }
 
     //Process command type
