@@ -79,6 +79,15 @@ public class Overkill extends IterativeRobot {
    */
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+
+    if (CommandBase.controlBoard.operatorJoystick.getHang30ButtonState()) {
+      CommandBase.shooter.extend();
+    } else {
+      CommandBase.shooter.load();
+    }
+    CommandBase.shooter.setIndexerUp(
+        !CommandBase.controlBoard.operatorJoystick.getHang20ButtonState());
+
     updateLCD();
   }
 

@@ -70,10 +70,11 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   }
 
   public boolean tryShoot() {
-    if (loadState == 0) {
-      wantShoot = true;
-    }
-    return loadState == 0;
+    //if (loadState == 0) {
+    //  wantShoot = true;
+    //}
+    //return loadState == 0;
+    return false;
   }
 
   public void setHighAngle(boolean high) {
@@ -85,7 +86,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   }
 
   public void setState(boolean isEnabled) {
-    loader.set(isEnabled);
+    //loader.set(isEnabled);
     //insert shooter logic here
     if (isEnabled) {
       frontController.enable();
@@ -102,6 +103,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
 
   // State machine
   public void update() {
+/*
     //p.println(loadState + " " + discSensor.getValue());
     int nextState = loadState;
     boolean hasDisk = debouncer.update(discSensor.getValue() > 400);
@@ -143,6 +145,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
       stateTimer.reset();
       loadState = nextState;
     }
+ */
   }
 
   private class ShooterControlSource implements ControlSource {
