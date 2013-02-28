@@ -164,7 +164,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
       int kCountsPerRev = 32;
       double rpm = 60.0 / (counter.getPeriod() * (double)kCountsPerRev);
       if (rpm < 14000.0) {
-       // curVel = filter.calculate(rpm); // probably dont want to filter bang bang
+      // curVel = filter.calculate(rpm); // probably dont want to filter bang bang
       }
       curVel = rpm;
     }

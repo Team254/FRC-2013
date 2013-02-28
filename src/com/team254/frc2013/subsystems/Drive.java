@@ -31,8 +31,6 @@ public class Drive extends Subsystem {
   private Gyro gyro = new Gyro(1);//Constants.gyroPort.getInt());
   private boolean isHighGear = true;
 
-
-
   protected class DriveControlSource implements ControlSource {
     boolean straight = true;
     DriveControlSource(boolean straight) {

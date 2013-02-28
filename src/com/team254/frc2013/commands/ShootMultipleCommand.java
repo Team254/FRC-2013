@@ -46,5 +46,4 @@ public class ShootMultipleCommand extends CommandBase implements Listener {
       taken++;
     }
   }
-  
 }

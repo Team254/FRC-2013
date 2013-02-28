@@ -18,7 +18,7 @@ public class DriveGearbox extends Subsystem{
   private Talon rightDriveA = new Talon(Constants.rightDrivePortA.getInt());
   private Talon rightDriveBC = new Talon(Constants.rightDrivePortBC.getInt());
   
-    // Sensors
+  // Sensors
   private Encoder rightEncoder = new Encoder(Constants.rightEncoderPortA.getInt(),
           Constants.rightEncoderPortB.getInt());
   

@@ -8,7 +8,7 @@ import com.team254.lib.util.ThrottledPrinter;
 import com.team254.lib.util.Util;
 
 /**
- * Controls the robot drivetrain using the standard Team 254 scheme.
+ * Controls the robot drive train using the standard Team 254 scheme.
  *
  * @author richard@team254.com (Richard Lin)
  */

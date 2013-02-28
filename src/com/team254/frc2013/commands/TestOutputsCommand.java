@@ -38,7 +38,7 @@ public class TestOutputsCommand extends CommandBase {
     //val = 1.0;
     //motors.driveLR(val, val);
     
-   // intake.setIntakePower(val);
+    // intake.setIntakePower(val);
     //intake.raiseIntake(val);
     
     //conveyor.setMotor(val);
@@ -47,7 +47,7 @@ public class TestOutputsCommand extends CommandBase {
     shooter.extend();
     hanger.setHookUp(Value.kReverse);
     hanger.setPto(true);
-  //  indexer.setPistonDown(true);
+    //indexer.setPistonDown(true);
     conveyor.setSolenoidState(true);
     
     //shooter.setRawPwm(1);
@@ -56,7 +56,6 @@ public class TestOutputsCommand extends CommandBase {
 
   protected boolean isFinished() {
     return false;
-    
   }
 
   protected void end() {
@@ -65,5 +64,4 @@ public class TestOutputsCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
 }

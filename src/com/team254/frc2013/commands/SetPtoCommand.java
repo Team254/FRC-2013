@@ -28,6 +28,5 @@ public class SetPtoCommand extends CommandBase{
   }
 
   protected void interrupted() {
-  }
-  
+  } 
 }

@@ -71,7 +71,6 @@ public abstract class ConstantsBase {
  /**
   * Handles an individual value used in the Constants class.
   */
-
   public static class Constant {
     private String name;
     private double value;
@@ -101,6 +100,5 @@ public abstract class ConstantsBase {
     public String toString(){
       return name + ": " + value;
     }
-  } 
-    
+  }   
 }

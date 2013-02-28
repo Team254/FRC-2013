@@ -75,7 +75,6 @@ public class PIDTuner implements Runnable {
     public Connection(SocketConnection client) {
       this.client = client;
       try {
-        
         output = client.openOutputStream();
         System.out.println(output);
       } catch (IOException ex) {
@@ -84,7 +83,6 @@ public class PIDTuner implements Runnable {
     }
     
     synchronized public void sendData(String data) throws IOException  {
-      
       if (output == null) {
         System.out.println("null");
         return;
@@ -92,8 +90,6 @@ public class PIDTuner implements Runnable {
       System.out.println(data);
       output.write(data.getBytes());
       output.flush();
-
     }
-
   }
 }

@@ -5,7 +5,6 @@
 package com.team254.frc2013.commands;
 
 /**
- *
  * @author tombot
  */
 public class RunIntakeCommand extends CommandBase {

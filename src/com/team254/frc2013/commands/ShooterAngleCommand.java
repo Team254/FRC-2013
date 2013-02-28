@@ -33,6 +33,4 @@ public class ShooterAngleCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
-  
 }

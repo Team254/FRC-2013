@@ -19,7 +19,6 @@ public class SetIntakePositionCommand extends CommandBase{
   }
 
   protected void execute() {
-   
   }
 
   protected boolean isFinished() {
@@ -31,5 +30,4 @@ public class SetIntakePositionCommand extends CommandBase{
 
   protected void interrupted() {
   }
-  
 }

@@ -28,5 +28,4 @@ public class IntakeRaiseCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
 }

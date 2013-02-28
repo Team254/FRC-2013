@@ -1,7 +1,7 @@
 package com.team254.frc2013.commands;
 
 /**
- * Grabs frisbee from conveyor and loads it into shooter.
+ * Grabs Frisbee from conveyor and loads it into shooter.
  * 
  * @author jonathan.chang13@gmail.com (Jonathan Chang)
  */
