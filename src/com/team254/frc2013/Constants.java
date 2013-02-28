@@ -1,11 +1,6 @@
 package com.team254.frc2013;
 
-import com.sun.squawk.microedition.io.FileConnection;
 import com.team254.lib.util.ConstantsBase;
-import com.team254.lib.util.Util;
-import java.io.DataInputStream;
-import java.util.Vector;
-import javax.microedition.io.Connector;
 
 /**
  * Manages constant values used everywhere in the robot code.
@@ -15,8 +10,6 @@ import javax.microedition.io.Connector;
  * @author brandon.gonzalez.451@gmail.com (Brandon Gonzalez)
  */
 public class Constants extends ConstantsBase {
-
-
   // Declare the constants and their default values here.
   // Control board mappings
   public static final Constant leftJoystickPort = new Constant("leftJoystickPort", 1);

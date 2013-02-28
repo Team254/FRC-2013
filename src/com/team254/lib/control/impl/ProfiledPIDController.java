@@ -51,7 +51,7 @@ public class ProfiledPIDController extends PIDController {
         // Maintain max velocity.
         setpoint += (velocity * period * sign);
       } else if (t < timeTotal) {
-         // Accelerate down.
+        // Accelerate down.
         double decelTime = t - timeFromMaxVelocity;
         double v = velocity + (-acceleration * decelTime);
         setpoint += (v * period  * sign);

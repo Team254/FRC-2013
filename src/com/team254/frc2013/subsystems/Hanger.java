@@ -82,13 +82,13 @@ public class Hanger extends PeriodicSubsystem {
   public void update() {
     switch(state) {
       case STATE_IDLE:
-       // setHookUp(false);
+        //setHookUp(false);
         break;
       case STATE_FIRST_UP:
-     //   setHookUp(true);
+        //setHookUp(true);
         break;
       case STATE_FIRST_HANG:
-   //     setHookUp(false);
+        //setHookUp(false);
         break;
       default:
         break;

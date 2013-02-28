@@ -32,6 +32,5 @@ public class ConveyorTimedCommand extends CommandBase {
   }
 
   protected void interrupted() {
-  }
-  
+  } 
 }

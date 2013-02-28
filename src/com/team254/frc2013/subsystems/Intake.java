@@ -103,7 +103,6 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
     intakeMotor.set(output);
   }
   
-  
   private void setPivot(double power){
     if (foundHome) {
       setRawPivot(power);

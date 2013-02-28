@@ -30,5 +30,4 @@ public class WaitCommand extends Command {
 
   protected void interrupted() {
   }
-
 }

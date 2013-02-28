@@ -29,6 +29,4 @@ public class ShootCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
-  
 }

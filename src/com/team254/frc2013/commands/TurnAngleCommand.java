@@ -6,7 +6,6 @@ package com.team254.frc2013.commands;
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class TurnAngleCommand extends CommandBase {
-  
   private double angle;
   private double timeout;
 
@@ -20,10 +19,8 @@ public class TurnAngleCommand extends CommandBase {
     setTimeout(timeout);
      drive.setGoal(0, angle);
   }
-  
 
   protected void execute() {
-   
   }
 
   protected boolean isFinished() {
@@ -35,6 +32,5 @@ public class TurnAngleCommand extends CommandBase {
   }
 
   protected void interrupted() {
-  }
-  
+  } 
 }

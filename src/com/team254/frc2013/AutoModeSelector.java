@@ -27,9 +27,7 @@ public final class AutoModeSelector {
   
   void addAutoCommand(String name, Class cmd) {
     autoModes.addElement(new AutoMode(name, cmd));
-
   }
-
 
   public void increment() {
     index++;

@@ -27,6 +27,5 @@ public class ToggleShooterAngleCommand extends CommandBase {
   }
 
   protected void interrupted() {
-  }
-  
+  }  
 }

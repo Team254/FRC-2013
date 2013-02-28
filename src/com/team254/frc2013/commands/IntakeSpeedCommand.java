@@ -30,5 +30,4 @@ public class IntakeSpeedCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
 }

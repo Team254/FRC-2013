@@ -26,7 +26,6 @@ public class DriveDistanceCommand extends CommandBase {
   }
 
   protected void execute() {
-
   }
 
   protected boolean isFinished() {

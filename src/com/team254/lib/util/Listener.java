@@ -1,4 +1,3 @@
-
 package com.team254.lib.util;
 
 /**
@@ -12,5 +11,4 @@ public interface Listener {
    * Receives and handle messages.
    */
   public void receive(int key, double value);
-
 }

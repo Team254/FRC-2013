@@ -8,9 +8,7 @@ import com.team254.frc2013.commands.WaitCommand;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- *
- *
- * @author richard
+ * @author richard@team254.com (Richard Lin)
  */
 public class FiveDiscAutoMode extends CommandGroup {
   public FiveDiscAutoMode() {

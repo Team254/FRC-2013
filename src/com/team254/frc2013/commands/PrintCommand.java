@@ -5,7 +5,6 @@
 package com.team254.frc2013.commands;
 
 /**
- *
  * @author tombot
  */
 public class PrintCommand extends CommandBase {
@@ -22,7 +21,6 @@ public class PrintCommand extends CommandBase {
     System.out.println(s);
   }
   
-
   protected boolean isFinished() {
     return true;
   }
@@ -31,7 +29,5 @@ public class PrintCommand extends CommandBase {
   }
 
   protected void interrupted() {
-  }
-  
-  
+  } 
 }

@@ -25,6 +25,5 @@ public class MovingAverageFilter implements Filter {
       sum += inputs[i];
     }
     return sum / (inputs.length * 1.0);
-  }
-  
+  } 
 }

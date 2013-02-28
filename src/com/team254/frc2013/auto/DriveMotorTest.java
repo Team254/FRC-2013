@@ -46,5 +46,4 @@ public class DriveMotorTest extends CommandBase{
 
     protected void interrupted() {
     }
-
 }
