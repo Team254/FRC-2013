@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.lib.util;
 
 import com.sun.squawk.microedition.io.FileConnection;
@@ -10,13 +6,14 @@ import java.util.Vector;
 import javax.microedition.io.Connector;
 
 /**
+ * Manages constant values used everywhere in the robot code.
  *
- * @author Tom
+ * @author brandon.gonzalez.451@gmail.com (Brandon Gonzalez)
  */
 public abstract class ConstantsBase {
   private static final Vector constants = new Vector();
   private static final String CONSTANTS_FILE_PATH = "Constants.txt";
-  
+
    /**
    * Reads the constants file and overrides the values in this class for any constants it contains.
    */
@@ -100,5 +97,5 @@ public abstract class ConstantsBase {
     public String toString(){
       return name + ": " + value;
     }
-  }   
+  }
 }

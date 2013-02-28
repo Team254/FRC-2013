@@ -1,9 +1,6 @@
 package com.team254.frc2013.commands;
 
 import com.team254.frc2013.Constants;
-import com.team254.lib.control.ControlSource;
-import com.team254.lib.control.PIDGains;
-import com.team254.lib.control.impl.PIDController;
 import com.team254.lib.util.ThrottledPrinter;
 import com.team254.lib.util.Util;
 
@@ -145,7 +142,7 @@ public class CheesyDriveCommand extends CommandBase {
       leftPwm += overPower * (-1.0 - rightPwm);
       rightPwm = -1.0;
     }
-    
+
     drive.setLeftRightPower(leftPwm, rightPwm);
   }
 
@@ -158,7 +155,7 @@ public class CheesyDriveCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
+
   public double handleDeadband(double val, double deadband) {
     return (Math.abs(val) > Math.abs(deadband)) ? val : 0.0;
   }

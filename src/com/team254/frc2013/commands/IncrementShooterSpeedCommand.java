@@ -1,10 +1,8 @@
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
  * Updates both shooters to increase or decrease values.
- * 
+ *
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class IncrementShooterSpeedCommand extends CommandBase {
@@ -36,5 +34,5 @@ public class IncrementShooterSpeedCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
+
 }

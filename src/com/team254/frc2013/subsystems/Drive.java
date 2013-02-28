@@ -8,11 +8,8 @@ import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.impl.PIDController;
 import com.team254.lib.control.impl.ProfiledPIDController;
 import com.team254.lib.util.RelativeEncoder;
-import com.team254.lib.util.Util;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**

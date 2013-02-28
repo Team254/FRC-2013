@@ -1,6 +1,5 @@
 package com.team254.lib.control;
 
-import com.team254.lib.control.StateSpaceGains;
 import com.team254.lib.util.Matrix;
 
 /**

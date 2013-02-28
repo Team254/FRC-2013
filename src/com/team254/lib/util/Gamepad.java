@@ -1,7 +1,6 @@
 package com.team254.lib.util;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -148,7 +147,7 @@ public class Gamepad extends Joystick {
     double x = getDPadX();
     return (x > 0.5);
   }
-  
+
   /**
    * Gets the state of the Start button
    * @return the state of the Start button
@@ -156,19 +155,19 @@ public class Gamepad extends Joystick {
   public JoystickButton getStartButton(){
     return new JoystickButton(this, BUTTON_START);
   }
-  
+
   public JoystickButton getBackButton() {
     return new JoystickButton(this, BUTTON_BACK);
   }
-  
+
   /**
    * Gets the state of the left shoulder
-   * @return the state of the left shoulder 
+   * @return the state of the left shoulder
    */
   public JoystickButton getLeftShoulder() {
     return new JoystickButton(this, BUTTON_SHOULDER_LEFT);
   }
-  
+
   /**
    * Gets the state of the right shoulder
    * @return the state of the right shoulder
@@ -176,19 +175,19 @@ public class Gamepad extends Joystick {
   public JoystickButton getRightShoulder() {
     return new JoystickButton(this, BUTTON_SHOULDER_RIGHT);
   }
-  
+
   public JoystickButton getLeftStickClick() {
     return new JoystickButton(this, BUTTON_LEFT_STICK);
   }
-  
+
   public JoystickButton getRightStickClick() {
     return new JoystickButton(this, BUTTON_RIGHT_STICK);
   }
-  
+
   public JoystickButton getLeftTriggerClick() {
     return new JoystickButton(this, BUTTON_TRIGGER_LEFT);
   }
-  
+
   public JoystickButton getRightTriggerClick() {
     return new JoystickButton(this, BUTTON_TRIGGER_RIGHT);
   }

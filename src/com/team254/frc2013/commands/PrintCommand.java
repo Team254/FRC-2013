@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 /**
@@ -9,7 +5,7 @@ package com.team254.frc2013.commands;
  */
 public class PrintCommand extends CommandBase {
   String s;
-  
+
   public PrintCommand(String s){
     this.s = s;
   }
@@ -20,7 +16,7 @@ public class PrintCommand extends CommandBase {
   protected void execute() {
     System.out.println(s);
   }
-  
+
   protected boolean isFinished() {
     return true;
   }
@@ -29,5 +25,5 @@ public class PrintCommand extends CommandBase {
   }
 
   protected void interrupted() {
-  } 
+  }
 }

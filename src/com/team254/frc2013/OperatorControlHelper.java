@@ -4,7 +4,6 @@ import com.team254.frc2013.commands.ConveyorSpeedCommand;
 import com.team254.frc2013.commands.HangerHookCommand;
 import com.team254.frc2013.commands.IndexerCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
-import com.team254.frc2013.commands.SetIntakePositionCommand;
 import com.team254.frc2013.commands.ShootCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 import com.team254.frc2013.Messages;
@@ -18,12 +14,12 @@ public class ShootMultipleCommand extends CommandBase implements Listener {
   public ShootMultipleCommand(int num) {
     this.num = num;
     requires(shooter);
-    setTimeout(num * 1.2);    
+    setTimeout(num * 1.2);
   }
 
-  
+
   protected void initialize() {
-    Notifier.subscribe(Messages.SHOT_TAKEN, this);   
+    Notifier.subscribe(Messages.SHOT_TAKEN, this);
   }
 
   protected void execute() {
