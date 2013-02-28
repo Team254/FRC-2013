@@ -1,29 +1,20 @@
 package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
-import com.team254.frc2013.Messages;
 import com.team254.lib.control.impl.BangBangController;
 import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.ControlledSubsystem;
-import com.team254.lib.control.impl.OpenLoopController;
-import com.team254.lib.control.impl.PIDController;
-import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.util.Debouncer;
 import com.team254.lib.util.MovingAverageFilter;
-import com.team254.lib.util.Notifier;
 import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.Counter;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Class representing the shooter wheels, managing its motors and sensors.
@@ -50,7 +41,8 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   AnalogChannel discSensor = new AnalogChannel(Constants.discSensorPort.getInt());
   ThrottledPrinter p = new ThrottledPrinter(.1);
 
-  double fspeed, bspeed;
+  private double frontSpeed;
+  private double backSpeed;
   int loadState = 0;
   boolean wantShoot = false;
   Timer stateTimer = new Timer();
@@ -196,23 +188,19 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
     stateTimer.start();
   }
 
-  public void setSpeed(double speed) {
-    setSpeeds(speed,speed);
+  public void setSpeeds(double frontSpeed, double backSpeed) {
+    this.frontSpeed = (frontSpeed < 0) ? 0 : frontSpeed;
+    this.backSpeed = (backSpeed < 0) ? 0 : backSpeed;
   }
 
-
-  public void setSpeeds(double fspeed, double bspeed) {
-    fspeed = (fspeed < 0) ? 0 : fspeed;
-    bspeed = (bspeed < 0) ? 0 : bspeed;
-    frontController.setGoal(fspeed);
-    backController.setGoal(bspeed);
-  }
-
-  public void setRawPwm(double val) {
-    frontController.disable();
-    backController.disable();
-    frontMotor.set(val);
-    backMotor.set(val);
+  public void setShooterOn(boolean isOn) {
+    if (isOn) {
+      frontController.setGoal(frontSpeed);
+      backController.setGoal(backSpeed);
+    } else {
+      frontController.setGoal(0);
+      backController.setGoal(0);
+    }
   }
 
   public double getFrontGoal() {

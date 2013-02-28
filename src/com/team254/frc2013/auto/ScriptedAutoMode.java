@@ -8,11 +8,9 @@ import com.sun.squawk.io.BufferedReader;
 import com.sun.squawk.microedition.io.FileConnection;
 import com.team254.frc2013.commands.ConveyorTimedCommand;
 import com.team254.frc2013.commands.DriveDistanceCommand;
-import com.team254.frc2013.commands.IndexerCommand;
 import com.team254.frc2013.commands.IntakeTimedCommand;
-import com.team254.frc2013.commands.ShooterAngleCommand;
 import com.team254.frc2013.commands.ShootCommand;
-import com.team254.frc2013.commands.ShooterSpeedCommand;
+import com.team254.frc2013.commands.ShooterPresetCommand;
 import com.team254.frc2013.commands.TurnAngleCommand;
 import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.command.Command;
@@ -153,12 +151,9 @@ public class ScriptedAutoMode extends CommandGroup {
     } else if(checkName(cmd, "CONVEYOR_TIMED")) {
       System.out.println("Params: " + params.at(0) + " " + params.at(1));
       c = new ConveyorTimedCommand(params.at(0), params.at(1));
-    } else if(checkName(cmd, "SHOOTER_ANGLE")) {
+    } else if(checkName(cmd, "SHOOTER_PRESET")) {
       System.out.println("Params: " + params.at(0));
-      c = new ShooterAngleCommand(params.at(0));
-    } else if(checkName(cmd, "SHOOTER_SPEED")) {
-      System.out.println("Params: " + params.at(0));
-      c = new ShooterSpeedCommand(params.at(0),true);
+      c = new ShooterPresetCommand(params.at(0), params.at(1) == 1);
     } else if(checkName(cmd, "SHOOT")) {
       System.out.println("Params: N/A");
       c = new ShootCommand();

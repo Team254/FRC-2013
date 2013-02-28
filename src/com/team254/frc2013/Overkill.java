@@ -7,7 +7,6 @@ import com.team254.frc2013.commands.CommandBase;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -20,7 +19,6 @@ public class Overkill extends IterativeRobot {
   private AutoModeSelector autoModeSelector;
   private boolean lastAutonSelectButton;
   private CommandGroup currentAutoMode;
-  private Timer shootTimer = new Timer();
 
   /**
    * Called when the robot is first started up and should be used for any initialization code.
@@ -83,15 +81,6 @@ public class Overkill extends IterativeRobot {
    */
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
-
-    if (CommandBase.controlBoard.operatorJoystick.getHang30ButtonState()) {
-      shootTimer.start();
-      CommandBase.shooter.extend();
-    } else if (shootTimer.get() > 0.3) {
-      CommandBase.shooter.load();
-      shootTimer.reset();
-    }
-
     updateLCD();
   }
 

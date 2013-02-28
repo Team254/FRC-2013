@@ -1,24 +1,26 @@
 package com.team254.frc2013.commands;
 
 /**
- * Controls the shooter wheel to spin at a certain speed.
+ * Sets the shooter preset speed and whether it is angled up or down.
  *
  * @author tom@team254.com (Tom Bottiglieri)
+ * @author pat@team254.com (Patrick Fairbank)
  */
-public class ShooterSpeedCommand extends CommandBase {
+public class ShooterPresetCommand extends CommandBase {
   private double speed;
   private boolean isUp;
 
-  public ShooterSpeedCommand(double speed, boolean isUp) {
+  public ShooterPresetCommand(double speed, boolean isUp) {
     requires(shooter);
     this.speed = speed;
     this.isUp = isUp;
   }
 
   // Constructor that only takes in and changes speed.
-  public ShooterSpeedCommand(double speed) {
+  public ShooterPresetCommand(double speed) {
     requires(shooter);
     this.speed = speed;
+    this.isUp = shooter.isHighAngle();
   }
 
   protected void initialize() {
@@ -26,7 +28,7 @@ public class ShooterSpeedCommand extends CommandBase {
 
   protected void execute() {
     shooter.setHighAngle(isUp);
-    shooter.setSpeed(speed);
+    shooter.setSpeeds(speed, speed);
   }
 
   protected boolean isFinished() {

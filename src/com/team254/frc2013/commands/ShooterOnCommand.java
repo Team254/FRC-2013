@@ -1,22 +1,23 @@
 package com.team254.frc2013.commands;
 
 /**
- * Changes the state of the shooter angle
- * 
- * @author tom@team254.com (Tom Bottiglieri)
+ * Turns the shooter on or off.
+ *
+ * @author pat@team254.com (Patrick Fairbank)
  */
+public class ShooterOnCommand extends CommandBase {
+  private boolean isOn;
 
-public class ToggleShooterAngleCommand extends CommandBase {
-
-  public ToggleShooterAngleCommand() {
+  public ShooterOnCommand(boolean isOn) {
     requires(shooter);
+    this.isOn = isOn;
   }
-  
+
   protected void initialize() {
   }
 
   protected void execute() {
-    shooter.setHighAngle(!shooter.isHighAngle());
+    shooter.setShooterOn(isOn);
   }
 
   protected boolean isFinished() {
@@ -27,5 +28,5 @@ public class ToggleShooterAngleCommand extends CommandBase {
   }
 
   protected void interrupted() {
-  }  
+  }
 }

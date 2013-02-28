@@ -1,30 +1,36 @@
 package com.team254.frc2013.commands;
 
+import edu.wpi.first.wpilibj.Timer;
+
 /**
- * Loads a disc into the shooter and fires it.
+ * Shoots a disc that is already loaded into the shooter.
  *
- * @author tom@team254.com (Tom Bottiglieri) 
+ * @author tom@team254.com (Tom Bottiglieri)
+ * @author pat@team254.com (Patrick Fairbank)
  */
 public class ShootCommand extends CommandBase {
+  private Timer shooterTimer;
 
   public ShootCommand() {
     requires(shooter);
+    shooterTimer = new Timer();
   }
-  
+
   protected void initialize() {
-    System.out.println("SHOOTING!");
-    //setTimeout(.3);
+    shooter.extend();
+    shooterTimer.reset();
+    shooterTimer.start();
   }
 
   protected void execute() {
-    shooter.tryShoot();
   }
 
   protected boolean isFinished() {
-    return true;
+    return shooterTimer.get() > 0.3;
   }
 
   protected void end() {
+    shooter.load();
   }
 
   protected void interrupted() {
