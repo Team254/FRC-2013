@@ -29,7 +29,8 @@ public class DriveMinDistanceCommand extends CommandBase {
 
   protected boolean isFinished() {
     return (drive.getLeftEncoderDistance() / 12 > distance ||
-                drive.getRightEncoderDistance() / 12 > distance);
+                drive.getRightEncoderDistance() / 12 > distance ||
+                isTimedOut());
   }
 
   protected void end() {
