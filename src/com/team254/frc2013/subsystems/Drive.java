@@ -69,7 +69,7 @@ public class Drive extends Subsystem {
   ProfiledPIDController straightController = new ProfiledPIDController("straightController",
           new PIDGains(Constants.driveStraightKP, Constants.driveStraightKI, Constants.driveStraightKD),
           new DriveControlSource(true), new DriveControlOutput(true),
-          6*12.0, .75); // Half a second to accelerate to 5.0 ft/s
+          6*12.0, .5); // Half a second to accelerate to 5.0 ft/s
 
   PIDController turnController = new PIDController("turnController",
           new PIDGains(Constants.driveTurnKP, Constants.driveTurnKI, Constants.driveTurnKD),
@@ -139,8 +139,6 @@ public class Drive extends Subsystem {
   }
 
   public void setGoal(double distance, double angle) {
-    resetGyro();
-    resetEncoders();
     straightController.setGoal(distance);
     if (distance != 0)
       straightController.enable();

@@ -54,6 +54,8 @@ public class Overkill extends IterativeRobot {
    * Called once at the start of the autonomous period.
    */
   public void autonomousInit() {
+    CommandBase.drive.resetEncoders();
+    CommandBase.drive.resetGyro();
     currentAutoMode = autoModeSelector.getCurrentAutoModeNewInstance();
     currentAutoMode.start();
   }

@@ -1,23 +1,36 @@
 package com.team254.frc2013.auto;
 
-import com.team254.frc2013.commands.DriveDistanceCommand;
+import com.team254.frc2013.commands.DriveMinDistanceCommand;
+import com.team254.frc2013.commands.DriveToDistanceCommand;
+import com.team254.frc2013.commands.LoadAndShootCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
-import com.team254.frc2013.commands.ShootMultipleCommand;
+import com.team254.frc2013.commands.ShootCommand;
+import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
 import com.team254.frc2013.commands.WaitCommand;
 import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * @author richard@team254.com (Richard Lin)
+ * Scores three starting discs from the back of the pyramid, picks up two more, then scores them
+ * again from the back of the pyramid.
+ *
+ * @author pat@team254.com (Patrick Fairbank)
  */
 public class FiveDiscAutoMode extends CommandGroup {
   public FiveDiscAutoMode() {
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
-    addSequential(new WaitCommand(.5));
-    addSequential(new ShootMultipleCommand(3));
-    addSequential(new RunIntakeCommand(1.0));
-    addSequential(new DriveDistanceCommand(3, 4, 4));
-    addSequential(new ShootMultipleCommand(3));
+    addSequential(new ShooterOnCommand(true));
+    addSequential(new WaitCommand(1.0));
+    addSequential(new ShootCommand());
+    addSequential(new LoadAndShootCommand());
+    addSequential(new LoadAndShootCommand());
+    addSequential(new RunIntakeCommand(0.8));
+    addSequential(new DriveMinDistanceCommand(3.5, 8, 5));
+    addSequential(new DriveToDistanceCommand(1.0, 7, 2.3)); // TODO(patrick): Fix; should be 0.
+    addSequential(new RunIntakeCommand(0.0));
+    addSequential(new LoadAndShootCommand());
+    addSequential(new LoadAndShootCommand());
+    addSequential(new ShooterOnCommand(false));
   }
 }

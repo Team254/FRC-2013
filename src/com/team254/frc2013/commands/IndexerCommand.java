@@ -19,7 +19,7 @@ public class IndexerCommand extends CommandBase {
   protected void initialize() {
     shooter.setIndexerUp(up);
     if (up) {
-      conveyor.setMotor(1);
+      conveyor.setMotor(0.9);
       conveyorTimer.reset();
       conveyorTimer.start();
     }
