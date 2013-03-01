@@ -27,11 +27,6 @@ public class OperatorControlHelper {
     c.operatorJoystick.getFrontPyramidButton().whenPressed(new ShooterPresetCommand(13000, true));
     c.operatorJoystick.getShootButton().whenPressed(new ShootCommand());
 
-    c.operatorJoystick.getConveyorButton().whenPressed(new ConveyorSpeedCommand(1.0));
-    c.operatorJoystick.getConveyorButton().whenReleased(new ConveyorSpeedCommand(0.0));
-    c.operatorJoystick.getConveyOutButton().whenPressed(new ConveyorSpeedCommand(-1.0));
-    c.operatorJoystick.getConveyOutButton().whenReleased(new ConveyorSpeedCommand(0.0));
-
     c.operatorJoystick.getIntakeOutButton().whenPressed(new RunIntakeCommand(-1.0));
     c.operatorJoystick.getIntakeOutButton().whenReleased(new RunIntakeCommand(0.0));
     c.operatorJoystick.getIntakeButton().whenPressed(new RunIntakeCommand(1.0));
