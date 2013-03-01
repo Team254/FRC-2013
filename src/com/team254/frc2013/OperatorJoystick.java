@@ -13,6 +13,8 @@ public class OperatorJoystick extends Joystick {
   public ShooterOnSwitch shooterOnSwitch = new ShooterOnSwitch();
   public ControlLoopsSwitch controlLoopsSwitch = new ControlLoopsSwitch();
   public StartHangSwitch startHangSwitch = new StartHangSwitch();
+  public IntakeUpSwitch intakeUpSwitch = new IntakeUpSwitch();
+  public IntakeDownSwitch intakeDownSwitch = new IntakeDownSwitch();
 
   public OperatorJoystick(int port) {
     super(port);

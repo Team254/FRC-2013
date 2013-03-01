@@ -1,7 +1,6 @@
 package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
-import com.team254.frc2013.commands.IntakeRaiseCommand;
 import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.ControlledSubsystem;
@@ -66,7 +65,7 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
   }
 
   protected void initDefaultCommand() {
-    setDefaultCommand(new IntakeRaiseCommand());
+//    setDefaultCommand(new IntakeRaiseCommand());
   }
 
   public void update() {
@@ -75,6 +74,7 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
     SmartDashboard.putData("intake encoder", encoder);
     double s = encoder.getDistance();
     //p.println("e: " + s);
+/*
     if (!foundHome && DriverStation.getInstance().isEnabled()) {
       if (firstTimeHoming) {
         homeDriveTimer.start();
@@ -95,6 +95,7 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
       homeDriveTimer.reset();
     }
     lastSensor = s;
+*/
   }
 
   public void setIntakePower(double power){
@@ -103,12 +104,12 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
   }
 
   private void setPivot(double power){
-    if (foundHome) {
-      setRawPivot(power);
-    }
+    //if (foundHome) {
+    //  setRawPivot(power);
+    //}
   }
 
-  private void setRawPivot(double power) {
+  public void setRawPivot(double power) {
     double output = Util.limit(power, 1.0);
     intakePivotMotor.set(output);
   }

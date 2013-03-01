@@ -1,8 +1,8 @@
 package com.team254.frc2013;
 
-import com.team254.frc2013.commands.ConveyorSpeedCommand;
 import com.team254.frc2013.commands.HangerHookCommand;
 import com.team254.frc2013.commands.IndexerCommand;
+import com.team254.frc2013.commands.IntakeRaiseCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.ShootCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
@@ -19,6 +19,13 @@ public class OperatorControlHelper {
     //c.operatorJoystick.getFrontPyramidButton().whenPressed(new SetIntakePositionCommand(80));
     //c.operatorJoystick.getCloseButton().whenPressed(new SetIntakePositionCommand(45));
     //c.operatorJoystick.getShootButton().whenPressed(new SetIntakePositionCommand(0));
+
+    c.operatorJoystick.intakeUpSwitch.whenPressed(
+        new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_UP));
+    c.operatorJoystick.intakeUpSwitch.whenReleased(
+        new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_OFF));
+    c.operatorJoystick.intakeDownSwitch.whenPressed(
+        new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_DOWN));
 
     c.operatorJoystick.getIndexButton().whenPressed(new IndexerCommand(false));
     c.operatorJoystick.getIndexButton().whenReleased(new IndexerCommand(true));
