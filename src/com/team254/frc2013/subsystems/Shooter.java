@@ -1,18 +1,12 @@
 package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
-import com.team254.lib.control.impl.BangBangController;
-import com.team254.lib.control.ControlOutput;
-import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.ControlledSubsystem;
 import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.util.Debouncer;
-import com.team254.lib.util.MovingAverageFilter;
 import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.AnalogChannel;
-import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -25,27 +19,26 @@ import edu.wpi.first.wpilibj.Timer;
  * @author eliwu26@gmail.com (Elias Wu)
  */
 public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
+  public static final int PRESET_BACK_PYRAMID = 0;
+  public static final int PRESET_FRONT_PYRAMID = 1;
+  public static final int PRESET_PYRAMID_GOAL = 2;
+
   private Talon frontMotor = new Talon(Constants.frontShooterPort.getInt());
   private Talon backMotor = new Talon(Constants.backShooterPort.getInt());
   private Solenoid loader = new Solenoid(Constants.shooterLoaderPort.getInt());
   private Solenoid angle = new Solenoid(Constants.shooterAnglePort.getInt());
-
-  public Counter frontSensor = new Counter(Constants.frontEncoderPort.getInt());
-  public Counter backSensor = new Counter(Constants.backEncoderPort.getInt());
-
-  private BangBangController frontController;
-  private BangBangController backController;
 
   private Solenoid indexer = new Solenoid(Constants.indexerPort.getInt());
   Debouncer debouncer = new Debouncer(.125);
   AnalogChannel discSensor = new AnalogChannel(Constants.discSensorPort.getInt());
   ThrottledPrinter p = new ThrottledPrinter(.1);
 
-  private double frontSpeed;
-  private double backSpeed;
-  int loadState = 0;
-  boolean wantShoot = false;
-  Timer stateTimer = new Timer();
+  private double frontPower;
+  private double backPower;
+  private boolean shooterOn;
+  private int loadState = 0;
+  private boolean wantShoot = false;
+  private Timer stateTimer = new Timer();
 
   public void setIndexerUp(boolean up) {
     indexer.set(!up);
@@ -75,18 +68,6 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
 
   public boolean isHighAngle() {
     return angle.get();
-  }
-
-  public void setState(boolean isEnabled) {
-    //loader.set(isEnabled);
-    //insert shooter logic here
-    if (isEnabled) {
-      frontController.enable();
-      backController.enable();
-    } else {
-      frontController.disable();
-      backController.disable();
-    }
   }
 
   public boolean getLoaderState() {
@@ -140,85 +121,47 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
  */
   }
 
-  private class ShooterControlSource implements ControlSource {
-    Counter counter;
-    double curVel;
-    MovingAverageFilter filter = new MovingAverageFilter(6);
-    public ShooterControlSource(Counter c) {
-      this.counter = c;
-    }
-
-    public double get() {
-      return curVel;
-    }
-
-    public void updateFilter() {
-      int kCountsPerRev = 32;
-      double rpm = 60.0 / (counter.getPeriod() * (double)kCountsPerRev);
-      if (rpm < 14000.0) {
-      // curVel = filter.calculate(rpm); // probably dont want to filter bang bang
-      }
-      curVel = rpm;
-    }
-  }
-
-  private class ShooterControlOutput implements ControlOutput {
-    SpeedController sc;
-
-    public ShooterControlOutput(SpeedController sc) {
-      this.sc = sc;
-    }
-
-    public void set(double value) {
-      sc.set(-value);
-    }
-  }
-
   public Shooter() {
     super();
-    frontSensor.start();
-    backSensor.start();
-    frontController = new BangBangController("FrontShooter", new ShooterControlSource(frontSensor),
-            new ShooterControlOutput(frontMotor));
-    backController = new BangBangController("BackShooter", new ShooterControlSource(backSensor),
-            new ShooterControlOutput(backMotor));
-
-    frontController.enable();
-    backController.enable();
+    setPreset(PRESET_BACK_PYRAMID);
+    shooterOn = false;
     stateTimer.start();
   }
 
-  public void setSpeeds(double frontSpeed, double backSpeed) {
-    this.frontSpeed = (frontSpeed < 0) ? 0 : frontSpeed;
-    this.backSpeed = (backSpeed < 0) ? 0 : backSpeed;
-  }
-
-  public void setShooterOn(boolean isOn) {
-    if (isOn) {
-      frontController.setGoal(frontSpeed);
-      backController.setGoal(backSpeed);
-    } else {
-      frontController.setGoal(0);
-      backController.setGoal(0);
+  public void setPreset(int preset) {
+    switch (preset) {
+      case PRESET_FRONT_PYRAMID:
+        setHighAngle(true);
+        setPowers(1, 1);
+        break;
+      case PRESET_PYRAMID_GOAL:
+        setHighAngle(true);
+        setPowers(0.8, 0.8);
+        break;
+      case PRESET_BACK_PYRAMID:
+      default:
+        setHighAngle(false);
+        setPowers(1, 1);
     }
   }
 
-  public double getFrontGoal() {
-    return frontController.getGoal();
+  private void setPowers(double frontPower, double backPower) {
+    this.frontPower = (frontPower < 0) ? 0 : frontPower;
+    this.backPower = (backPower < 0) ? 0 : backPower;
+    setShooterOn(shooterOn);
   }
 
-  public double getBackGoal() {
-    return backController.getGoal();
+  public void setShooterOn(boolean isOn) {
+    shooterOn = isOn;
+    if (isOn) {
+      frontMotor.set(-frontPower);
+      backMotor.set(-backPower);
+    } else {
+      frontMotor.set(0);
+      backMotor.set(0);
+    }
   }
 
   protected void initDefaultCommand() {
-  }
-
-  public int getFrontCounter() {
-    return frontSensor.get();
-  }
-
-  public int getBackCounter() {
-    return backSensor.get();
   }
 }

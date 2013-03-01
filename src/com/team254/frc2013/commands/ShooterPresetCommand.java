@@ -7,28 +7,18 @@ package com.team254.frc2013.commands;
  * @author pat@team254.com (Patrick Fairbank)
  */
 public class ShooterPresetCommand extends CommandBase {
-  private double speed;
-  private boolean isUp;
+  private int preset;
 
-  public ShooterPresetCommand(double speed, boolean isUp) {
+  public ShooterPresetCommand(int preset) {
     requires(shooter);
-    this.speed = speed;
-    this.isUp = isUp;
-  }
-
-  // Constructor that only takes in and changes speed.
-  public ShooterPresetCommand(double speed) {
-    requires(shooter);
-    this.speed = speed;
-    this.isUp = shooter.isHighAngle();
+    this.preset = preset;
   }
 
   protected void initialize() {
   }
 
   protected void execute() {
-    shooter.setHighAngle(isUp);
-    shooter.setSpeeds(speed, speed);
+    shooter.setPreset(preset);
   }
 
   protected boolean isFinished() {

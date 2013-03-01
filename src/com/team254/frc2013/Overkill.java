@@ -93,9 +93,6 @@ public class Overkill extends IterativeRobot {
                 "Gyro: " + Math.floor(CommandBase.drive.getGyroAngle() * 100) / 100);
     lcd.println(DriverStationLCD.Line.kUser4, 1, "IE: " + CommandBase.intake.getEncoderCount());
     lcd.println(DriverStationLCD.Line.kUser5, 1,
-                "FS: " + CommandBase.shooter.getFrontCounter() + " BS: " +
-                    CommandBase.shooter.getBackCounter());
-    lcd.println(DriverStationLCD.Line.kUser6, 1,
                 "PSI: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + "     ");
     lcd.updateLCD();
   }

@@ -5,6 +5,7 @@ import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.ShootMultipleCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
 import com.team254.frc2013.commands.WaitCommand;
+import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
@@ -12,7 +13,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class FiveDiscAutoMode extends CommandGroup {
   public FiveDiscAutoMode() {
-    addSequential(new ShooterPresetCommand(12000, false));
+    addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
     addSequential(new WaitCommand(.5));
     addSequential(new ShootMultipleCommand(3));
     addSequential(new RunIntakeCommand(1.0));

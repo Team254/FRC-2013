@@ -53,7 +53,7 @@ public class Constants extends ConstantsBase {
   public static final Constant indexControlPort = new Constant("indexControlPort", 5);
   public static final Constant backPyramidControlPort = new Constant("backPyramidControlPort", 4);
   public static final Constant frontPyramidControlPort = new Constant("frontPyramidControlPort", 3);
-  public static final Constant closeControlPort = new Constant("closeControlPort", 2);
+  public static final Constant pyramidGoalControlPort = new Constant("pyramidGoalControlPort", 2);
   public static final Constant shooterOnPort = new Constant("shooterOnPort", 3);
   public static final Constant intakeUpPort = new Constant("intakeUpPort", 4);
   public static final Constant intakeDownPort = new Constant("intakeDownPort", 12);

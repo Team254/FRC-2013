@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.Joystick;
 public class ControlBoard {
   public Joystick leftStick = new Joystick(Constants.leftJoystickPort.getInt());
   public Joystick rightStick = new Joystick(Constants.rightJoystickPort.getInt());
-  //public Gamepad gamepad = new Gamepad(Constants.gamepadPort.getInt());
   public OperatorJoystick operatorJoystick = new OperatorJoystick(Constants.gamepadPort.getInt());
 
   public boolean getQuickTurn() {
@@ -18,6 +17,6 @@ public class ControlBoard {
   }
 
   public boolean getHighGear() {
-    return !leftStick.getRawButton(3);
+    return leftStick.getRawButton(3);
   }
 }

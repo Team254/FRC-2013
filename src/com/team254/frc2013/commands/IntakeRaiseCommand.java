@@ -21,9 +21,7 @@ public class IntakeRaiseCommand extends CommandBase {
     requires(intake);
     this.intakePosition = intakePosition;
     intakeTimer = new Timer();
-    if (intakePosition == INTAKE_UP) {
-      timeLimit = 0.9;
-    } else if (intakePosition == INTAKE_DOWN) {
+    if (intakePosition == INTAKE_DOWN) {
       timeLimit = 0.25;
     } else {
       timeLimit = 0;
@@ -34,34 +32,34 @@ public class IntakeRaiseCommand extends CommandBase {
     intakeTimer.reset();
     intakeTimer.start();
     if (intakePosition == INTAKE_UP) {
-      intake.setRawPivot(0.65);
+      intake.enablePivotController(true);
+      intake.setIntakeAngle(105);
     } else if (intakePosition == INTAKE_DOWN) {
+      intake.enablePivotController(false);
       intake.setRawPivot(-0.5);
     } else {
+      intake.enablePivotController(false);
       intake.setRawPivot(0);
     }
   }
 
   protected void execute() {
-    // Slow down the raise once it has become vertial and the gravity torque on it is less.
-    if (intakePosition == INTAKE_UP && intakeTimer.get() > 0.5) {
-      intake.setRawPivot(0.4);
-    }
   }
 
   protected boolean isFinished() {
+    if (intakePosition == INTAKE_UP) {
+      return false;
+    }
     return intakeTimer.get() > timeLimit;
   }
 
   protected void end() {
-    if (intakePosition == INTAKE_UP) {
-      // Stall the motor with low voltage to keep the intake from falling down.
-      intake.setRawPivot(0.07);
-    } else {
-      intake.setRawPivot(0);
-    }
+    intake.enablePivotController(false);
+    intake.setRawPivot(0);
   }
 
   protected void interrupted() {
+    intake.enablePivotController(false);
+    intake.setRawPivot(0);
   }
 }

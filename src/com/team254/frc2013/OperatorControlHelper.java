@@ -7,6 +7,7 @@ import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.ShootCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
+import com.team254.frc2013.subsystems.Shooter;
 
 /**
  * Maps operator control buttons to a specified command.
@@ -30,8 +31,12 @@ public class OperatorControlHelper {
     c.operatorJoystick.getIndexButton().whenPressed(new IndexerCommand(false));
     c.operatorJoystick.getIndexButton().whenReleased(new IndexerCommand(true));
 
-    c.operatorJoystick.getBackPyramidButton().whenPressed(new ShooterPresetCommand(13000, false));
-    c.operatorJoystick.getFrontPyramidButton().whenPressed(new ShooterPresetCommand(13000, true));
+    c.operatorJoystick.getBackPyramidButton().whenPressed(
+        new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
+    c.operatorJoystick.getFrontPyramidButton().whenPressed(
+        new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
+    c.operatorJoystick.getPyramidGoalButton().whenPressed(
+        new ShooterPresetCommand(Shooter.PRESET_PYRAMID_GOAL));
     c.operatorJoystick.getShootButton().whenPressed(new ShootCommand());
 
     c.operatorJoystick.getIntakeOutButton().whenPressed(new RunIntakeCommand(-1.0));

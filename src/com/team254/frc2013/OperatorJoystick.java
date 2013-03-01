@@ -138,12 +138,12 @@ public class OperatorJoystick extends Joystick {
     return new JoystickButton(this, Constants.frontPyramidControlPort.getInt());
   }
 
-  public boolean getCloseButtonState() {
-    return this.getRawButton(Constants.closeControlPort.getInt());
+  public boolean getPyramidGoalButtonState() {
+    return this.getRawButton(Constants.pyramidGoalControlPort.getInt());
   }
 
-  public JoystickButton getCloseButton() {
-    return new JoystickButton(this, Constants.closeControlPort.getInt());
+  public JoystickButton getPyramidGoalButton() {
+    return new JoystickButton(this, Constants.pyramidGoalControlPort.getInt());
   }
 
   public boolean getShootButtonState() {

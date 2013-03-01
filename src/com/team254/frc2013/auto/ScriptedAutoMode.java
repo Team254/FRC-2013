@@ -153,7 +153,7 @@ public class ScriptedAutoMode extends CommandGroup {
       c = new ConveyorTimedCommand(params.at(0), params.at(1));
     } else if(checkName(cmd, "SHOOTER_PRESET")) {
       System.out.println("Params: " + params.at(0));
-      c = new ShooterPresetCommand(params.at(0), params.at(1) == 1);
+      c = new ShooterPresetCommand((int)params.at(0));
     } else if(checkName(cmd, "SHOOT")) {
       System.out.println("Params: N/A");
       c = new ShootCommand();

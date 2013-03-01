@@ -74,7 +74,6 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
     SmartDashboard.putData("intake encoder", encoder);
     double s = encoder.getDistance();
     //p.println("e: " + s);
-/*
     if (!foundHome && DriverStation.getInstance().isEnabled()) {
       if (firstTimeHoming) {
         homeDriveTimer.start();
@@ -95,7 +94,6 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
       homeDriveTimer.reset();
     }
     lastSensor = s;
-*/
   }
 
   public void setIntakePower(double power){
@@ -117,7 +115,16 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
   public void setIntakeAngle(double angle) {
     controller.setGoal(angle);
   }
+
   public int getEncoderCount() {
     return encoder.get();
+  }
+
+  public void enablePivotController(boolean on) {
+    if (on) {
+      controller.enable();
+    } else {
+      controller.disable();
+    }
   }
 }
