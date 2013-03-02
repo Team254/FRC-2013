@@ -58,6 +58,9 @@ public class ProfiledPIDController extends PIDController {
       }
       super.setGoalRaw(setpoint);
       lastTime = t;
+      if (name.equals("straightController")) {
+        System.out.println("sp: " + setpoint + " err: " + (setpoint - source.get()));
+      }
     }
     super.update();
   }

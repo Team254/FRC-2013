@@ -1,8 +1,8 @@
 package com.team254.frc2013;
 
+import com.team254.frc2013.commands.AutoIndexCommand;
 import com.team254.frc2013.commands.CheesyDriveCommand;
 import com.team254.frc2013.commands.HangerHookCommand;
-import com.team254.frc2013.commands.IndexerCommand;
 import com.team254.frc2013.commands.IntakeRaiseCommand;
 import com.team254.frc2013.commands.PtoCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
@@ -30,8 +30,10 @@ public class OperatorControlHelper {
     c.operatorJoystick.intakeDownSwitch.whenPressed(
         new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_DOWN));
 
-    c.operatorJoystick.getIndexButton().whenPressed(new IndexerCommand(false));
-    c.operatorJoystick.getIndexButton().whenReleased(new IndexerCommand(true));
+    // NOTE(pat, 2013-03-02): Temporarily testing out indexer down hall effect sensor.
+    c.operatorJoystick.getIndexButton().whenPressed(new AutoIndexCommand());
+//    c.operatorJoystick.getIndexButton().whenPressed(new IndexerCommand(false));
+//    c.operatorJoystick.getIndexButton().whenReleased(new IndexerCommand(true));
 
     c.operatorJoystick.getBackPyramidButton().whenPressed(
         new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));

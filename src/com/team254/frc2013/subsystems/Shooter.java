@@ -6,6 +6,7 @@ import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.util.Debouncer;
 import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.AnalogChannel;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
@@ -32,6 +33,8 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   Debouncer debouncer = new Debouncer(.125);
   AnalogChannel discSensor = new AnalogChannel(Constants.discSensorPort.getInt());
   ThrottledPrinter p = new ThrottledPrinter(.1);
+  private DigitalInput indexerDownSensor =
+      new DigitalInput(Constants.indexerDownSensorPort.getInt());
 
   private double frontPower;
   private double backPower;
@@ -72,6 +75,11 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
 
   public boolean getLoaderState() {
     return loader.get();
+  }
+
+  public boolean isIndexerDown() {
+    // The sensor reads true when the indexer is down.
+    return !indexerDownSensor.get();
   }
 
   // State machine
