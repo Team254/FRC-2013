@@ -138,12 +138,22 @@ public class Drive extends Subsystem {
     setLeftRightPower(0,0);
   }
 
-  public void setGoal(double distance, double angle) {
+  public void setPowerGoal(double power, double angle) {
+    straightController.disable();
+    lastStraight = power;
+    turnController.setGoal(angle);
+    turnController.enable();
+  }
+
+  public void setPositionGoal(double distance, double angle) {
     straightController.setGoal(distance);
-    if (distance != 0)
-      straightController.enable();
-    else
-      straightController.disable();
+    straightController.enable();
+    turnController.setGoal(angle);
+    turnController.enable();
+  }
+
+  public void setTurnGoal(double angle) {
+    straightController.disable();
     turnController.setGoal(angle);
     turnController.enable();
   }

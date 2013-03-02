@@ -32,12 +32,12 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new LoadAndShootCommand());
     addSequential(new LoadAndShootCommand());
     addSequential(new RunIntakeCommand(0.7));
-    addSequential(new DriveAtSpeedCommand(7, 6, 5));
+    addSequential(new DriveAtSpeedCommand(7, 0.6, 5));  // TODO(patrick): Test and tweak speed.
     addSequential(new IndexerCommand(false));
     addSequential(new WaitCommand(0.4));
     addSequential(new IndexerCommand(true));
     addSequential(new RunIntakeCommand(0.9));
-    addSequential(new DriveAtSpeedCommand(13, 6, 5));
+    addSequential(new DriveAtSpeedCommand(13, 0.6, 5));  // TODO(patrick): Test and tweak speed.
     addSequential(new RunIntakeCommand(0.4));
     addSequential(new DriveProfiledCommand(9, 5, 2.3));
     addSequential(new RunIntakeCommand(0.0));

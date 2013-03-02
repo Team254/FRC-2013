@@ -19,7 +19,7 @@ public class DriveProfiledCommand extends CommandBase {
 
   protected void initialize() {
     drive.setMaxSpeed(speed * 12);  // Drive controller works in inches
-    drive.setGoal(distance * 12, 0);  // Drive controller works in inches
+    drive.setPositionGoal(distance * 12, 0);  // Drive controller works in inches
     setTimeout(timeout);
   }
 
@@ -32,7 +32,7 @@ public class DriveProfiledCommand extends CommandBase {
 
   protected void end() {
     drive.setLeftRightPower(0, 0);
-    drive.setGoal(0, 0);
+    drive.setPositionGoal(0, 0);
   }
 
   protected void interrupted() {

@@ -2,7 +2,7 @@ package com.team254.frc2013.commands;
 
 /**
  * Rotates the drivebase a specific angle in specific amount of time
- * 
+ *
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class TurnAngleCommand extends CommandBase {
@@ -17,7 +17,7 @@ public class TurnAngleCommand extends CommandBase {
 
   protected void initialize() {
     setTimeout(timeout);
-     drive.setGoal(0, angle);
+     drive.setTurnGoal(angle);
   }
 
   protected void execute() {
@@ -32,5 +32,5 @@ public class TurnAngleCommand extends CommandBase {
   }
 
   protected void interrupted() {
-  } 
+  }
 }

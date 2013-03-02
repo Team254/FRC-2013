@@ -8,19 +8,18 @@ package com.team254.frc2013.commands;
  */
 public class DriveAtSpeedCommand extends CommandBase {
   private double distance;
-  private double speed;
+  private double power;
   private double timeout;
 
-  public DriveAtSpeedCommand(double distance, double speed, double timeout) {
+  public DriveAtSpeedCommand(double distance, double power, double timeout) {
     this.distance = distance;
-    this.speed = speed;
+    this.power = power;
     this.timeout = timeout;
     requires(drive);
   }
 
   protected void initialize() {
-    drive.setMaxSpeed(speed * 12);  // Drive controller works in inches
-    drive.setGoal(distance * 12, 0);  // Drive controller works in inches
+    drive.setPowerGoal(power, 0);
     setTimeout(timeout);
   }
 
@@ -29,13 +28,12 @@ public class DriveAtSpeedCommand extends CommandBase {
 
   protected boolean isFinished() {
     return (drive.getLeftEncoderDistance() / 12 > distance ||
-                drive.getRightEncoderDistance() / 12 > distance ||
-                isTimedOut());
+                drive.getRightEncoderDistance() / 12 > distance || isTimedOut());
   }
 
   protected void end() {
     drive.setLeftRightPower(0, 0);
-    drive.setGoal(0,0);
+    drive.setPowerGoal(0,0);
   }
 
   protected void interrupted() {
