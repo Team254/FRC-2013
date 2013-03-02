@@ -16,6 +16,7 @@ public class AutoIndexCommand extends CommandBase {
   }
 
   protected void initialize() {
+    setTimeout(3);
     shooter.setIndexerUp(false);
     conveyorOn = false;
     conveyorTimer.stop();
@@ -23,7 +24,7 @@ public class AutoIndexCommand extends CommandBase {
   }
 
   protected void execute() {
-    if (shooter.isIndexerDown() && !conveyorOn) {
+    if (shooter.isIndexerDown() && shooter.isShooterBack() && !conveyorOn) {
       conveyorOn = true;
       shooter.setIndexerUp(true);
       conveyor.setMotor(0.9);
@@ -33,14 +34,16 @@ public class AutoIndexCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return conveyorTimer.get() > 0.5;
+    return conveyorTimer.get() > 0.5 || isTimedOut();
   }
 
   protected void end() {
+    shooter.setIndexerUp(true);
     conveyor.setMotor(0);
   }
 
   protected void interrupted() {
+    shooter.setIndexerUp(true);
     conveyor.setMotor(0);
   }
 }

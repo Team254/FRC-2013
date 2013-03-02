@@ -63,6 +63,7 @@ public class Constants extends ConstantsBase {
   public static final Constant discSensorPort = new Constant("discSensorPort", 2);
   public static final Constant pressureTransducerPort = new Constant("pressureTransducerPort", 3);
   public static final Constant indexerDownSensorPort = new Constant("indexerDownSensorPort", 10);
+  public static final Constant shooterBackSensorPort = new Constant("indexerDownSensorPort", 11);
 
   // Drive encoders
   public static final Constant leftEncoderPortA = new Constant("leftEncoderPortA", 1);

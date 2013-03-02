@@ -35,6 +35,8 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   ThrottledPrinter p = new ThrottledPrinter(.1);
   private DigitalInput indexerDownSensor =
       new DigitalInput(Constants.indexerDownSensorPort.getInt());
+  private DigitalInput shooterBackSensor =
+      new DigitalInput(Constants.shooterBackSensorPort.getInt());
 
   private double frontPower;
   private double backPower;
@@ -80,6 +82,11 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   public boolean isIndexerDown() {
     // The sensor reads true when the indexer is down.
     return !indexerDownSensor.get();
+  }
+
+  public boolean isShooterBack() {
+    // The sensor reads true when the shooter is back.
+    return !shooterBackSensor.get();
   }
 
   // State machine
