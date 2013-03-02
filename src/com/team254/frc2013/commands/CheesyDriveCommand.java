@@ -21,7 +21,7 @@ public class CheesyDriveCommand extends CommandBase {
   }
 
   protected void initialize() {
-    drive.openLoop() ;
+    drive.disableControllers() ;
   }
 
   protected void execute() {

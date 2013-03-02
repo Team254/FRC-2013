@@ -31,8 +31,7 @@ public class DriveProfiledCommand extends CommandBase {
   }
 
   protected void end() {
-    drive.setLeftRightPower(0, 0);
-    drive.setPositionGoal(0, 0);
+    drive.disableControllers();
   }
 
   protected void interrupted() {

@@ -82,7 +82,7 @@ public class Drive extends Subsystem {
     rightEncoder = new RelativeEncoder(motors.getRightEncoder());
     leftEncoder.start();
     rightEncoder.start();
-    openLoop();
+    disableControllers();
   }
 
   protected void initDefaultCommand() {
@@ -132,10 +132,10 @@ public class Drive extends Subsystem {
     return isHighGear;
   }
 
-  public void openLoop() {
+  public void disableControllers() {
     straightController.disable();
     turnController.disable();
-    setLeftRightPower(0,0);
+    setLeftRightPower(0, 0);
   }
 
   public void setPowerGoal(double power, double angle) {

@@ -44,6 +44,12 @@ public class Overkill extends IterativeRobot {
   public void disabledInit() {
     System.out.println("Disabled init.. reloading constants...");
     Constants.readConstantsFromFile();
+
+    // Make sure that the autonomous stops running.
+    if (currentAutoMode != null) {
+      currentAutoMode.cancel();
+      currentAutoMode = null;
+    }
   }
 
   public void disabledPeriodic() {
@@ -60,6 +66,12 @@ public class Overkill extends IterativeRobot {
    * Called once at the start of the autonomous period.
    */
   public void autonomousInit() {
+    // Make sure that the autonomous stops running.
+    if (currentAutoMode != null) {
+      currentAutoMode.cancel();
+      currentAutoMode = null;
+    }
+
     CommandBase.drive.resetEncoders();
     CommandBase.drive.resetGyro();
     currentAutoMode = autoModeSelector.getCurrentAutoModeNewInstance();
@@ -81,6 +93,7 @@ public class Overkill extends IterativeRobot {
     // Make sure that the autonomous stops running when teleop begins.
     if (currentAutoMode != null) {
       currentAutoMode.cancel();
+      currentAutoMode = null;
     }
   }
 

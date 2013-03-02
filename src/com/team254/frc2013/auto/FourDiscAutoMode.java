@@ -29,8 +29,8 @@ public class FourDiscAutoMode extends CommandGroup {
     addSequential(new ShootCommand());
     addSequential(new LoadAndShootCommand());
     addSequential(new RunIntakeCommand(0.8));
-    addSequential(new DriveAtSpeedCommand(2.5, 0.6, 5));  // TODO(patrick): Test and tweak speed.
-    addSequential(new DriveProfiledCommand(1.0, 7, 2.3));
+    addSequential(new DriveAtSpeedCommand(3.25, 0.6, 5));
+    addSequential(new DriveProfiledCommand(0.5, 5, 2.3));
     addSequential(new RunIntakeCommand(0.0));
     addSequential(new LoadAndShootCommand());
     addSequential(new LoadAndShootCommand());
