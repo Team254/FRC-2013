@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OperatorJoystick extends Joystick {
   public ShooterOnSwitch shooterOnSwitch = new ShooterOnSwitch();
   public ControlLoopsSwitch controlLoopsSwitch = new ControlLoopsSwitch();
-  public StartHangSwitch startHangSwitch = new StartHangSwitch();
+  public PtoOnSwitch ptoOnSwitch = new PtoOnSwitch();
   public IntakeUpSwitch intakeUpSwitch = new IntakeUpSwitch();
   public IntakeDownSwitch intakeDownSwitch = new IntakeDownSwitch();
 
@@ -35,7 +35,7 @@ public class OperatorJoystick extends Joystick {
   }
 
   public Button getStartHangSwitch() {
-    return startHangSwitch;
+    return ptoOnSwitch;
   }
 
   public class ControlLoopsSwitch extends Button {
@@ -44,9 +44,9 @@ public class OperatorJoystick extends Joystick {
     }
   }
 
-  public class StartHangSwitch extends Button {
+  public class PtoOnSwitch extends Button {
     public boolean get() {
-      return getStartHangSwitchState();
+      return getPtoOnSwitchState();
     }
   }
 
@@ -162,7 +162,7 @@ public class OperatorJoystick extends Joystick {
     return this.getX() < -0.75;
   }
 
-  public boolean getStartHangSwitchState() {
+  public boolean getPtoOnSwitchState() {
     return this.getY() < 0.0;
   }
 }

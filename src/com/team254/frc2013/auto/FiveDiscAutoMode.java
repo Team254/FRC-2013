@@ -30,8 +30,8 @@ public class FiveDiscAutoMode extends CommandGroup {
     addSequential(new LoadAndShootCommand());
     addSequential(new LoadAndShootCommand());
     addSequential(new RunIntakeCommand(0.8));
-    addSequential(new DriveAtSpeedCommand(3.5, 0.6, 5)); // TODO(patrick): Test and tweak speed.
-    addSequential(new DriveProfiledCommand(1.0, 7, 2.3)); // TODO(patrick): Fix; should be 0.
+    addSequential(new DriveAtSpeedCommand(3.5, 0.6, 5));  // TODO(patrick): Test and tweak speed.
+    addSequential(new DriveProfiledCommand(1.0, 7, 2.3));
     addSequential(new RunIntakeCommand(0.0));
     addSequential(new LoadAndShootCommand());
     addSequential(new LoadAndShootCommand());

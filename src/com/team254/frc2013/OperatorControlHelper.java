@@ -1,8 +1,10 @@
 package com.team254.frc2013;
 
+import com.team254.frc2013.commands.CheesyDriveCommand;
 import com.team254.frc2013.commands.HangerHookCommand;
 import com.team254.frc2013.commands.IndexerCommand;
 import com.team254.frc2013.commands.IntakeRaiseCommand;
+import com.team254.frc2013.commands.PtoCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.ShootCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
@@ -49,5 +51,8 @@ public class OperatorControlHelper {
 
     c.operatorJoystick.getShooterOnSwitch().whenPressed(new ShooterOnCommand(true));
     c.operatorJoystick.getShooterOnSwitch().whenReleased(new ShooterOnCommand(false));
+
+    c.operatorJoystick.ptoOnSwitch.whenPressed(new PtoCommand());
+    c.operatorJoystick.ptoOnSwitch.whenReleased(new CheesyDriveCommand());
   }
 }
