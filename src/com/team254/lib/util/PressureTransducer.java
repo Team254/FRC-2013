@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.AnalogChannel;
 /**
  * Analog input wrapper class for the Honeywell PX2AN2XX150PAAAX pressure transducer.
  *
- * @author patrick@ooyala.com (Patrick Fairbank)
+ * @author pat@team254.com (Patrick Fairbank)
  */
 public class PressureTransducer {
   private AnalogChannel sensor;
@@ -15,7 +15,7 @@ public class PressureTransducer {
   }
 
   public double getPsi() {
-    // Voltage scales linearly: 10% of Vs is 0 psi; 90% is 150 psi.
-    return (sensor.getVoltage() - 0.5) / 4 * 150;
+    // Voltage scales linearly; this number came from taking sensor readings and plotting in Excel.
+    return 38.823 * sensor.getVoltage() - 32.976;
   }
 }
