@@ -2,7 +2,10 @@ package com.team254.frc2013;
 
 import com.team254.lib.control.ControlUpdater;
 import com.team254.frc2013.auto.FiveDiscAutoMode;
+import com.team254.frc2013.auto.FourDiscAutoMode;
 import com.team254.frc2013.auto.SevenDiscAutoMode;
+import com.team254.frc2013.auto.ThreeDiscAutoMode;
+import com.team254.frc2013.auto.TwoDiscAutoMode;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.DriverStationLCD;
@@ -33,6 +36,9 @@ public class Overkill extends IterativeRobot {
     autoModeSelector = new AutoModeSelector();
     autoModeSelector.addAutoCommand("7 Disc", SevenDiscAutoMode.class);
     autoModeSelector.addAutoCommand("5 Disc", FiveDiscAutoMode.class);
+    autoModeSelector.addAutoCommand("4 Disc", FourDiscAutoMode.class);
+    autoModeSelector.addAutoCommand("3 Disc", ThreeDiscAutoMode.class);
+    autoModeSelector.addAutoCommand("2 Disc", TwoDiscAutoMode.class);
   }
 
   public void disabledInit() {
