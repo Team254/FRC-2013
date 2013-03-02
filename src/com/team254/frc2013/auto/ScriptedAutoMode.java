@@ -7,7 +7,7 @@ import com.team254.frc2013.commands.WaitCommand;
 import com.sun.squawk.io.BufferedReader;
 import com.sun.squawk.microedition.io.FileConnection;
 import com.team254.frc2013.commands.ConveyorTimedCommand;
-import com.team254.frc2013.commands.DriveDistanceCommand;
+import com.team254.frc2013.commands.DriveProfiledCommand;
 import com.team254.frc2013.commands.IntakeTimedCommand;
 import com.team254.frc2013.commands.ShootCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
@@ -138,7 +138,7 @@ public class ScriptedAutoMode extends CommandGroup {
     System.out.println("Command: " + cmd);
     if (checkName(cmd, "DRIVE")) {
       System.out.println("Params: " + params.at(0) + " "  + params.at(1) + " " + params.at(2));
-      c = new DriveDistanceCommand(params.at(0), params.at(1), params.at(2));
+      c = new DriveProfiledCommand(params.at(0), params.at(1), params.at(2));
     } else if (checkName(cmd, "WAIT")) {
       System.out.println("Params: " + params.at(0));
       c = new WaitCommand(params.at(0));

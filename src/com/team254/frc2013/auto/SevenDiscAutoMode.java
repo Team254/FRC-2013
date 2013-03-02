@@ -1,9 +1,11 @@
 package com.team254.frc2013.auto;
 
-import com.team254.frc2013.commands.DriveMinDistanceCommand;
-import com.team254.frc2013.commands.DriveToDistanceCommand;
+import com.team254.frc2013.commands.DriveAtSpeedCommand;
+import com.team254.frc2013.commands.DriveProfiledCommand;
 import com.team254.frc2013.commands.IndexerCommand;
 import com.team254.frc2013.commands.LoadAndShootCommand;
+import com.team254.frc2013.commands.ResetDriveEncodersCommand;
+import com.team254.frc2013.commands.ResetGyroCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.ShootCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
@@ -21,6 +23,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class SevenDiscAutoMode extends CommandGroup {
   public SevenDiscAutoMode() {
+    addSequential(new ResetDriveEncodersCommand());
+    addSequential(new ResetGyroCommand());
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
     addSequential(new ShooterOnCommand(true));
     addSequential(new WaitCommand(1.0));
@@ -28,14 +32,14 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new LoadAndShootCommand());
     addSequential(new LoadAndShootCommand());
     addSequential(new RunIntakeCommand(0.7));
-    addSequential(new DriveMinDistanceCommand(7, 6, 5));
+    addSequential(new DriveAtSpeedCommand(7, 6, 5));
     addSequential(new IndexerCommand(false));
     addSequential(new WaitCommand(0.4));
     addSequential(new IndexerCommand(true));
     addSequential(new RunIntakeCommand(0.9));
-    addSequential(new DriveMinDistanceCommand(13, 6, 5));
+    addSequential(new DriveAtSpeedCommand(13, 6, 5));
     addSequential(new RunIntakeCommand(0.4));
-    addSequential(new DriveToDistanceCommand(9, 5, 2.3)); // TODO(patrick): Fix; should be 0.
+    addSequential(new DriveProfiledCommand(9, 5, 2.3));
     addSequential(new RunIntakeCommand(0.0));
     addSequential(new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
     addSequential(new ShootCommand());

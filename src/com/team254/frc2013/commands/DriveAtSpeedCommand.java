@@ -6,12 +6,12 @@ package com.team254.frc2013.commands;
  *
  * @author pat@team254.com (Patrick Fairbank)
  */
-public class DriveMinDistanceCommand extends CommandBase {
+public class DriveAtSpeedCommand extends CommandBase {
   private double distance;
   private double speed;
   private double timeout;
 
-  public DriveMinDistanceCommand(double distance, double speed, double timeout) {
+  public DriveAtSpeedCommand(double distance, double speed, double timeout) {
     this.distance = distance;
     this.speed = speed;
     this.timeout = timeout;

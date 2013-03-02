@@ -1,20 +1,20 @@
 package com.team254.frc2013.commands;
 
 /**
- * Controls the robot drivetrain to drive to a certain distance
+ * Controls the robot drivetrain to drive in a straight line to a certain distance.
  *
  * @author pat@team254.com (Patrick Fairbank)
  */
-public class DriveToDistanceCommand extends CommandBase {
+public class DriveProfiledCommand extends CommandBase {
   private double distance;
   private double speed;
   private double timeout;
 
-  public DriveToDistanceCommand(double distance, double speed, double timeout) {
+  public DriveProfiledCommand(double distance, double speed, double timeout) {
+    requires(drive);
     this.distance = distance;
     this.speed = speed;
     this.timeout = timeout;
-    requires(drive);
   }
 
   protected void initialize() {
@@ -27,16 +27,12 @@ public class DriveToDistanceCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    boolean done = (drive.onTarget() ||
-            isTimedOut());
-    if (done)
-      System.out.println("DD DONE!");
-    return done;
+    return drive.onTarget() || isTimedOut();
   }
 
   protected void end() {
     drive.setLeftRightPower(0, 0);
-    drive.setGoal(0,0);
+    drive.setGoal(0, 0);
   }
 
   protected void interrupted() {
