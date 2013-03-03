@@ -44,7 +44,7 @@ public class TestOutputsCommand extends CommandBase {
     drive.shift(true);
     shooter.setHighAngle(true);
     shooter.extend();
-    hanger.setHookUp(Value.kReverse);
+    hanger.setHookUp(hanger.HANGER_HOOK_RETRACTED);
     hanger.setPto(true);
     //indexer.setPistonDown(true);
     conveyor.setSolenoidState(true);

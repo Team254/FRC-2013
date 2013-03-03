@@ -8,10 +8,13 @@ import com.team254.frc2013.auto.ThreeDiscAutoMode;
 import com.team254.frc2013.auto.TwoDiscAutoMode;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.lib.util.PIDTuner;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Main class of the robot.

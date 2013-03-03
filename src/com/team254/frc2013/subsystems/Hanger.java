@@ -19,9 +19,14 @@ import edu.wpi.first.wpilibj.Solenoid;
 
 public class Hanger extends PeriodicSubsystem {
   private DriveGearbox motors;
-  private DoubleSolenoid hangerSolenoid = new DoubleSolenoid(Constants.hangerExtendedPort.getInt(), Constants.hangerRetractedPort.getInt());
+  private Solenoid hangerExtend = new Solenoid(Constants.hangerExtendedPort.getInt());
+  private Solenoid hangerRetract = new Solenoid(Constants.hangerRetractedPort.getInt());
   private Solenoid pto = new Solenoid(Constants.ptoPort.getInt());
   private RelativeEncoder encoder;
+  
+  public final int HANGER_HOOK_EXTENDED = 0;
+  public final int HANGER_HOOK_FLOATING = 1;
+  public final int HANGER_HOOK_RETRACTED = 2;
   
   PIDGains gains = new PIDGains(Constants.hangerKP, Constants.hangerKI, Constants.hangerKD);
   ProfiledPIDController controller = new ProfiledPIDController("Hanger", gains, new HangerControlSource(), 
@@ -50,9 +55,18 @@ public class Hanger extends PeriodicSubsystem {
     encoder.start();
   }
   
-  public void setHookUp(Value isUp) {
-    System.out.println("Setting hooks: " + isUp.toString());
-    hangerSolenoid.set(isUp);
+  public void setHookUp(int isUp) {
+    switch(isUp) {
+      case HANGER_HOOK_EXTENDED:
+        hangerExtend.set(true);
+        hangerRetract.set(false);
+      case HANGER_HOOK_RETRACTED:
+        hangerExtend.set(true);
+        hangerRetract.set(false);
+      case HANGER_HOOK_FLOATING: default:
+        hangerExtend.set(false);
+        hangerRetract.set(false);
+    }
   }
   
   private void set(double power) {

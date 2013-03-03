@@ -22,9 +22,9 @@ public class HangerHookCommand extends CommandBase {
 
   protected void execute() {
     if(up)
-      hanger.setHookUp(Value.kForward);
+      hanger.setHookUp(hanger.HANGER_HOOK_EXTENDED);
     else
-      hanger.setHookUp(Value.kReverse);
+      hanger.setHookUp(hanger.HANGER_HOOK_RETRACTED);
   }
 
   protected boolean isFinished() {
@@ -32,7 +32,7 @@ public class HangerHookCommand extends CommandBase {
   }
 
   protected void end() {
-    hanger.setHookUp(Value.kOff);
+    hanger.setHookUp(hanger.HANGER_HOOK_FLOATING);
     //May need to change
   }
 
