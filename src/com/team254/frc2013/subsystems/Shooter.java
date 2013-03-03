@@ -169,8 +169,8 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   public void setShooterOn(boolean isOn) {
     shooterOn = isOn;
     if (isOn) {
-      frontMotor.set(frontPower);
-      backMotor.set(backPower);
+      frontMotor.set(-frontPower);
+      backMotor.set(-backPower);
     } else {
       frontMotor.set(0);
       backMotor.set(0);
