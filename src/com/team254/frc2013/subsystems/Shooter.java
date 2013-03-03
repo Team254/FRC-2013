@@ -37,6 +37,8 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
       new DigitalInput(Constants.indexerDownSensorPort.getInt());
   private DigitalInput shooterBackSensor =
       new DigitalInput(Constants.shooterBackSensorPort.getInt());
+  private DigitalInput indexerBeamSensor =
+      new DigitalInput(Constants.indexerBeamSensorPort.getInt());
 
   private double frontPower;
   private double backPower;
@@ -85,6 +87,11 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   }
 
   public boolean isShooterBack() {
+    // The sensor reads true when the shooter is back.
+    return !shooterBackSensor.get();
+  }
+
+  public boolean isDiscPresent() {
     // The sensor reads true when the shooter is back.
     return !shooterBackSensor.get();
   }

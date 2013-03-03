@@ -8,13 +8,10 @@ import com.team254.frc2013.auto.ThreeDiscAutoMode;
 import com.team254.frc2013.auto.TwoDiscAutoMode;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.lib.util.PIDTuner;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Main class of the robot.
@@ -75,6 +72,10 @@ public class Overkill extends IterativeRobot {
       currentAutoMode = null;
     }
 
+    // Don't run the compressor during autonomous as there are a bunch of other things drawing a lot
+    // of current.
+    CommandBase.compressor.stop();
+
     CommandBase.drive.resetEncoders();
     CommandBase.drive.resetGyro();
     currentAutoMode = autoModeSelector.getCurrentAutoModeNewInstance();
@@ -98,6 +99,8 @@ public class Overkill extends IterativeRobot {
       currentAutoMode.cancel();
       currentAutoMode = null;
     }
+
+    CommandBase.compressor.start();
   }
 
   /**
@@ -120,7 +123,7 @@ public class Overkill extends IterativeRobot {
                 "PSI: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + "     ");
     lcd.println(DriverStationLCD.Line.kUser6, 1,
                 "ID: " + CommandBase.shooter.isIndexerDown() +
-                    " SB: " + CommandBase.shooter.isShooterBack() + " ");
+                    " IB: " + CommandBase.shooter.isDiscPresent() + " ");
     lcd.updateLCD();
   }
 }

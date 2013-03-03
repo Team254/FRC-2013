@@ -1,8 +1,8 @@
 package com.team254.frc2013.auto;
 
+import com.team254.frc2013.commands.AutonIndexerCommand;
 import com.team254.frc2013.commands.DriveAtSpeedCommand;
 import com.team254.frc2013.commands.DriveProfiledCommand;
-import com.team254.frc2013.commands.IndexerCommand;
 import com.team254.frc2013.commands.LoadAndShootCommand;
 import com.team254.frc2013.commands.ResetDriveEncodersCommand;
 import com.team254.frc2013.commands.ResetGyroCommand;
@@ -27,20 +27,24 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new ResetGyroCommand());
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
     addSequential(new ShooterOnCommand(true));
-    addSequential(new WaitCommand(1.0));
+    addSequential(new WaitCommand(1.5));
+    addSequential(new RunIntakeCommand(0.5));
     addSequential(new ShootCommand());
     addSequential(new LoadAndShootCommand());
     addSequential(new LoadAndShootCommand());
-    addSequential(new RunIntakeCommand(0.8));
-    addSequential(new DriveAtSpeedCommand(3, 0.6, 5));
-    addSequential(new IndexerCommand(false));
-    addSequential(new WaitCommand(0.4));
-    addSequential(new IndexerCommand(true));
-    addSequential(new RunIntakeCommand(0.9));
-    addSequential(new DriveAtSpeedCommand(10, 0.6, 5));
-    addSequential(new RunIntakeCommand(0.7));
-    addSequential(new DriveProfiledCommand(7, 5, 2.3));
-    addSequential(new RunIntakeCommand(0.0));
+    addSequential(new RunIntakeCommand(1));
+    addSequential(new DriveAtSpeedCommand(3, 0.3, 5));
+//    addSequential(new WaitCommand(0.4));
+//    addSequential(new IndexerCommand(true));
+//    addSequential(new RunIntakeCommand(1));
+    addSequential(new DriveAtSpeedCommand(5, 0.4, 5));
+    addSequential(new AutonIndexerCommand());
+    addSequential(new DriveAtSpeedCommand(12.5, 0.3, 5));
+//    addSequential(new RunIntakeCommand(1));
+    addSequential(new RunIntakeCommand(1.0));
+    addSequential(new DriveProfiledCommand(8, 5, 2.3));
+    addSequential(new RunIntakeCommand(0.5));
+//    addSequential(new RunIntakeCommand(0.0));
     addSequential(new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
     addSequential(new ShootCommand());
     addSequential(new LoadAndShootCommand());
@@ -48,5 +52,5 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new LoadAndShootCommand());
     addSequential(new ShooterOnCommand(false));
     addSequential(new RunIntakeCommand(0.0));
-  }
+ }
 }

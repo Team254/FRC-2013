@@ -11,7 +11,6 @@ import com.team254.frc2013.subsystems.Intake;
 import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.util.PressureTransducer;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -43,6 +42,5 @@ public abstract class CommandBase extends Command {
     controlBoard = new ControlBoard();
     OperatorControlHelper.setupOperationMap(controlBoard);
     //r.set(Relay.Value.kForward);
-    compressor.start();
   }
 }

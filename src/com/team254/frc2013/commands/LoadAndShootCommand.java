@@ -9,10 +9,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class LoadAndShootCommand extends CommandGroup {
   public LoadAndShootCommand() {
-    addSequential(new IndexerCommand(false));
-    addSequential(new WaitCommand(0.4));
-    addSequential(new IndexerCommand(true));
-    addSequential(new WaitCommand(0.1));
+    addSequential(new AutonIndexerCommand());
+//    addSequential(new WaitCommand(0.4));
+//    addSequential(new IndexerCommand(true));
+    addSequential(new WaitCommand(0.5));
     addSequential(new ShootCommand());
   }
 }
