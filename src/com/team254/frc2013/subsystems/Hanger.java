@@ -7,8 +7,6 @@ import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.control.impl.ProfiledPIDController;
 import com.team254.lib.util.RelativeEncoder;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.Solenoid;
 
 /**
@@ -61,16 +59,12 @@ public class Hanger extends PeriodicSubsystem {
         hangerExtend.set(true);
         hangerRetract.set(false);
       case HANGER_HOOK_RETRACTED:
-        hangerExtend.set(true);
-        hangerRetract.set(false);
+        hangerExtend.set(false);
+        hangerRetract.set(true);
       case HANGER_HOOK_FLOATING: default:
         hangerExtend.set(false);
         hangerRetract.set(false);
     }
-  }
-  
-  private void set(double power) {
-    motors.set(power);
   }
   
   public void setPto(boolean on) {
