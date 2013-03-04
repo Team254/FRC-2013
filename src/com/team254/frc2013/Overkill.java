@@ -7,6 +7,7 @@ import com.team254.frc2013.auto.SevenDiscAutoMode;
 import com.team254.frc2013.auto.ThreeDiscAutoMode;
 import com.team254.frc2013.auto.TwoDiscAutoMode;
 import com.team254.frc2013.commands.CommandBase;
+import com.team254.frc2013.subsystems.Hanger;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -109,6 +110,15 @@ public class Overkill extends IterativeRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     updateLCD();
+
+    // Handle the stage 1 hanging here because the Command system is not well suited to it.
+    if (CommandBase.controlBoard.getStage1Hang()) {
+      CommandBase.hanger.setHookUp(Hanger.HANGER_HOOK_EXTENDED);
+    } else if (CommandBase.controlBoard.operatorJoystick.getPtoOnSwitchState()) {
+      CommandBase.hanger.setHookUp(Hanger.HANGER_HOOK_RETRACTED);
+    } else {
+      CommandBase.hanger.setHookUp(Hanger.HANGER_HOOK_FLOATING);
+    }
   }
 
   private void updateLCD(){

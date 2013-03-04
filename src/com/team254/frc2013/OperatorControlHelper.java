@@ -48,9 +48,6 @@ public class OperatorControlHelper {
     c.operatorJoystick.getShooterOnSwitch().whenPressed(new ShooterOnCommand(true));
     c.operatorJoystick.getShooterOnSwitch().whenReleased(new ShooterOnCommand(false));
 
-    c.stage1HangSwitch.whenPressed(new HangerHookCommand(true));
-    c.stage1HangSwitch.whenReleased(new HangerHookCommand(false));
-
     // NOTE(pat, 2013-03-03): PTO disabled for safety until the hanger works.
     //c.operatorJoystick.ptoOnSwitch.whenPressed(new PtoCommand());
     //c.operatorJoystick.ptoOnSwitch.whenReleased(new CheesyDriveCommand());

@@ -66,7 +66,7 @@ public class Hanger extends PeriodicSubsystem {
       case HANGER_HOOK_FLOATING:
       default:
         hangerExtend.set(false);
-        hangerRetract.set(false);
+        hangerRetract.set(true);
     }
   }
 

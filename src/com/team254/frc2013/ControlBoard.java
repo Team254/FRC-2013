@@ -23,7 +23,7 @@ public class ControlBoard {
   }
 
   public boolean getStage1Hang() {
-    return rightStick.getRawButton(3);
+    return !rightStick.getRawButton(3);
   }
 
   public class Stage1HangSwitch extends Button {
