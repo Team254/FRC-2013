@@ -8,6 +8,7 @@ import com.team254.frc2013.auto.ThreeDiscAutoMode;
 import com.team254.frc2013.auto.TwoDiscAutoMode;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.frc2013.subsystems.Hanger;
+import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -73,10 +74,6 @@ public class Overkill extends IterativeRobot {
       currentAutoMode = null;
     }
 
-    // Don't run the compressor during autonomous as there are a bunch of other things drawing a lot
-    // of current.
-    CommandBase.compressor.stop();
-
     CommandBase.drive.resetEncoders();
     CommandBase.drive.resetGyro();
     currentAutoMode = autoModeSelector.getCurrentAutoModeNewInstance();
@@ -101,7 +98,11 @@ public class Overkill extends IterativeRobot {
       currentAutoMode = null;
     }
 
-    CommandBase.compressor.start();
+    // Reset all things to their default positions, so that they're not left on from autonomous.
+    CommandBase.shooter.setShooterOn(false);
+    CommandBase.shooter.setPreset(Shooter.PRESET_BACK_PYRAMID);
+    CommandBase.intake.setIntakePower(0);
+    CommandBase.conveyor.setMotor(0);
   }
 
   /**

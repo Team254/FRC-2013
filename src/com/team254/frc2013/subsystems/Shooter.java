@@ -31,14 +31,12 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
 
   private Solenoid indexer = new Solenoid(Constants.indexerPort.getInt());
   Debouncer debouncer = new Debouncer(.125);
-  AnalogChannel discSensor = new AnalogChannel(Constants.discSensorPort.getInt());
+  public AnalogChannel discSensor = new AnalogChannel(Constants.discSensorPort.getInt());
   ThrottledPrinter p = new ThrottledPrinter(.1);
   private DigitalInput indexerDownSensor =
       new DigitalInput(Constants.indexerDownSensorPort.getInt());
   private DigitalInput shooterBackSensor =
       new DigitalInput(Constants.shooterBackSensorPort.getInt());
-  private DigitalInput indexerBeamSensor =
-      new DigitalInput(Constants.indexerBeamSensorPort.getInt());
 
   private double frontPower;
   private double backPower;

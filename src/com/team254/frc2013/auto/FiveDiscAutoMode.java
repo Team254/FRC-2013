@@ -26,15 +26,18 @@ public class FiveDiscAutoMode extends CommandGroup {
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
     addSequential(new ShooterOnCommand(true));
     addSequential(new WaitCommand(1.0));
+    addSequential(new RunIntakeCommand(0.5));
     addSequential(new ShootCommand());
     addSequential(new LoadAndShootCommand());
     addSequential(new LoadAndShootCommand());
-    addSequential(new RunIntakeCommand(0.8));
-    addSequential(new DriveAtSpeedCommand(1.5, 0.8, 5));
+    addSequential(new RunIntakeCommand(1));
+    addSequential(new DriveAtSpeedCommand(2.5, 0.3, 5));
+    addSequential(new WaitCommand(1));
     addSequential(new DriveProfiledCommand(0, 5, 2.3));
-    addSequential(new RunIntakeCommand(0.0));
+    addSequential(new RunIntakeCommand(0.5));
     addSequential(new LoadAndShootCommand());
     addSequential(new LoadAndShootCommand());
     addSequential(new ShooterOnCommand(false));
+    addSequential(new RunIntakeCommand(0.0));
   }
 }
