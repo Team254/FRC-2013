@@ -12,7 +12,7 @@ public class LoadAndShootCommand extends CommandGroup {
     addSequential(new AutonIndexerCommand());
 //    addSequential(new WaitCommand(0.4));
 //    addSequential(new IndexerCommand(true));
-    addSequential(new WaitCommand(0.5));
+    addSequential(new WaitCommand(0.4));
     addSequential(new ShootCommand());
   }
 }

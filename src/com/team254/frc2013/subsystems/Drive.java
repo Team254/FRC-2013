@@ -69,7 +69,7 @@ public class Drive extends Subsystem {
   ProfiledPIDController straightController = new ProfiledPIDController("straightController",
           new PIDGains(Constants.driveStraightKP, Constants.driveStraightKI, Constants.driveStraightKD),
           new DriveControlSource(true), new DriveControlOutput(true),
-          6*12.0, .5); // Half a second to accelerate to 5.0 ft/s
+          6*12.0, .25); // Half a second to accelerate to 5.0 ft/s
 
   PIDController turnController = new PIDController("turnController",
           new PIDGains(Constants.driveTurnKP, Constants.driveTurnKI, Constants.driveTurnKD),
