@@ -14,6 +14,11 @@ public class ShooterOnCommand extends CommandBase {
   }
 
   protected void initialize() {
+    if (isOn) {
+      CommandBase.compressor.stop();
+    } else {
+      CommandBase.compressor.start();
+    }
   }
 
   protected void execute() {
