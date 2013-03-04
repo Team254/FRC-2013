@@ -10,16 +10,18 @@ public class DriveAtSpeedCommand extends CommandBase {
   private double distance;
   private double power;
   private double timeout;
+  private double angle;
 
-  public DriveAtSpeedCommand(double distance, double power, double timeout) {
+  public DriveAtSpeedCommand(double distance, double power, double angle, double timeout) {
     this.distance = distance;
     this.power = power;
+    this.angle = angle;
     this.timeout = timeout;
     requires(drive);
   }
 
   protected void initialize() {
-    drive.setPowerGoal(power, 0);
+    drive.setPowerGoal(power, angle);
     setTimeout(timeout);
   }
 
@@ -33,7 +35,7 @@ public class DriveAtSpeedCommand extends CommandBase {
 
   protected void end() {
     drive.setLeftRightPower(0, 0);
-    drive.setPowerGoal(0,0);
+    drive.setPowerGoal(0, 0);
   }
 
   protected void interrupted() {

@@ -1,5 +1,6 @@
 package com.team254.frc2013;
 
+import com.team254.frc2013.auto.CenterDiscAutoMode;
 import com.team254.lib.control.ControlUpdater;
 import com.team254.frc2013.auto.FiveDiscAutoMode;
 import com.team254.frc2013.auto.FourDiscAutoMode;
@@ -36,11 +37,15 @@ public class Overkill extends IterativeRobot {
 
     // Set up autonomous modes.
     autoModeSelector = new AutoModeSelector();
+    autoModeSelector.addAutoCommand("3 Disc", ThreeDiscAutoMode.class);
     autoModeSelector.addAutoCommand("7 Disc", SevenDiscAutoMode.class);
     autoModeSelector.addAutoCommand("5 Disc", FiveDiscAutoMode.class);
     autoModeSelector.addAutoCommand("4 Disc", FourDiscAutoMode.class);
-    autoModeSelector.addAutoCommand("3 Disc", ThreeDiscAutoMode.class);
     autoModeSelector.addAutoCommand("2 Disc", TwoDiscAutoMode.class);
+    autoModeSelector.addAutoCommand("Center Disc", CenterDiscAutoMode.class);
+
+    // Choose the first non-none autonomous.
+    autoModeSelector.increment();
   }
 
   public void disabledInit() {

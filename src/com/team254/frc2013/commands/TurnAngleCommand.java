@@ -17,14 +17,14 @@ public class TurnAngleCommand extends CommandBase {
 
   protected void initialize() {
     setTimeout(timeout);
-     drive.setTurnGoal(angle);
+    drive.setTurnGoal(angle);
   }
 
   protected void execute() {
   }
 
   protected boolean isFinished() {
-    return drive.onTarget();
+    return drive.onTarget() || isTimedOut();
   }
 
   protected void end() {

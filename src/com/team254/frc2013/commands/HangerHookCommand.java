@@ -15,11 +15,8 @@ public class HangerHookCommand extends CommandBase {
   }
 
   protected void initialize() {
-    boolean ptoEnabled = controlBoard.operatorJoystick.getPtoOnSwitchState();
     if (isUp) {
       hanger.setHookUp(Hanger.HANGER_HOOK_EXTENDED);
-    } else if (ptoEnabled) {
-      hanger.setHookUp(Hanger.HANGER_HOOK_RETRACTED);
     } else {
       hanger.setHookUp(Hanger.HANGER_HOOK_FLOATING);
     }

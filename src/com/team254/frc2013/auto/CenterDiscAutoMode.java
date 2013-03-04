@@ -10,6 +10,7 @@ import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.ShootCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
+import com.team254.frc2013.commands.TurnAngleCommand;
 import com.team254.frc2013.commands.WaitCommand;
 import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -21,8 +22,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * @author tom@team254.com (Tom Bottiglieri)
  * @author pat@team254.com (Patrick Fairbank)
  */
-public class SevenDiscAutoMode extends CommandGroup {
-  public SevenDiscAutoMode() {
+public class CenterDiscAutoMode extends CommandGroup {
+  public CenterDiscAutoMode() {
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
@@ -32,18 +33,18 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new ShootCommand());
     addSequential(new LoadAndShootCommand());
     addSequential(new LoadAndShootCommand());
+    addSequential(new DriveProfiledCommand(-10.0, 7, 3));
+    addSequential(new TurnAngleCommand(-70, 1.25));
+    addSequential(new ResetDriveEncodersCommand());
     addSequential(new RunIntakeCommand(1));
-    addSequential(new DriveAtSpeedCommand(0.4, 0.7, 0, 5));
-    addSequential(new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
-    addSequential(new DriveAtSpeedCommand(3, 0.3, 0, 5));
-    addSequential(new DriveAtSpeedCommand(7, 0.4, 0, 5));
-    addSequential(new DriveAtSpeedCommand(8, 0.3, 0, 5));
-    addSequential(new AutonIndexerCommand());
-    addSequential(new DriveAtSpeedCommand(12, 0.3, 0, 5));
-    addSequential(new RunIntakeCommand(1.0));
-    addSequential(new WaitCommand(0.3));
-    addSequential(new DriveProfiledCommand(8, 8, 2.3));
+    addSequential(new DriveAtSpeedCommand(2, 0.8, -75, 5));
+    addSequential(new DriveAtSpeedCommand(7, 0.3, -75, 5));
+    addSequential(new DriveAtSpeedCommand(6.5, 0.1, -75, 0.2));
     addSequential(new RunIntakeCommand(0.5));
+    addSequential(new TurnAngleCommand(17, 1.25));
+    addSequential(new AutonIndexerCommand());
+    addSequential(new ResetDriveEncodersCommand());
+    addSequential(new DriveProfiledCommand(10, 6, 5));
     addSequential(new ShootCommand());
     addSequential(new LoadAndShootCommand());
     addSequential(new LoadAndShootCommand());
