@@ -1,14 +1,13 @@
 package com.team254.frc2013;
 
-import com.team254.frc2013.commands.CheesyDriveCommand;
 import com.team254.frc2013.commands.HangerHookCommand;
 import com.team254.frc2013.commands.IndexerCommand;
 import com.team254.frc2013.commands.IntakeRaiseCommand;
-import com.team254.frc2013.commands.PtoCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.ShootCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
+import com.team254.frc2013.subsystems.Hanger;
 import com.team254.frc2013.subsystems.Shooter;
 
 /**
@@ -46,13 +45,14 @@ public class OperatorControlHelper {
     c.operatorJoystick.getIntakeButton().whenPressed(new RunIntakeCommand(1.0));
     c.operatorJoystick.getIntakeButton().whenReleased(new RunIntakeCommand(0.0));
 
-    c.operatorJoystick.getAutonSelectButton().whenPressed(new HangerHookCommand(true));
-    c.operatorJoystick.getAutonSelectButton().whenReleased(new HangerHookCommand(false));
-
     c.operatorJoystick.getShooterOnSwitch().whenPressed(new ShooterOnCommand(true));
     c.operatorJoystick.getShooterOnSwitch().whenReleased(new ShooterOnCommand(false));
 
-    c.operatorJoystick.ptoOnSwitch.whenPressed(new PtoCommand());
-    c.operatorJoystick.ptoOnSwitch.whenReleased(new CheesyDriveCommand());
+    c.stage1HangSwitch.whenPressed(new HangerHookCommand(true));
+    c.stage1HangSwitch.whenReleased(new HangerHookCommand(false));
+
+    // NOTE(pat, 2013-03-03): PTO disabled for safety until the hanger works.
+    //c.operatorJoystick.ptoOnSwitch.whenPressed(new PtoCommand());
+    //c.operatorJoystick.ptoOnSwitch.whenReleased(new CheesyDriveCommand());
   }
 }

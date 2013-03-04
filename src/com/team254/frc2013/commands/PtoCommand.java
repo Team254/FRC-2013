@@ -7,7 +7,6 @@ package com.team254.frc2013.commands;
  */
 public class PtoCommand extends CommandBase{
   public PtoCommand() {
-    requires(hanger);
     requires(drive);
   }
 
@@ -16,8 +15,7 @@ public class PtoCommand extends CommandBase{
 
   protected void execute() {
     hanger.setPto(true);
-    //motors.set(controlBoard.leftStick.getY());
-    motors.set(0);  // Disabled until needed, for safety.
+    motors.set(controlBoard.leftStick.getY());
   }
 
   protected boolean isFinished() {

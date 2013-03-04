@@ -21,52 +21,55 @@ public class Hanger extends PeriodicSubsystem {
   private Solenoid hangerRetract = new Solenoid(Constants.hangerRetractedPort.getInt());
   private Solenoid pto = new Solenoid(Constants.ptoPort.getInt());
   private RelativeEncoder encoder;
-  
-  public final int HANGER_HOOK_EXTENDED = 0;
-  public final int HANGER_HOOK_FLOATING = 1;
-  public final int HANGER_HOOK_RETRACTED = 2;
-  
+
+  public static final int HANGER_HOOK_EXTENDED = 0;
+  public static final int HANGER_HOOK_FLOATING = 1;
+  public static final int HANGER_HOOK_RETRACTED = 2;
+
   PIDGains gains = new PIDGains(Constants.hangerKP, Constants.hangerKI, Constants.hangerKD);
-  ProfiledPIDController controller = new ProfiledPIDController("Hanger", gains, new HangerControlSource(), 
+  ProfiledPIDController controller = new ProfiledPIDController("Hanger", gains, new HangerControlSource(),
           new HangerControlOutput(), .5, .5);
 
   private class HangerControlSource implements ControlSource {
     public double get() {
       return encoder.get();
     }
-    public void updateFilter() { } 
+    public void updateFilter() { }
   }
   private class HangerControlOutput implements ControlOutput {
     public void set(double value) {
       //motors.set(value);
     }
   }
-  
+
   int state;
   private static final int STATE_IDLE = 0;
   private static final int STATE_FIRST_UP = 1;
   private static final int STATE_FIRST_HANG = 2;
-  
+
   public Hanger(DriveGearbox motors) {
     this.motors = motors;
     encoder = new RelativeEncoder(motors.getLeftEncoder());
     encoder.start();
   }
-  
+
   public void setHookUp(int isUp) {
     switch(isUp) {
       case HANGER_HOOK_EXTENDED:
         hangerExtend.set(true);
-        hangerRetract.set(false);
+        hangerRetract.set(true);
+        break;
       case HANGER_HOOK_RETRACTED:
         hangerExtend.set(false);
-        hangerRetract.set(true);
-      case HANGER_HOOK_FLOATING: default:
+        hangerRetract.set(false);
+        break;
+      case HANGER_HOOK_FLOATING:
+      default:
         hangerExtend.set(false);
         hangerRetract.set(false);
     }
   }
-  
+
   public void setPto(boolean on) {
     pto.set(on);
     motors.setDriveMode(!on);
@@ -74,17 +77,17 @@ public class Hanger extends PeriodicSubsystem {
 
   protected void initDefaultCommand() {
   }
-  
+
   public void prepareClimb() {
     if (state == STATE_IDLE) {
       state = STATE_FIRST_UP;
     }
   }
-  
+
   public void startClimb() {
     if (state == STATE_FIRST_UP) {
       state = STATE_FIRST_HANG;
-    } 
+    }
   }
 
   public void update() {

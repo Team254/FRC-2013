@@ -1,6 +1,6 @@
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import com.team254.frc2013.subsystems.Hanger;
 
 /**
  * Controls the first-stage hanger hook
@@ -8,23 +8,24 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
  * @author richard@team254.com (Richard Lin)
  */
 public class HangerHookCommand extends CommandBase {
+  private boolean isUp;
 
-  boolean up = true;
-
-  public HangerHookCommand(boolean up) {
-    System.out.println("New hanger hook command");
-    this.up = up;
-    requires(hanger);
+  public HangerHookCommand(boolean isUp) {
+    this.isUp = isUp;
   }
 
   protected void initialize() {
+    boolean ptoEnabled = controlBoard.operatorJoystick.getPtoOnSwitchState();
+    if (isUp) {
+      hanger.setHookUp(Hanger.HANGER_HOOK_EXTENDED);
+    } else if (ptoEnabled) {
+      hanger.setHookUp(Hanger.HANGER_HOOK_RETRACTED);
+    } else {
+      hanger.setHookUp(Hanger.HANGER_HOOK_FLOATING);
+    }
   }
 
   protected void execute() {
-    if(up)
-      hanger.setHookUp(hanger.HANGER_HOOK_EXTENDED);
-    else
-      hanger.setHookUp(hanger.HANGER_HOOK_RETRACTED);
   }
 
   protected boolean isFinished() {
@@ -32,11 +33,8 @@ public class HangerHookCommand extends CommandBase {
   }
 
   protected void end() {
-    hanger.setHookUp(hanger.HANGER_HOOK_FLOATING);
-    //May need to change
   }
 
   protected void interrupted() {
   }
-
 }

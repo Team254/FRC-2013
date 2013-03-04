@@ -34,10 +34,6 @@ public class OperatorJoystick extends Joystick {
     return controlLoopsSwitch;
   }
 
-  public Button getStartHangSwitch() {
-    return ptoOnSwitch;
-  }
-
   public class ControlLoopsSwitch extends Button {
     public boolean get() {
       return getControlLoopsSwitchState();
