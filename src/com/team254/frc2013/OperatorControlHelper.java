@@ -1,5 +1,6 @@
 package com.team254.frc2013;
 
+import com.team254.frc2013.commands.ContinuousShootCommand;
 import com.team254.frc2013.commands.HangerHookCommand;
 import com.team254.frc2013.commands.IndexerCommand;
 import com.team254.frc2013.commands.IntakeRaiseCommand;
@@ -47,6 +48,9 @@ public class OperatorControlHelper {
 
     c.operatorJoystick.getShooterOnSwitch().whenPressed(new ShooterOnCommand(true));
     c.operatorJoystick.getShooterOnSwitch().whenReleased(new ShooterOnCommand(false));
+
+    c.operatorJoystick.getConveyOutButton().whenPressed(new ContinuousShootCommand(true));
+    c.operatorJoystick.getConveyOutButton().whenReleased(new ContinuousShootCommand(false));
 
     // NOTE(pat, 2013-03-03): PTO disabled for safety until the hanger works.
     //c.operatorJoystick.ptoOnSwitch.whenPressed(new PtoCommand());
