@@ -22,7 +22,7 @@ public class IntakeRaiseCommand extends CommandBase {
     this.intakePosition = intakePosition;
     intakeTimer = new Timer();
     if (intakePosition == INTAKE_DOWN) {
-      timeLimit = 0.8;
+      timeLimit = 1.0;
     } else if (intakePosition == INTAKE_UP) {
       timeLimit = .9;
     } else {
@@ -34,13 +34,10 @@ public class IntakeRaiseCommand extends CommandBase {
     intakeTimer.reset();
     intakeTimer.start();
     if (intakePosition == INTAKE_UP) {
-      intake.enablePivotController(false);
       intake.setRawPivot(.5);
     } else if (intakePosition == INTAKE_DOWN) {
-      intake.enablePivotController(false);
       intake.setRawPivot(-0.33);
     } else {
-      intake.enablePivotController(false);
       intake.setRawPivot(0);
     }
   }
@@ -58,12 +55,10 @@ public class IntakeRaiseCommand extends CommandBase {
   }
 
   protected void end() {
-    intake.enablePivotController(false);
     intake.setRawPivot(0);
   }
 
   protected void interrupted() {
-    intake.enablePivotController(false);
     intake.setRawPivot(0);
   }
 }

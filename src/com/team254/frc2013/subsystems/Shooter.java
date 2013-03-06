@@ -68,7 +68,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   }
 
   public void setHighAngle(boolean high) {
-    angle.set(high);
+    angle.set(!high);
   }
 
   public boolean isHighAngle() {
@@ -143,7 +143,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
 
   public Shooter() {
     super();
-    setPreset(PRESET_BACK_PYRAMID);
+    setPreset(PRESET_FRONT_PYRAMID);
     shooterOn = false;
     stateTimer.start();
   }

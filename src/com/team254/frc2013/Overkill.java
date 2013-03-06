@@ -105,7 +105,7 @@ public class Overkill extends IterativeRobot {
 
     // Reset all things to their default positions, so that they're not left on from autonomous.
     CommandBase.shooter.setShooterOn(false);
-    CommandBase.shooter.setPreset(Shooter.PRESET_BACK_PYRAMID);
+    CommandBase.shooter.setPreset(Shooter.PRESET_FRONT_PYRAMID);
     CommandBase.intake.setIntakePower(0);
     CommandBase.conveyor.setMotor(0);
     CommandBase.compressor.start();
@@ -135,10 +135,9 @@ public class Overkill extends IterativeRobot {
     lcd.println(DriverStationLCD.Line.kUser2, 1, driveEncoders + "     ");
     lcd.println(DriverStationLCD.Line.kUser3, 1,
                 "Gyro: " + Math.floor(CommandBase.drive.getGyroAngle() * 100) / 100);
-    lcd.println(DriverStationLCD.Line.kUser4, 1, "IE: " + CommandBase.intake.getEncoderCount());
-    lcd.println(DriverStationLCD.Line.kUser5, 1,
+    lcd.println(DriverStationLCD.Line.kUser4, 1,
                 "PSI: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + "     ");
-    lcd.println(DriverStationLCD.Line.kUser6, 1,
+    lcd.println(DriverStationLCD.Line.kUser5, 1,
                 "ID: " + CommandBase.shooter.isIndexerDown() +
                     " IB: " + CommandBase.shooter.isDiscPresent() + " ");
     lcd.updateLCD();
