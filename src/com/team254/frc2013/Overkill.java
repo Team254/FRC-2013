@@ -108,6 +108,7 @@ public class Overkill extends IterativeRobot {
     CommandBase.shooter.setPreset(Shooter.PRESET_BACK_PYRAMID);
     CommandBase.intake.setIntakePower(0);
     CommandBase.conveyor.setMotor(0);
+    CommandBase.compressor.start();
   }
 
   /**
