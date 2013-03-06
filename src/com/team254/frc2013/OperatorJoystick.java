@@ -78,20 +78,20 @@ public class OperatorJoystick extends Joystick {
     return new JoystickButton(this, Constants.autonSelectControlPort.getInt());
   }
 
-  public boolean getConveyOutButtonState() {
-    return this.getRawButton(Constants.conveyOutControlPort.getInt());
+  public boolean getIntakeUpButtonState() {
+    return this.getRawButton(Constants.intakeUpPort.getInt());
   }
 
-  public JoystickButton getConveyOutButton() {
-    return new JoystickButton(this, Constants.conveyOutControlPort.getInt());
+  public JoystickButton getIntakeUpButton() {
+    return new JoystickButton(this, Constants.intakeUpPort.getInt());
   }
 
-  public boolean getConveyorButtonState() {
-    return this.getRawButton(Constants.conveyorControlPort.getInt());
+  public boolean getIntakeDownButtonState() {
+    return this.getRawButton(Constants.intakeDownPort.getInt());
   }
 
-  public JoystickButton getConveyorButton() {
-    return new JoystickButton(this, Constants.conveyorControlPort.getInt());
+  public JoystickButton getIntakeDownButton() {
+    return new JoystickButton(this, Constants.intakeDownPort.getInt());
   }
 
   public boolean getIntakeOutButtonState() {
@@ -134,12 +134,12 @@ public class OperatorJoystick extends Joystick {
     return new JoystickButton(this, Constants.frontPyramidControlPort.getInt());
   }
 
-  public boolean getPyramidGoalButtonState() {
-    return this.getRawButton(Constants.pyramidGoalControlPort.getInt());
+  public boolean getRapidFireButtonState() {
+    return this.getRawButton(Constants.rapidFirePort.getInt());
   }
 
-  public JoystickButton getPyramidGoalButton() {
-    return new JoystickButton(this, Constants.pyramidGoalControlPort.getInt());
+  public JoystickButton getRapidFireButton() {
+    return new JoystickButton(this, Constants.rapidFirePort.getInt());
   }
 
   public boolean getShootButtonState() {

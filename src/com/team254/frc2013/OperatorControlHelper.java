@@ -22,13 +22,26 @@ public class OperatorControlHelper {
     //c.operatorJoystick.getFrontPyramidButton().whenPressed(new SetIntakePositionCommand(80));
     //c.operatorJoystick.getCloseButton().whenPressed(new SetIntakePositionCommand(45));
     //c.operatorJoystick.getShootButton().whenPressed(new SetIntakePositionCommand(0));
-
-    c.operatorJoystick.intakeUpSwitch.whenPressed(
+    
+    /*
+    c.operatorJoystick.intakeUpSwitch.whenActive(
         new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_UP));
     c.operatorJoystick.intakeUpSwitch.whenReleased(
         new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_OFF));
-    c.operatorJoystick.intakeDownSwitch.whenPressed(
+    c.operatorJoystick.intakeDownSwitch.whenActive(
         new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_DOWN));
+    c.operatorJoystick.intakeDownSwitch.whenReleased(
+        new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_OFF));
+    */
+    
+    c.operatorJoystick.getIntakeUpButton().whenPressed(
+        new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_UP));
+    c.operatorJoystick.getIntakeUpButton().whenReleased(
+        new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_OFF));
+    c.operatorJoystick.getIntakeDownButton().whenPressed(
+        new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_DOWN));
+    c.operatorJoystick.getIntakeDownButton().whenReleased(
+        new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_OFF));
 
     c.operatorJoystick.getIndexButton().whenPressed(new IndexerCommand(false));
     c.operatorJoystick.getIndexButton().whenReleased(new IndexerCommand(true));
@@ -37,8 +50,8 @@ public class OperatorControlHelper {
         new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
     c.operatorJoystick.getFrontPyramidButton().whenPressed(
         new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
-    c.operatorJoystick.getPyramidGoalButton().whenPressed(
-        new ShooterPresetCommand(Shooter.PRESET_PYRAMID_GOAL));
+    //c.operatorJoystick.getPyramidGoalButton().whenPressed(
+        //new ShooterPresetCommand(Shooter.PRESET_PYRAMID_GOAL));
     c.operatorJoystick.getShootButton().whenPressed(new ShootCommand());
 
     c.operatorJoystick.getIntakeOutButton().whenPressed(new RunIntakeCommand(-1.0));
@@ -48,9 +61,13 @@ public class OperatorControlHelper {
 
     c.operatorJoystick.getShooterOnSwitch().whenPressed(new ShooterOnCommand(true));
     c.operatorJoystick.getShooterOnSwitch().whenReleased(new ShooterOnCommand(false));
-
-    c.operatorJoystick.getConveyOutButton().whenPressed(new ContinuousShootCommand(true));
-    c.operatorJoystick.getConveyOutButton().whenReleased(new ContinuousShootCommand(false));
+    
+    
+    c.operatorJoystick.getRapidFireButton().whenPressed(new ContinuousShootCommand(true));
+    c.operatorJoystick.getRapidFireButton().whenReleased(new ContinuousShootCommand(false));
+    
+    //c.operatorJoystick.getConveyOutButton().whenPressed(new ContinuousShootCommand(true));
+    //c.operatorJoystick.getConveyOutButton().whenReleased(new ContinuousShootCommand(false));
 
     // NOTE(pat, 2013-03-03): PTO disabled for safety until the hanger works.
     //c.operatorJoystick.ptoOnSwitch.whenPressed(new PtoCommand());
