@@ -18,6 +18,7 @@ public class ContinuousShootCommand extends CommandGroup {
       addSequential(new LoadAndShootCommand());
     } else {
       addSequential(new RunIntakeCommand(0));
+      addSequential(new RetractShooterCommand());
     }
  }
 

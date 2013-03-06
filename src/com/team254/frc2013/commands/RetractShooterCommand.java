@@ -8,29 +8,23 @@ import edu.wpi.first.wpilibj.Timer;
  * @author tom@team254.com (Tom Bottiglieri)
  * @author pat@team254.com (Patrick Fairbank)
  */
-public class ShootCommand extends CommandBase {
-  private Timer shooterTimer;
-
-  public ShootCommand() {
+public class RetractShooterCommand extends CommandBase {
+  public RetractShooterCommand() {
     requires(shooter);
-    shooterTimer = new Timer();
   }
 
   protected void initialize() {
-    shooter.extend();
-    shooterTimer.reset();
-    shooterTimer.start();
+    shooter.load();
   }
 
   protected void execute() {
   }
 
   protected boolean isFinished() {
-    return shooterTimer.get() > 0.3;
+    return true;
   }
 
   protected void end() {
-    shooter.load();
   }
 
   protected void interrupted() {

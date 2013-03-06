@@ -54,7 +54,7 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
           value /= 2.0;
         else if (encoder.getDistance() < 90 && value < 0)
           value /= 2.0;
-        setPivot(value);
+        // setPivot(value); XXX:changed by tombot to rip out control loop pre SD
       }
     }
   }
@@ -72,7 +72,6 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
     //System.out.println(encoder.get() + " " + homeDriveTimer.get() + " ");
 
     SmartDashboard.putData("intake encoder", encoder);
-    double s = encoder.getDistance();
     //p.println("e: " + s);
     if (!foundHome && DriverStation.getInstance().isEnabled()) {
       if (firstTimeHoming) {
@@ -80,20 +79,15 @@ public class Intake extends PeriodicSubsystem implements ControlledSubsystem {
         firstTimeHoming = false;
       }
       System.out.println(homeDriveTimer.get() + " ");
-      if (homeDriveTimer.get() < .4) {
-        setRawPivot(-.4);
+      if (homeDriveTimer.get() < .7) {
+        setRawPivot(-.33);
       } else {
         setRawPivot(0);
-        if (encoderReset.update(Math.abs(s - lastSensor) < 1.5)) {
-          System.out.println("Reset intake encoder");
-          foundHome = true;
-          encoder.reset();
-        }
+        foundHome = true;
       }
     } else {
       homeDriveTimer.reset();
     }
-    lastSensor = s;
   }
 
   public void setIntakePower(double power){
