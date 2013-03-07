@@ -33,10 +33,10 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   Debouncer debouncer = new Debouncer(.125);
   public AnalogChannel discSensor = new AnalogChannel(Constants.discSensorPort.getInt());
   ThrottledPrinter p = new ThrottledPrinter(.1);
-  private DigitalInput indexerDownSensor =
-      new DigitalInput(Constants.indexerDownSensorPort.getInt());
-  private DigitalInput shooterBackSensor =
-      new DigitalInput(Constants.shooterBackSensorPort.getInt());
+  private DigitalInput indexerDownSensorA =
+      new DigitalInput(Constants.indexerDownSensorPortA.getInt());
+  private DigitalInput indexerDownSensorB =
+      new DigitalInput(Constants.indexerDownSensorPortB.getInt());
 
   private double frontPower;
   private double backPower;
@@ -81,17 +81,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
 
   public boolean isIndexerDown() {
     // The sensor reads true when the indexer is down.
-    return !indexerDownSensor.get();
-  }
-
-  public boolean isShooterBack() {
-    // The sensor reads true when the shooter is back.
-    return !shooterBackSensor.get();
-  }
-
-  public boolean isDiscPresent() {
-    // The sensor reads true when the shooter is back.
-    return !shooterBackSensor.get();
+    return !indexerDownSensorA.get() || !indexerDownSensorB.get();
   }
 
   // State machine

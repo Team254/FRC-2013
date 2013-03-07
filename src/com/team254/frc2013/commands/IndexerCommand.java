@@ -31,7 +31,7 @@ public class IndexerCommand extends CommandBase {
   }
 
   protected void execute() {
-    if ((controlLoopsOn && !up && shooter.isIndexerDown() && shooter.isShooterBack() ||
+    if ((controlLoopsOn && !up && shooter.isIndexerDown() ||
         !controlLoopsOn && up) && !conveyorOn) {
       conveyorOn = true;
       shooter.setIndexerUp(true);
