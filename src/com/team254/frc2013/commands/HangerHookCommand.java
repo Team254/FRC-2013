@@ -16,9 +16,11 @@ public class HangerHookCommand extends CommandBase {
 
   protected void initialize() {
     if (isUp) {
-      hanger.setHookUp(Hanger.HANGER_HOOK_EXTENDED);
+      //hanger.setHookUp(Hanger.HANGER_HOOK_EXTENDED);
+      hanger.setHookUp(true);
     } else {
-      hanger.setHookUp(Hanger.HANGER_HOOK_FLOATING);
+      //hanger.setHookUp(Hanger.HANGER_HOOK_FLOATING);
+      hanger.setHookUp(false);
     }
   }
 

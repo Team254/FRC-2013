@@ -23,7 +23,7 @@ public class DriveGearbox extends Subsystem{
           Constants.rightEncoderPortB.getInt());
   
   private Encoder leftEncoder = new Encoder(Constants.leftEncoderPortA.getInt(),
-          Constants.leftEncoderPortB.getInt());
+          Constants.leftEncoderPortB.getInt(), true);
   
   private boolean isDriveMode = true;
   

@@ -11,6 +11,7 @@ import com.team254.frc2013.commands.CommandBase;
 import com.team254.frc2013.subsystems.Hanger;
 import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.util.PIDTuner;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -25,6 +26,7 @@ public class Overkill extends IterativeRobot {
   private AutoModeSelector autoModeSelector;
   private boolean lastAutonSelectButton;
   private CommandGroup currentAutoMode;
+  DigitalInput thing = new DigitalInput(14);
 
   /**
    * Called when the robot is first started up and should be used for any initialization code.
@@ -118,14 +120,8 @@ public class Overkill extends IterativeRobot {
     Scheduler.getInstance().run();
     updateLCD();
 
-    // Handle the stage 1 hanging here because the Command system is not well suited to it.
-    if (CommandBase.controlBoard.getStage1Hang()) {
-      CommandBase.hanger.setHookUp(Hanger.HANGER_HOOK_EXTENDED);
-    } else if (CommandBase.controlBoard.operatorJoystick.getPtoOnSwitchState()) {
-      CommandBase.hanger.setHookUp(Hanger.HANGER_HOOK_RETRACTED);
-    } else {
-      CommandBase.hanger.setHookUp(Hanger.HANGER_HOOK_FLOATING);
-    }
+    CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
+    System.out.println("Left: " + CommandBase.controlBoard.leftStick.getY() + "\nRight: " + CommandBase.controlBoard.rightStick.getX());
   }
 
   private void updateLCD(){
