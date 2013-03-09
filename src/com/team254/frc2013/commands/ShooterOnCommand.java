@@ -9,7 +9,6 @@ public class ShooterOnCommand extends CommandBase {
   private boolean isOn;
 
   public ShooterOnCommand(boolean isOn) {
-    requires(shooter);
     this.isOn = isOn;
   }
 

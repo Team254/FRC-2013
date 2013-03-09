@@ -81,7 +81,6 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
 
   public boolean isIndexerDown() {
     // The sensor reads true when the indexer is down.
-    System.out.println("HE 1: " + !indexerDownSensorA.get() + ", HE 2: " + !indexerDownSensorB.get());
     return !indexerDownSensorA.get() || !indexerDownSensorB.get();
   }
 

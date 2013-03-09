@@ -47,6 +47,8 @@ public class IndexerCommand extends CommandBase {
     } else {
       return !up || conveyorTimer.get() > 0.5;
     }
+    
+    
   }
 
   protected void end() {

@@ -1,5 +1,7 @@
 package com.team254.frc2013.commands;
 
+import edu.wpi.first.wpilibj.Timer;
+
 /**
  * Grabs Frisbee from conveyor and loads it into shooter.
  *
@@ -7,19 +9,30 @@ package com.team254.frc2013.commands;
  * @author pat@team254.com (Patrick Fairbank)
  */
 public class AutonIndexerCommand extends CommandBase {
+  private Timer afterDownDelayTimer;
+  private boolean downDelayStarted;
+  
   public AutonIndexerCommand() {
+    afterDownDelayTimer = new Timer();
   }
 
   protected void initialize() {
-    setTimeout(3);
+    setTimeout(1.5);
     shooter.setIndexerUp(false);
+    afterDownDelayTimer.stop();
+    afterDownDelayTimer.reset();
+    downDelayStarted = false;
   }
 
   protected void execute() {
+    if (shooter.isIndexerDown() && !downDelayStarted) {
+      downDelayStarted = true;
+      afterDownDelayTimer.start();
+    }
   }
 
   protected boolean isFinished() {
-    return shooter.isIndexerDown() || isTimedOut();
+    return afterDownDelayTimer.get() > 0.2 || isTimedOut();
   }
 
   protected void end() {

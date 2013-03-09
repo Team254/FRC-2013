@@ -121,7 +121,6 @@ public class Overkill extends IterativeRobot {
     updateLCD();
 
     CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
-    System.out.println("Left: " + CommandBase.controlBoard.leftStick.getY() + "\nRight: " + CommandBase.controlBoard.rightStick.getX());
   }
 
   private void updateLCD(){
