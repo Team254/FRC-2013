@@ -22,6 +22,8 @@ public class AutonIndexerCommand extends CommandBase {
     afterDownDelayTimer.stop();
     afterDownDelayTimer.reset();
     downDelayStarted = false;
+    intake.setIntakePower(0);
+    conveyor.setMotor(0);
   }
 
   protected void execute() {
@@ -29,14 +31,19 @@ public class AutonIndexerCommand extends CommandBase {
       downDelayStarted = true;
       afterDownDelayTimer.start();
     }
+    if (afterDownDelayTimer.get() > 0.4) {
+      shooter.setIndexerUp(true);
+    }
   }
 
   protected boolean isFinished() {
-    return afterDownDelayTimer.get() > 0.2 || isTimedOut();
+    return afterDownDelayTimer.get() > 0.5 || isTimedOut();
   }
 
   protected void end() {
     shooter.setIndexerUp(true);
+    intake.setIntakePower(0.5);
+    conveyor.setMotor(0.5);            
   }
 
   protected void interrupted() {

@@ -33,9 +33,9 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   Debouncer debouncer = new Debouncer(.125);
   public AnalogChannel discSensor = new AnalogChannel(Constants.discSensorPort.getInt());
   ThrottledPrinter p = new ThrottledPrinter(.1);
-  private DigitalInput indexerDownSensorA =
+  public DigitalInput indexerDownSensorA =
       new DigitalInput(Constants.indexerDownSensorPortA.getInt());
-  private DigitalInput indexerDownSensorB =
+  public DigitalInput indexerDownSensorB =
       new DigitalInput(Constants.indexerDownSensorPortB.getInt());
 
   private double frontPower;
@@ -142,7 +142,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
     switch (preset) {
       case PRESET_FRONT_PYRAMID:
         setHighAngle(true);
-        setPowers(1, 1);
+        setPowers(1, 1); // CHANGE BACK TO 1,1 
         break;
       case PRESET_PYRAMID_GOAL:
         setHighAngle(true);
@@ -151,7 +151,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
       case PRESET_BACK_PYRAMID:
       default:
         setHighAngle(false);
-        setPowers(1, 1);
+        setPowers(1, 1); // CHANGE BACK TO 1,1 
     }
   }
 
