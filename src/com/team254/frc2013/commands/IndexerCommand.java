@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class IndexerCommand extends CommandBase {
   private boolean up;
-  private boolean controlLoopsOn;
   private boolean conveyorOn;
   private Timer conveyorTimer;
 
@@ -23,7 +22,6 @@ public class IndexerCommand extends CommandBase {
     conveyorOn = false;
     conveyorTimer.stop();
     conveyorTimer.reset();
-    controlLoopsOn = controlBoard.operatorJoystick.getControlLoopsSwitchState();
     if (!up) {
       setTimeout(3);
       shooter.setIndexerUp(false);
@@ -31,8 +29,7 @@ public class IndexerCommand extends CommandBase {
   }
 
   protected void execute() {
-    if ((controlLoopsOn && !up && shooter.isIndexerDown() ||
-        !controlLoopsOn && up) && !conveyorOn) {
+    if (up && !conveyorOn) {
       conveyorOn = true;
       shooter.setIndexerUp(true);
       conveyor.setMotor(0.9);
@@ -42,26 +39,14 @@ public class IndexerCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    if (controlLoopsOn) {
-      return up || conveyorTimer.get() > 0.5 || isTimedOut();
-    } else {
-      return !up || conveyorTimer.get() > 0.5;
-    }
-    
-    
+    return !up || conveyorTimer.get() > 0.5;
   }
 
   protected void end() {
     conveyor.setMotor(0);
-    if (controlLoopsOn) {
-      shooter.setIndexerUp(true);
-    }
   }
 
   protected void interrupted() {
     conveyor.setMotor(0);
-    if (controlLoopsOn) {
-      shooter.setIndexerUp(true);
-    }
   }
 }

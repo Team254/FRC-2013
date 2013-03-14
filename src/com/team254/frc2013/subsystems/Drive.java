@@ -94,10 +94,6 @@ public class Drive extends Subsystem {
     motors.driveLR(leftPower, -rightPower); // changed from + - for comp bot
   }
 
-  public void setMotor(int portNumber, double power) {
-    motors.setMotor(portNumber, power);
-  }
-
   public double getLeftEncoderDistance() {
     return leftEncoder.get() / 256.0 * 3.5 * Math.PI;
   }

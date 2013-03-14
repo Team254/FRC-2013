@@ -17,20 +17,20 @@ public class DriveGearbox extends Subsystem{
   private Talon leftDriveC = new Talon(Constants.leftDrivePortC.getInt());
   private Talon rightDriveA = new Talon(Constants.rightDrivePortA.getInt());
   private Talon rightDriveBC = new Talon(Constants.rightDrivePortBC.getInt());
-  
+
   // Sensors
   private Encoder rightEncoder = new Encoder(Constants.rightEncoderPortA.getInt(),
           Constants.rightEncoderPortB.getInt());
-  
+
   private Encoder leftEncoder = new Encoder(Constants.leftEncoderPortA.getInt(),
           Constants.leftEncoderPortB.getInt(), true);
-  
+
   private boolean isDriveMode = true;
-  
+
   public Encoder getLeftEncoder() {
     return leftEncoder;
   }
-  
+
   public Encoder getRightEncoder() {
     return rightEncoder;
   }
@@ -44,7 +44,7 @@ public class DriveGearbox extends Subsystem{
       rightDriveBC.set(rightPower);
     }
   }
-  
+
   public void set(double allPower){
     if (!isDriveMode) {
       leftDriveA.set(allPower);
@@ -54,33 +54,35 @@ public class DriveGearbox extends Subsystem{
       rightDriveBC.set(-allPower);
     }
   }
-  
-  public void setMotor(int portNum, double power) {
-    if(portNum == 3) {
-      leftDriveA.set(power);
-    }
-    else if(portNum == 4) {
-      leftDriveB.set(power);
-    }
-    else if(portNum == 5) {
-      leftDriveC.set(power);
-    }
-    else if(portNum == 6) {
-      rightDriveA.set(power);
-    }
-    else if(portNum == 7) {
-      rightDriveBC.set(power);
-    }
+
+  public void setLeftDriveA(double power) {
+    leftDriveA.set(power);
   }
-  
+
+  public void setLeftDriveB(double power) {
+    leftDriveB.set(power);
+  }
+
+  public void setLeftDriveC(double power) {
+    leftDriveC.set(power);
+  }
+
+  public void setRightDriveA(double power) {
+    rightDriveA.set(power);
+  }
+
+  public void setRightDriveBC(double power) {
+    rightDriveBC.set(power);
+  }
+
   public void setDriveMode(boolean wantsDrive) {
     isDriveMode = wantsDrive;
   }
-  
+
   public boolean isDriveMode() {
     return isDriveMode;
   }
-  
+
   protected void initDefaultCommand() {
   }
 }

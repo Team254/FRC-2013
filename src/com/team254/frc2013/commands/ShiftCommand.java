@@ -2,7 +2,7 @@ package com.team254.frc2013.commands;
 
 /**
  * Shifts the drive gearbox into high or low gear.
- * 
+ *
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class ShiftCommand extends CommandBase {
@@ -13,7 +13,6 @@ public class ShiftCommand extends CommandBase {
   }
 
   protected void initialize() {
-    requires(drive);
   }
 
   protected void execute() {

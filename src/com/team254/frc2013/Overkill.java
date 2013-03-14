@@ -1,6 +1,7 @@
 package com.team254.frc2013;
 
 import com.team254.frc2013.auto.CenterDiscAutoMode;
+import com.team254.frc2013.auto.DriveMotorTestAutoMode;
 import com.team254.lib.control.ControlUpdater;
 import com.team254.frc2013.auto.FiveDiscAutoMode;
 import com.team254.frc2013.auto.FourDiscAutoMode;
@@ -8,7 +9,6 @@ import com.team254.frc2013.auto.SevenDiscAutoMode;
 import com.team254.frc2013.auto.ThreeDiscAutoMode;
 import com.team254.frc2013.auto.TwoDiscAutoMode;
 import com.team254.frc2013.commands.CommandBase;
-import com.team254.frc2013.subsystems.Hanger;
 import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -45,6 +45,7 @@ public class Overkill extends IterativeRobot {
     autoModeSelector.addAutoCommand("4 Disc", FourDiscAutoMode.class);
     autoModeSelector.addAutoCommand("2 Disc", TwoDiscAutoMode.class);
     autoModeSelector.addAutoCommand("Center Disc", CenterDiscAutoMode.class);
+    autoModeSelector.addAutoCommand("Drive Test", DriveMotorTestAutoMode.class);
 
     // Choose the first non-none autonomous.
     autoModeSelector.increment();
@@ -120,6 +121,29 @@ public class Overkill extends IterativeRobot {
     Scheduler.getInstance().run();
     updateLCD();
 
+    // Set shooter presets.
+    if (CommandBase.controlBoard.operatorJoystick.getBackPyramidButtonState()) {
+      CommandBase.shooter.setPreset(Shooter.PRESET_BACK_PYRAMID);
+    } else if (CommandBase.controlBoard.operatorJoystick.getFrontPyramidButtonState()) {
+      CommandBase.shooter.setPreset(Shooter.PRESET_FRONT_PYRAMID);
+    }
+
+    // Set conveyor and intake speed.
+    if (CommandBase.controlBoard.operatorJoystick.getIntakeOutButtonState()) {
+      CommandBase.intake.setIntakePower(-1.0);
+      CommandBase.conveyor.setMotor(-1.0);
+    } else if (CommandBase.controlBoard.operatorJoystick.getIntakeButtonState()) {
+      CommandBase.intake.setIntakePower(1.0);
+      CommandBase.conveyor.setMotor(1.0);
+    } else {
+      CommandBase.intake.setIntakePower(0.0);
+      CommandBase.conveyor.setMotor(0.0);
+    }
+
+    // Set shooter on/off.
+    CommandBase.shooter.setShooterOn(CommandBase.controlBoard.operatorJoystick.getShooterSwitch());
+
+    // Set 10pt hang up/down.
     CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
   }
 
@@ -133,7 +157,7 @@ public class Overkill extends IterativeRobot {
     lcd.println(DriverStationLCD.Line.kUser4, 1,
                 "PSI: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + "     ");
     lcd.println(DriverStationLCD.Line.kUser5, 1,
-                "HE: " + !CommandBase.shooter.indexerDownSensorA.get() + ", " + 
+                "HE: " + !CommandBase.shooter.indexerDownSensorA.get() + ", " +
                 !CommandBase.shooter.indexerDownSensorB.get() + "    ");
     lcd.updateLCD();
   }
