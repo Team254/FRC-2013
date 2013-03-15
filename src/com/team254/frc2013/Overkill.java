@@ -7,6 +7,7 @@ import com.team254.frc2013.auto.FiveDiscAutoMode;
 import com.team254.frc2013.auto.FourDiscAutoMode;
 import com.team254.frc2013.auto.SevenDiscAutoMode;
 import com.team254.frc2013.auto.ThreeDiscAutoMode;
+import com.team254.frc2013.auto.TuneDriveAutoMode;
 import com.team254.frc2013.auto.TwoDiscAutoMode;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.frc2013.subsystems.Shooter;
@@ -46,6 +47,7 @@ public class Overkill extends IterativeRobot {
     autoModeSelector.addAutoCommand("2 Disc", TwoDiscAutoMode.class);
     autoModeSelector.addAutoCommand("Center Disc", CenterDiscAutoMode.class);
     autoModeSelector.addAutoCommand("Drive Test", DriveMotorTestAutoMode.class);
+    autoModeSelector.addAutoCommand("Tune Drive", TuneDriveAutoMode.class);
 
     // Choose the first non-none autonomous.
     autoModeSelector.increment();

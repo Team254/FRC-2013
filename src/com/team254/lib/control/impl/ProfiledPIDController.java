@@ -32,10 +32,11 @@ public class ProfiledPIDController extends PIDController {
   double sign = 1;
   ThrottledPrinter printer = new ThrottledPrinter(.1);
 
-  public ProfiledPIDController(String name, PIDGains gains, ControlSource source, ControlOutput output, double maxV, double timeToMaxV) {
+  public ProfiledPIDController(String name, PIDGains gains, ControlSource source,
+                               ControlOutput output, double maxV, double timeToMaxV) {
     super(name, gains, source, output);
     velocity = maxV;
-    acceleration = maxV / timeToMaxV;
+    setTimeToMaxV(timeToMaxV);
   }
 
   public void update() {
@@ -59,7 +60,7 @@ public class ProfiledPIDController extends PIDController {
       super.setGoalRaw(setpoint);
       lastTime = t;
       if (name.equals("straightController")) {
-        System.out.println("sp: " + setpoint + " err: " + (setpoint - source.get()));
+        System.out.println(timeToMaxVelocity + " t: " + t + " sp: " + setpoint + " err: " + (setpoint - source.get()));
       }
     }
     super.update();
@@ -84,6 +85,10 @@ public class ProfiledPIDController extends PIDController {
 
   public void setMaxVelocity(double v) {
     velocity = v;
+  }
+
+  public final void setTimeToMaxV(double timeToMaxV) {
+    acceleration = velocity / timeToMaxV;
   }
 
   public boolean onTarget() {

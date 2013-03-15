@@ -19,7 +19,7 @@ public class ControlBoard {
   }
 
   public boolean getHighGear() {
-    return leftStick.getRawButton(3);
+    return !leftStick.getRawButton(3);
   }
 
   public boolean getStage1Hang() {

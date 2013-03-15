@@ -3,6 +3,7 @@ package com.team254.frc2013.commands;
 import com.team254.frc2013.Constants;
 import com.team254.lib.util.ThrottledPrinter;
 import com.team254.lib.util.Util;
+import edu.wpi.first.wpilibj.DriverStation;
 
 /**
  * Controls the robot drive train using the standard Team 254 scheme.
@@ -25,6 +26,9 @@ public class CheesyDriveCommand extends CommandBase {
   }
 
   protected void execute() {
+
+    if (DriverStation.getInstance().isAutonomous())
+      return;
    // p.println(intake.getEncoderCount() + "");
    // p.println(drive.getLeftEncoderDistance() + " " + drive.getRightEncoderDistance());
     boolean isQuickTurn = controlBoard.getQuickTurn();

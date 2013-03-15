@@ -69,7 +69,7 @@ public class Drive extends Subsystem {
   ProfiledPIDController straightController = new ProfiledPIDController("straightController",
           new PIDGains(Constants.driveStraightKP, Constants.driveStraightKI, Constants.driveStraightKD),
           new DriveControlSource(true), new DriveControlOutput(true),
-          6*12.0, .25); // Half a second to accelerate to 5.0 ft/s
+          6*12.0, .25);
 
   PIDController turnController = new PIDController("turnController",
           new PIDGains(Constants.driveTurnKP, Constants.driveTurnKI, Constants.driveTurnKD),
@@ -115,13 +115,9 @@ public class Drive extends Subsystem {
     gyro.reset();
   }
 
-  public void setMaxSpeed(double speed) {
-    straightController.setMaxVelocity(speed);
-  }
-
   public void shift(boolean highGear) {
     isHighGear = highGear;
-    shifter.set(isHighGear);
+    shifter.set(!isHighGear);
   }
 
   public boolean isHighGear() {
@@ -134,24 +130,37 @@ public class Drive extends Subsystem {
     setLeftRightPower(0, 0);
   }
 
-  public void setPowerGoal(double power, double angle) {
-    straightController.disable();
-    lastStraight = power;
+  public void setSpeedGoal(double speed, double angle) {
+    straightController.setMaxVelocity(speed);
+    straightController.setTimeToMaxV(0.001);
+    straightController.setGoal(speed < 0 ? -1000 : 1000);
+    straightController.enable();
     turnController.setGoal(angle);
     turnController.enable();
   }
 
-  public void setPositionGoal(double distance, double angle) {
+  public void setPositionGoal(double distance, double angle, double speed) {
+    straightController.setMaxVelocity(speed);
+    straightController.setTimeToMaxV(.2);
     straightController.setGoal(distance);
     straightController.enable();
     turnController.setGoal(angle);
     turnController.enable();
   }
 
+  public void updatePositionGoal(double distance) {
+    straightController.setGoalRaw(distance);
+  }
+
   public void setTurnGoal(double angle) {
     straightController.disable();
+    lastStraight = 0;
     turnController.setGoal(angle);
     turnController.enable();
+  }
+
+  public void updateTurnGoal(double angle) {
+    turnController.setGoalRaw(angle);
   }
 
   public boolean onTarget() {

@@ -84,13 +84,13 @@ public class Constants extends ConstantsBase {
   public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .85);
   public static final Constant sensitivityLow = new Constant("sensitivityLow", .7);
 
-  public static final Constant driveStraightKP = new Constant("driveStraightKP", 0.014);
-  public static final Constant driveStraightKI = new Constant("driveStraightKI", .0005);
-  public static final Constant driveStraightKD = new Constant("driveStraightKD", 0.02);
+  public static final Constant driveStraightKP = new Constant("driveStraightKP", 0.07);
+  public static final Constant driveStraightKI = new Constant("driveStraightKI", 0);
+  public static final Constant driveStraightKD = new Constant("driveStraightKD", 0.04);
 
-  public static final Constant driveTurnKP = new Constant("driveTurnKP", 0.02);
-  public static final Constant driveTurnKI = new Constant("driveTurnKI", 0.0005);
-  public static final Constant driveTurnKD = new Constant("driveTurnKD", 0.025);
+  public static final Constant driveTurnKP = new Constant("driveTurnKP", 0.03);
+  public static final Constant driveTurnKI = new Constant("driveTurnKI", 0);
+  public static final Constant driveTurnKD = new Constant("driveTurnKD", 0.09);
 
   public static final Constant hangerKP = new Constant("hangerKP", 0.0);
   public static final Constant hangerKI = new Constant("hangerKI", 0.0);
