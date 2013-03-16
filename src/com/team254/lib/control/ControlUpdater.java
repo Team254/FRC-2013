@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 
+
 /**
  * Keeps track of, updates, and pokes the subsystems and controllers periodically.
  *
@@ -13,7 +14,7 @@ public class ControlUpdater {
   private static ControlUpdater instance = null;
   private Vector systems = new Vector();
   private Timer controlUpdater;
-  private double period = 1.0 / 100.0;
+  private double period = 1.0 / 50.0;
 
   private class UpdaterTask extends TimerTask {
     private ControlUpdater updater;
@@ -31,9 +32,11 @@ public class ControlUpdater {
   }
 
   public void update() {
+    //System.out.println("s " + edu.wpi.first.wpilibj.Timer.getFPGATimestamp() + " " + this.hashCode());
     for(int i = 0; i < systems.size(); i++) {
       ((Updatable)systems.elementAt(i)).update();
     }
+    //System.out.println("e " + edu.wpi.first.wpilibj.Timer.getFPGATimestamp());
   }
 
   public static ControlUpdater getInstance() {

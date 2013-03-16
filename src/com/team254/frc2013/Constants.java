@@ -82,15 +82,23 @@ public class Constants extends ConstantsBase {
 
   // Drive tuning
   public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .85);
-  public static final Constant sensitivityLow = new Constant("sensitivityLow", .7);
+  public static final Constant sensitivityLow = new Constant("sensitivityLow", .75);
 
-  public static final Constant driveStraightKP = new Constant("driveStraightKP", 0.07);
-  public static final Constant driveStraightKI = new Constant("driveStraightKI", 0);
-  public static final Constant driveStraightKD = new Constant("driveStraightKD", 0.04);
+  public static final Constant driveStraightKPLow = new Constant("driveStraightKPLow", 0.07);
+  public static final Constant driveStraightKILow = new Constant("driveStraightKILow", 0);
+  public static final Constant driveStraightKDLow = new Constant("driveStraightKDLow", 0.02);
 
-  public static final Constant driveTurnKP = new Constant("driveTurnKP", 0.03);
-  public static final Constant driveTurnKI = new Constant("driveTurnKI", 0);
-  public static final Constant driveTurnKD = new Constant("driveTurnKD", 0.09);
+  public static final Constant driveTurnKPLow = new Constant("driveTurnKPLow", 0.03);
+  public static final Constant driveTurnKILow = new Constant("driveTurnKILow", 0);
+  public static final Constant driveTurnKDLow = new Constant("driveTurnKDLow", 0.045);
+  
+  public static final Constant driveStraightKPHigh = new Constant("driveStraightKPHigh", 0.045);
+  public static final Constant driveStraightKIHigh = new Constant("driveStraightKIHigh", 0);
+  public static final Constant driveStraightKDHigh = new Constant("driveStraightKDHigh", 0.17);
+
+  public static final Constant driveTurnKPHigh = new Constant("driveTurnKPHigh", 0.045);
+  public static final Constant driveTurnKIHigh = new Constant("driveTurnKIHigh", 0);
+  public static final Constant driveTurnKDHigh = new Constant("driveTurnKDHigh", 0.15);
 
   public static final Constant hangerKP = new Constant("hangerKP", 0.0);
   public static final Constant hangerKI = new Constant("hangerKI", 0.0);

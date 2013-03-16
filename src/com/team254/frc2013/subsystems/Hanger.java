@@ -6,6 +6,7 @@ import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.control.impl.ProfiledPIDController;
+import com.team254.lib.control.impl.TrapezoidProfile;
 import com.team254.lib.util.RelativeEncoder;
 import edu.wpi.first.wpilibj.Solenoid;
 
@@ -28,7 +29,7 @@ public class Hanger extends PeriodicSubsystem {
 
   PIDGains gains = new PIDGains(Constants.hangerKP, Constants.hangerKI, Constants.hangerKD);
   ProfiledPIDController controller = new ProfiledPIDController("Hanger", gains, new HangerControlSource(),
-          new HangerControlOutput(), .5, .5);
+          new HangerControlOutput(), new TrapezoidProfile(.5,.5));
 
   private class HangerControlSource implements ControlSource {
     public double get() {

@@ -4,9 +4,11 @@ import com.team254.frc2013.Constants;
 import com.team254.frc2013.commands.CheesyDriveCommand;
 import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
+import com.team254.lib.control.MotionProfile;
 import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.impl.PIDController;
 import com.team254.lib.control.impl.ProfiledPIDController;
+import com.team254.lib.control.impl.TrapezoidProfile;
 import com.team254.lib.util.RelativeEncoder;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -66,13 +68,17 @@ public class Drive extends Subsystem {
     }
   }
 
+  TrapezoidProfile profile = new TrapezoidProfile(6*12.0, .25);
+  PIDGains lowStraightGains = new PIDGains(Constants.driveStraightKPLow, Constants.driveStraightKILow, Constants.driveStraightKDLow);
+  PIDGains highStraightGains = new PIDGains(Constants.driveStraightKPHigh, Constants.driveStraightKIHigh, Constants.driveStraightKDHigh);
   ProfiledPIDController straightController = new ProfiledPIDController("straightController",
-          new PIDGains(Constants.driveStraightKP, Constants.driveStraightKI, Constants.driveStraightKD),
-          new DriveControlSource(true), new DriveControlOutput(true),
-          6*12.0, .25);
+          highStraightGains,
+          new DriveControlSource(true), new DriveControlOutput(true), profile);
 
+  PIDGains lowTurnGains = new PIDGains(Constants.driveTurnKPLow, Constants.driveTurnKILow, Constants.driveTurnKDLow);
+  PIDGains highTurnGains = new PIDGains(Constants.driveTurnKPHigh, Constants.driveTurnKIHigh, Constants.driveTurnKDHigh);
   PIDController turnController = new PIDController("turnController",
-          new PIDGains(Constants.driveTurnKP, Constants.driveTurnKI, Constants.driveTurnKD),
+          highTurnGains,
           new DriveControlSource(false), new DriveControlOutput(false));;
 
   public Drive(DriveGearbox motors) {
@@ -118,6 +124,8 @@ public class Drive extends Subsystem {
   public void shift(boolean highGear) {
     isHighGear = highGear;
     shifter.set(!isHighGear);
+    straightController.setGains(highGear ? highStraightGains : lowStraightGains);
+    turnController.setGains(highGear ? highTurnGains : lowTurnGains);
   }
 
   public boolean isHighGear() {
@@ -131,8 +139,8 @@ public class Drive extends Subsystem {
   }
 
   public void setSpeedGoal(double speed, double angle) {
-    straightController.setMaxVelocity(speed);
-    straightController.setTimeToMaxV(0.001);
+    profile.setMaxVelocity(speed);
+    profile.setTimeToMaxV(0.001);
     straightController.setGoal(speed < 0 ? -1000 : 1000);
     straightController.enable();
     turnController.setGoal(angle);
@@ -140,8 +148,8 @@ public class Drive extends Subsystem {
   }
 
   public void setPositionGoal(double distance, double angle, double speed) {
-    straightController.setMaxVelocity(speed);
-    straightController.setTimeToMaxV(.2);
+    profile.setMaxVelocity(speed);
+    profile.setTimeToMaxV(.2);
     straightController.setGoal(distance);
     straightController.enable();
     turnController.setGoal(angle);
@@ -165,5 +173,13 @@ public class Drive extends Subsystem {
 
   public boolean onTarget() {
     return straightController.onTarget() && turnController.onTarget();
+  }
+  
+  public void resetControllers() {
+    straightController.setProfile(profile);
+  }
+  
+  public void setStraightProfile(MotionProfile profile) {
+    straightController.setProfile(profile);
   }
 }

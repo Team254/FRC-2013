@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class TuneDriveAutoMode extends CommandGroup {
   public TuneDriveAutoMode() {
-    addSequential(new ShiftCommand(false));
-    //addSequential(new TuneDriveCommand(10, 2));
+    addSequential(new ShiftCommand(true));
+   // addSequential(new TuneDriveCommand(10, 2));
     addSequential(new TuneTurnCommand(10, 45));
   }
 }

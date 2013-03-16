@@ -1,6 +1,7 @@
 package com.team254.frc2013;
 
-import com.team254.frc2013.auto.CenterDiscAutoMode;
+import com.team254.frc2013.auto.CenterDiscMiddleAutoMode;
+import com.team254.frc2013.auto.CenterDiscSideAutoMode;
 import com.team254.frc2013.auto.DriveMotorTestAutoMode;
 import com.team254.lib.control.ControlUpdater;
 import com.team254.frc2013.auto.FiveDiscAutoMode;
@@ -45,7 +46,8 @@ public class Overkill extends IterativeRobot {
     autoModeSelector.addAutoCommand("5 Disc", FiveDiscAutoMode.class);
     autoModeSelector.addAutoCommand("4 Disc", FourDiscAutoMode.class);
     autoModeSelector.addAutoCommand("2 Disc", TwoDiscAutoMode.class);
-    autoModeSelector.addAutoCommand("Center Disc", CenterDiscAutoMode.class);
+    autoModeSelector.addAutoCommand("Center (Middle)", CenterDiscMiddleAutoMode.class);
+    autoModeSelector.addAutoCommand("Center (Side)", CenterDiscSideAutoMode.class);
     autoModeSelector.addAutoCommand("Drive Test", DriveMotorTestAutoMode.class);
     autoModeSelector.addAutoCommand("Tune Drive", TuneDriveAutoMode.class);
 
@@ -56,7 +58,7 @@ public class Overkill extends IterativeRobot {
   public void disabledInit() {
     System.out.println("Disabled init.. reloading constants...");
     Constants.readConstantsFromFile();
-
+    CommandBase.drive.disableControllers();
     // Make sure that the autonomous stops running.
     if (currentAutoMode != null) {
       currentAutoMode.cancel();
