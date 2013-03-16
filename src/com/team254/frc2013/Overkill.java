@@ -132,18 +132,6 @@ public class Overkill extends IterativeRobot {
       CommandBase.shooter.setPreset(Shooter.PRESET_FRONT_PYRAMID);
     }
 
-    // Set conveyor and intake speed.
-    if (CommandBase.controlBoard.operatorJoystick.getIntakeOutButtonState()) {
-      CommandBase.intake.setIntakePower(-1.0);
-      CommandBase.conveyor.setMotor(-1.0);
-    } else if (CommandBase.controlBoard.operatorJoystick.getIntakeButtonState()) {
-      CommandBase.intake.setIntakePower(1.0);
-      CommandBase.conveyor.setMotor(1.0);
-    } else {
-      CommandBase.intake.setIntakePower(0.0);
-      CommandBase.conveyor.setMotor(0.0);
-    }
-
     // Set shooter on/off.
     CommandBase.shooter.setShooterOn(CommandBase.controlBoard.operatorJoystick.getShooterSwitch());
 

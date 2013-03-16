@@ -3,6 +3,7 @@ package com.team254.frc2013;
 import com.team254.frc2013.commands.ContinuousShootCommand;
 import com.team254.frc2013.commands.IndexerCommand;
 import com.team254.frc2013.commands.IntakeRaiseCommand;
+import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.ShootCommand;
 
 /**
@@ -26,6 +27,10 @@ public class OperatorControlHelper {
 
     c.operatorJoystick.getShootButton().whenPressed(new ShootCommand());
 
+    c.operatorJoystick.getIntakeButton().whenPressed(new RunIntakeCommand(1));
+    c.operatorJoystick.getIntakeButton().whenReleased(new RunIntakeCommand(0));
+    c.operatorJoystick.getIntakeOutButton().whenPressed(new RunIntakeCommand(-1));
+    c.operatorJoystick.getIntakeOutButton().whenReleased(new RunIntakeCommand(0));
 
     c.operatorJoystick.getRapidFireButton().whenPressed(new ContinuousShootCommand(true));
     c.operatorJoystick.getRapidFireButton().whenReleased(new ContinuousShootCommand(false));
