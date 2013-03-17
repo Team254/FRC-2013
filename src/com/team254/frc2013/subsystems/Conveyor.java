@@ -6,7 +6,6 @@ import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.util.Listener;
 import com.team254.lib.util.Notifier;
 import com.team254.lib.util.Util;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -17,7 +16,6 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class Conveyor extends PeriodicSubsystem implements Listener {
   private Talon conveyorMotor = new Talon(Constants.conveyorPort.getInt());
-  private Solenoid conveyorSolenoid = new Solenoid(Constants.conveyorSolenoidPort.getInt());
   Timer autoTimer = new Timer();
   boolean doAutoLoad = false;
 
@@ -28,18 +26,6 @@ public class Conveyor extends PeriodicSubsystem implements Listener {
 
   public void setMotor(double power) {
     conveyorMotor.set(Util.limit(power, 1.0));
-  }
-
-  public void setSolenoidState(boolean on) {
-    conveyorSolenoid.set(on);
-  }
-
-  public boolean getSolenoidState() {
-    return conveyorSolenoid.get();
-  }
-
-  public void toggleSolenoid() {
-    setSolenoidState(!getSolenoidState());
   }
 
   protected void initDefaultCommand() {

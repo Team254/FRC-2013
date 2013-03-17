@@ -11,6 +11,7 @@ import com.team254.frc2013.subsystems.Intake;
 import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.util.PressureTransducer;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -32,6 +33,7 @@ public abstract class CommandBase extends Command {
       new PressureTransducer(Constants.pressureTransducerPort.getInt());
   public static Intake intake = new Intake();
   public static Conveyor conveyor = new Conveyor();
+  public static Timer shotTimer = new Timer();
 
   public static void init() {
     // This MUST be here. If the OI creates Commands (which it very likely will), constructing it
@@ -43,5 +45,6 @@ public abstract class CommandBase extends Command {
     OperatorControlHelper.setupOperationMap(controlBoard);
     //r.set(Relay.Value.kForward);
     compressor.start();
+    shotTimer.start();
   }
 }

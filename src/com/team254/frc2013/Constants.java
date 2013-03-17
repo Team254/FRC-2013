@@ -40,8 +40,8 @@ public class Constants extends ConstantsBase {
   public static final Constant shooterLoaderPort = new Constant("shooterLoaderPort", 5);
   public static final Constant hangerRetractedPort = new Constant("hangerRetractedPort", 4);
   public static final Constant hangerExtendedPort = new Constant("hangerExtendedPort", 3);
-  public static final Constant indexerPort = new Constant("indexerPort", 2);
-  public static final Constant conveyorSolenoidPort = new Constant("conveyorSolenoidPort", 1);
+  public static final Constant indexerRightPort = new Constant("indexerRightPort", 2);
+  public static final Constant indexerLeftPort = new Constant("indexerLeftPort", 1);
 
   // Operator control mappings
   public static final Constant autonSelectControlPort = new Constant("autonSelectControlPort",11);
@@ -91,7 +91,7 @@ public class Constants extends ConstantsBase {
   public static final Constant driveTurnKPLow = new Constant("driveTurnKPLow", 0.03);
   public static final Constant driveTurnKILow = new Constant("driveTurnKILow", 0);
   public static final Constant driveTurnKDLow = new Constant("driveTurnKDLow", 0.045);
-  
+
   public static final Constant driveStraightKPHigh = new Constant("driveStraightKPHigh", 0.045);
   public static final Constant driveStraightKIHigh = new Constant("driveStraightKIHigh", 0);
   public static final Constant driveStraightKDHigh = new Constant("driveStraightKDHigh", 0.17);

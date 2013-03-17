@@ -1,13 +1,13 @@
 package com.team254.frc2013.commands;
 
 /**
- * Shoots a disc that is already loaded into the shooter.
+ * Extends the shooter.
  *
- * @author tom@team254.com (Tom Bottiglieri)
  * @author pat@team254.com (Patrick Fairbank)
  */
-public class RetractShooterCommand extends CommandBase {
-  public RetractShooterCommand() {
+public class ShooterRetractCommand extends CommandBase {
+  public ShooterRetractCommand() {
+    requires(shooter);
   }
 
   protected void initialize() {

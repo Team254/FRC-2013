@@ -18,7 +18,6 @@ public class WaitCommand extends Command {
   }
 
   protected void execute() {
-    System.out.println("Waiting..." + timeout);
   }
 
   protected boolean isFinished() {

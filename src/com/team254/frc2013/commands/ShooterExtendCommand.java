@@ -1,17 +1,19 @@
 package com.team254.frc2013.commands;
 
 /**
- * Shoots a disc that is already loaded into the shooter.
+ * Retracts the shooter.
  *
- * @author tom@team254.com (Tom Bottiglieri)
  * @author pat@team254.com (Patrick Fairbank)
  */
-public class RetractShooterCommand extends CommandBase {
-  public RetractShooterCommand() {
+public class ShooterExtendCommand extends CommandBase {
+  public ShooterExtendCommand() {
   }
 
   protected void initialize() {
-    shooter.load();
+    shooter.extend();
+    System.out.println("Shot timer: " + shotTimer.get());
+    shotTimer.reset();
+    shotTimer.start();
   }
 
   protected void execute() {

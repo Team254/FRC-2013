@@ -1,7 +1,5 @@
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-
 /**
  * Tests all robot subsystems to make sure they are working
  *
@@ -47,7 +45,6 @@ public class TestOutputsCommand extends CommandBase {
     hanger.setHookUp(true);
     hanger.setPto(true);
     //indexer.setPistonDown(true);
-    conveyor.setSolenoidState(true);
 
     //shooter.setRawPwm(1);
     //shooter.setSpeed(10000);

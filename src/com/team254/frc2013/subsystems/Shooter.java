@@ -29,7 +29,8 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   private Solenoid loader = new Solenoid(Constants.shooterLoaderPort.getInt());
   private Solenoid angle = new Solenoid(Constants.shooterAnglePort.getInt());
 
-  private Solenoid indexer = new Solenoid(Constants.indexerPort.getInt());
+  private Solenoid indexerLeft = new Solenoid(Constants.indexerLeftPort.getInt());
+  private Solenoid indexerRight = new Solenoid(Constants.indexerRightPort.getInt());
   Debouncer debouncer = new Debouncer(.125);
   public AnalogChannel discSensor = new AnalogChannel(Constants.discSensorPort.getInt());
   ThrottledPrinter p = new ThrottledPrinter(.1);
@@ -46,7 +47,8 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   private Timer stateTimer = new Timer();
 
   public void setIndexerUp(boolean up) {
-    indexer.set(!up);
+    indexerLeft.set(!up);
+    indexerRight.set(!up);
   }
 
   // Load a frisbee into shooter by retracting the piston
@@ -142,7 +144,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
     switch (preset) {
       case PRESET_FRONT_PYRAMID:
         setHighAngle(true);
-        setPowers(1, 1); // CHANGE BACK TO 1,1 
+        setPowers(1, 1);
         break;
       case PRESET_PYRAMID_GOAL:
         setHighAngle(true);
@@ -151,7 +153,7 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
       case PRESET_BACK_PYRAMID:
       default:
         setHighAngle(false);
-        setPowers(1, 1); // CHANGE BACK TO 1,1 
+        setPowers(1, 1);
     }
   }
 
