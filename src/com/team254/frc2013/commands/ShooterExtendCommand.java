@@ -1,7 +1,7 @@
 package com.team254.frc2013.commands;
 
 /**
- * Retracts the shooter.
+ * Extends the shooter.
  *
  * @author pat@team254.com (Patrick Fairbank)
  */

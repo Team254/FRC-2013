@@ -1,7 +1,6 @@
 package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
-import com.team254.lib.util.ThrottledPrinter;
 import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -16,8 +15,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Intake extends Subsystem {
   private Talon intakeMotor = new Talon(Constants.intakePort.getInt());
   private Talon intakePivotMotor = new Talon(Constants.intakePivotPort.getInt());
-
-  ThrottledPrinter p = new ThrottledPrinter(.5);
 
   protected void initDefaultCommand() {
   }

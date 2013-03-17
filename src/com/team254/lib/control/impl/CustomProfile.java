@@ -2,7 +2,6 @@ package com.team254.lib.control.impl;
 
 import com.team254.lib.control.MotionProfile;
 import com.team254.lib.util.Interpolator;
-import java.util.Vector;
 
 /**
  *
@@ -20,7 +19,7 @@ public class CustomProfile implements MotionProfile {
 
     double period = Math.abs(curTime - lastTime);
     double vel = i.get(curSource);
-    
+
     double setpoint = curSetpoint;
     setpoint += (vel * period * sign);
     if (setpoint >=  goal && sign > 0)
@@ -44,16 +43,16 @@ public class CustomProfile implements MotionProfile {
     lastTime = t;
     return curSource;
   }
-  
+
   public void addWaypoint(double pos, double vel) {
     i.add(pos, vel);
   }
-  
+
   public void resetProfile() {
     i.clear();
   }
-  
 
 
-  
+
+
 }

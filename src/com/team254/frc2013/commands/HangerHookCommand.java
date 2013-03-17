@@ -1,7 +1,5 @@
 package com.team254.frc2013.commands;
 
-import com.team254.frc2013.subsystems.Hanger;
-
 /**
  * Controls the first-stage hanger hook
  *
@@ -16,10 +14,8 @@ public class HangerHookCommand extends CommandBase {
 
   protected void initialize() {
     if (isUp) {
-      //hanger.setHookUp(Hanger.HANGER_HOOK_EXTENDED);
       hanger.setHookUp(true);
     } else {
-      //hanger.setHookUp(Hanger.HANGER_HOOK_FLOATING);
       hanger.setHookUp(false);
     }
   }

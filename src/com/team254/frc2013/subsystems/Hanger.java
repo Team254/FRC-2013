@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.Solenoid;
 public class Hanger extends PeriodicSubsystem {
   private DriveGearbox motors;
   private Solenoid hangerExtend = new Solenoid(Constants.hangerExtendedPort.getInt());
-  //private Solenoid hangerRetract = new Solenoid(Constants.hangerRetractedPort.getInt());
   private Solenoid pto = new Solenoid(Constants.ptoPort.getInt());
   private RelativeEncoder encoder;
 
@@ -56,22 +55,6 @@ public class Hanger extends PeriodicSubsystem {
 
   public void setHookUp(boolean isUp) {
     hangerExtend.set(isUp);
-    /*
-    switch(isUp) {
-      case HANGER_HOOK_EXTENDED:
-        hangerExtend.set(true);
-        hangerRetract.set(true);
-        break;
-      case HANGER_HOOK_RETRACTED:
-        hangerExtend.set(false);
-        hangerRetract.set(false);
-        break;
-      case HANGER_HOOK_FLOATING:
-      default:
-        hangerExtend.set(false);
-        hangerRetract.set(true);
-    }
-    */
   }
 
   public void setPto(boolean on) {

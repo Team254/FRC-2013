@@ -19,11 +19,10 @@ public class DriveGearbox extends Subsystem{
   private Talon rightDriveBC = new Talon(Constants.rightDrivePortBC.getInt());
 
   // Sensors
-  private Encoder rightEncoder = new Encoder(Constants.rightEncoderPortA.getInt(),
-          Constants.rightEncoderPortB.getInt());
-
   private Encoder leftEncoder = new Encoder(Constants.leftEncoderPortA.getInt(),
           Constants.leftEncoderPortB.getInt(), true);
+  private Encoder rightEncoder = new Encoder(Constants.rightEncoderPortA.getInt(),
+          Constants.rightEncoderPortB.getInt());
 
   private boolean isDriveMode = true;
 

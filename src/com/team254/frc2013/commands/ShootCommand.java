@@ -30,7 +30,7 @@ public class ShootCommand extends CommandBase {
   }
 
   protected void end() {
-    shooter.load();
+    shooter.retract();
   }
 
   protected void interrupted() {

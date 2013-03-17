@@ -15,7 +15,7 @@ import javax.microedition.io.SocketConnection;
  */
 public class PIDTuner implements Runnable {
   private static PIDTuner instance = null;
-  private final int PORT_NUMBER = 41234; // ?
+  private final int PORT_NUMBER = 41234;
   private Vector connections = new Vector();
   Thread thread;
   boolean running = false;

@@ -1,7 +1,7 @@
 package com.team254.frc2013.commands;
 
 /**
- * Extends the shooter.
+ * Retracts the shooter.
  *
  * @author pat@team254.com (Patrick Fairbank)
  */
@@ -11,7 +11,7 @@ public class ShooterRetractCommand extends CommandBase {
   }
 
   protected void initialize() {
-    shooter.load();
+    shooter.retract();
   }
 
   protected void execute() {

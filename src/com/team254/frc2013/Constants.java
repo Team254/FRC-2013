@@ -55,8 +55,8 @@ public class Constants extends ConstantsBase {
   public static final Constant frontPyramidControlPort = new Constant("frontPyramidControlPort", 3);
   public static final Constant rapidFirePort = new Constant("rapidFirePort", 2);
   public static final Constant shooterOnPort = new Constant("shooterOnPort", 3);
-  //public static final Constant intakeUpPort = new Constant("intakeUpPort", 4);
-  //public static final Constant intakeDownPort = new Constant("intakeDownPort", 12);
+  //public static final Constant intakeSwitchUpPort = new Constant("intakeSwitchUpPort", 4);
+  //public static final Constant intakeSwitchDownPort = new Constant("intakeSwitchDownPort", 12);
 
   // Sensor mappings
   public static final Constant gyroPort = new Constant("gyroPort", 1);

@@ -25,9 +25,8 @@ public class Drive extends Subsystem {
   RelativeEncoder leftEncoder;
   RelativeEncoder rightEncoder;
 
-  // Shifter
   private Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
-  private Gyro gyro = new Gyro(1);//Constants.gyroPort.getInt());
+  private Gyro gyro = new Gyro(Constants.gyroPort.getInt());
   private boolean isHighGear = true;
 
   protected class DriveControlSource implements ControlSource {
@@ -60,7 +59,7 @@ public class Drive extends Subsystem {
 
     public void set(double value) {
       if (straight) {
-        lastStraight = value; // Why is this negative?
+        lastStraight = value;
       } else {
         lastTurn = value;
       }
@@ -92,12 +91,11 @@ public class Drive extends Subsystem {
   }
 
   protected void initDefaultCommand() {
-    //setDefaultCommand(new TankDriveCommand());
     setDefaultCommand(new CheesyDriveCommand());
   }
 
   public void setLeftRightPower(double leftPower, double rightPower) {
-    motors.driveLR(leftPower, -rightPower); // changed from + - for comp bot
+    motors.driveLR(leftPower, -rightPower);
   }
 
   public double getLeftEncoderDistance() {
@@ -174,11 +172,11 @@ public class Drive extends Subsystem {
   public boolean onTarget() {
     return straightController.onTarget() && turnController.onTarget();
   }
-  
+
   public void resetControllers() {
     straightController.setProfile(profile);
   }
-  
+
   public void setStraightProfile(MotionProfile profile) {
     straightController.setProfile(profile);
   }

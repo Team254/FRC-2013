@@ -52,11 +52,11 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   }
 
   // Load a frisbee into shooter by retracting the piston
-  public void load() {
+  public void retract() {
     loader.set(false);
   }
 
-  // Extend piston to prepare for loading in another frisbee
+  // Shoot already loaded frisbee by extending the piston
   public void extend() {
     loader.set(true);
   }
