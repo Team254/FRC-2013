@@ -2,6 +2,7 @@ package com.team254.lib.util;
 
 import com.sun.squawk.microedition.io.FileConnection;
 import java.io.DataInputStream;
+import java.io.IOException;
 import java.util.Vector;
 import javax.microedition.io.Connector;
 
@@ -60,6 +61,8 @@ public abstract class ConstantsBase {
         if (!found)
           System.out.println("Error: the constant doesn't exist: " + lines[i]);
       }
+    } catch (IOException e) {
+      System.out.println("Constants.txt not found. Not overriding constants.");
     } catch (Exception e) {
       e.printStackTrace();
     }

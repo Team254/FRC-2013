@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ShootAndLoadCommand extends CommandGroup {
   public ShootAndLoadCommand() {
     addSequential(new ShooterExtendCommand());
-    addSequential(new WaitCommand(0.3));
+    addSequential(new WaitCommand(0.5));
     addSequential(new ShooterRetractCommand());
     addSequential(new IndexerDownCommand());
     addSequential(new IndexerUpCommand());

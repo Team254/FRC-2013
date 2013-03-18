@@ -34,7 +34,7 @@ public class IndexerDownCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return afterDownDelayTimer.get() > 0.15 || isTimedOut();
+    return afterDownDelayTimer.get() > 0.25 || isTimedOut();
   }
 
   protected void end() {

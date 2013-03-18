@@ -26,7 +26,6 @@ public class CheesyDriveCommand extends CommandBase {
   }
 
   protected void execute() {
-System.out.println("Executing CheesyDrive");
     if (DriverStation.getInstance().isAutonomous())
       return;
    // p.println(intake.getEncoderCount() + "");

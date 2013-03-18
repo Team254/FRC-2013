@@ -36,7 +36,7 @@ public class IntakeRaiseCommand extends CommandBase {
     if (intakePosition == INTAKE_UP) {
       intake.setRawPivot(.5);
     } else if (intakePosition == INTAKE_DOWN) {
-      intake.setRawPivot(-0.33);
+      intake.setRawPivot(-0.5);
     } else {
       intake.setRawPivot(0);
     }
