@@ -142,6 +142,14 @@ public class OperatorJoystick extends Joystick {
     return new JoystickButton(this, Constants.rapidFirePort.getInt());
   }
 
+  public boolean getClimbButtonState() {
+    return this.getRawButton(Constants.climbButtonPort.getInt());
+  }
+
+  public JoystickButton getClimbButton() {
+    return new JoystickButton(this, Constants.climbButtonPort.getInt());
+  }
+
   public boolean getShootButtonState() {
     return this.getRawButton(Constants.shootControlPort.getInt());
   }

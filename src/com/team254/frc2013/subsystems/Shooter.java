@@ -5,7 +5,6 @@ import com.team254.lib.control.ControlledSubsystem;
 import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.util.Debouncer;
 import com.team254.lib.util.ThrottledPrinter;
-import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
@@ -32,7 +31,6 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   private Solenoid indexerLeft = new Solenoid(Constants.indexerLeftPort.getInt());
   private Solenoid indexerRight = new Solenoid(Constants.indexerRightPort.getInt());
   Debouncer debouncer = new Debouncer(.125);
-  public AnalogChannel discSensor = new AnalogChannel(Constants.discSensorPort.getInt());
   ThrottledPrinter p = new ThrottledPrinter(.1);
   public DigitalInput indexerDownSensorA =
       new DigitalInput(Constants.indexerDownSensorPortA.getInt());

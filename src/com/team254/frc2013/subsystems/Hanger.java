@@ -5,10 +5,10 @@ import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.PeriodicSubsystem;
-import com.team254.lib.control.impl.ProfiledPIDController;
-import com.team254.lib.control.impl.TrapezoidProfile;
-import com.team254.lib.util.RelativeEncoder;
+import com.team254.lib.control.impl.PIDController;
+import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Controls the climbing and hanging mechanism.
@@ -20,37 +20,43 @@ public class Hanger extends PeriodicSubsystem {
   private DriveGearbox motors;
   private Solenoid hangerExtend = new Solenoid(Constants.hangerExtendedPort.getInt());
   private Solenoid pto = new Solenoid(Constants.ptoPort.getInt());
-  private RelativeEncoder encoder;
+  private Gyro pitchGyro = new Gyro(Constants.pitchGyroPort.getInt());
+  private Timer pitchRateTimer = new Timer();
+  private double pitchRate = 0;
+  private double lastPitchAngle = 0;
 
-  public static final int HANGER_HOOK_EXTENDED = 0;
-  public static final int HANGER_HOOK_FLOATING = 1;
-  public static final int HANGER_HOOK_RETRACTED = 2;
+  private PIDController controller;
 
-  PIDGains gains = new PIDGains(Constants.hangerKP, Constants.hangerKI, Constants.hangerKD);
-  ProfiledPIDController controller = new ProfiledPIDController("Hanger", gains, new HangerControlSource(),
-          new HangerControlOutput(), new TrapezoidProfile(.5,.5));
-
-  private class HangerControlSource implements ControlSource {
+  private class HangControlSource implements ControlSource {
     public double get() {
-      return encoder.get();
+      return motors.getLeftEncoder().get();
     }
-    public void updateFilter() { }
-  }
-  private class HangerControlOutput implements ControlOutput {
-    public void set(double value) {
-      //motors.set(value);
+
+    public void updateFilter() {
     }
   }
 
-  int state;
-  private static final int STATE_IDLE = 0;
-  private static final int STATE_FIRST_UP = 1;
-  private static final int STATE_FIRST_HANG = 2;
+  private class HangControlOutput implements ControlOutput {
+    public void set(double value) {
+      motors.set(value);
+    }
+  }
 
   public Hanger(DriveGearbox motors) {
     this.motors = motors;
-    encoder = new RelativeEncoder(motors.getLeftEncoder());
-    encoder.start();
+    PIDGains gains = new PIDGains(Constants.hangerUpKP, Constants.hangerUpKI, Constants.hangerUpKD);
+    controller = new PIDController("hangerUpController", gains, new HangControlSource(),
+                                   new HangControlOutput());
+    controller.setEpsilons(15, 1);
+    controller.disable();
+  }
+
+  public void setGoal(double goal) {
+    controller.setGoal(goal);
+  }
+
+  public void setGoalRaw(double goal) {
+    controller.setGoalRaw(goal);
   }
 
   public void setHookUp(boolean isUp) {
@@ -62,34 +68,39 @@ public class Hanger extends PeriodicSubsystem {
     motors.setDriveMode(!on);
   }
 
+  public void enableController(boolean on) {
+    if (on) {
+      controller.enable();
+    } else {
+      controller.disable();
+    }
+  }
+
   protected void initDefaultCommand() {
   }
 
-  public void prepareClimb() {
-    if (state == STATE_IDLE) {
-      state = STATE_FIRST_UP;
-    }
+  public double getPitchAngle() {
+    return pitchGyro.getAngle();
   }
 
-  public void startClimb() {
-    if (state == STATE_FIRST_UP) {
-      state = STATE_FIRST_HANG;
-    }
+  public double getPitchRate() {
+    return pitchRate;
+  }
+
+  public void resetPitchGyro() {
+    pitchRate = 0;
+    pitchGyro.reset();
   }
 
   public void update() {
-    switch(state) {
-      case STATE_IDLE:
-        //setHookUp(false);
-        break;
-      case STATE_FIRST_UP:
-        //setHookUp(true);
-        break;
-      case STATE_FIRST_HANG:
-        //setHookUp(false);
-        break;
-      default:
-        break;
-    }
+    double pitchAngle = pitchGyro.getAngle();
+    pitchRate = (pitchAngle - lastPitchAngle) / pitchRateTimer.get();
+    lastPitchAngle = pitchAngle;
+    pitchRateTimer.reset();
+    pitchRateTimer.start();
+  }
+
+  public boolean onTarget() {
+    return controller.onTarget();
   }
 }

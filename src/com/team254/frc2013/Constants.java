@@ -55,12 +55,11 @@ public class Constants extends ConstantsBase {
   public static final Constant frontPyramidControlPort = new Constant("frontPyramidControlPort", 3);
   public static final Constant rapidFirePort = new Constant("rapidFirePort", 2);
   public static final Constant shooterOnPort = new Constant("shooterOnPort", 3);
-  //public static final Constant intakeSwitchUpPort = new Constant("intakeSwitchUpPort", 4);
-  //public static final Constant intakeSwitchDownPort = new Constant("intakeSwitchDownPort", 12);
+  public static final Constant climbButtonPort = new Constant("climbButtonPort", 1);
 
   // Sensor mappings
   public static final Constant gyroPort = new Constant("gyroPort", 1);
-  public static final Constant discSensorPort = new Constant("discSensorPort", 2);
+  public static final Constant pitchGyroPort = new Constant("pitchGyroPort", 2);
   public static final Constant pressureTransducerPort = new Constant("pressureTransducerPort", 3);
   public static final Constant indexerDownSensorPortA = new Constant("indexerDownSensorPortA", 10);
   public static final Constant indexerDownSensorPortB = new Constant("indexerDownSensorPortB", 11);
@@ -100,9 +99,13 @@ public class Constants extends ConstantsBase {
   public static final Constant driveTurnKIHigh = new Constant("driveTurnKIHigh", 0);
   public static final Constant driveTurnKDHigh = new Constant("driveTurnKDHigh", 0.15);
 
-  public static final Constant hangerKP = new Constant("hangerKP", 0.0);
-  public static final Constant hangerKI = new Constant("hangerKI", 0.0);
-  public static final Constant hangerKD = new Constant("hangerKD", 0.0);
+  public static final Constant hangerUpKP = new Constant("hangerUpKP", 0.005);
+  public static final Constant hangerUpKI = new Constant("hangerUpKI", 0.004);
+  public static final Constant hangerUpKD = new Constant("hangerUpKD", 0.0);
+
+  public static final Constant hangerDownKP = new Constant("hangerDownKP", 0.0);
+  public static final Constant hangerDownKI = new Constant("hangerDownKI", 0.0);
+  public static final Constant hangerDownKD = new Constant("hangerDownKD", 0.0);
 
   public static final Constant intakeKP = new Constant("intakeKP", 0.09);
   public static final Constant intakeKI = new Constant("intakeKI", 0.0);

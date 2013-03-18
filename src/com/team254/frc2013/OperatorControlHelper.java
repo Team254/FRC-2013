@@ -1,8 +1,10 @@
 package com.team254.frc2013;
 
+import com.team254.frc2013.commands.CheesyDriveCommand;
 import com.team254.frc2013.commands.ContinuousShootCommand;
 import com.team254.frc2013.commands.IndexerCommand;
 import com.team254.frc2013.commands.IntakeRaiseCommand;
+import com.team254.frc2013.commands.PtoCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.ShootCommand;
 
@@ -35,8 +37,7 @@ public class OperatorControlHelper {
     c.operatorJoystick.getRapidFireButton().whenPressed(new ContinuousShootCommand(true));
     c.operatorJoystick.getRapidFireButton().whenReleased(new ContinuousShootCommand(false));
 
-    // NOTE(pat, 2013-03-03): PTO disabled for safety until the hanger works.
-    //c.operatorJoystick.ptoOnSwitch.whenPressed(new PtoCommand());
-    //c.operatorJoystick.ptoOnSwitch.whenReleased(new CheesyDriveCommand());
+    c.operatorJoystick.ptoOnSwitch.whenPressed(new PtoCommand());
+    c.operatorJoystick.ptoOnSwitch.whenReleased(new CheesyDriveCommand());
   }
 }

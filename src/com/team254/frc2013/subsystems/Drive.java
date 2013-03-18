@@ -107,6 +107,8 @@ public class Drive extends Subsystem {
   }
 
   public void resetEncoders() {
+    motors.getLeftEncoder().reset();
+    motors.getRightEncoder().reset();
     leftEncoder.reset();
     rightEncoder.reset();
   }

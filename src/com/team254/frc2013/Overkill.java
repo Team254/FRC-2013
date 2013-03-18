@@ -10,10 +10,10 @@ import com.team254.frc2013.auto.SevenDiscAutoMode;
 import com.team254.frc2013.auto.ThreeDiscAutoMode;
 import com.team254.frc2013.auto.TuneDriveAutoMode;
 import com.team254.frc2013.auto.TwoDiscAutoMode;
+import com.team254.frc2013.commands.AutoHangCommand;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.util.PIDTuner;
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -28,7 +28,9 @@ public class Overkill extends IterativeRobot {
   private AutoModeSelector autoModeSelector;
   private boolean lastAutonSelectButton;
   private CommandGroup currentAutoMode;
-  DigitalInput thing = new DigitalInput(14);
+  private AutoHangCommand autoHangCommand;
+  private boolean autoHangStarted;
+  private boolean lastStage1HangButton;
 
   /**
    * Called when the robot is first started up and should be used for any initialization code.
@@ -73,6 +75,7 @@ public class Overkill extends IterativeRobot {
       autoModeSelector.increment();
     }
     lastAutonSelectButton = autonSelectButton;
+    lastStage1HangButton = CommandBase.controlBoard.getStage1Hang();
     updateLCD();
   }
 
@@ -116,6 +119,10 @@ public class Overkill extends IterativeRobot {
     CommandBase.intake.setIntakePower(0);
     CommandBase.conveyor.setMotor(0);
     CommandBase.compressor.start();
+
+    // Set up the one-shot autonomous 30-point climbing routine.
+    autoHangCommand = new AutoHangCommand();
+    autoHangStarted = false;
   }
 
   /**
@@ -137,10 +144,29 @@ public class Overkill extends IterativeRobot {
 
     // Set 10pt hang up/down.
     CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
+
+    // Handle triggering the autonomous 30-point climbing routine.
+    if (CommandBase.controlBoard.getStage1Hang() && !lastStage1HangButton) {
+      CommandBase.hanger.resetPitchGyro();
+    } else if (!CommandBase.controlBoard.getStage1Hang() && lastStage1HangButton &&
+        CommandBase.controlBoard.operatorJoystick.getClimbButtonState() &&
+        autoHangCommand != null) {
+      autoHangStarted = true;
+      Scheduler.getInstance().add(autoHangCommand);
+    }
+
+    // Kill the climb if the dead man switch is released.
+    if (autoHangStarted && !CommandBase.controlBoard.operatorJoystick.getClimbButtonState() &&
+        autoHangCommand != null) {
+      autoHangCommand.cancel();
+      autoHangCommand = null;
+    }
+
+    lastStage1HangButton = CommandBase.controlBoard.getStage1Hang();
   }
 
   private void updateLCD(){
-    String driveEncoders = "LE: " + Math.floor(CommandBase.drive.getLeftEncoderDistance());
+    String driveEncoders = "LE: " + Math.floor(CommandBase.motors.getLeftEncoder().get());
     driveEncoders += " RE: " + Math.floor(CommandBase.drive.getRightEncoderDistance());
     DriverStationLCD lcd = DriverStationLCD.getInstance();
     lcd.println(DriverStationLCD.Line.kUser2, 1, driveEncoders + "     ");
@@ -151,6 +177,9 @@ public class Overkill extends IterativeRobot {
     lcd.println(DriverStationLCD.Line.kUser5, 1,
                 "HE: " + !CommandBase.shooter.indexerDownSensorA.get() + ", " +
                 !CommandBase.shooter.indexerDownSensorB.get() + "    ");
+    lcd.println(DriverStationLCD.Line.kUser6, 1,
+                "PA: " + Math.floor(CommandBase.hanger.getPitchAngle() * 10) / 10 + " PR: " +
+                    Math.floor(CommandBase.hanger.getPitchRate() * 10) / 10 + "    ");
     lcd.updateLCD();
   }
 }

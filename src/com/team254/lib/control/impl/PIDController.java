@@ -40,9 +40,14 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
     errorSum = 0.0;
     lastError = 0.0;
   }
-  
+
   public void setGains(PIDGains gains) {
     this.gains = gains;
+  }
+
+  public void setEpsilons(double onTargetError, double onTargetDeltaError) {
+    this.onTargetError = onTargetError;
+    this.onTargetDeltaError = onTargetDeltaError;
   }
 
   public void update() {
