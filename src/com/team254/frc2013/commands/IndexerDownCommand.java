@@ -27,7 +27,7 @@ public class IndexerDownCommand extends CommandBase {
   }
 
   protected void execute() {
-    if (shooter.isIndexerDown() && !downDelayStarted) {
+    if (shooter.isIndexerDown() && !downDelayStarted && !controlBoard.operatorJoystick.getIndexButtonState()) {
       downDelayStarted = true;
       afterDownDelayTimer.start();
     }
