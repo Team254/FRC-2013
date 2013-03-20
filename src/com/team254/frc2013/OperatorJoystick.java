@@ -110,10 +110,10 @@ public class OperatorJoystick extends Joystick {
     return new JoystickButton(this, Constants.intakeControlPort.getInt());
   }
 
-  public boolean getHang20ButtonState() {
+  public boolean getIndexButtonState() {
     return this.getRawButton(Constants.indexControlPort.getInt());
   }
-
+  
   public JoystickButton getIndexButton() {
     return new JoystickButton(this, Constants.indexControlPort.getInt());
   }

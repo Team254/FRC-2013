@@ -24,7 +24,8 @@ public class OperatorControlHelper {
     c.operatorJoystick.getIntakeDownButton().whenReleased(
         new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_OFF));
 
-    c.operatorJoystick.getIndexButton().whenPressed(new ManualIndexerCommand());
+    c.operatorJoystick.getIndexButton().whenPressed(new ManualIndexerCommand(false));
+    c.operatorJoystick.getIndexButton().whenReleased(new ManualIndexerCommand(true));
 
     c.operatorJoystick.getShootButton().whenPressed(new ShootCommand());
 
