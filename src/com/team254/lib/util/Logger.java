@@ -31,7 +31,7 @@ public class Logger {
     String loc = "file:///" + filename;
     try {
       c = (FileConnection) Connector.open(loc);
-      OutputStreamWriter writer = new OutputStreamWriter(c.openOutputStream());
+      w = new OutputStreamWriter(c.openOutputStream());
     } catch (IOException ex) {
       ex.printStackTrace();
     }
