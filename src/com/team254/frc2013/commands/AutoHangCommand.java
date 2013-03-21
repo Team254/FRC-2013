@@ -15,6 +15,8 @@ public class AutoHangCommand extends CommandGroup {
     addSequential(new HangerUpCommand(-2485));
     addSequential(new WaitForForwardSwingCommand(-5, 15));
     addSequential(new HangerUpCommand(-3180));
+    // Try this tomorrow.... Delete the previous 3 commands before removing comment
+    //addSequential(new HangerGrabBarCommand(-2485, -3180, -5, 15));
     addSequential(new WaitForBackwardSwingCommand(-2));
     addSequential(new HangerDownCommand(-5));
     addSequential(new WaitCommand(0.25));
