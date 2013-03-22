@@ -3,10 +3,9 @@ package com.team254.frc2013;
 import com.team254.frc2013.commands.CheesyDriveCommand;
 import com.team254.frc2013.commands.ContinuousShootCommand;
 import com.team254.frc2013.commands.IntakeRaiseCommand;
-import com.team254.frc2013.commands.ManualIndexerCommand;
 import com.team254.frc2013.commands.PtoCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
-import com.team254.frc2013.commands.ShootCommand;
+import com.team254.frc2013.commands.ShootSequenceCommand;
 
 /**
  * Maps operator control buttons to a specified command.
@@ -24,9 +23,7 @@ public class OperatorControlHelper {
     c.operatorJoystick.getIntakeDownButton().whenReleased(
         new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_OFF));
 
-    c.operatorJoystick.getIndexButton().whenPressed(new ManualIndexerCommand());
-
-    c.operatorJoystick.getShootButton().whenPressed(new ShootCommand());
+    c.operatorJoystick.getShootButton().whenPressed(new ShootSequenceCommand());
 
     c.operatorJoystick.getIntakeButton().whenPressed(new RunIntakeCommand(1));
     c.operatorJoystick.getIntakeButton().whenReleased(new RunIntakeCommand(0));

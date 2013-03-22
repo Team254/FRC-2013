@@ -26,7 +26,7 @@ public class ShootCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return shooterTimer.get() > 0.3;
+    return shooterTimer.get() > 0.25;
   }
 
   protected void end() {

@@ -9,25 +9,27 @@ import edu.wpi.first.wpilibj.Timer;
  * @author pat@team254.com (Patrick Fairbank)
  */
 public class IndexerUpCommand extends CommandBase {
-  private Timer conveyorDelayTimer;
+  private Timer timer;
 
   public IndexerUpCommand() {
-    conveyorDelayTimer = new Timer();
+    timer = new Timer();
+    requires(intake);
+    requires(conveyor);
   }
 
   protected void initialize() {
     shooter.setIndexerUp(true);
     intake.setIntakePower(0);
     conveyor.setMotor(0);
-    conveyorDelayTimer.reset();
-    conveyorDelayTimer.start();
+    timer.reset();
+    timer.start();
   }
 
   protected void execute() {
   }
 
   protected boolean isFinished() {
-    return conveyorDelayTimer.get() > 0.1;
+    return timer.get() > 0.15; //.1
   }
 
   protected void end() {

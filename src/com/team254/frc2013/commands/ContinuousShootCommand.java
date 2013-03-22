@@ -14,11 +14,11 @@ public class ContinuousShootCommand extends CommandGroup {
     requires(CommandBase.shooter);
     this.isOn = isOn;
     if (isOn) {
-      addSequential(new ShootAndLoadCommand());
+      addSequential(new ShootSequenceCommand());
     } else {
       addSequential(new RunIntakeCommand(0));
       addSequential(new ShooterRetractCommand());
-      addSequential(new IndexerUpCommand());
+      addSequential(new IndexerDownCommand());
     }
  }
 

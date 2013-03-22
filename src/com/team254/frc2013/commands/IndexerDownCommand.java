@@ -3,38 +3,33 @@ package com.team254.frc2013.commands;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- * Moves the indexer down to the conveyor to grab a disc.
+ * Moves indexer back to the shooter after having loaded a disc.
  *
  * @author jonathan.chang13@gmail.com (Jonathan Chang)
  * @author pat@team254.com (Patrick Fairbank)
  */
 public class IndexerDownCommand extends CommandBase {
-  private Timer afterDownDelayTimer;
-  private boolean downDelayStarted;
+  private Timer timer;
 
   public IndexerDownCommand() {
-    afterDownDelayTimer = new Timer();
+    timer = new Timer();
+    requires(intake);
+    requires(conveyor);
   }
 
   protected void initialize() {
-    setTimeout(1.5);
     shooter.setIndexerUp(false);
-    afterDownDelayTimer.stop();
-    afterDownDelayTimer.reset();
-    downDelayStarted = false;
     intake.setIntakePower(0);
     conveyor.setMotor(0);
+    timer.reset();
+    timer.start();
   }
 
   protected void execute() {
-    if (shooter.isIndexerDown() && !downDelayStarted && !controlBoard.operatorJoystick.getIndexButtonState()) {
-      downDelayStarted = true;
-      afterDownDelayTimer.start();
-    }
   }
 
   protected boolean isFinished() {
-    return afterDownDelayTimer.get() > 0.25 || isTimedOut();
+    return timer.get() > 0.15; //.1
   }
 
   protected void end() {
