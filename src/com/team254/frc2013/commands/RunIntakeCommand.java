@@ -5,17 +5,27 @@ package com.team254.frc2013.commands;
  */
 public class RunIntakeCommand extends CommandBase {
   double speed;
-  public RunIntakeCommand(double speed) {
+  boolean runConveyor = true;
+  
+  public RunIntakeCommand(double speed, boolean runConveyor) {
     this.speed = speed;
+    this.runConveyor = runConveyor;
     requires(intake);
     requires(conveyor);
+  }
+  
+  public RunIntakeCommand(double speed) {
+    this(speed, true);
   }
   protected void initialize() {
   }
 
   protected void execute() {
     intake.setIntakePower(speed);
-    conveyor.setMotor(speed);
+    if (runConveyor)
+      conveyor.setMotor(speed);
+    else
+      conveyor.setMotor(0);
   }
 
   protected boolean isFinished() {

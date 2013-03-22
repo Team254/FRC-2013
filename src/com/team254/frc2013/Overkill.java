@@ -7,6 +7,7 @@ import com.team254.lib.control.ControlUpdater;
 import com.team254.frc2013.auto.FiveDiscAutoMode;
 import com.team254.frc2013.auto.FourDiscAutoMode;
 import com.team254.frc2013.auto.SevenDiscAutoMode;
+import com.team254.frc2013.auto.TestAutoMode;
 import com.team254.frc2013.auto.ThreeDiscAutoMode;
 import com.team254.frc2013.auto.TuneDriveAutoMode;
 import com.team254.frc2013.auto.TwoDiscAutoMode;
@@ -43,6 +44,7 @@ public class Overkill extends IterativeRobot {
 
     // Set up autonomous modes.
     autoModeSelector = new AutoModeSelector();
+    autoModeSelector.addAutoCommand("Test Auto", TestAutoMode.class);
     autoModeSelector.addAutoCommand("3 Disc", ThreeDiscAutoMode.class);
     autoModeSelector.addAutoCommand("7 Disc", SevenDiscAutoMode.class);
     autoModeSelector.addAutoCommand("5 Disc", FiveDiscAutoMode.class);

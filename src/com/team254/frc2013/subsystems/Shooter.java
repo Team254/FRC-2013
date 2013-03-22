@@ -1,14 +1,13 @@
 package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
-import com.team254.lib.control.ControlledSubsystem;
-import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.util.Debouncer;
 import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Class representing the shooter wheels, managing its motors and sensors.
@@ -18,7 +17,7 @@ import edu.wpi.first.wpilibj.Timer;
  * @author eric.vanlare14@bcp.org (Eric van Lare)
  * @author eliwu26@gmail.com (Elias Wu)
  */
-public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
+public class Shooter extends Subsystem  {
   public static final int PRESET_BACK_PYRAMID = 0;
   public static final int PRESET_FRONT_PYRAMID = 1;
   public static final int PRESET_PYRAMID_GOAL = 2;
@@ -82,53 +81,6 @@ public class Shooter extends PeriodicSubsystem implements ControlledSubsystem {
   public boolean isIndexerDown() {
     // The sensor reads true when the indexer is down.
     return !indexerDownSensorA.get() || !indexerDownSensorB.get();
-  }
-
-  // State machine
-  public void update() {
-/*
-    //p.println(loadState + " " + discSensor.getValue());
-    int nextState = loadState;
-    boolean hasDisk = debouncer.update(discSensor.getValue() > 400);
-    switch (loadState) {
-      case 0: // frisbee loaded
-        setIndexerUp(true);
-        if (wantShoot) {
-          System.out.println("shooting in here");
-          wantShoot = false;
-          nextState++;
-        }
-        break;
-      case 1: // Shooting
-        extend();
-        if (stateTimer.get() > .2) {
-          nextState++;
-          Notifier.publish(Messages.SHOT_TAKEN);
-        }
-        break;
-      case 2:
-        setIndexerUp(false);
-        if (stateTimer.get() > .2)
-          nextState++;
-        break;
-      case 3:
-        load();
-        if (stateTimer.get() > .5)
-          nextState++;
-        break;
-      case 4:
-        if (hasDisk)
-          nextState = 0;
-        break;
-      default:
-        nextState = 0;
-        break;
-    }
-    if (nextState != loadState) {
-      stateTimer.reset();
-      loadState = nextState;
-    }
- */
   }
 
   public Shooter() {
