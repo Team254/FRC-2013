@@ -37,22 +37,27 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new ShootSequenceCommand());
 
 */
-    profile.addWaypoint(0, 1.0 * 12);
-    profile.addWaypoint(1 * 12, 2.0 * 12);
-    profile.addWaypoint(2 * 12, 2.0 * 12);
-    profile.addWaypoint(3 * 12, 5.5 * 12);
-    profile.addWaypoint(5.5 * 12, 5.5 * 12);
-    profile.addWaypoint(6.5 * 12, 1.0 * 12);
-    profile.addWaypoint(9.5 * 12, 1.0 * 12);
-addSequential(new ShooterOnCommand(true));
-addSequential(new IndexerDownCommand());
+    profile.addWaypoint(0, 2.0 * 12);
+    profile.addWaypoint(2.5 * 12, 2.0 * 12);
+    profile.addWaypoint(3 * 12, 4.5 * 12);
+    profile.addWaypoint(6.5 * 12, 4.5 * 12);
+    profile.addWaypoint(7.5 * 12, 2 * 12);
+    profile.addWaypoint(10.75 * 12, 1.5 * 12);
+    addSequential(new ShooterOnCommand(true));
+    addSequential(new IndexerDownCommand());
     addSequential(new ShiftCommand(false));
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
     addSequential(new RunIntakeCommand(1));
-    addSequential(new DriveAtSpeedCommand(10.5, 2.5, 0, 6));
+    /*
+    addSequential(new DriveAtSpeedCommand(3.0, 2.0, 0, 3));
+    addSequential(new DriveAtSpeedCommand(7.5, 4.0, 0, 2));
+    addSequential(new DriveAtSpeedCommand(10, 2.0, 0, 6));
+    * */
+    addSequential(new DriveProfiledCommand(10.25, 10, 6, profile));
     addSequential(new WaitCommand(.5));
     //addSequential(new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
+
     addSequential(new DriveProfiledCommand(6, 5, 2.3));
 
     addSequential(new RunIntakeCommand(0.0));
