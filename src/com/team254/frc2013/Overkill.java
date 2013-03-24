@@ -63,6 +63,7 @@ public class Overkill extends IterativeRobot {
     System.out.println("Disabled init.. reloading constants...");
     Constants.readConstantsFromFile();
     CommandBase.drive.disableControllers();
+    CommandBase.shooter.setIndexerUp(true); // Disabled is default up
     // Make sure that the autonomous stops running.
     if (currentAutoMode != null) {
       currentAutoMode.cancel();
@@ -177,8 +178,7 @@ public class Overkill extends IterativeRobot {
     lcd.println(DriverStationLCD.Line.kUser4, 1,
                 "PSI: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + "     ");
     lcd.println(DriverStationLCD.Line.kUser5, 1,
-                "HE: " + !CommandBase.shooter.indexerDownSensorA.get() + ", " +
-                !CommandBase.shooter.indexerDownSensorB.get() + "    ");
+                "indDown: " + CommandBase.shooter.isIndexerDown() + ", ");
     lcd.println(DriverStationLCD.Line.kUser6, 1,
                 "PA: " + Math.floor(CommandBase.hanger.getPitchAngle() * 10) / 10 + " PR: " +
                     Math.floor(CommandBase.hanger.getPitchRate() * 10) / 10 + "    ");

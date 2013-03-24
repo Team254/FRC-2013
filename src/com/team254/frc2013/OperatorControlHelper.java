@@ -2,6 +2,7 @@ package com.team254.frc2013;
 
 import com.team254.frc2013.commands.CheesyDriveCommand;
 import com.team254.frc2013.commands.ContinuousShootCommand;
+import com.team254.frc2013.commands.IndexerDownCommand;
 import com.team254.frc2013.commands.IntakeRaiseCommand;
 import com.team254.frc2013.commands.PtoCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
@@ -24,6 +25,7 @@ public class OperatorControlHelper {
         new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_OFF));
 
     c.operatorJoystick.getShootButton().whenPressed(new ShootSequenceCommand());
+    c.operatorJoystick.getIndexButton().whenPressed(new IndexerDownCommand());
 
     c.operatorJoystick.getIntakeButton().whenPressed(new RunIntakeCommand(1));
     c.operatorJoystick.getIntakeButton().whenReleased(new RunIntakeCommand(0));

@@ -3,13 +3,11 @@ package com.team254.frc2013.auto;
 import com.team254.frc2013.commands.DriveAtSpeedCommand;
 import com.team254.frc2013.commands.DriveProfiledCommand;
 import com.team254.frc2013.commands.IndexerDownCommand;
-import com.team254.frc2013.commands.IndexerUpCommand;
-import com.team254.frc2013.commands.IntakeRaiseCommand;
 import com.team254.frc2013.commands.ResetDriveEncodersCommand;
 import com.team254.frc2013.commands.ResetGyroCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.ShiftCommand;
-import com.team254.frc2013.commands.ShootAndLoadCommand;
+import com.team254.frc2013.commands.ShootSequenceCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
 import com.team254.frc2013.commands.WaitCommand;
@@ -28,38 +26,44 @@ public class SevenDiscAutoMode extends CommandGroup {
   CustomProfile profile = new CustomProfile();
 
   public SevenDiscAutoMode() {
+    /*
     addSequential(new ShooterOnCommand(true));
+
     addSequential(new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_DOWN));
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
     addSequential(new WaitCommand(0.2));
-    addSequential(new ShootAndLoadCommand());
-    addSequential(new ShootAndLoadCommand());
-    addSequential(new ShootAndLoadCommand());
-    addSequential(new RunIntakeCommand(1));
+    addSequential(new ShootSequenceCommand());
+    addSequential(new ShootSequenceCommand());
+    addSequential(new ShootSequenceCommand());
 
+*/
     profile.addWaypoint(0, 1.0 * 12);
-    profile.addWaypoint(1 * 12, 1.0 * 12);
+    profile.addWaypoint(1 * 12, 2.0 * 12);
     profile.addWaypoint(2 * 12, 2.0 * 12);
     profile.addWaypoint(3 * 12, 5.5 * 12);
     profile.addWaypoint(5.5 * 12, 5.5 * 12);
     profile.addWaypoint(6.5 * 12, 1.0 * 12);
-    //profile.addWaypoint(9.5 * 12, 1.0 * 12);
-
+    profile.addWaypoint(9.5 * 12, 1.0 * 12);
+addSequential(new ShooterOnCommand(true));
+addSequential(new IndexerDownCommand());
+    addSequential(new ShiftCommand(false));
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
-    addSequential(new ShiftCommand(false));
-    addSequential(new DriveProfiledCommand(6.5, 10, 10, profile));
-    addSequential(new IndexerDownCommand());
-    addSequential(new IndexerUpCommand());
     addSequential(new RunIntakeCommand(1));
-    addSequential(new DriveAtSpeedCommand(9.5, 1.0, 0, 5));
-    addSequential(new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
-    addSequential(new DriveProfiledCommand(6, 6, 2.3));
+    addSequential(new DriveAtSpeedCommand(10.5, 2.5, 0, 6));
+    addSequential(new WaitCommand(.5));
+    //addSequential(new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
+    addSequential(new DriveProfiledCommand(6, 5, 2.3));
 
-    addSequential(new ShootAndLoadCommand());
-    addSequential(new ShootAndLoadCommand());
-    addSequential(new ShootAndLoadCommand());
-    addSequential(new ShootAndLoadCommand());
+    addSequential(new RunIntakeCommand(0.0));
+        addSequential(new ShooterOnCommand(false));
+    addSequential(new RunIntakeCommand(0.0));
+    /*
+    addSequential(new ShootSequenceCommand());
+    addSequential(new ShootSequenceCommand());
+    addSequential(new ShootSequenceCommand());
+    addSequential(new ShootSequenceCommand());
+    * */
     /*
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());

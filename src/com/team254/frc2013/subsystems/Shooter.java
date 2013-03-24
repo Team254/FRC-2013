@@ -44,8 +44,8 @@ public class Shooter extends Subsystem  {
   private Timer stateTimer = new Timer();
 
   public void setIndexerUp(boolean up) {
-    indexerLeft.set(up);
-    indexerRight.set(up);
+    indexerLeft.set(!up);
+    indexerRight.set(!up);
   }
 
   // Load a frisbee into shooter by retracting the piston
@@ -80,7 +80,7 @@ public class Shooter extends Subsystem  {
 
   public boolean isIndexerDown() {
     // The sensor reads true when the indexer is down.
-    return !indexerDownSensorA.get() || !indexerDownSensorB.get();
+    return indexerLeft.get() && indexerRight.get();
   }
 
   public Shooter() {

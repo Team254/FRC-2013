@@ -17,7 +17,7 @@ public class ShootSequenceCommand extends CommandGroup {
     addSequential(new ShootCommand());
     addSequential(new IndexerDownCommand());
     addSequential(new RunIntakeCommand(1));
-    addSequential(new WaitCommand(.25));
+    addSequential(new WaitCommand(.275));
     addSequential(new RunIntakeCommand(0));
   }
 }

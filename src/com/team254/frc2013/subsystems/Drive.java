@@ -117,7 +117,9 @@ public class Drive extends Subsystem {
     return gyro.getAngle();
   }
 
+  int resets = 0;
   public void resetGyro() {
+    System.out.println("Resetting gyro!!!!" + resets++);
     gyro.reset();
   }
 

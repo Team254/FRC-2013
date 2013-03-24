@@ -3,18 +3,12 @@ package com.team254.frc2013.auto;
 import com.team254.frc2013.commands.DriveAtSpeedCommand;
 import com.team254.frc2013.commands.DriveProfiledCommand;
 import com.team254.frc2013.commands.IndexerDownCommand;
-import com.team254.frc2013.commands.IndexerUpCommand;
-import com.team254.frc2013.commands.IntakeRaiseCommand;
 import com.team254.frc2013.commands.ResetDriveEncodersCommand;
 import com.team254.frc2013.commands.ResetGyroCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
 import com.team254.frc2013.commands.ShiftCommand;
-import com.team254.frc2013.commands.ShootAndLoadCommand;
-import com.team254.frc2013.commands.ShooterOnCommand;
-import com.team254.frc2013.commands.ShooterPresetCommand;
 import com.team254.frc2013.commands.TurnMinAngleCommand;
 import com.team254.frc2013.commands.WaitCommand;
-import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.control.impl.CustomProfile;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -32,22 +26,14 @@ public class TestAutoMode extends CommandGroup {
 
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
+    addSequential(new IndexerDownCommand());
     addSequential(new ShiftCommand(false));
-    addSequential(new RunIntakeCommand(.15, false));
-    addSequential(new DriveAtSpeedCommand(1.75, 3.0, 0, 5));
     addSequential(new RunIntakeCommand(1));
-    addSequential(new DriveAtSpeedCommand(3.5, 4.0, 45, 5));
-    //addSequential(new TurnMinAngleCommand(30,.35));
-    //addSequential(new TurnMinAngleCommand(-30,.35));
-    //addSequential(new TurnMinAngleCommand(30,.35));
-    addSequential(new TurnMinAngleCommand(23,.15));
-    addSequential(new DriveAtSpeedCommand(4.5, 3.0, 23, 5));
+    addSequential(new DriveAtSpeedCommand(5, 1.5, 0, 5));
+        addSequential(new RunIntakeCommand(1));
     addSequential(new WaitCommand(.25));
-    addSequential(new TurnMinAngleCommand(0,.25));
-
-  //  
-
-    addSequential(new DriveProfiledCommand(-1, 8, 2.3));
+        addSequential(new RunIntakeCommand(1));
+    addSequential(new DriveProfiledCommand(0, 8, 2.3));
     /*addSequaential(new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
     addSequential(new DriveProfiledCommand(6, 6, 2.3));
 
