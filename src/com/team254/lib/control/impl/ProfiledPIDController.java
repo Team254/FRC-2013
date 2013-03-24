@@ -44,8 +44,6 @@ public class ProfiledPIDController extends PIDController {
     if (enabled) {
       double t = timer.get();
       super.setGoal(profile.updateSetpoint(getGoal(), source.get(), t));
-      //if (name.equalsIgnoreCase("straightController"))
-        //System.out.println(t + " " + getGoal() + " " + source.get());
     }
 
     super.update();

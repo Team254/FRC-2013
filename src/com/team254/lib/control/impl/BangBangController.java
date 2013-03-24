@@ -29,8 +29,6 @@ public class BangBangController extends Controller implements NamedSendable {
       return;
     source.updateFilter();
     double s = source.get();
-        SmartDashboard.putNumber(name + " rpm", s);
-    SmartDashboard.putNumber(name + " goal", goal);
     if (s >= goal) {
       output.set(0.0);
     }

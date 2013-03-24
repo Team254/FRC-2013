@@ -68,8 +68,6 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
       lastOut = out;
     }
     lastDeltaError = dError;
-    SmartDashboard.putData(this);
-
   }
 
   public void setGoal(double goal) {
