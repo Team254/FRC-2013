@@ -100,8 +100,8 @@ public class Constants extends ConstantsBase {
   public static final Constant driveTurnKDHigh = new Constant("driveTurnKDHigh", 0.15);
 
   public static final Constant hangerUpKP = new Constant("hangerUpKP", 0.005);
-  public static final Constant hangerUpKI = new Constant("hangerUpKI", 0.004);
-  public static final Constant hangerUpKD = new Constant("hangerUpKD", 0.0);
+  public static final Constant hangerUpKI = new Constant("hangerUpKI", 0.0);
+  public static final Constant hangerUpKD = new Constant("hangerUpKD", 0.004);
 
   public static final Constant hangerDownKP = new Constant("hangerDownKP", 0.0);
   public static final Constant hangerDownKI = new Constant("hangerDownKI", 0.0);
