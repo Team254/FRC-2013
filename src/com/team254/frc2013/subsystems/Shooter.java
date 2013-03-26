@@ -1,13 +1,14 @@
 package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
+import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.util.Debouncer;
 import com.team254.lib.util.ThrottledPrinter;
+import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Class representing the shooter wheels, managing its motors and sensors.
@@ -17,7 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author eric.vanlare14@bcp.org (Eric van Lare)
  * @author eliwu26@gmail.com (Elias Wu)
  */
-public class Shooter extends Subsystem  {
+public class Shooter extends PeriodicSubsystem  {
   public static final int PRESET_BACK_PYRAMID = 0;
   public static final int PRESET_FRONT_PYRAMID = 1;
   public static final int PRESET_PYRAMID_GOAL = 2;
@@ -35,6 +36,7 @@ public class Shooter extends Subsystem  {
       new DigitalInput(Constants.indexerDownSensorPortA.getInt());
   public DigitalInput indexerDownSensorB =
       new DigitalInput(Constants.indexerDownSensorPortB.getInt());
+  public Counter counter = new Counter(Constants.shootEncoderPort.getInt());
 
   private double frontPower;
   private double backPower;
@@ -88,6 +90,7 @@ public class Shooter extends Subsystem  {
     setPreset(PRESET_FRONT_PYRAMID);
     shooterOn = false;
     stateTimer.start();
+    counter.start();
   }
 
   public void setPreset(int preset) {
@@ -125,5 +128,17 @@ public class Shooter extends Subsystem  {
   }
 
   protected void initDefaultCommand() {
+  }
+
+  public double lastRpm = 0;
+  public void update() {
+    int kCountsPerRev = 32;
+    double period = counter.getPeriod();
+    double rpm = 60.0 / (period * (double)kCountsPerRev);
+    lastRpm = rpm;
+  }
+  
+  public boolean onSpeedTarget() {
+    return lastRpm > Constants.minShootRpm.getDouble();
   }
 }

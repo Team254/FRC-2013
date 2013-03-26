@@ -178,7 +178,7 @@ public class Overkill extends IterativeRobot {
     lcd.println(DriverStationLCD.Line.kUser4, 1,
                 "PSI: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + "     ");
     lcd.println(DriverStationLCD.Line.kUser5, 1,
-                "indDown: " + CommandBase.shooter.isIndexerDown() + ", ");
+                " ?: " + CommandBase.shooter.onSpeedTarget() + " RPM: " + Math.floor(CommandBase.shooter.lastRpm * 10) / 10);
     lcd.println(DriverStationLCD.Line.kUser6, 1,
                 "PA: " + Math.floor(CommandBase.hanger.getPitchAngle() * 10) / 10 + " PR: " +
                     Math.floor(CommandBase.hanger.getPitchRate() * 10) / 10 + "    ");
