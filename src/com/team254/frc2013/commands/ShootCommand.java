@@ -1,5 +1,6 @@
 package com.team254.frc2013.commands;
 
+import com.team254.lib.util.Logger;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
@@ -30,6 +31,7 @@ public class ShootCommand extends CommandBase {
   }
 
   protected void end() {
+    System.out.println("RPM of shot: " + shooter.getRpm());
     shooter.retract();
   }
 

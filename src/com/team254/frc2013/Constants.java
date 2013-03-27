@@ -72,7 +72,7 @@ public class Constants extends ConstantsBase {
   public static final Constant rightEncoderPortB = new Constant("rightEncoderPortB", 4);
 
   // Shooter encoders
-  public static final Constant shootEncoderPort = new Constant("shootEncoderPort",6);
+  public static final Constant shootEncoderPort = new Constant("shootEncoderPort", 5);
 
   // Intake encoder
   public static final Constant intakeEncoderPortA = new Constant("intakeEncoderPortA", 7);
@@ -110,7 +110,7 @@ public class Constants extends ConstantsBase {
   public static final Constant intakeKI = new Constant("intakeKI", 0.0);
   public static final Constant intakeKD = new Constant("intakeKD", 0.24);
 
-  public static final Constant minShootRpm = new Constant("minShootRpm", 10250);
+  public static final Constant minShootRpm = new Constant("minShootRpm", 11000);
 
   static {
     // Set any overridden constants from the file on startup.

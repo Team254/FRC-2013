@@ -3,6 +3,7 @@ package com.team254.frc2013.subsystems;
 import com.team254.frc2013.Constants;
 import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.util.Debouncer;
+import com.team254.lib.util.MovingAverageFilter;
 import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -30,13 +31,14 @@ public class Shooter extends PeriodicSubsystem  {
 
   private Solenoid indexerLeft = new Solenoid(Constants.indexerLeftPort.getInt());
   private Solenoid indexerRight = new Solenoid(Constants.indexerRightPort.getInt());
-  Debouncer debouncer = new Debouncer(.125);
   ThrottledPrinter p = new ThrottledPrinter(.1);
   public DigitalInput indexerDownSensorA =
       new DigitalInput(Constants.indexerDownSensorPortA.getInt());
   public DigitalInput indexerDownSensorB =
       new DigitalInput(Constants.indexerDownSensorPortB.getInt());
   public Counter counter = new Counter(Constants.shootEncoderPort.getInt());
+  Debouncer debounce = new Debouncer(.1);
+  MovingAverageFilter filter = new MovingAverageFilter(5);
 
   private double frontPower;
   private double backPower;
@@ -129,16 +131,22 @@ public class Shooter extends PeriodicSubsystem  {
 
   protected void initDefaultCommand() {
   }
+  boolean onTarget = false;
 
   public double lastRpm = 0;
   public void update() {
-    int kCountsPerRev = 32;
+    int kCountsPerRev = 1;
     double period = counter.getPeriod();
     double rpm = 60.0 / (period * (double)kCountsPerRev);
-    lastRpm = rpm;
+    lastRpm = filter.calculate(rpm);
+    onTarget = lastRpm > Constants.minShootRpm.getDouble();
+  }
+  
+  public double getRpm() {
+    return lastRpm;
   }
   
   public boolean onSpeedTarget() {
-    return lastRpm > Constants.minShootRpm.getDouble();
+    return onTarget;
   }
 }

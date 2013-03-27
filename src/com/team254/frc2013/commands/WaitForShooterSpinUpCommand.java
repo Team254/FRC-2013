@@ -4,6 +4,8 @@
  */
 package com.team254.frc2013.commands;
 
+import edu.wpi.first.wpilibj.Timer;
+
 /**
  *
  * @author tombot
@@ -17,6 +19,7 @@ public class WaitForShooterSpinUpCommand extends CommandBase  {
   }
 
   protected void execute() {
+
   }
 
   protected boolean isFinished() {
