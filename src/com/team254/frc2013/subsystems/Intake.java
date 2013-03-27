@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  * Class designed to control the intake mechanism.
- * TODO: add potentiometer; two PID gains for up/down pivot of intake.
  *
  * @author art.kalb96@gmail.com (Arthur Kalb)
  * @author maskoken@gmail.com (Matthew Koken)

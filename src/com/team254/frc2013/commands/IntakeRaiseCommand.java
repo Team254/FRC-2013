@@ -4,7 +4,6 @@ import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Raises the intake.
- * TODO: Modify for autonomous usage.
  *
  * @author richard@team254.com (Richard Lin)
  */
@@ -43,14 +42,12 @@ public class IntakeRaiseCommand extends CommandBase {
   }
 
   protected void execute() {
-    if (intakePosition == INTAKE_DOWN && intakeTimer.get() > .5)
+    if (intakePosition == INTAKE_DOWN && intakeTimer.get() > .5) {
       intake.setRawPivot(-.1);
+    }
   }
 
   protected boolean isFinished() {
-    //if (intakePosition == INTAKE_UP) {
-    //  return false;
-    //}
     return intakeTimer.get() > timeLimit;
   }
 

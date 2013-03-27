@@ -1,16 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-
 /**
+ * Waits until the shooter wheels have gotten up to a certain speed.
  *
- * @author tombot
+ * @author tom@team254.com (Tom Bottiglieri)
  */
-public class WaitForShooterSpinUpCommand extends CommandBase  {
+public class WaitForShooterSpinUpCommand extends CommandBase {
 
   public WaitForShooterSpinUpCommand(double timeout) {
     setTimeout(timeout);
@@ -31,6 +26,4 @@ public class WaitForShooterSpinUpCommand extends CommandBase  {
 
   protected void interrupted() {
   }
-
-
 }

@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class WaitCommand extends Command {
-  double timeout;
+  private double timeout;
 
   public WaitCommand(double seconds) {
     timeout = seconds;

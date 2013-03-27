@@ -26,8 +26,9 @@ public class CheesyDriveCommand extends CommandBase {
   }
 
   protected void execute() {
-    if (DriverStation.getInstance().isAutonomous())
+    if (DriverStation.getInstance().isAutonomous()) {
       return;
+    }
    // p.println(intake.getEncoderCount() + "");
    // p.println(drive.getLeftEncoderDistance() + " " + drive.getRightEncoderDistance());
     boolean isQuickTurn = controlBoard.getQuickTurn();

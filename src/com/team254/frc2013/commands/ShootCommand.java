@@ -1,6 +1,5 @@
 package com.team254.frc2013.commands;
 
-import com.team254.lib.util.Logger;
 import edu.wpi.first.wpilibj.Timer;
 
 /**

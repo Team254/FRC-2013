@@ -43,7 +43,6 @@ public abstract class CommandBase extends Command {
     // Set up operator controls
     controlBoard = new ControlBoard();
     OperatorControlHelper.setupOperationMap(controlBoard);
-    //r.set(Relay.Value.kForward);
     compressor.start();
     shotTimer.start();
   }

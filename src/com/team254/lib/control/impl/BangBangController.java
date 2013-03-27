@@ -4,7 +4,6 @@ import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.Controller;
 import edu.wpi.first.wpilibj.NamedSendable;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.tables.ITable;
 
 /**
@@ -25,8 +24,9 @@ public class BangBangController extends Controller implements NamedSendable {
 
   public void update() {
 
-    if (!isEnabled())
+    if (!isEnabled()) {
       return;
+    }
     source.updateFilter();
     double s = source.get();
     if (s >= goal) {

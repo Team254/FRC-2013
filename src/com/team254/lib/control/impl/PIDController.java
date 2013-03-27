@@ -8,7 +8,6 @@ import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.NamedSendable;
 import edu.wpi.first.wpilibj.livewindow.LiveWindowSendable;
 import edu.wpi.first.wpilibj.parsing.IUtility;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.tables.ITable;
 import edu.wpi.first.wpilibj.tables.ITableListener;
 
@@ -55,8 +54,9 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
     double out = 0;
     double error = goal - lastSource;
     double p = gains.getP() * error;
-    if (Math.abs(error) < minIError)
+    if (Math.abs(error) < minIError) {
       errorSum += error;
+    }
     double i = gains.getI() * errorSum;
     double dError = error - lastError;
     double d = gains.getD() * dError;
@@ -155,8 +155,9 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
 
   public boolean onTarget() {
     boolean done = !enabled || (Math.abs(goal - lastSource) < onTargetError) && (Math.abs(lastDeltaError) < onTargetDeltaError);
-    if (done)
+    if (done) {
       System.out.println(name + " DONE");
+    }
     return done;
   }
 }

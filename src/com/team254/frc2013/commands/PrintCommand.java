@@ -1,20 +1,22 @@
 package com.team254.frc2013.commands;
 
 /**
- * @author tombot
+ * Prints a string to the console.
+ * 
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class PrintCommand extends CommandBase {
-  String s;
+  private String message;
 
-  public PrintCommand(String s){
-    this.s = s;
+  public PrintCommand(String message){
+    this.message = message;
   }
 
   protected void initialize() {
   }
 
   protected void execute() {
-    System.out.println(s);
+    System.out.println(message);
   }
 
   protected boolean isFinished() {

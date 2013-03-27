@@ -15,7 +15,7 @@ public class DriveProfiledCommand extends CommandBase {
   MotionProfile profile = null;
 
   public DriveProfiledCommand(double distance, double speed, double timeout) {
-    this(distance,0,speed,timeout);
+    this(distance, 0, speed, timeout);
   }
 
   public DriveProfiledCommand(double distance, double angle, double speed, double timeout) {
@@ -32,8 +32,9 @@ public class DriveProfiledCommand extends CommandBase {
   }
 
   protected void initialize() {
-    if (profile != null)
+    if (profile != null) {
       drive.setStraightProfile(profile);
+    }
     drive.setPositionGoal(distance * 12, angle, speed * 12);  // Drive controller works in inches
     setTimeout(timeout);
   }

@@ -2,7 +2,7 @@ package com.team254.frc2013.commands;
 
 /**
  * Controls the robot drivetrain to drive a certain minimum distance, ending once the distance has
- * been travelled while the robot is still moving.
+ * been traveled while the robot is still moving.
  *
  * @author pat@team254.com (Patrick Fairbank)
  */

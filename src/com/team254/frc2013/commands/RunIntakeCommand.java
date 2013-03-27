@@ -1,11 +1,13 @@
 package com.team254.frc2013.commands;
 
 /**
- * @author tombot
+ * Runs the intake and conveyor motors.
+ * 
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class RunIntakeCommand extends CommandBase {
-  double speed;
-  boolean runConveyor = true;
+  private double speed;
+  private boolean runConveyor = true;
 
   public RunIntakeCommand(double speed, boolean runConveyor) {
     this.speed = speed;
@@ -26,10 +28,12 @@ public class RunIntakeCommand extends CommandBase {
       tmpSpeed = 0; // Don't run the conveyor with the indexer in the "up" position
     }
     intake.setIntakePower(tmpSpeed);
-    if (runConveyor)
+    if (runConveyor) {
       conveyor.setMotor(tmpSpeed);
-    else
+    }
+    else {
       conveyor.setMotor(0);
+    }
   }
 
   protected boolean isFinished() {
@@ -41,5 +45,4 @@ public class RunIntakeCommand extends CommandBase {
 
   protected void interrupted() {
   }
-
 }

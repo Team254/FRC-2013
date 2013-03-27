@@ -36,9 +36,7 @@ public class Drive extends Subsystem {
     }
 
     public double get() {
-      // This is super hacky.
       if (straight) {
-        //System.out.println("e: " + (getLeftEncoderDistance() + getRightEncoderDistance()) / 2.0);
         return (getLeftEncoderDistance() + getRightEncoderDistance()) / 2.0;
       } else {
         return getGyroAngle();
@@ -67,7 +65,7 @@ public class Drive extends Subsystem {
     }
   }
 
-  TrapezoidProfile profile = new TrapezoidProfile(6*12.0, .25);
+  TrapezoidProfile profile = new TrapezoidProfile(6 * 12.0, .25);
   PIDGains lowStraightGains = new PIDGains(Constants.driveStraightKPLow, Constants.driveStraightKILow, Constants.driveStraightKDLow);
   PIDGains highStraightGains = new PIDGains(Constants.driveStraightKPHigh, Constants.driveStraightKIHigh, Constants.driveStraightKDHigh);
   ProfiledPIDController straightController = new ProfiledPIDController("straightController",

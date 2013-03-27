@@ -8,27 +8,12 @@ import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- * Represents trapezoidal velocity control.
- * Constant acceleration until target (max) velocity is reached, sets acceleration to zero
- * for a calculated time, then decelerates at a constant deceleration with a slope equal to
- * the negative slope of the initial acceleration.
- *     _____
- *    /     \
- *   /       \
- *  /         \
- * /___________\
+ * Represents a PID controller that is driven by a motion profile.
  *
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class ProfiledPIDController extends PIDController {
-  private double acceleration;
-  private double velocity;
-  private double timeToMaxVelocity;
-  private double timeFromMaxVelocity;
-  private double timeTotal;
-  private double setpoint;
   private Timer timer = new Timer();
-  private double lastTime = 0;
   double origGoal;
   double sign = 1;
   ThrottledPrinter printer = new ThrottledPrinter(.1);
@@ -60,8 +45,9 @@ public class ProfiledPIDController extends PIDController {
 
   public boolean onTarget() {
     boolean done = !enabled || (Math.abs(origGoal - lastSource) < onTargetError) && (Math.abs(lastDeltaError) < onTargetDeltaError);
-    if (done)
+    if (done) {
       System.out.println(name + " DONE");
+    }
     return done;
   }
 

@@ -28,21 +28,33 @@ public class PIDGains {
 
   public final void set(Constant p, Constant i, Constant d, Constant f) {
     Constant nullConstant = new Constant("nullPID", 0);
-    if (p != null)
+    if (p != null) {
       kP = p;
-    else kP = nullConstant;
+    }
+    else {
+      kP = nullConstant;
+    }
 
-    if (i != null)
+    if (i != null) {
       kI = i;
-    else kI = nullConstant;
+    }
+    else {
+      kI = nullConstant;
+    }
 
-    if (d != null)
+    if (d != null) {
       kD = d;
-    else kD = nullConstant;
+    }
+    else {
+      kD = nullConstant;
+    }
 
-    if (f != null)
+    if (f != null) {
       kF = f;
-    else kF = nullConstant;;
+    }
+    else {
+      kF = nullConstant;
+    }
   }
 
   public final void set(double p, double i, double d) {

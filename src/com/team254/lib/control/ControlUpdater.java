@@ -32,11 +32,9 @@ public class ControlUpdater {
   }
 
   public void update() {
-    //System.out.println("s " + edu.wpi.first.wpilibj.Timer.getFPGATimestamp() + " " + this.hashCode());
     for(int i = 0; i < systems.size(); i++) {
       ((Updatable)systems.elementAt(i)).update();
     }
-    //System.out.println("e " + edu.wpi.first.wpilibj.Timer.getFPGATimestamp());
   }
 
   public static ControlUpdater getInstance() {

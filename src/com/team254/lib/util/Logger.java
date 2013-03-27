@@ -1,6 +1,3 @@
-/*
- * Logs strings to a file
- */
 package com.team254.lib.util;
 
 import com.sun.squawk.microedition.io.FileConnection;
@@ -9,6 +6,7 @@ import java.io.OutputStreamWriter;
 import javax.microedition.io.Connector;
 
 /**
+ * Logs strings to a file.
  *
  * @author tom@team254.com (Tom Bottiglieri)
  */
@@ -19,8 +17,9 @@ public class Logger {
 
   public Logger(String filename, boolean open) {
     this.filename = filename;
-    if (open)
+    if (open) {
       open();
+    }
   }
 
   public Logger(String filename) {

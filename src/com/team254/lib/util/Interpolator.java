@@ -4,7 +4,7 @@ import java.util.Vector;
 
 /**
  *
- * @author tom@team254.com
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class Interpolator {
 

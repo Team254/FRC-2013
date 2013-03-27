@@ -1,27 +1,27 @@
-/*
- * Waits for a certain distance to be driven.
- */
 package com.team254.frc2013.commands;
 
 /**
- *
- * @author Tom Bottiglieri (tom@team254.com)
+ * Waits for a certain distance to be driven.
+ * 
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class WaitForDistanceCommand extends CommandBase {
   private double distance;
+  
   public WaitForDistanceCommand(double distance, double timeout) {
     this.distance = distance;
     setTimeout(timeout);
   }
+  
   protected void initialize() {
-
   }
 
   protected void execute() {
   }
 
   protected boolean isFinished() {
-    return ((drive.getLeftEncoderDistance() + drive.getRightEncoderDistance()) / 2) > distance  || isTimedOut();
+    double averageDistance = (drive.getLeftEncoderDistance() + drive.getRightEncoderDistance()) / 2;
+    return averageDistance > distance || isTimedOut();
   }
 
   protected void end() {

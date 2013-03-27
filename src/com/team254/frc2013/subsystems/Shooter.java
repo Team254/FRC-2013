@@ -43,8 +43,8 @@ public class Shooter extends PeriodicSubsystem  {
   private double frontPower;
   private double backPower;
   private boolean shooterOn;
-  private int loadState = 0;
-  private boolean wantShoot = false;
+  boolean onTarget = false;
+  public double lastRpm = 0;
   private Timer stateTimer = new Timer();
 
   public void setIndexerUp(boolean up) {
@@ -60,14 +60,6 @@ public class Shooter extends PeriodicSubsystem  {
   // Shoot already loaded frisbee by extending the piston
   public void extend() {
     loader.set(true);
-  }
-
-  public boolean tryShoot() {
-    //if (loadState == 0) {
-    //  wantShoot = true;
-    //}
-    //return loadState == 0;
-    return false;
   }
 
   public void setHighAngle(boolean high) {
@@ -131,9 +123,7 @@ public class Shooter extends PeriodicSubsystem  {
 
   protected void initDefaultCommand() {
   }
-  boolean onTarget = false;
-
-  public double lastRpm = 0;
+  
   public void update() {
     int kCountsPerRev = 1;
     double period = counter.getPeriod();

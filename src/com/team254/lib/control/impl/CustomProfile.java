@@ -4,8 +4,9 @@ import com.team254.lib.control.MotionProfile;
 import com.team254.lib.util.Interpolator;
 
 /**
+ * Represents a customizable motion profile.
  *
- * @author tom@team254.com
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class CustomProfile implements MotionProfile {
   double goal;
@@ -22,10 +23,12 @@ public class CustomProfile implements MotionProfile {
 
     double setpoint = curSetpoint;
     setpoint += (vel * period * sign);
-    if (setpoint >=  goal && sign > 0)
+    if (setpoint >=  goal && sign > 0) {
       done = true;
-    else if (setpoint <= goal && sign < 0)
+    }
+    else if (setpoint <= goal && sign < 0) {
       done = true;
+    }
     lastTime = curTime;
     System.out.println(goal + " " + setpoint + " " + (vel * period * sign) +  " " + curSource + " " + vel + " " + curSetpoint);
     if (done) {
@@ -51,8 +54,4 @@ public class CustomProfile implements MotionProfile {
   public void resetProfile() {
     i.clear();
   }
-
-
-
-
 }
