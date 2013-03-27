@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * @author tombot
  */
 public class ShootSequenceCommand extends CommandGroup {
-  
+
   public ShootSequenceCommand() {
     addSequential(new IndexerUpCommand());
     addSequential(new WaitForShooterSpinUpCommand(.5));

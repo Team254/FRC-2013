@@ -6,14 +6,14 @@ package com.team254.frc2013.commands;
 public class RunIntakeCommand extends CommandBase {
   double speed;
   boolean runConveyor = true;
-  
+
   public RunIntakeCommand(double speed, boolean runConveyor) {
     this.speed = speed;
     this.runConveyor = runConveyor;
     requires(intake);
     requires(conveyor);
   }
-  
+
   public RunIntakeCommand(double speed) {
     this(speed, true);
   }

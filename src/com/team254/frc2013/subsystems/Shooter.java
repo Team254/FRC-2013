@@ -141,11 +141,11 @@ public class Shooter extends PeriodicSubsystem  {
     lastRpm = filter.calculate(rpm);
     onTarget = lastRpm > Constants.minShootRpm.getDouble();
   }
-  
+
   public double getRpm() {
     return lastRpm;
   }
-  
+
   public boolean onSpeedTarget() {
     return onTarget;
   }

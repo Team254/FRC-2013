@@ -17,15 +17,15 @@ public class DriveProfiledCommand extends CommandBase {
   public DriveProfiledCommand(double distance, double speed, double timeout) {
     this(distance,0,speed,timeout);
   }
-  
+
   public DriveProfiledCommand(double distance, double angle, double speed, double timeout) {
     requires(drive);
     this.distance = distance;
     this.speed = speed;
     this.timeout = timeout;
-    this.angle = angle; 
+    this.angle = angle;
   }
-  
+
   public DriveProfiledCommand(double distance, double speed, double timeout, MotionProfile profile) {
     this(distance,speed,timeout);
     this.profile = profile;

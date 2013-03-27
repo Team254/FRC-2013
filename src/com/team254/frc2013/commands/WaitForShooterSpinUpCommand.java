@@ -31,6 +31,6 @@ public class WaitForShooterSpinUpCommand extends CommandBase  {
 
   protected void interrupted() {
   }
-  
-  
+
+
 }

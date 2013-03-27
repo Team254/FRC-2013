@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author richard@team254.com (Richard Lin)
  */
 public abstract class PeriodicSubsystem extends Subsystem implements Updatable {
-  
+
   public PeriodicSubsystem() {
     ControlUpdater.getInstance().add(this);
   }
-  
+
   public abstract void update();
 }

@@ -51,7 +51,7 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
     addSequential(new DriveAtSpeedCommand(3.0, 2.0, 0, 3));
     addSequential(new DriveProfiledCommand(6, 3.5, 2.5));
-    
+
     // Second 2
     addSequential(new WaitCommand(.25));
     addSequential(new ShootSequenceCommand());
@@ -62,12 +62,12 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new WaitCommand(.25));
     addSequential(new DriveProfiledCommand(6, 5, 2.3));
     addSequential(new WaitCommand(.25));
-    
+
     // Third 2
     addSequential(new RunIntakeCommand(0.0));
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand());
-    
+
     addSequential(new ShooterOnCommand(false));
 
     /*

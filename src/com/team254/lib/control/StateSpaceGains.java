@@ -15,7 +15,7 @@ public class StateSpaceGains implements Gains {
     double[] K;
     double[] Umax;
     double[] Umin;
-    boolean updated = false; 
+    boolean updated = false;
     public StateSpaceGains(double[] A,
                            double[] B,
                            double[] C,

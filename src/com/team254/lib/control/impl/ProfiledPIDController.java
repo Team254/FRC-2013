@@ -64,7 +64,7 @@ public class ProfiledPIDController extends PIDController {
       System.out.println(name + " DONE");
     return done;
   }
-  
+
   public void setProfile(MotionProfile profile) {
     this.profile = profile;
     setGoal(source.get());

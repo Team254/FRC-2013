@@ -31,20 +31,20 @@ public class PIDGains {
     if (p != null)
       kP = p;
     else kP = nullConstant;
- 
+
     if (i != null)
       kI = i;
     else kI = nullConstant;
- 
+
     if (d != null)
       kD = d;
     else kD = nullConstant;
-    
+
     if (f != null)
       kF = f;
     else kF = nullConstant;;
   }
-  
+
   public final void set(double p, double i, double d) {
     kP.setVal(p);
     kI.setVal(i);
@@ -58,7 +58,7 @@ public class PIDGains {
   public double getI() {
     return kI.getDouble();
   }
-  
+
   public double getD() {
     return kD.getDouble();
   }

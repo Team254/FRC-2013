@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class AutonIndexerCommand extends CommandBase {
   private Timer afterDownDelayTimer;
   private boolean downDelayStarted;
-  
+
   public AutonIndexerCommand() {
     afterDownDelayTimer = new Timer();
   }
@@ -43,7 +43,7 @@ public class AutonIndexerCommand extends CommandBase {
   protected void end() {
     shooter.setIndexerUp(true);
     intake.setIntakePower(0.5);
-    conveyor.setMotor(0.5);            
+    conveyor.setMotor(0.5);
   }
 
   protected void interrupted() {

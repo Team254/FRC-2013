@@ -38,7 +38,7 @@ public class Matrix {
       throw new IndexOutOfBoundsException();
     }
   }
-  
+
   /**
    * Check if this matrix is of the same dimensions as the other matrix
    * @param other: the matrix to check against

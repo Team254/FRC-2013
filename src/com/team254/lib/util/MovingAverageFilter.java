@@ -8,12 +8,12 @@ package com.team254.lib.util;
 public class MovingAverageFilter implements Filter {
   private double[] inputs;
   private int index;
-  
+
   public MovingAverageFilter(int size) {
     inputs = new double[size];
     index = 0;
   }
-  
+
   public double calculate(double input) {
     index++;
     if(index == inputs.length) {
@@ -25,5 +25,5 @@ public class MovingAverageFilter implements Filter {
       sum += inputs[i];
     }
     return sum / (inputs.length * 1.0);
-  } 
+  }
 }

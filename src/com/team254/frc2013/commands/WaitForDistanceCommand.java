@@ -14,7 +14,7 @@ public class WaitForDistanceCommand extends CommandBase {
     setTimeout(timeout);
   }
   protected void initialize() {
-    
+
   }
 
   protected void execute() {
@@ -29,5 +29,5 @@ public class WaitForDistanceCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
+
 }

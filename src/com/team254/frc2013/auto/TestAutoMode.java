@@ -43,7 +43,7 @@ public class TestAutoMode extends CommandGroup {
     addSequential(new ShootAndLoadCommand());
     * */
     /*
-    * 
+    *
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
     addSequential(new DriveAtSpeedCommand(2.5, 2, 0, 20));

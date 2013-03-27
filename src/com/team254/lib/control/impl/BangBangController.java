@@ -16,7 +16,7 @@ public class BangBangController extends Controller implements NamedSendable {
   private ControlSource source;
   private ControlOutput output;
   private double goal;
-  
+
   public BangBangController(String name, ControlSource source, ControlOutput output) {
     super(name);
     this.source = source;
@@ -24,7 +24,7 @@ public class BangBangController extends Controller implements NamedSendable {
   }
 
   public void update() {
-   
+
     if (!isEnabled())
       return;
     source.updateFilter();

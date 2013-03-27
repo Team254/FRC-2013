@@ -68,7 +68,7 @@ public class Interpolator {
     double val = (((floor.value - ceiling.value) / (floor.key - ceiling.key)) * (k - floor.key)) + floor.value;
     return val;
   }
-  
+
   public void clear() {
     points.removeAllElements();
   }

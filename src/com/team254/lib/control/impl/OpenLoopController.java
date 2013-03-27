@@ -12,12 +12,12 @@ public class OpenLoopController extends Controller {
   ControlOutput output;
   private double value;
   private boolean enabled = true;
-  
+
   public OpenLoopController(String name, ControlOutput output) {
     super(name);
     this.output = output;
   }
-  
+
   public void enable() {
     enabled = true;
   }
