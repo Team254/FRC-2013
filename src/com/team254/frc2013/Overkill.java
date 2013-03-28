@@ -149,7 +149,7 @@ public class Overkill extends IterativeRobot {
     CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
 
     // Handle triggering the autonomous 30-point climbing routine.
-    if (CommandBase.controlBoard.getStage1Hang() && !lastStage1HangButton) {
+    if (CommandBase.controlBoard.getStage1Hang()) {
       CommandBase.hanger.resetPitchGyro();
     } else if (!CommandBase.controlBoard.getStage1Hang() && lastStage1HangButton &&
         CommandBase.controlBoard.operatorJoystick.getClimbButtonState() &&

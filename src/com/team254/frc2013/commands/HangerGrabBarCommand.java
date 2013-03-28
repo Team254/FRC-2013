@@ -9,7 +9,7 @@ package com.team254.frc2013.commands;
  */
 public class HangerGrabBarCommand extends CommandBase {
   private double stagingGoal, endGoal, minForeswingAngle, minBackswingAngle;
-  boolean setToEnd = false;
+  boolean setToEnd;
 
   public HangerGrabBarCommand(double stagingGoal, double endGoal,
           double minForeswingAngle, double minBackswingAngle) {
@@ -26,6 +26,7 @@ public class HangerGrabBarCommand extends CommandBase {
   }
 
   protected void initialize() {
+    setToEnd = false;
     hanger.setPto(true);
     hanger.setGoal(stagingGoal);
     hanger.enableController(true);
