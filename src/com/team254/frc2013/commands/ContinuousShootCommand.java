@@ -9,22 +9,23 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class ContinuousShootCommand extends CommandGroup {
   private boolean isOn;
+  private static boolean cancel;
 
   public ContinuousShootCommand(boolean isOn) {
-    requires(CommandBase.shooter);
     this.isOn = isOn;
     if (isOn) {
       addSequential(new ShootSequenceCommand());
-    } else {
-      addSequential(new RunIntakeCommand(0));
-      addSequential(new ShooterRetractCommand());
-      addSequential(new IndexerDownCommand());
     }
  }
+  
+  protected void initialize() {
+    super.initialize();
+    cancel = !isOn;
+  }
 
   protected void end() {
     super.end();
-    if (isOn) {
+    if (isOn && !cancel) {
       start();
     }
   }
