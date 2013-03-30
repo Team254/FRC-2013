@@ -80,7 +80,7 @@ public class Shooter extends PeriodicSubsystem  {
     // The sensor reads true when the indexer is down.
     return indexerLeft.get() && indexerRight.get();
   }
-  
+
   public boolean isIndexerLoaded() {
     return beamBreakSensor.get();
   }
@@ -129,7 +129,7 @@ public class Shooter extends PeriodicSubsystem  {
 
   protected void initDefaultCommand() {
   }
-  
+
   public void update() {
     int kCountsPerRev = 1;
     double period = counter.getPeriod();
@@ -144,5 +144,9 @@ public class Shooter extends PeriodicSubsystem  {
 
   public boolean onSpeedTarget() {
     return onTarget;
+  }
+
+  public boolean isOn() {
+    return shooterOn;
   }
 }

@@ -17,16 +17,19 @@ public class ShootCommand extends CommandBase {
   }
 
   protected void initialize() {
-    shooter.extend();
-    shooterTimer.reset();
-    shooterTimer.start();
+    // Don't fire the piston if the shooter is not turned on.
+    if (shooter.isOn()) {
+      shooter.extend();
+      shooterTimer.reset();
+      shooterTimer.start();
+    }
   }
 
   protected void execute() {
   }
 
   protected boolean isFinished() {
-    return shooterTimer.get() > 0.2;
+    return shooterTimer.get() > 0.2 || !shooter.isOn();
   }
 
   protected void end() {
