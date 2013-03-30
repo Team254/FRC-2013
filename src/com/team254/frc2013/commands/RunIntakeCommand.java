@@ -24,8 +24,8 @@ public class RunIntakeCommand extends CommandBase {
 
   protected void execute() {
     double tmpSpeed = speed;
-    if (!shooter.isIndexerDown()){
-      tmpSpeed = 0; // Don't run the conveyor with the indexer in the "up" position
+    if (!shooter.isIndexerDown() && tmpSpeed > 0) {
+      tmpSpeed = 0; // Don't run the conveyor with the indexer up AND conveyor running inwards
     }
     intake.setIntakePower(tmpSpeed);
     if (runConveyor) {
