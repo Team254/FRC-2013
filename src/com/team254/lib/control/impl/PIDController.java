@@ -27,7 +27,7 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
   double lastDeltaError;
   double lastSource, lastOut;
   double minIError = 10.0;
-  double onTargetError = 1.0, onTargetDeltaError = 0.05;
+  double onTargetError = 2.0, onTargetDeltaError = 0.05;
   ThrottledPrinter printer = new ThrottledPrinter(.1);
 
   public PIDController(String name, PIDGains gains, ControlSource source, ControlOutput output) {

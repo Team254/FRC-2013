@@ -6,6 +6,7 @@ import com.team254.frc2013.commands.IntakeRaiseCommand;
 import com.team254.frc2013.commands.ResetDriveEncodersCommand;
 import com.team254.frc2013.commands.ResetGyroCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
+import com.team254.frc2013.commands.ShiftCommand;
 import com.team254.frc2013.commands.ShootSequenceCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
@@ -26,7 +27,7 @@ public class FiveDiscAutoMode extends CommandGroup {
     addSequential(new ShooterOnCommand(true));
     addSequential(new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_DOWN));
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
-    addSequential(new WaitCommand(0.25));
+    addSequential(new ShiftCommand(false));
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand());
@@ -35,14 +36,15 @@ public class FiveDiscAutoMode extends CommandGroup {
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
     addSequential(new RunIntakeCommand(1));
-    addSequential(new DriveAtSpeedCommand(2, 0.22, 0, 5));
+    addSequential(new DriveAtSpeedCommand(2, 2, 0, 5));
     addSequential(new WaitCommand(1));
 
     // Drive back and shoot
-    addSequential(new DriveProfiledCommand(0, 5, 2.3));
-    addSequential(new RunIntakeCommand(0.5));
+    addSequential(new DriveProfiledCommand(0, 5, 5));
+    addSequential(new RunIntakeCommand(0.0));
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand());
+
     addSequential(new ShooterOnCommand(false));
     addSequential(new RunIntakeCommand(0.0));
   }
