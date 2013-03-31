@@ -139,7 +139,7 @@ public class Drive extends Subsystem {
   }
 
   public void setSpeedGoal(double speed, double angle) {
-    profile.setMaxVelocity(speed);
+    profile.setMaxVelocity(Math.abs(speed));
     profile.setTimeToMaxV(0.001);
     straightController.setGoal(speed < 0 ? -1000 : 1000);
     straightController.enable();

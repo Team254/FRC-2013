@@ -39,7 +39,7 @@ public class FourDiscAutoMode extends CommandGroup {
     addSequential(new WaitCommand(1));
 
     // Drive back and shoot
-    addSequential(new DriveProfiledCommand(0, 5, 5));
+    addSequential(new DriveProfiledCommand(0, 5, 0, 5));
     addSequential(new RunIntakeCommand(0.0));
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand());

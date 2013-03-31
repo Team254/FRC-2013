@@ -30,8 +30,13 @@ public class DriveAtSpeedCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return (drive.getLeftEncoderDistance() / 12.0 > distance ||
-                drive.getRightEncoderDistance() / 12.0 > distance || isTimedOut());
+    if (speed >= 0) {
+      return (drive.getLeftEncoderDistance() / 12.0 > distance ||
+                  drive.getRightEncoderDistance() / 12.0 > distance || isTimedOut());
+    } else {
+      return (drive.getLeftEncoderDistance() / 12.0 < distance ||
+                  drive.getRightEncoderDistance() / 12.0 < distance || isTimedOut());
+    }
   }
 
   protected void end() {

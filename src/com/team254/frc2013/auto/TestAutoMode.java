@@ -31,7 +31,7 @@ public class TestAutoMode extends CommandGroup {
     addSequential(new RunIntakeCommand(1));
     addSequential(new WaitCommand(.25));
     addSequential(new RunIntakeCommand(1));
-    addSequential(new DriveProfiledCommand(0, 8, 2.3));
+    addSequential(new DriveProfiledCommand(0, 8, 0, 2.3));
     addSequential(new RunIntakeCommand(0.0));
  }
 }
