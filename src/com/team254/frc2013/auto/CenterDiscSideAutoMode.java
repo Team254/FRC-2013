@@ -10,6 +10,7 @@ import com.team254.frc2013.commands.ShootSequenceCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
 import com.team254.frc2013.commands.TurnMinAngleCommand;
+import com.team254.frc2013.commands.WaitCommand;
 import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -33,29 +34,26 @@ public class CenterDiscSideAutoMode extends CommandGroup {
     addSequential(new ShooterOnCommand(false));
 
     // Drive to center line
+    addSequential(new ShiftCommand(false));
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
-    addSequential(new DriveAtSpeedCommand(-9, -6, 0, 5));
-    addSequential(new DriveAtSpeedCommand(-8.5, 6, 0, 0.1));
-    addSequential(new ShiftCommand(false));
+    addSequential(new DriveAtSpeedCommand(-8.5, -6, 0, 5));
+    addSequential(new DriveAtSpeedCommand(-8, 6, 0, 0.1));
     addSequential(new TurnMinAngleCommand(-72, 5));
 
-    // Drive forward and backward along center line to pick up discs
+    // Drive forward along center line to pick up discs
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new RunIntakeCommand(1.0));
-    addSequential(new DriveAtSpeedCommand(8, 4, -72, 10));
-    addSequential(new RunIntakeCommand(0));
-    addSequential(new ShiftCommand(true));
-    addSequential(new DriveAtSpeedCommand(-1, -6, -72, 5));
-    addSequential(new DriveAtSpeedCommand(-0.5, 6, -72, 0.1));
+    addSequential(new DriveAtSpeedCommand(7, 4, -72, 10));
 
     // Return to starting position
-    addSequential(new TurnMinAngleCommand(0, 5));
-    addSequential(new ShooterOnCommand(true));
+    addSequential(new TurnMinAngleCommand(-126, 5));
+    addSequential(new RunIntakeCommand(0));
     addSequential(new ResetDriveEncodersCommand());
-    addSequential(new DriveAtSpeedCommand(10, 6, 0, 5));
-    addSequential(new DriveAtSpeedCommand(9.5, -6, 0, 0.1));
-    addSequential(new TurnMinAngleCommand(-5, 1));
+    addSequential(new DriveAtSpeedCommand(-12, -6, -126, 10));
+    addSequential(new ShooterOnCommand(true));
+    addSequential(new TurnMinAngleCommand(5, 10));
+    addSequential(new WaitCommand(0.5));
 
     // Shoot remaining discs
     addSequential(new ShootSequenceCommand());
