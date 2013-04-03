@@ -1,7 +1,9 @@
 package com.team254.frc2013.commands;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 /**
- * Checks the auton timer and blocks if there is not enough time left
+ * Checks the auton timer and blocks if there is not enough time left.
  *
  * @author pat@team254.com (Patrick Fairbank)
  */
@@ -19,7 +21,7 @@ public class CheckAutonTimerCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return 15 - autonTimer.get() > timeRequiredSec;
+    return !DriverStation.getInstance().isAutonomous() || (15 - autonTimer.get() > timeRequiredSec);
   }
 
   protected void end() {
