@@ -18,7 +18,8 @@ public class WaitForBackwardSwingCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return hanger.getPitchAngle() < angle;
+    return hanger.getPitchAngle() < angle ||
+        hanger.getPitchAngle() < 1 && hanger.getPitchRate() < 0;
   }
 
   protected void end() {

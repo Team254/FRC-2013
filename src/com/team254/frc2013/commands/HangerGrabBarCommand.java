@@ -33,14 +33,14 @@ public class HangerGrabBarCommand extends CommandBase {
   }
 
   protected void execute() {
-    if (!setToEnd && clearToTop()) {
+    if (!setToEnd && clearToTop() && (motors.getLeftEncoder().get() - stagingGoal) < 500) {
       hanger.setGoal(endGoal);
       setToEnd = true;
     }
   }
 
   protected boolean isFinished() {
-    return setToEnd && hanger.onTarget();
+    return setToEnd && hanger.onTarget() || Math.abs(controlBoard.leftStick.getY()) > 0.3;
   }
 
   protected void end() {
