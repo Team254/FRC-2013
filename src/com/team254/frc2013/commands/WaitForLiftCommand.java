@@ -13,6 +13,7 @@ public class WaitForLiftCommand extends CommandBase {
   }
 
   protected void execute() {
+    System.out.println("Waiting for lift...");
   }
 
   protected boolean isFinished() {
@@ -20,6 +21,7 @@ public class WaitForLiftCommand extends CommandBase {
   }
 
   protected void end() {
+    System.out.println("Off the ground; okay for hanger extension.");
   }
 
   protected void interrupted() {

@@ -26,6 +26,7 @@ public class HangerGrabBarCommand extends CommandBase {
   }
 
   protected void initialize() {
+    System.out.println("Starting hanger extension.");
     setToEnd = false;
     hanger.setPto(true);
     hanger.setGoal(stagingGoal);
@@ -33,17 +34,20 @@ public class HangerGrabBarCommand extends CommandBase {
   }
 
   protected void execute() {
-    if (!setToEnd && clearToTop() && (motors.getLeftEncoder().get() - stagingGoal) < 500) {
+    System.out.println("Extending hanger...");
+    if (!setToEnd && clearToTop() && (motors.getLeftEncoder().get() - stagingGoal) < 300) {
+      System.out.println("Hanger clear to extend fully.");
       hanger.setGoal(endGoal);
       setToEnd = true;
     }
   }
 
   protected boolean isFinished() {
-    return setToEnd && hanger.onTarget() || Math.abs(controlBoard.leftStick.getY()) > 0.3;
+    return setToEnd && motors.getLeftEncoder().get() < endGoal;
   }
 
   protected void end() {
+    System.out.println("Finished extending hanger.");
     hanger.enableController(false);
     motors.set(0);
   }

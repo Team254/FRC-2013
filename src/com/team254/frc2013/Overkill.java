@@ -149,7 +149,7 @@ public class Overkill extends IterativeRobot {
     CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
 
     // Handle triggering the autonomous 30-point climbing routine.
-    if (CommandBase.controlBoard.getStage1Hang()) {
+    if (CommandBase.controlBoard.getStage1Hang() && !lastStage1HangButton) {
       CommandBase.hanger.resetPitchGyro();
     } else if (!CommandBase.controlBoard.getStage1Hang() && lastStage1HangButton &&
         CommandBase.controlBoard.operatorJoystick.getClimbButtonState() &&
@@ -161,6 +161,7 @@ public class Overkill extends IterativeRobot {
     // Kill the climb if the dead man switch is released.
     if (autoHangStarted && !CommandBase.controlBoard.operatorJoystick.getClimbButtonState() &&
         autoHangCommand != null) {
+      System.out.println("Canceling climb.");
       autoHangCommand.cancel();
       autoHangCommand = null;
     }

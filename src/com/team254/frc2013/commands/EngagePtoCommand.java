@@ -30,6 +30,7 @@ public class EngagePtoCommand extends CommandBase {
   }
 
   protected void end() {
+    System.out.println("Engaged PTO.");
     motors.set(0);
     driveTimer.stop();
   }

@@ -7,16 +7,18 @@ package com.team254.frc2013.commands;
  */
 public class HangerDownCommand extends CommandBase {
   private double goal;
+  private double speed;
 
-  public HangerDownCommand(double goal) {
+  public HangerDownCommand(double goal, double speed) {
     requires(drive);
     this.goal = goal;
+    this.speed = speed;
   }
 
   protected void initialize() {
     hanger.setPto(true);
     hanger.enableController(false);
-    motors.set(1);
+    motors.set(speed);
   }
 
   protected void execute() {
