@@ -76,6 +76,7 @@ public class Overkill extends IterativeRobot {
     CommandBase.intake.setIntakePower(0);
     CommandBase.conveyor.setMotor(0);
     CommandBase.compressor.start();
+    CommandBase.autonTimer.reset();
   }
 
   public void disabledPeriodic() {
@@ -103,6 +104,7 @@ public class Overkill extends IterativeRobot {
     CommandBase.drive.resetGyro();
     currentAutoMode = autoModeSelector.getCurrentAutoModeNewInstance();
     currentAutoMode.start();
+    CommandBase.autonTimer.start();
   }
 
   /**

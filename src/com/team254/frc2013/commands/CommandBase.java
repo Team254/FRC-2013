@@ -34,6 +34,7 @@ public abstract class CommandBase extends Command {
   public static Intake intake = new Intake();
   public static Conveyor conveyor = new Conveyor();
   public static Timer shotTimer = new Timer();
+  public static Timer autonTimer = new Timer();
 
   public static void init() {
     // This MUST be here. If the OI creates Commands (which it very likely will), constructing it
