@@ -47,13 +47,13 @@ public class CenterDiscSideAutoMode extends CommandGroup {
     addSequential(new DriveAtSpeedCommand(7, 4, -72, 10));
 
     // Return to starting position
-    addSequential(new TurnMinAngleCommand(-126, 5));
+    addSequential(new TurnMinAngleCommand(-126, 2));
     addSequential(new RunIntakeCommand(0));
     addSequential(new ResetDriveEncodersCommand());
-    addSequential(new DriveAtSpeedCommand(-12, -6, -126, 10));
+    addSequential(new DriveAtSpeedCommand(-12, -8, -126, 10));
     addSequential(new ShooterOnCommand(true));
     addSequential(new TurnMinAngleCommand(5, 10));
-    addSequential(new WaitCommand(0.5));
+    addSequential(new WaitCommand(0.25));
 
     // Shoot remaining discs
     addSequential(new ShootSequenceCommand());
