@@ -128,9 +128,6 @@ public class Overkill extends IterativeRobot {
     // Set up the one-shot autonomous 30-point climbing routine.
     autoHangCommand = new AutoHangCommand();
     autoHangStarted = false;
-
-    // Reset the hook safety lock.
-    CommandBase.hanger.setHookSafetyLock(false);
   }
 
   /**

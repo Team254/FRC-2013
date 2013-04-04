@@ -24,7 +24,6 @@ public class Hanger extends PeriodicSubsystem {
   private Timer pitchRateTimer = new Timer();
   private double pitchRate = 0;
   private double lastPitchAngle = 0;
-  private boolean hookSafetyLock;
 
   private PIDController controller;
 
@@ -50,7 +49,6 @@ public class Hanger extends PeriodicSubsystem {
                                    new HangControlOutput());
     controller.setEpsilons(15, 1);
     controller.disable();
-    hookSafetyLock = false;
   }
 
   public void setGoal(double goal) {
@@ -62,22 +60,10 @@ public class Hanger extends PeriodicSubsystem {
   }
 
   public void setHookUp(boolean isUp) {
-    // Don't allow extending the hooks if they are locked out.
-    if (!hookSafetyLock) {
-      hangerExtend.set(isUp);
-    }
-  }
-
-  // Prevents the hooks from firing if locked, to avoid situations where extending them would cause
-  // the robot to fall.
-  public void setHookSafetyLock(boolean locked) {
-    hookSafetyLock = locked;
+    hangerExtend.set(isUp);
   }
 
   public void setPto(boolean on) {
-    if (on) {
-      hookSafetyLock = true;
-    }
     pto.set(on);
     motors.setDriveMode(!on);
   }
