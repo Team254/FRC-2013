@@ -44,8 +44,8 @@ public class Overkill extends IterativeRobot {
 
     // Set up autonomous modes.
     autoModeSelector = new AutoModeSelector();
-    autoModeSelector.addAutoCommand("3 Disc", ThreeDiscAutoMode.class);
     autoModeSelector.addAutoCommand("7 Disc", SevenDiscAutoMode.class);
+    autoModeSelector.addAutoCommand("3 Disc", ThreeDiscAutoMode.class);
     autoModeSelector.addAutoCommand("5 Disc", FiveDiscAutoMode.class);
     autoModeSelector.addAutoCommand("4 Disc", FourDiscAutoMode.class);
     autoModeSelector.addAutoCommand("2 Disc", TwoDiscAutoMode.class);
