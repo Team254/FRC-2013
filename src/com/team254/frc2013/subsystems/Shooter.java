@@ -29,7 +29,6 @@ public class Shooter extends PeriodicSubsystem  {
   private Solenoid loader = new Solenoid(Constants.shooterLoaderPort.getInt());
   private Solenoid angle = new Solenoid(Constants.shooterAnglePort.getInt());
 
-  private Solenoid indexerLeft = new Solenoid(Constants.indexerLeftPort.getInt());
   private Solenoid indexerRight = new Solenoid(Constants.indexerRightPort.getInt());
   ThrottledPrinter p = new ThrottledPrinter(.1);
   public DigitalInput indexerDownSensorA =
@@ -50,7 +49,6 @@ public class Shooter extends PeriodicSubsystem  {
   private Timer stateTimer = new Timer();
 
   public void setIndexerUp(boolean up) {
-    indexerLeft.set(!up);
     indexerRight.set(!up);
   }
 
@@ -78,7 +76,7 @@ public class Shooter extends PeriodicSubsystem  {
 
   public boolean isIndexerDown() {
     // The sensor reads true when the indexer is down.
-    return indexerLeft.get() && indexerRight.get();
+    return indexerRight.get();
   }
 
   public boolean isIndexerLoaded() {
