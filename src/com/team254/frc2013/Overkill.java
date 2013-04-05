@@ -88,6 +88,7 @@ public class Overkill extends IterativeRobot {
     lastAutonSelectButton = autonSelectButton;
     lastStage1HangButton = CommandBase.controlBoard.getStage1Hang();
     updateLCD();
+    CommandBase.shooter.setSpeedLimit(1);
   }
 
   /**
@@ -138,6 +139,12 @@ public class Overkill extends IterativeRobot {
     updateLCD();
 
     // Set shooter presets.
+    if (CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState()) {
+      CommandBase.shooter.setSpeedLimit(.35);
+    } else {
+      CommandBase.shooter.setSpeedLimit(1);
+    }
+    
     if (CommandBase.controlBoard.operatorJoystick.getBackPyramidButtonState()) {
       CommandBase.shooter.setPreset(Shooter.PRESET_BACK_PYRAMID);
     } else if (CommandBase.controlBoard.operatorJoystick.getFrontPyramidButtonState()) {
@@ -147,6 +154,7 @@ public class Overkill extends IterativeRobot {
     // Set shooter on/off.
     CommandBase.shooter.setShooterOn(CommandBase.controlBoard.operatorJoystick.getShooterSwitch());
 
+    
     // Set 10pt hang up/down.
     CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
 

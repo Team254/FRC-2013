@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.Timer;
 public class Shooter extends PeriodicSubsystem  {
   public static final int PRESET_BACK_PYRAMID = 0;
   public static final int PRESET_FRONT_PYRAMID = 1;
-  public static final int PRESET_PYRAMID_GOAL = 2;
+  public static final int SLOW_SHOOT = 2;
 
   private Talon frontMotor = new Talon(Constants.frontShooterPort.getInt());
   private Talon backMotor = new Talon(Constants.backShooterPort.getInt());
@@ -48,6 +48,7 @@ public class Shooter extends PeriodicSubsystem  {
   boolean onTarget = false;
   public double lastRpm = 0;
   private Timer stateTimer = new Timer();
+  double speedLimit = 1;
 
   public void setIndexerUp(boolean up) {
     indexerLeft.set(!up);
@@ -99,9 +100,9 @@ public class Shooter extends PeriodicSubsystem  {
         setHighAngle(true);
         setPowers(1, 1);
         break;
-      case PRESET_PYRAMID_GOAL:
-        setHighAngle(true);
-        setPowers(0.8, 0.8);
+      case SLOW_SHOOT:
+        //setHighAngle(true);
+        setPowers(0.35, 0.35);
         break;
       case PRESET_BACK_PYRAMID:
       default:
@@ -109,10 +110,15 @@ public class Shooter extends PeriodicSubsystem  {
         setPowers(1, 1);
     }
   }
+  
+  public void setSpeedLimit(double limit) {
+    speedLimit = limit;
+    setPowers(speedLimit,speedLimit);
+  }
 
   private void setPowers(double frontPower, double backPower) {
-    this.frontPower = (frontPower < 0) ? 0 : frontPower;
-    this.backPower = (backPower < 0) ? 0 : backPower;
+    this.frontPower = (frontPower < 0) ? 0 : (frontPower > speedLimit) ? speedLimit :frontPower;
+    this.backPower = (backPower < 0) ? 0 : (backPower > speedLimit) ? speedLimit :backPower;
     setShooterOn(shooterOn);
   }
 
