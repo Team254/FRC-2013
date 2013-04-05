@@ -72,7 +72,7 @@ public class Constants extends ConstantsBase {
   public static final Constant rightEncoderPortB = new Constant("rightEncoderPortB", 4);
 
   // Shooter encoders
-  public static final Constant shootEncoderPort = new Constant("shootEncoderPort", 6);
+  public static final Constant shootEncoderPort = new Constant("shootEncoderPort", 5);
 
   // Intake encoder
   public static final Constant intakeEncoderPortA = new Constant("intakeEncoderPortA", 7);
