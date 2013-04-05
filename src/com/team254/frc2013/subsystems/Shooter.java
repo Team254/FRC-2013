@@ -82,7 +82,7 @@ public class Shooter extends PeriodicSubsystem  {
   }
 
   public boolean isIndexerLoaded() {
-    return discSensor.get();
+    return !discSensor.get();
   }
 
   public Shooter() {
