@@ -16,6 +16,7 @@ public class HangerDownCommand extends CommandBase {
   }
 
   protected void initialize() {
+    drive.shift(true);
     hanger.setPto(true);
     hanger.enableController(false);
     motors.set(speed);

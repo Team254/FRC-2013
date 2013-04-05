@@ -10,6 +10,7 @@ public class WaitForLiftCommand extends CommandBase {
   public WaitForLiftCommand() {
   }
   protected void initialize() {
+    drive.shift(true);
   }
 
   protected void execute() {

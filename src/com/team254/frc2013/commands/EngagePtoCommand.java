@@ -16,6 +16,7 @@ public class EngagePtoCommand extends CommandBase {
   }
 
   protected void initialize() {
+    drive.shift(true);
     hanger.setPto(true);
     driveTimer.reset();
     driveTimer.start();

@@ -29,7 +29,7 @@ public class IndexerDownCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return timer.get() > 0.25;
+    return timer.get() > 0.2;
   }
 
   protected void end() {

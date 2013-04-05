@@ -14,6 +14,7 @@ public class PtoCommand extends CommandBase{
   }
 
   protected void execute() {
+    drive.shift(true);
     hanger.setPto(true);
     motors.set(controlBoard.leftStick.getY());
   }

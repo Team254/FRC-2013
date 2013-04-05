@@ -14,6 +14,7 @@ public class HangerUpCommand extends CommandBase {
   }
 
   protected void initialize() {
+    drive.shift(true);
     hanger.setPto(true);
     hanger.setGoal(goal);
     hanger.enableController(true);

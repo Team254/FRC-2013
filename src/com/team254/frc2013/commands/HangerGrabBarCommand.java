@@ -28,6 +28,7 @@ public class HangerGrabBarCommand extends CommandBase {
   protected void initialize() {
     System.out.println("Starting hanger extension.");
     setToEnd = false;
+    drive.shift(true);
     hanger.setPto(true);
     hanger.setGoal(stagingGoal);
     hanger.enableController(true);
