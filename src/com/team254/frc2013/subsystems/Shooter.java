@@ -36,8 +36,8 @@ public class Shooter extends PeriodicSubsystem  {
       new DigitalInput(Constants.indexerDownSensorPortA.getInt());
   public DigitalInput indexerDownSensorB =
       new DigitalInput(Constants.indexerDownSensorPortB.getInt());
-  private DigitalInput beamBreakSensor =
-      new DigitalInput(Constants.indexerBeamSensorPort.getInt());
+  private DigitalInput discSensor =
+      new DigitalInput(Constants.discSensorPort.getInt());
   public Counter counter = new Counter(Constants.shootEncoderPort.getInt());
   Debouncer debounce = new Debouncer(.1);
   MovingAverageFilter filter = new MovingAverageFilter(5);
@@ -82,7 +82,7 @@ public class Shooter extends PeriodicSubsystem  {
   }
 
   public boolean isIndexerLoaded() {
-    return beamBreakSensor.get();
+    return discSensor.get();
   }
 
   public Shooter() {

@@ -12,13 +12,20 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ShootSequenceCommand extends CommandGroup {
 
   public ShootSequenceCommand() {
-    addSequential(new CheckAutonTimerCommand(1));
+    addSequential(new RunIntakeCommand(1));
+    addSequential(new WaitCommand(.13));
+    addSequential(new RunIntakeCommand(-.1));
+    addSequential(new WaitCommand(.08));
+    addSequential(new RunIntakeCommand(0));
+    addSequential(new WaitCommand(.09));
+   // addSequential(new LoadDiscIntoIndexerCommand());
+    addSequential(new CheckAutonTimerCommand(.5));
     addSequential(new IndexerUpCommand());
     addSequential(new WaitForShooterSpinUpCommand(.5));
     addSequential(new ShootCommand());
     addSequential(new IndexerDownCommand());
     addSequential(new RunIntakeCommand(1));
-    addSequential(new WaitCommand(.275));
+    addSequential(new WaitCommand(.26));
     addSequential(new RunIntakeCommand(0));
   }
 }
