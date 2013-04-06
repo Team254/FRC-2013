@@ -13,10 +13,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class LoadDiscIntoIndexerCommand extends CommandGroup {
   public LoadDiscIntoIndexerCommand() {
     addSequential(new RunIntakeCommand(1));
-    addSequential(new WaitForDiscCommand(1.5));
-    addSequential(new RunIntakeCommand(-.1));
-    addSequential(new WaitCommand(.08));
+    addSequential(new WaitForDiscCommand(.5));
+    addSequential(new RunIntakeCommand(-.075));
+    addSequential(new WaitCommand(.03));
     addSequential(new RunIntakeCommand(0));
-    addSequential(new WaitCommand(.05));
   }
 }
