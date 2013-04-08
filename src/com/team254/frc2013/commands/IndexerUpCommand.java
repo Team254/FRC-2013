@@ -29,7 +29,7 @@ public class IndexerUpCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return timer.get() > 0.10;
+    return timer.get() > .25;
   }
 
   protected void end() {

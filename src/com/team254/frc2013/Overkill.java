@@ -89,6 +89,7 @@ public class Overkill extends IterativeRobot {
     lastStage1HangButton = CommandBase.controlBoard.getStage1Hang();
     updateLCD();
     CommandBase.shooter.setSpeedLimit(1);
+    CommandBase.shooter.retract();
   }
 
   /**
@@ -129,6 +130,7 @@ public class Overkill extends IterativeRobot {
     // Set up the one-shot autonomous 30-point climbing routine.
     autoHangCommand = new AutoHangCommand();
     autoHangStarted = false;
+    CommandBase.shooter.retract();
   }
 
   /**
