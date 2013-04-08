@@ -23,6 +23,8 @@ public class ShootCommand extends CommandBase {
       shooterTimer.reset();
       shooterTimer.start();
     }
+    conveyor.setMotor(-.175);
+    intake.setIntakePower(-.1);
   }
 
   protected void execute() {
