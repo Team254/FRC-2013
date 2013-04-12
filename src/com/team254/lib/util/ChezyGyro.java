@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.tables.ITable;
  * where it samples the gyro while at rest to determine the default offset. This is
  * subtracted from each sample to determine the heading.
  */
-public class Gyro extends SensorBase implements PIDSource, ISensor, LiveWindowSendable {
+public class ChezyGyro extends SensorBase implements PIDSource, ISensor, LiveWindowSendable {
 
     static final int kOversampleBits = 10;
     static final int kAverageBits = 0;
@@ -77,7 +77,7 @@ public class Gyro extends SensorBase implements PIDSource, ISensor, LiveWindowSe
      * @param slot The cRIO slot for the analog module the gyro is connected to.
      * @param channel The analog channel the gyro is connected to.
      */
-    public Gyro(int slot, int channel) {
+    public ChezyGyro(int slot, int channel) {
         m_analog = new AnalogChannel(slot, channel);
         m_channelAllocated = true;
         initGyro();
@@ -90,7 +90,7 @@ public class Gyro extends SensorBase implements PIDSource, ISensor, LiveWindowSe
      *
      * @param channel The analog channel the gyro is connected to.
      */
-    public Gyro(int channel) {
+    public ChezyGyro(int channel) {
         m_analog = new AnalogChannel(channel);
         m_channelAllocated = true;
         initGyro();
@@ -102,7 +102,7 @@ public class Gyro extends SensorBase implements PIDSource, ISensor, LiveWindowSe
      * is no reference counting when an AnalogChannel is passed to the gyro.
      * @param channel The AnalogChannel object that the gyro is connected to.
      */
-    public Gyro(AnalogChannel channel) {
+    public ChezyGyro(AnalogChannel channel) {
         m_analog = channel;
         if (m_analog == null) {
             System.err.println("Analog channel supplied to Gyro constructor is null");
