@@ -14,6 +14,7 @@ import com.team254.frc2013.commands.AutoHangCommand;
 import com.team254.frc2013.commands.CommandBase;
 import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.control.ControlUpdater;
+import com.team254.lib.util.Latch;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -27,11 +28,12 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  */
 public class Overkill extends IterativeRobot {
   private AutoModeSelector autoModeSelector;
-  private boolean lastAutonSelectButton;
   private CommandGroup currentAutoMode;
   private AutoHangCommand autoHangCommand;
   private boolean autoHangStarted;
   private boolean lastStage1HangButton;
+  private Latch autonSelectLatch = new Latch();
+  private Latch reinitGyroLatch = new Latch();
 
   /**
    * Called when the robot is first started up and should be used for any initialization code.
@@ -82,10 +84,19 @@ public class Overkill extends IterativeRobot {
   public void disabledPeriodic() {
     boolean autonSelectButton =
         CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState();
-    if (autonSelectButton && !lastAutonSelectButton) {
+    if (autonSelectLatch.update(autonSelectButton)) {
       autoModeSelector.increment();
     }
-    lastAutonSelectButton = autonSelectButton;
+
+    boolean reinitGyroButton =
+        CommandBase.controlBoard.operatorJoystick.getClimbButtonState();
+    if (reinitGyroLatch.update(reinitGyroButton)) {
+      System.out.println("About to reinit gyro");
+      CommandBase.drive.reinitGyro();
+      CommandBase.drive.resetGyro();
+      System.out.println("Finished reinit gyro");
+    }
+
     lastStage1HangButton = CommandBase.controlBoard.getStage1Hang();
     updateLCD();
     CommandBase.shooter.setSpeedLimit(1);
