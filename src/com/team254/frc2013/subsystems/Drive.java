@@ -9,8 +9,8 @@ import com.team254.lib.control.PIDGains;
 import com.team254.lib.control.impl.PIDController;
 import com.team254.lib.control.impl.ProfiledPIDController;
 import com.team254.lib.control.impl.TrapezoidProfile;
+import com.team254.lib.util.ChezyGyro;
 import com.team254.lib.util.RelativeEncoder;
-import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -26,7 +26,7 @@ public class Drive extends Subsystem {
   RelativeEncoder rightEncoder;
 
   private Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
-  private Gyro gyro = new Gyro(Constants.gyroPort.getInt());
+  private ChezyGyro gyro = new ChezyGyro(Constants.gyroPort.getInt());
   private boolean isHighGear = true;
 
   protected class DriveControlSource implements ControlSource {
@@ -181,5 +181,9 @@ public class Drive extends Subsystem {
 
   public void setStraightProfile(MotionProfile profile) {
     straightController.setProfile(profile);
+  }
+
+  public void reinitGyro() {
+    gyro.initGyro();
   }
 }
