@@ -110,6 +110,7 @@ public class Constants extends ConstantsBase {
   public static final Constant intakeKI = new Constant("intakeKI", 0.0);
   public static final Constant intakeKD = new Constant("intakeKD", 0.24);
 
+  public static final Constant speedLimit = new Constant("speedLimit", 0.8);
   public static final Constant minShootRpm = new Constant("minShootRpm", 11750);
 
   static {
