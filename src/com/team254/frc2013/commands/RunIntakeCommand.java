@@ -2,7 +2,7 @@ package com.team254.frc2013.commands;
 
 /**
  * Runs the intake and conveyor motors.
- * 
+ *
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class RunIntakeCommand extends CommandBase {

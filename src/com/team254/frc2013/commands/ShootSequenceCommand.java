@@ -24,7 +24,7 @@ public class ShootSequenceCommand extends CommandGroup {
       addSequential(new SetIndexerDownCommand());
     }
   }
-  
+
   public ShootSequenceCommand() {
     this(true);
   }

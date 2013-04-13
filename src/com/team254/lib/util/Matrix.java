@@ -78,7 +78,7 @@ public class Matrix {
     }
     return result;
   }
-  
+
   public static Matrix add(Matrix mat1,Matrix mat2) {
     if (!mat1.sameSize(mat2)) {
       throw new IllegalArgumentException("Matrices not same size");
@@ -91,7 +91,7 @@ public class Matrix {
     }
     return result;
   }
-  
+
   public static Matrix multiply(Matrix mat1, Matrix mat2) {
     if (mat1.getWidth() != mat2.getHeight()) {
       throw new IllegalArgumentException("Matrix A's width not equal to Matix B's height");
@@ -136,7 +136,7 @@ public class Matrix {
     }
     return sb.toString();
   }
-  
+
   public boolean equals(Object o) {
     if ( this == o ) return true;
     if ( !(o instanceof Matrix) ) return false;
@@ -144,13 +144,13 @@ public class Matrix {
 
     if (!sameSize(m))
       return false;
- 
+
     for (int i = 0; i < getHeight(); ++i)
       for (int j = 0; j < getWidth(); ++j)
         if (get(i,j) != m.get(i,j))
           return false;
 
     return true;
-    
+
   }
 }

@@ -51,10 +51,10 @@ public class FlywheelController extends StateSpaceController {
       double u_max = Umax.get(0);
       double u_min = Umin.get(0);
       double u = Xhat.get(0);
-      
+
       double upWindow = u_max - outputVoltage;
       double downWindow = u_min - outputVoltage;
-      
+
       if (deltaU > upWindow) {
         deltaU = upWindow ;
       } else if (deltaU < downWindow) {

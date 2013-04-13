@@ -11,14 +11,14 @@ import com.team254.lib.util.Debouncer;
  * @author tombot
  */
 public class WaitForDiscCommand extends CommandBase {
-  
+
   Debouncer d = new Debouncer(.05);
   public WaitForDiscCommand(double timeout) {
     setTimeout(timeout);
   }
 
   protected void initialize() {
-    d.reset(); 
+    d.reset();
   }
 
   protected void execute() {
@@ -41,5 +41,5 @@ public class WaitForDiscCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
+
 }

@@ -26,7 +26,7 @@ public class Debouncer {
     }
     return t.get() > time;
   }
-  
+
   public void reset() {
     t.reset();
   }

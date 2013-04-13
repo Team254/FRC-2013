@@ -2,7 +2,7 @@ package com.team254.frc2013.commands;
 
 /**
  * Prints a string to the console.
- * 
+ *
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class PrintCommand extends CommandBase {

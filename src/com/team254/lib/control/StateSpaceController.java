@@ -24,7 +24,7 @@ public abstract class StateSpaceController extends Controller {
   boolean initialized = false;
   StateSpaceGains gains;
   public double period = 1.0/50.0;
-  
+
   //the state matrices, calculated and imported from matlab
   protected Matrix A;
   protected Matrix B;
@@ -85,7 +85,7 @@ public abstract class StateSpaceController extends Controller {
     U = Matrix.multiply(K, r1);
 
     capU();
-    
+
     // X_hat = (A - L * C) * X_hat + L * Y + B * U;
     Matrix b_u = Matrix.multiply(B, U);
     Matrix l_y = Matrix.multiply(L, Y);

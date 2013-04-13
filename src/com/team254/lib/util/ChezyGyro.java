@@ -185,7 +185,7 @@ public class ChezyGyro extends SensorBase implements PIDSource, ISensor, LiveWin
         return "Gyro";
     }
     private ITable m_table;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -193,14 +193,14 @@ public class ChezyGyro extends SensorBase implements PIDSource, ISensor, LiveWin
         m_table = subtable;
         updateTable();
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public ITable getTable(){
         return m_table;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -209,12 +209,12 @@ public class ChezyGyro extends SensorBase implements PIDSource, ISensor, LiveWin
             m_table.putNumber("Value", getAngle());
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public void startLiveWindowMode() {}
-    
+
     /**
      * {@inheritDoc}
      */

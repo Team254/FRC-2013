@@ -60,7 +60,7 @@ public class Shooter extends Subsystem {
 
     }
   }
-  
+
   private class ShooterOutput implements ControlOutput {
     public void set(double value) {
       if (value > speedLimit) {
@@ -114,7 +114,7 @@ public class Shooter extends Subsystem {
     // The sensor reads true when the indexer is down.
     return indexerLeft.get() && indexerRight.get();
   }
-  
+
   public void setVelocityGoal(double rpm) {
     goal = rpm;
     controller.setVelocityGoal((goal * Math.PI * 2.0) / 60.0);
