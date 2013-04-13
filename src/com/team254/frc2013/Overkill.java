@@ -16,6 +16,7 @@ import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.control.ControlUpdater;
 import com.team254.lib.util.Latch;
 import com.team254.lib.util.PIDTuner;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Timer;
@@ -191,10 +192,6 @@ public class Overkill extends IterativeRobot {
     }
 
     lastStage1HangButton = CommandBase.controlBoard.getStage1Hang();
-    
-    if (CommandBase.shooter.isOn()) {
-      System.out.println(Timer.getFPGATimestamp() + ", " + CommandBase.shooter.getRpm() + ", " + CommandBase.shooter.getLoaderState());
-    }
   }
 
   private void updateLCD(){

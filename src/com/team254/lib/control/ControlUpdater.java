@@ -14,7 +14,7 @@ public class ControlUpdater {
   private static ControlUpdater instance = null;
   private Vector systems = new Vector();
   private Timer controlUpdater;
-  private double period = 1.0 / 50.0;
+  private double period = 1.0 / 100.0;
 
   private class UpdaterTask extends TimerTask {
     private ControlUpdater updater;

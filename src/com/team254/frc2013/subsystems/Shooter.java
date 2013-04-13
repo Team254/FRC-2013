@@ -1,12 +1,14 @@
 package com.team254.frc2013.subsystems;
 
 import com.team254.frc2013.Constants;
+import com.team254.frc2013.commands.CommandBase;
 import com.team254.lib.control.PeriodicSubsystem;
 import com.team254.lib.util.Debouncer;
 import com.team254.lib.util.MovingAverageFilter;
 import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
@@ -140,8 +142,10 @@ public class Shooter extends PeriodicSubsystem  {
     int kCountsPerRev = 1;
     double period = counter.getPeriod();
     double rpm = 60.0 / (period * (double)kCountsPerRev);
-    lastRpm = filter.calculate(rpm);
+    lastRpm = rpm;
     onTarget = lastRpm > Constants.minShootRpm.getDouble();
+    if (DriverStation.getInstance().isEnabled())
+      System.out.println(Timer.getFPGATimestamp() + ", " + -getCurrentTalon() + ", " +  getRpm() + ", " + DriverStation.getInstance().getBatteryVoltage());
   }
 
   public double getRpm() {
@@ -154,5 +158,9 @@ public class Shooter extends PeriodicSubsystem  {
 
   public boolean isOn() {
     return shooterOn;
+  }
+  
+  public double getCurrentTalon() {
+    return frontMotor.get();
   }
 }
