@@ -101,7 +101,7 @@ public class Overkill extends IterativeRobot {
 
     lastStage1HangButton = CommandBase.controlBoard.getStage1Hang();
     updateLCD();
-    CommandBase.shooter.setSpeedLimit(Constants.speedLimit.getDouble());
+    CommandBase.shooter.setSpeedLimit(1);
     CommandBase.shooter.retract();
   }
 
@@ -157,7 +157,7 @@ public class Overkill extends IterativeRobot {
     if (CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState()) {
       CommandBase.shooter.setSpeedLimit(.35);
     } else {
-      CommandBase.shooter.setSpeedLimit(Constants.speedLimit.getDouble());
+      CommandBase.shooter.setSpeedLimit(1);
     }
     
     if (CommandBase.controlBoard.operatorJoystick.getBackPyramidButtonState()) {

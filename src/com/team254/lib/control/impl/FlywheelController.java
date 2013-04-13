@@ -67,6 +67,7 @@ public class FlywheelController extends StateSpaceController {
   public void update() {
     if (!enabled) {
       output.set(0);
+      return;
     }
 
     double curSensorVel = sensor.get();
