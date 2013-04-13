@@ -1,233 +1,156 @@
+/*
+ * FIRST Team 254 - The Cheesy Poofs
+ * Team 254 Lib
+ * Matrix
+ *
+ * This is a matrix implementation. All fields are doubles.
+ */
+
 package com.team254.lib.util;
 
 /**
- * Represents a matrix with standard operations.
  *
- * @author stephen@team254.com (Stephen Pinkerton)
- * @author jonathanc@team254.com (Jonathan Chang)
- * @author art.kalb96@gmail.com (Arthur Kalb)
- * @author liam.hardiman13@bcp.org (Liam Hardiman)
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class Matrix {
+  private double data[];
   private int width;
   private int height;
-  private double data[][];
 
-  /**
-   * Creates an empty Matrix of size (rows) by (cols)
-   * @param rows: number of rows
-   * @param cols: number of columns
-   */
-  public Matrix(int rows, int cols) {
-    this.width = cols;
-    this.height = rows;
-    this.data = new double[height][width];
+  public Matrix (int nRows, int nCols){
+    int i;
+    width = nCols;
+    height = nRows;
+    data = new double[width * height];
+    for(i = 0; i<nRows*nCols; i++)
+      data[i] = 0.0;
   }
 
-  /**
-   * Creates a Matrix of size (rows) by (cols) populated by (vals)
-   * @param rows: number of rows
-   * @param cols: number of columns
-   * @param vals: values to insert into the matrix
-   */
-  public Matrix(int rows, int cols, double vals[][]) {
-    this(rows, cols);
-    if (vals.length == height && vals[0].length == width) {
-      this.data = vals;
-    } else {
-      throw new IndexOutOfBoundsException();
+  public double get(int y,int x){
+    if (x >= width || y >= height){
+      throw new ArrayIndexOutOfBoundsException("Bad index");
     }
+    return data[x + (width * y)];
   }
 
-  /**
-   * Check if this matrix is of the same dimensions as the other matrix
-   * @param other: the matrix to check against
-   * @return: true if dimensions match
-   */
-  public boolean checkDimensions(Matrix other) {
-    return (other.getHeight() == height && other.getWidth() == width);
-  }
-
-  /**
-   * Check if this matrix can be multiplied by the other matrix
-   * @param other: the matrix to check against
-   * @return: true if the matrices can me multiplied
-   */
-  public boolean canMultiply(Matrix other) {
-    return (other.getWidth() == height);
-  }
-
-  /**
-   * Add this matrix and the other matrix. Result is stored in this matrix.
-   * @param other: the matrix to add
-   * @return: true if the matrices were successfully added
-   */
-  public boolean addMatrix(Matrix other) {
-    if (checkDimensions(other)) {
-      for (int i = 0; i < other.height; i++) {
-        for (int j = 0; j < other.width; j++) {
-          setValue(i, j, getValue(i, j) + other.getValue(i, j));
-        }
-      }
-      return true;
-    } else {
-      return false;
+  public double get(int i) {
+    if (i >= width * height){
+      throw new ArrayIndexOutOfBoundsException("Bad index");
     }
+    return data[i];
   }
 
-  /**
-   * Subtract this matrix and the other matrix. Result is stored in this matrix.
-   * @param other: the matrix to subtract
-   * @return: true if the matrices were successfully subtracted
-   */
-  public boolean subtractMatrix(Matrix other) {
-    if (checkDimensions(other)) {
-      for (int i = 0; i < other.height; i++) {
-        for (int j = 0; j < other.width; j++) {
-          setValue(i, j, getValue(i, j) - other.getValue(i, j));
-        }
-      }
-      return true;
-    } else {
-      return false;
+  void set(int y, int x, double val){
+    if (x >= width || y >= height){
+      throw new ArrayIndexOutOfBoundsException("Bad index");
     }
+    data[x + (width * y)] = val;
   }
 
-  /**
-   * Multiplies this matrix by the other matrix. Result is stored in this matrix.
-   * @param other: the matrix to multiply by
-   * @return: true if the matrices were successfully subtracted
-   */
-  public boolean multiplyMatrix(Matrix other) {
-    if (canMultiply(other)) {
-      double product[][] = new double[height][other.width];
-      for (int i = 0; i < height; i++) {
-        for (int j = 0; j < other.width; j++) {
-          for (int k = 0; k < width; k++) {
-            product[i][j] += data[i][k] * other.data[k][j];
-          }
-        }
-      }
-      data = product;
-      height = product.length;
-      width = product[0].length;
-      return true;
-    } else {
-      return false;
+  public void set(int i, double val){
+    if (i >= width * height){
+      throw new ArrayIndexOutOfBoundsException("Bad index");
     }
+    data[i] = val;
   }
 
-  /**
-   * Multiply this matrix by a scalar
-   * @param scale: the scalar to multiply by
-   */
-  public void multiplyByScalar(double scale) {
-      for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-          setValue(i, j, getValue(i, j) * scale);
-        }
-      }
+  int getWidth() {
+    return width;
   }
 
-  /**
-   * Fill this matrix with an array of given values
-   * @param values: the values with which to flash the matrix
-   */
-  public void flashMatrix(double[] values) {
-    int k = 0;
-    for (int i = 0; i < height; i++) {
-      for (int j = 0; j < width; j++,k++) {
-        if(k >= values.length) {
-           return;
-        } else {
-          data[i][j] = values[k];
-        }
-      }
-    }
-  }
-
-  /**
-   * Creates an identity matrix of size (length) by (length)
-   * @param length: the length of the identity matrix
-   * @return: an identity matrix with the specified dimensions
-   */
-  public static Matrix makeIdentityMatrix(int length) {
-    Matrix identityMatrix = new Matrix(length, length);
-    for (int i = 0; i < length; i++) {
-      identityMatrix.setValue(i, i, 1.0);
-    }
-    return identityMatrix;
-  }
-
-  /**
-   * Prints a formatted representation of this matrix
-   * @return: a formatted string containing values from the matrix.
-   */
-  public String toString() {
-    String theMatrix = ""; // you're living in a dreamworld, Neo
-    for (int i = 0; i < height; i++) {
-      theMatrix += "| ";
-      for (int j = 0; j < width; j++) {
-        theMatrix += Double.toString(data[i][j]);
-        if (j == width-1) {
-          theMatrix += " |";
-        } else {
-          theMatrix += ", ";
-        }
-      }
-      theMatrix += "\n";
-    }
-    return theMatrix; // to blockbuster
-  }
-
-  /**
-   * Puts value in the matrix at coordinates y and x
-   * @param y: y-coordinate
-   * @param x: x-coordinate
-   * @param value: the value to store
-   */
-  public void setValue(int y, int x, double value) {
-    if (y > height || x > width) {
-      throw new IndexOutOfBoundsException();
-    } else {
-      data[y][x] = value;
-    }
-  }
-
-  /**
-   * Gets the value of the matrix at coordinates (x,y)
-   * @param y: y-coordinate
-   * @param x: x-coordinate
-   * @return: the value at (x,y)
-   */
-  public double getValue(int y, int x) {
-    return data[y][x];
-  }
-
-  /**
-   * How tall is this matrix?
-   * @return: Row count of this matrix
-   */
-  public int getHeight() {
+  int getHeight() {
     return height;
   }
 
-  /**
-   * How wide is this matrix?
-   * @return: Column count of this matrix
-   */
-  public int getWidth() {
-    return width;
+  boolean sameSize(Matrix m) {
+    return (getWidth() == m.getWidth()) && (getHeight() == m.getHeight());
   }
-  /**
-   * Creates a carbon copy of the Matrix
-   * @return a new Matrix with the same dimensions and respective elements
-   */
-  public Matrix clone(){
-      Matrix m = new Matrix(this.height,this.width);
-      for(int i = 0; i < data.length; i++){
-          m.flashMatrix(data[i]);
+
+  public static Matrix subtract(Matrix mat1,Matrix mat2) {
+    if (!mat1.sameSize(mat2)) {
+      throw new IllegalArgumentException("Matrices not same size");
+    }
+    Matrix result = new Matrix(mat2.getHeight(),mat1.getWidth());
+    int comp = mat1.getWidth() * mat2.getHeight();
+    int i;
+    for(i = 0; i < comp; i++){
+      result.set(i,mat1.data[i] - mat2.data[i]);
+    }
+    return result;
+  }
+  
+  public static Matrix add(Matrix mat1,Matrix mat2) {
+    if (!mat1.sameSize(mat2)) {
+      throw new IllegalArgumentException("Matrices not same size");
+    }
+    Matrix result = new Matrix(mat1.getHeight(), mat1.getWidth());
+    int comp = mat1.getWidth() * mat1.getHeight();
+    int i;
+    for(i = 0; i < comp; i++){
+      result.set(i, mat1.data[i] + mat2.data[i]);
+    }
+    return result;
+  }
+  
+  public static Matrix multiply(Matrix mat1, Matrix mat2) {
+    if (mat1.getWidth() != mat2.getHeight()) {
+      throw new IllegalArgumentException("Matrix A's width not equal to Matix B's height");
+    }
+
+    int destHeight = mat1.getHeight();
+    int destWidth = mat2.getWidth();
+
+    Matrix result = new Matrix(destHeight, destWidth);
+
+    int pMax = mat1.getWidth();
+    int width1 = mat1.getWidth();
+    int width2 = mat2.getWidth();
+    for(int i = 0; i < destWidth; i++){
+      for(int j = 0; j < destHeight;j++){
+        double tmp = 0.0;
+        for(int p = 0; p < pMax; p++){
+          tmp += mat2.data[i + width2 * p] * mat1.data[p + width1 * j];
+        }
+        // mat1->row i * mat2->col
+        result.data[i + destWidth * j] = tmp;
       }
-      return m;
+    }
+    return result;
+  }
+
+
+  public void flash(double [] d){
+    for (int i = 0; i < d.length; i++) {
+      data[i] = d[i];
+    }
+  }
+
+  public String toString() {
+    StringBuffer sb = new StringBuffer();
+    for (int i = 0; i < height; i++) {
+      for (int j = 0; j < width; j++) {
+        sb.append(get(i,j));
+        sb.append('\t');
+      }
+      sb.append('\n');
+    }
+    return sb.toString();
+  }
+  
+  public boolean equals(Object o) {
+    if ( this == o ) return true;
+    if ( !(o instanceof Matrix) ) return false;
+    Matrix m = (Matrix) o;
+
+    if (!sameSize(m))
+      return false;
+ 
+    for (int i = 0; i < getHeight(); ++i)
+      for (int j = 0; j < getWidth(); ++j)
+        if (get(i,j) != m.get(i,j))
+          return false;
+
+    return true;
+    
   }
 }
