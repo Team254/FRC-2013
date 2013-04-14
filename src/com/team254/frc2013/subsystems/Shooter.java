@@ -69,7 +69,7 @@ public class Shooter extends Subsystem {
       frontMotor.set(-value);
       backMotor.set(-value);
       if (DriverStation.getInstance().isEnabled()) {
-        System.out.println("D:" + Timer.getFPGATimestamp() + ", " + value + ", " + getRpm() + ":D");
+        //System.out.println("D:" + Timer.getFPGATimestamp() + ", " + value + ", " + getRpm() + ":D");
       }
     }
   }
@@ -181,7 +181,7 @@ public class Shooter extends Subsystem {
   }
 
   public boolean onSpeedTarget() {
-    return onTarget;
+    return controller.onTarget();
   }
 
   public boolean isOn() {

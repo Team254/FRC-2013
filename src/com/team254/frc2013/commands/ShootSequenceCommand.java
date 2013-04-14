@@ -16,7 +16,7 @@ public class ShootSequenceCommand extends CommandGroup {
     requires(CommandBase.intake);
     requires(CommandBase.conveyor);
     addSequential(new LoadDiscIntoIndexerCommand());
-    addSequential(new CheckAutonTimerCommand(.25));
+   // addSequential(new CheckAutonTimerCommand(.25));
     addSequential(new IndexerUpCommand());
     addSequential(new WaitForShooterSpinUpCommand(.5));
     addSequential(new ShootCommand());

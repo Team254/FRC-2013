@@ -82,6 +82,15 @@ public class DriveGearbox extends Subsystem{
   public boolean isDriveMode() {
     return isDriveMode;
   }
+  
+  public double getLeftPower() {
+    return leftDriveA.get();
+  }
+
+  public double getRightPower() {
+    return rightDriveA.get();
+  }
+
 
   protected void initDefaultCommand() {
   }

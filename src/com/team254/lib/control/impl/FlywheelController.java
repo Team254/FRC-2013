@@ -31,6 +31,7 @@ public class FlywheelController extends StateSpaceController {
   double curVel;
   double period = 1 / 50.0;
   double outputVoltage = 0.0;
+  double targetError = 30;
 
   public FlywheelController(String name, ControlOutput output, ControlSource sensor, StateSpaceGains gains) {
     this(name, output, sensor, gains, 1 / 50.0);
@@ -71,7 +72,7 @@ public class FlywheelController extends StateSpaceController {
     }
 
     double curSensorVel = sensor.get();
-    curVel = ((curSensorVel - this.prevPos) / (1.0 / period));
+    curVel = curSensorVel;
 
     this.y.flash(new double[]{curSensorVel});
 
@@ -103,6 +104,11 @@ public class FlywheelController extends StateSpaceController {
   public void disable() {
     enabled = false;
     output.set(0);
+    curVel = 0;
+  }
+  
+  public boolean onTarget() {
+    return enabled && Math.abs(curVel - velGoal) < targetError;
   }
 
   public double getVelocityGoal() {

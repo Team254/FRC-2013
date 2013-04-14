@@ -22,28 +22,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CenterDiscMiddleAutoMode extends CommandGroup {
 
   public CenterDiscMiddleAutoMode(int numLastDiscs) {
-    // Shoot first 3
+     addSequential(new CenterDiscPartialAutoMode());
+ 
+    // Drive to back of pyramid
+    addSequential(new TurnMinAngleCommand(15, 1.25));
+    addSequential(new ResetDriveEncodersCommand());
     addSequential(new ShooterOnCommand(true));
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
-    addSequential(new ShootSequenceCommand());
-    addSequential(new ShootSequenceCommand());
-    addSequential(new ShootSequenceCommand());
-
-    // Drive to center line and intake
-    addSequential(new ShiftCommand(false));
-    addSequential(new ResetDriveEncodersCommand());
-    addSequential(new ResetGyroCommand());
-    addSequential(new TurnMinAngleCommand(17, 0.5));
-    addSequential(new DriveProfiledCommand(-100 / 12.0, 17, 8, 2));
-    addSequential(new TurnMinAngleCommand(-73, .5));
-    addSequential(new RunIntakeCommand(1.0));
-    addSequential(new ResetDriveEncodersCommand());
-    addSequential(new DriveProfiledCommand(6, -73, 5, 1.75));
-
-    // Drive to back of pyramid
-    addSequential(new TurnMinAngleCommand(17, 1.25));
-    addSequential(new ResetDriveEncodersCommand());
-    addSequential(new DriveProfiledCommand(8.2, 17, 8, 1.75));
+    addSequential(new DriveProfiledCommand(8.9, 6.4, 15, 3));
 
     // Shoot last discs
     for (int i = 0; i < numLastDiscs; ++i) {
@@ -54,6 +40,6 @@ public class CenterDiscMiddleAutoMode extends CommandGroup {
   }
 
   public CenterDiscMiddleAutoMode() {
-    this(3);
+    this(5);
   }
 }
