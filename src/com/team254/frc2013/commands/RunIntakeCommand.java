@@ -12,8 +12,6 @@ public class RunIntakeCommand extends CommandBase {
   public RunIntakeCommand(double speed, boolean runConveyor) {
     this.speed = speed;
     this.runConveyor = runConveyor;
-    requires(intake);
-    requires(conveyor);
   }
 
   public RunIntakeCommand(double speed) {

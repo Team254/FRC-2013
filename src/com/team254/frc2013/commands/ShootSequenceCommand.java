@@ -12,6 +12,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class ShootSequenceCommand extends CommandGroup {
 
   public ShootSequenceCommand(boolean doFeed) {
+    requires(CommandBase.shooter);
+    requires(CommandBase.intake);
+    requires(CommandBase.conveyor);
     addSequential(new LoadDiscIntoIndexerCommand());
     addSequential(new CheckAutonTimerCommand(.25));
     addSequential(new IndexerUpCommand());
