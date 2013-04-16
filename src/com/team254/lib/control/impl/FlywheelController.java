@@ -31,10 +31,10 @@ public class FlywheelController extends StateSpaceController {
   double curVel;
   double period = 1 / 50.0;
   double outputVoltage = 0.0;
-  double targetError = 30;
+  double targetError = 15;
 
   public FlywheelController(String name, ControlOutput output, ControlSource sensor, StateSpaceGains gains) {
-    this(name, output, sensor, gains, 1 / 50.0);
+    this(name, output, sensor, gains, 1 / 100.0);
   }
 
   public FlywheelController(String name, ControlOutput output, ControlSource sensor, StateSpaceGains gains, double period) {
