@@ -106,7 +106,7 @@ public class FlywheelController extends StateSpaceController {
     output.set(0);
     curVel = 0;
   }
-  
+
   public boolean onTarget() {
     return enabled && Math.abs(curVel - velGoal) < targetError;
   }

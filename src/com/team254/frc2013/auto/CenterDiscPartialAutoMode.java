@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * @author tom@team254.com
  */
 public class CenterDiscPartialAutoMode extends CommandGroup {
-  
+
   public CenterDiscPartialAutoMode() {
      // Shoot first 3
     addSequential(new ShooterOnCommand(true));
@@ -32,7 +32,7 @@ public class CenterDiscPartialAutoMode extends CommandGroup {
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand(false));
     addSequential(new ShooterOnCommand(false));
-  
+
     // Drive to center line
     addSequential(new ShiftCommand(false));
     addSequential(new ResetDriveEncodersCommand());
@@ -46,5 +46,5 @@ public class CenterDiscPartialAutoMode extends CommandGroup {
     addSequential(new RunIntakeCommand(1.0));
     addSequential(new DriveAtSpeedCommand(7, 4, -72, 10));
   }
-  
+
 }

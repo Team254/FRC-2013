@@ -23,7 +23,7 @@ public class CenterDiscMiddleAutoMode extends CommandGroup {
 
   public CenterDiscMiddleAutoMode(int numLastDiscs) {
      addSequential(new CenterDiscPartialAutoMode());
- 
+
     // Drive to back of pyramid
     addSequential(new TurnMinAngleCommand(15, 1.25));
     addSequential(new ResetDriveEncodersCommand());
