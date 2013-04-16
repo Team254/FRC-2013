@@ -5,8 +5,6 @@ import com.team254.frc2013.ShooterGains;
 import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.impl.FlywheelController;
-import com.team254.lib.util.Debouncer;
-import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -25,24 +23,29 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class Shooter extends Subsystem {
 
+  // Preset enumeration
   public static final int PRESET_BACK_PYRAMID = 0;
   public static final int PRESET_FRONT_PYRAMID = 1;
   public static final int SLOW_SHOOT = 2;
+
+  // Actuators
   private Talon frontMotor = new Talon(Constants.frontShooterPort.getInt());
   private Talon backMotor = new Talon(Constants.backShooterPort.getInt());
   private Solenoid loader = new Solenoid(Constants.shooterLoaderPort.getInt());
   private Solenoid angle = new Solenoid(Constants.shooterAnglePort.getInt());
   private Solenoid indexerLeft = new Solenoid(Constants.indexerLeftPort.getInt());
   private Solenoid indexerRight = new Solenoid(Constants.indexerRightPort.getInt());
-  ThrottledPrinter p = new ThrottledPrinter(.1);
-  public DigitalInput indexerDownSensorA =
-          new DigitalInput(Constants.indexerDownSensorPortA.getInt());
-  public DigitalInput indexerDownSensorB =
-          new DigitalInput(Constants.indexerDownSensorPortB.getInt());
+
+  // Sensors
+  public DigitalInput indexerDownSensor =
+          new DigitalInput(Constants.indexerDownSensorPort.getInt());
+  public DigitalInput indexerUpSensor =
+          new DigitalInput(Constants.indexerUpSensorPort.getInt());
   private DigitalInput discSensor =
           new DigitalInput(Constants.discSensorPort.getInt());
   public Counter counter = new Counter(Constants.shootEncoderPort.getInt());
-  Debouncer debounce = new Debouncer(.1);
+
+  // Controller helpers
   double goal = 0;
 
   private class ShooterSource implements ControlSource {
@@ -110,9 +113,19 @@ public class Shooter extends Subsystem {
     return loader.get();
   }
 
-  public boolean isIndexerDown() {
-    // The sensor reads true when the indexer is down.
-    return indexerLeft.get() && indexerRight.get();
+  // This returns true when the solenoids are on.
+  public boolean isIndexerSetDown() {
+    return indexerLeft.get() && indexerRight.get() ;
+  }
+
+  // This returns true when the hall effect sensor is tripped.
+  public boolean isIndexerSensedDown() {
+    return indexerDownSensor.get();
+  }
+
+  // This returns true when the hall effect sensor is tripped.
+  public boolean isIndexerSensedUp() {
+    return indexerUpSensor.get();
   }
 
   public void setVelocityGoal(double rpm) {
@@ -133,14 +146,13 @@ public class Shooter extends Subsystem {
     controller.enable();
   }
 
-  public void setPreset(int preset) {
+  public final void setPreset(int preset) {
     switch (preset) {
       case PRESET_FRONT_PYRAMID:
         setHighAngle(true);
         setVelocityGoal(Constants.shootRpm.getDouble());
         break;
       case SLOW_SHOOT:
-        //setHighAngle(true);
         setVelocityGoal(2000);
         break;
       case PRESET_BACK_PYRAMID:
@@ -155,18 +167,14 @@ public class Shooter extends Subsystem {
   }
 
   private void setPowers(double frontPower, double backPower) {
-  //  this.frontPower = (frontPower < 0) ? 0 : (frontPower > speedLimit) ? speedLimit : frontPower;
-  //  this.backPower = (backPower < 0) ? 0 : (backPower > speedLimit) ? speedLimit : backPower;
-  //  setShooterOn(shooterOn);
+
   }
 
   public void setShooterOn(boolean isOn) {
     shooterOn = isOn;
     if (isOn) {
       controller.enable();
-     // setVelocityGoalRaw(goal);
     } else {
-    //  setVelocityGoalRaw(0);
       controller.disable();
       frontMotor.set(0);
       backMotor.set(0);

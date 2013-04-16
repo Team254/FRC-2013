@@ -27,7 +27,7 @@ public class AutonIndexerCommand extends CommandBase {
   }
 
   protected void execute() {
-    if (shooter.isIndexerDown() && !downDelayStarted) {
+    if (shooter.isIndexerSetDown() && !downDelayStarted) {
       downDelayStarted = true;
       afterDownDelayTimer.start();
     }

@@ -1,35 +1,34 @@
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-
 /**
  * Moves indexer back to the shooter after having loaded a disc.
  *
  * @author jonathan.chang13@gmail.com (Jonathan Chang)
  * @author pat@team254.com (Patrick Fairbank)
  */
-public class IndexerUpCommand extends CommandBase {
-  private Timer timer;
+public class SensedIndexerUpCommand extends CommandBase {
 
-  public IndexerUpCommand() {
-    timer = new Timer();
+  public SensedIndexerUpCommand(double timeout) {
     requires(intake);
     requires(conveyor);
+    setTimeout(timeout);
+  }
+
+  public SensedIndexerUpCommand() {
+    this(1.0);
   }
 
   protected void initialize() {
     shooter.setIndexerUp(true);
     intake.setIntakePower(0);
     conveyor.setMotor(0);
-    timer.reset();
-    timer.start();
   }
 
   protected void execute() {
   }
 
   protected boolean isFinished() {
-    return timer.get() > .25;
+    return shooter.isIndexerSensedUp() || isTimedOut();
   }
 
   protected void end() {

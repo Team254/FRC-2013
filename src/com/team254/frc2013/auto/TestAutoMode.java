@@ -2,7 +2,7 @@ package com.team254.frc2013.auto;
 
 import com.team254.frc2013.commands.DriveAtSpeedCommand;
 import com.team254.frc2013.commands.DriveProfiledCommand;
-import com.team254.frc2013.commands.IndexerDownCommand;
+import com.team254.frc2013.commands.SensedIndexerDownCommand;
 import com.team254.frc2013.commands.ResetDriveEncodersCommand;
 import com.team254.frc2013.commands.ResetGyroCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
@@ -24,7 +24,7 @@ public class TestAutoMode extends CommandGroup {
   public TestAutoMode() {
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
-    addSequential(new IndexerDownCommand());
+    addSequential(new SensedIndexerDownCommand());
     addSequential(new ShiftCommand(false));
     addSequential(new RunIntakeCommand(1));
     addSequential(new DriveAtSpeedCommand(5, 1.5, 0, 5));

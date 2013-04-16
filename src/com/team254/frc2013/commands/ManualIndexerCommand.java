@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class ManualIndexerCommand extends CommandGroup {
   public ManualIndexerCommand() {
-    addSequential(new IndexerDownCommand());
-    addSequential(new IndexerUpCommand());
+    addSequential(new SensedIndexerDownCommand());
+    addSequential(new SensedIndexerUpCommand());
   }
 }

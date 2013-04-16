@@ -25,7 +25,7 @@ public class WaitForDiscCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    boolean indexerUp = !shooter.isIndexerDown();
+    boolean indexerUp = !shooter.isIndexerSetDown();
     boolean sensor = d.update(shooter.isIndexerLoaded()) ;
     boolean timedOut = isTimedOut();
     if (indexerUp || sensor || timedOut)  // indexer up OR disk sensor OR timeout
