@@ -135,11 +135,15 @@ public class OperatorJoystick extends Joystick {
   }
 
   public boolean getRapidFireButtonState() {
-    return this.getRawButton(Constants.rapidFirePort.getInt());
+    return this.getRawButton(Constants.rapidFirePort.getInt()) && getShooterSwitch();
   }
 
   public JoystickButton getRapidFireButton() {
-    return new JoystickButton(this, Constants.rapidFirePort.getInt());
+    return new JoystickButton(this, Constants.rapidFirePort.getInt()) {
+       public boolean get() {
+         return super.get() && getShooterSwitch();
+       }
+    };
   }
 
   public boolean getClimbButtonState() {
@@ -155,7 +159,11 @@ public class OperatorJoystick extends Joystick {
   }
 
   public JoystickButton getShootButton() {
-    return new JoystickButton(this, Constants.shootControlPort.getInt());
+    return new JoystickButton(this, Constants.shootControlPort.getInt()) {
+       public boolean get() {
+         return super.get() && getShooterSwitch();
+       }
+    };
   }
 
   public boolean getShooterSwitch() {
