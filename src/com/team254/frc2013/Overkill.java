@@ -83,6 +83,8 @@ public class Overkill extends IterativeRobot {
     CommandBase.conveyor.setMotor(0);
     CommandBase.compressor.start();
     CommandBase.autonTimer.reset();
+
+    lastAngle = CommandBase.drive.getGyroAngle();
   }
 
   public void disabledPeriodic() {
