@@ -11,6 +11,7 @@ public abstract class Controller implements Updatable {
   private static Vector controllers = new Vector();
   protected String name;
   protected boolean enabled;
+  protected double goal;
 
   public Controller(String name) {
     ControlUpdater.getInstance().add(this);
@@ -42,7 +43,11 @@ public abstract class Controller implements Updatable {
 
   public abstract void update();
 
-  public abstract void setGoal(double goal);
+  public void setGoal(double goal) {
+    this.goal = goal;
+  }
 
-  public abstract double getGoal();
+  public double getGoal() {
+    return goal;
+  }
 }

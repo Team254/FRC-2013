@@ -23,7 +23,7 @@ public abstract class StateSpaceController extends Controller {
   int numStates;
   boolean initialized = false;
   StateSpaceGains gains;
-  public double period = 1.0/50.0;
+  public double period = 1.0/100.0;
 
   //the state matrices, calculated and imported from matlab
   protected Matrix A;

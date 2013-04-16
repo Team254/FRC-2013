@@ -40,7 +40,7 @@ public class Matrix {
     return data[i];
   }
 
-  void set(int y, int x, double val){
+  public void set(int y, int x, double val){
     if (x >= width || y >= height){
       throw new ArrayIndexOutOfBoundsException("Bad index");
     }
