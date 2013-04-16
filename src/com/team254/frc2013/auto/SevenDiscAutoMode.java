@@ -31,10 +31,10 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
     addSequential(new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_DOWN));
     addSequential(new ShiftCommand(false));
-  //  addSequential(new ShootSequenceCommand());
-  //  addSequential(new ShootSequenceCommand());
-    //addSequential(new ShootSequenceCommand(false));
-addSequential(new WaitCommand(1));
+    addSequential(new ShootSequenceCommand());
+    addSequential(new ShootSequenceCommand());
+    addSequential(new ShootSequenceCommand(false));
+
     // Pick up 2 middle discs
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
@@ -44,9 +44,8 @@ addSequential(new WaitCommand(1));
     // Drive to front of pyramid and shoot 2
     addSequential(new DriveProfiledCommand(6, 3.5, 0, 5));
     addSequential(new RunIntakeCommand(0.0));
-   // addSequential(new ShootSequenceCommand());
-    //addSequential(new ShootSequenceCommand(false));
-    addSequential(new WaitCommand(1));
+    addSequential(new ShootSequenceCommand());
+    addSequential(new ShootSequenceCommand(false));
 
     // Pick up 2 far discs
     addSequential(new RunIntakeCommand(1.0));
@@ -55,9 +54,10 @@ addSequential(new WaitCommand(1));
     // Drive to front of pyramid and shoot 2
     addSequential(new DriveProfiledCommand(6, 5, 0, 2.5));
     addSequential(new RunIntakeCommand(0.0));
-   // addSequential(new ShootSequenceCommand());
-   // addSequential(new ShootSequenceCommand(false));
-addSequential(new WaitCommand(1));
+    addSequential(new ShootSequenceCommand());
+    addSequential(new ShootSequenceCommand());
+    addSequential(new ShootSequenceCommand(false));
+
     addSequential(new ShooterOnCommand(false));
     addSequential(new RunIntakeCommand(0.0));
   }
