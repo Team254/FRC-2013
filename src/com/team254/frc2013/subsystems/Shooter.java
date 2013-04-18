@@ -48,7 +48,6 @@ public class Shooter extends Subsystem {
           new DigitalInput(Constants.leftDiscSensorPort.getInt());
   public Counter counter = new Counter(Constants.shootEncoderPort.getInt());
 
-  int testBumpSensor = Constants.testBumpSensor.getInt();
   // Controller helpers
   double goal = 0;
 
@@ -70,12 +69,9 @@ public class Shooter extends Subsystem {
 
   private class ShooterOutput implements ControlOutput {
     public void set(double value) {
-      /*
       if (value > speedLimit) {
         value = speedLimit;
       }
-      */
-      value = Util.limit(value, speedLimit);
       frontMotor.set(-value);
       backMotor.set(-value);
       if (DriverStation.getInstance().isEnabled()) {
@@ -91,7 +87,7 @@ public class Shooter extends Subsystem {
   boolean onTarget = false;
   public double lastRpm = 0;
   private Timer stateTimer = new Timer();
-  double speedLimit = 1;
+  double speedLimit = 15000;
 
   public void setIndexerUp(boolean up) {
     indexerLeft.set(!up);
@@ -141,7 +137,7 @@ public class Shooter extends Subsystem {
   }
 
   public boolean isIndexerLoaded() {
-    if (testBumpSensor == 0) {
+    if (Constants.testBumpSensor.getInt() == 0) {
       return !rightDiscSensor.get();
     } else { // if test bumper status is not 0, then use left bumper
       return !rightDiscSensor.get() || !leftDiscSensor.get();

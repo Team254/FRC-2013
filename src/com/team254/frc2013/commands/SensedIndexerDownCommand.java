@@ -25,6 +25,7 @@ public class SensedIndexerDownCommand extends CommandBase {
   }
 
   protected void execute() {
+    System.out.println("looking for dn: " + shooter.isIndexerSensedDown());
   }
 
   protected boolean isFinished() {

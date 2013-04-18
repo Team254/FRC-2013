@@ -25,6 +25,7 @@ public class SensedIndexerUpCommand extends CommandBase {
   }
 
   protected void execute() {
+    System.out.println("looking for up: " + shooter.isIndexerSensedUp());
   }
 
   protected boolean isFinished() {
