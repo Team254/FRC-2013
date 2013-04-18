@@ -17,11 +17,11 @@ public class ShootSequenceCommand extends CommandGroup {
     requires(CommandBase.conveyor);
     addSequential(new LoadDiscIntoIndexerCommand());
    // addSequential(new CheckAutonTimerCommand(.25));
-    addSequential(new SensedIndexerUpCommand(.75));
+    addSequential(new SensedIndexerUpCommand(.25));
     addSequential(new WaitForShooterSpinUpCommand(.5));
     addSequential(new ShootCommand());
     if (doFeed) {
-      addSequential(new SensedIndexerDownCommand(.75));
+      addSequential(new SensedIndexerDownCommand(.25));
       addSequential(new LoadDiscIntoIndexerCommand());
     } else {
       addSequential(new SetIndexerDownCommand());

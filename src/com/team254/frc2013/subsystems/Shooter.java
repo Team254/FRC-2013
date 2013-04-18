@@ -5,6 +5,7 @@ import com.team254.frc2013.ShooterGains;
 import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.impl.FlywheelController;
+import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -41,10 +42,13 @@ public class Shooter extends Subsystem {
           new DigitalInput(Constants.indexerDownSensorPort.getInt());
   public DigitalInput indexerUpSensor =
           new DigitalInput(Constants.indexerUpSensorPort.getInt());
-  private DigitalInput discSensor =
-          new DigitalInput(Constants.discSensorPort.getInt());
+  private DigitalInput rightDiscSensor =
+          new DigitalInput(Constants.rightDiscSensorPort.getInt());
+  private DigitalInput leftDiscSensor =
+          new DigitalInput(Constants.leftDiscSensorPort.getInt());
   public Counter counter = new Counter(Constants.shootEncoderPort.getInt());
 
+  int testBumpSensor = Constants.testBumpSensor.getInt();
   // Controller helpers
   double goal = 0;
 
@@ -66,9 +70,12 @@ public class Shooter extends Subsystem {
 
   private class ShooterOutput implements ControlOutput {
     public void set(double value) {
+      /*
       if (value > speedLimit) {
         value = speedLimit;
       }
+      */
+      value = Util.limit(value, speedLimit);
       frontMotor.set(-value);
       backMotor.set(-value);
       if (DriverStation.getInstance().isEnabled()) {
@@ -84,7 +91,7 @@ public class Shooter extends Subsystem {
   boolean onTarget = false;
   public double lastRpm = 0;
   private Timer stateTimer = new Timer();
-  double speedLimit = 15000;
+  double speedLimit = 1;
 
   public void setIndexerUp(boolean up) {
     indexerLeft.set(!up);
@@ -115,17 +122,17 @@ public class Shooter extends Subsystem {
 
   // This returns true when the solenoids are on.
   public boolean isIndexerSetDown() {
-    return indexerLeft.get() && indexerRight.get() ;
+    return indexerLeft.get() && indexerRight.get();
   }
 
   // This returns true when the hall effect sensor is tripped.
   public boolean isIndexerSensedDown() {
-    return indexerDownSensor.get();
+    return !indexerDownSensor.get();
   }
 
   // This returns true when the hall effect sensor is tripped.
   public boolean isIndexerSensedUp() {
-    return indexerUpSensor.get();
+    return !indexerUpSensor.get();
   }
 
   public void setVelocityGoal(double rpm) {
@@ -134,7 +141,11 @@ public class Shooter extends Subsystem {
   }
 
   public boolean isIndexerLoaded() {
-    return !discSensor.get();
+    if (testBumpSensor == 0) {
+      return !rightDiscSensor.get();
+    } else { // if test bumper status is not 0, then use left bumper
+      return !rightDiscSensor.get() || !leftDiscSensor.get();
+    }
   }
 
   public Shooter() {
