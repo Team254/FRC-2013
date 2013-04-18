@@ -1,7 +1,5 @@
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-
 /**
  * Moves indexer back to the shooter after having loaded a disc.
  *
@@ -9,14 +7,18 @@ import edu.wpi.first.wpilibj.Timer;
  * @author pat@team254.com (Patrick Fairbank)
  */
 public class SetIndexerDownCommand extends CommandBase {
+  private boolean wantsDown;
 
-  public SetIndexerDownCommand() {;
-    requires(intake);
-    requires(conveyor);
+  public SetIndexerDownCommand() {
+    this(true);
+  }
+  
+  public SetIndexerDownCommand(boolean wantsDown) {
+    this.wantsDown = wantsDown;
   }
 
   protected void initialize() {
-    shooter.setIndexerUp(false);
+    shooter.setIndexerUp(!wantsDown);
     intake.setIntakePower(0);
     conveyor.setMotor(0);
   }
