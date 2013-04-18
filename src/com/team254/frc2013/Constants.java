@@ -63,7 +63,8 @@ public class Constants extends ConstantsBase {
   public static final Constant pressureTransducerPort = new Constant("pressureTransducerPort", 3);
   public static final Constant indexerDownSensorPort = new Constant("indexerDownSensorPort", 12);
   public static final Constant indexerUpSensorPort = new Constant("indexerUpSensorPort", 11);
-  public static final Constant discSensorPort = new Constant("discSensorPort", 13);
+  public static final Constant rightDiscSensorPort = new Constant("rightDiscSensorPort", 13);
+  public static final Constant leftDiscSensorPort = new Constant("leftDiscSensorPort", 14);
 
   // Drive encoders
   public static final Constant leftEncoderPortA = new Constant("leftEncoderPortA", 1);
@@ -111,7 +112,7 @@ public class Constants extends ConstantsBase {
   public static final Constant intakeKD = new Constant("intakeKD", 0.24);
 
   public static final Constant minShootRpm = new Constant("minShootRpm", 11750);
-  public static final Constant shootRpm = new Constant("shootRpm", 9750);
+  public static final Constant shootRpm = new Constant("shootRpm", 9900);
 
   static {
     // Set any overridden constants from the file on startup.

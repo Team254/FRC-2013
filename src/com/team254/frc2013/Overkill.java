@@ -88,6 +88,8 @@ public class Overkill extends IterativeRobot {
   }
 
   public void disabledPeriodic() {
+    System.out.println("HE Up: " + CommandBase.shooter.isIndexerSensedUp() + ", Down: " + CommandBase.shooter.isIndexerSensedDown());
+
     boolean autonSelectButton =
         CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState();
     if (autonSelectLatch.update(autonSelectButton)) {
