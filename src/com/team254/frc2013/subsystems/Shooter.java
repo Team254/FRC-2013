@@ -56,9 +56,10 @@ public class Shooter extends Subsystem {
     public double get() {
       int kCountsPerRev = 1;
       double period = counter.getPeriod();
+      System.out.println(period);
       double rpm = 60.0 / (period * (double) kCountsPerRev);
-      lastRpm = rpm;
-      onTarget = lastRpm > Constants.minShootRpm.getDouble();
+      if (period < 1.0)
+        lastRpm = rpm;
       return (lastRpm * Math.PI * 2.0) / 60.0;
     }
 
@@ -69,14 +70,15 @@ public class Shooter extends Subsystem {
 
   private class ShooterOutput implements ControlOutput {
     public void set(double value) {
+      value = goal / 12000.0;
       if (value > speedLimit) {
         value = speedLimit;
       }
+      if (!controller.isEnabled()) {
+        value = 0;
+      }
       frontMotor.set(-value);
       backMotor.set(-value);
-      if (DriverStation.getInstance().isEnabled()) {
-        //System.out.println("D:" + Timer.getFPGATimestamp() + ", " + value + ", " + getRpm() + ":D");
-      }
     }
   }
 
@@ -84,7 +86,6 @@ public class Shooter extends Subsystem {
   private double frontPower;
   private double backPower;
   private boolean shooterOn;
-  boolean onTarget = false;
   public double lastRpm = 0;
   private Timer stateTimer = new Timer();
   double speedLimit = 15000;
