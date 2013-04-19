@@ -76,7 +76,7 @@ public class FlywheelController extends StateSpaceController {
 
     this.y.flash(new double[]{curSensorVel});
 
-    r.flash(new double[]{(velGoal * (1 - A.get(1,1)))/ B.get(1,0), velGoal});
+    r.flash(new double[]{(velGoal * (1 - A.get(1,1)))/ A.get(1,0), velGoal});
 
     // Update SSC
     update(r, y);

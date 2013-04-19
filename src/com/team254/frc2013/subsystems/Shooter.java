@@ -8,7 +8,6 @@ import com.team254.lib.control.impl.FlywheelController;
 import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
@@ -56,9 +55,8 @@ public class Shooter extends Subsystem {
     public double get() {
       int kCountsPerRev = 1;
       double period = counter.getPeriod();
-      System.out.println(period);
       double rpm = 60.0 / (period * (double) kCountsPerRev);
-      if (period < 1.0)
+      if (rpm < 20000)
         lastRpm = rpm;
       return (lastRpm * Math.PI * 2.0) / 60.0;
     }
@@ -70,13 +68,16 @@ public class Shooter extends Subsystem {
 
   private class ShooterOutput implements ControlOutput {
     public void set(double value) {
-      value = goal / 12000.0;
+      // Leave this for Austin usage
+      //System.out.println("D:" + Timer.getFPGATimestamp() + ", " + value*12.0 + ", " + lastRpm + ":D");
       if (value > speedLimit) {
         value = speedLimit;
       }
       if (!controller.isEnabled()) {
         value = 0;
       }
+      value = Util.limit(value, 1.0);
+
       frontMotor.set(-value);
       backMotor.set(-value);
     }

@@ -88,7 +88,7 @@ public class Overkill extends IterativeRobot {
   }
 
   public void disabledPeriodic() {
-    System.out.println("HE Up: " + CommandBase.shooter.isIndexerSensedUp() + ", Down: " + CommandBase.shooter.isIndexerSensedDown());
+    //System.out.println("HE Up: " + CommandBase.shooter.isIndexerSensedUp() + ", Down: " + CommandBase.shooter.isIndexerSensedDown());
 
     boolean autonSelectButton =
         CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState();
@@ -214,8 +214,9 @@ public class Overkill extends IterativeRobot {
   }
 
   private void updateLCD(){
-    String driveEncoders = "LE: " + Math.floor(CommandBase.motors.getLeftEncoder().get());
-    driveEncoders += " RE: " + Math.floor(CommandBase.drive.getRightEncoderDistance());
+    String driveEncoders = "L: " + Math.floor(CommandBase.motors.getLeftEncoder().get());
+    driveEncoders += " R: " + Math.floor(CommandBase.drive.getRightEncoderDistance());
+    driveEncoders += " U:" + CommandBase.shooter.isIndexerSensedUp() + " D:" + CommandBase.shooter.isIndexerSetDown();
     DriverStationLCD lcd = DriverStationLCD.getInstance();
     lcd.println(DriverStationLCD.Line.kUser2, 1, driveEncoders + "     ");
     lcd.println(DriverStationLCD.Line.kUser3, 1,
