@@ -19,8 +19,6 @@ public class SetIndexerDownCommand extends CommandBase {
 
   protected void initialize() {
     shooter.setIndexerUp(!wantsDown);
-    intake.setIntakePower(0);
-    conveyor.setMotor(0);
   }
 
   protected void execute() {

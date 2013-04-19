@@ -20,12 +20,9 @@ public class SensedIndexerDownCommand extends CommandBase {
 
   protected void initialize() {
     shooter.setIndexerUp(false);
-    intake.setIntakePower(0);
-    conveyor.setMotor(0);
   }
 
   protected void execute() {
-    System.out.println("looking for dn: " + shooter.isIndexerSensedDown());
   }
 
   protected boolean isFinished() {

@@ -14,8 +14,6 @@ public class LoadDiscIntoIndexerCommand extends CommandGroup {
   public LoadDiscIntoIndexerCommand() {
     addSequential(new RunIntakeCommand(1));
     addSequential(new WaitForDiscCommand(.5));
-    addSequential(new RunIntakeCommand(-.075));
-    addSequential(new WaitCommand(.03));
     addSequential(new RunIntakeCommand(0));
   }
 }

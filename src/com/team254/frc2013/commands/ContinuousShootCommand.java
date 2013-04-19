@@ -11,10 +11,15 @@ public class ContinuousShootCommand extends CommandGroup {
   public ContinuousShootCommand() {
     addSequential(new ShootSequenceCommand(false));
   }
+  
+  protected void initialize() {
+    super.initialize();
+  }
 
   protected void end() {
     super.end();
-    if (CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState()) {
+    CommandBase.rapidFireShots++;
+    if (CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState() && CommandBase.rapidFireShots < 4) {
       start();
     }
   }

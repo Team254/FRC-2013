@@ -20,12 +20,9 @@ public class SensedIndexerUpCommand extends CommandBase {
 
   protected void initialize() {
     shooter.setIndexerUp(true);
-    intake.setIntakePower(0);
-    conveyor.setMotor(0);
   }
 
   protected void execute() {
-    System.out.println("looking for up: " + shooter.isIndexerSensedUp());
   }
 
   protected boolean isFinished() {

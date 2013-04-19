@@ -36,6 +36,8 @@ public abstract class CommandBase extends Command {
   public static Timer shotTimer = new Timer();
   public static Timer autonTimer = new Timer();
 
+  public static int rapidFireShots = 0;
+
   public static void init() {
     // This MUST be here. If the OI creates Commands (which it very likely will), constructing it
     // during the construction of CommandBase (from which commands extend), subsystems are not
