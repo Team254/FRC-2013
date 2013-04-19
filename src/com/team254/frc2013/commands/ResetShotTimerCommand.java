@@ -1,16 +1,15 @@
 package com.team254.frc2013.commands;
 
 /**
- * Extends the shooter.
+ * Resets the shot timer to measure the time of each shoot sequence.
  *
- * @author pat@team254.com (Patrick Fairbank)
+ * @author Richard
  */
-public class ShooterExtendCommand extends CommandBase {
-  public ShooterExtendCommand() {
-  }
+public class ResetShotTimerCommand extends CommandBase {
 
   protected void initialize() {
-    shooter.extend();
+    shotTimer.reset();
+    shotTimer.start();
   }
 
   protected void execute() {

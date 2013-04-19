@@ -15,6 +15,7 @@ public class ShootSequenceCommand extends CommandGroup {
     requires(CommandBase.shooter);
     requires(CommandBase.intake);
     requires(CommandBase.conveyor);
+    addSequential(new ResetShotTimerCommand());
     addSequential(new LoadDiscIntoIndexerCommand());
     addSequential(new CheckAutonTimerCommand(.25));
     addSequential(new SensedIndexerUpCommand(1));
@@ -26,6 +27,7 @@ public class ShootSequenceCommand extends CommandGroup {
     } else {
       addSequential(new SetIndexerDownCommand());
     }
+    addSequential(new PrintCommand("Last shoot sequence time: " + CommandBase.shotTimer.get()));
   }
 
   public ShootSequenceCommand() {
