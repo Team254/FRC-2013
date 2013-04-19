@@ -216,7 +216,7 @@ public class Overkill extends IterativeRobot {
   private void updateLCD(){
     String driveEncoders = "L: " + Math.floor(CommandBase.motors.getLeftEncoder().get());
     driveEncoders += " R: " + Math.floor(CommandBase.drive.getRightEncoderDistance());
-    driveEncoders += " U:" + CommandBase.shooter.isIndexerSensedUp() + " D:" + CommandBase.shooter.isIndexerSetDown();
+    driveEncoders += " U:" + (CommandBase.shooter.isIndexerSensedUp() ? 1 : 0) + " D:" + (CommandBase.shooter.isIndexerSensedDown() ? 1 : 0);
     DriverStationLCD lcd = DriverStationLCD.getInstance();
     lcd.println(DriverStationLCD.Line.kUser2, 1, driveEncoders + "     ");
     lcd.println(DriverStationLCD.Line.kUser3, 1,
