@@ -1,15 +1,21 @@
 package com.team254.frc2013.commands;
 
+import edu.wpi.first.wpilibj.Timer;
+
 /**
- * Resets the shot timer to measure the time of each shoot sequence.
+ * Resets and restarts a given timer.
  *
  * @author Richard
  */
-public class ResetShotTimerCommand extends CommandBase {
+public class ResetTimerCommand extends CommandBase {
+  private Timer timer;
 
+  public ResetTimerCommand(Timer timer) {
+    this.timer = timer;
+  }
   protected void initialize() {
-    shotTimer.reset();
-    shotTimer.start();
+    timer.reset();
+    timer.start();
   }
 
   protected void execute() {
