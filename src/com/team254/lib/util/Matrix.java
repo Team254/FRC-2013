@@ -25,7 +25,7 @@ public class Matrix {
     for(i = 0; i<nRows*nCols; i++)
       data[i] = 0.0;
   }
-  
+
   public double[] getData() {
     return data;
   }

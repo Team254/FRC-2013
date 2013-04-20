@@ -2,7 +2,7 @@ package com.team254.frc2013.commands;
 
 /**
  * Reversed the conveyor if the indexer cannot make it down
- * 
+ *
  * @author tom@team254.com
  */
 public class FixIndexerCommand extends CommandBase {

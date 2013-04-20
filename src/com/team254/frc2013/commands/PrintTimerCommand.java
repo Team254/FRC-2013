@@ -13,7 +13,7 @@ public class PrintTimerCommand extends CommandBase {
   public PrintTimerCommand(Timer timer) {
     this.timer = timer;
   }
-  
+
   protected void initialize() {
     System.out.println("Last shoot sequence time: " + timer.get());
   }
@@ -29,5 +29,5 @@ public class PrintTimerCommand extends CommandBase {
   }
 
   protected void interrupted() {
-  } 
+  }
 }

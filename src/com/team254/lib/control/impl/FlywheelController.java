@@ -87,14 +87,14 @@ public class FlywheelController extends StateSpaceController {
     double voltage = DriverStation.getInstance().getBatteryVoltage();
     if (voltage < 4.5)
       voltage = 12.0;
- 
+
     if (velGoal < 1.0) {
       this.output.set(0.0);
       goal = curSensorVel;
     } else {
       this.output.set(outputVoltage / voltage);
     }
-    
+
     onTarget = filter.update(onTargetRaw());
   }
 

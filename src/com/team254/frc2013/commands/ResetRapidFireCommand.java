@@ -27,5 +27,5 @@ public class ResetRapidFireCommand extends CommandBase {
 
   protected void interrupted() {
   }
-  
+
 }

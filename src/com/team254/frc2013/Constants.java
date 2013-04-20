@@ -113,7 +113,7 @@ public class Constants extends ConstantsBase {
 
   public static final Constant minShootRpm = new Constant("minShootRpm", 11750);
   public static final Constant shootRpm = new Constant("shootRpm", 9900);
-  
+
   public static final Constant testBumpSensor = new Constant("testBumpSensor", 0);
 
   static {

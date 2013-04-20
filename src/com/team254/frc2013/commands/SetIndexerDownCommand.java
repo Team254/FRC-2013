@@ -12,7 +12,7 @@ public class SetIndexerDownCommand extends CommandBase {
   public SetIndexerDownCommand() {
     this(true);
   }
-  
+
   public SetIndexerDownCommand(boolean wantsDown) {
     this.wantsDown = wantsDown;
   }
