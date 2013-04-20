@@ -10,8 +10,8 @@ public class ShooterGains {
             new double[] {1.000000, 0.000000},  // B
             new double[] {0.000000, 1.000000},  // C
             new double[] {0.000000},  // D
-            new double[] {0.013975, 0.563936},  // L
-            new double[] {0.863936, 0.036709},  // K
+            new double[] {0.013975, 0.413936},  // L
+            new double[] {0.943936, 0.047502},  // K
             new double[] {12.000000},  // Umax
             new double[] {-2.000000}),  // Umin
         };

@@ -186,6 +186,10 @@ public class Overkill extends IterativeRobot {
       CommandBase.shooter.setPreset(Shooter.PRESET_FRONT_PYRAMID);
     }
 
+    if (!CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState()) {
+      CommandBase.rapidFireShots = 0;
+    }
+
     // Set shooter on/off.
     CommandBase.shooter.setShooterOn(CommandBase.controlBoard.operatorJoystick.getShooterSwitch());
 

@@ -35,7 +35,6 @@ public class OperatorControlHelper {
     c.operatorJoystick.getIntakeOutButton().whenReleased(new RunIntakeCommand(0));
 
     c.operatorJoystick.getRapidFireButton().whenPressed(new ContinuousShootCommand());
-    c.operatorJoystick.getRapidFireButton().whenReleased(new ResetRapidFireCommand());
 
     c.operatorJoystick.ptoOnSwitch.whenPressed(new PtoCommand());
     c.operatorJoystick.ptoOnSwitch.whenReleased(new CheesyDriveCommand());
