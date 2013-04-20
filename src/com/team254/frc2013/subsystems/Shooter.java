@@ -8,6 +8,7 @@ import com.team254.lib.control.impl.FlywheelController;
 import com.team254.lib.util.Util;
 import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
@@ -69,7 +70,7 @@ public class Shooter extends Subsystem {
   private class ShooterOutput implements ControlOutput {
     public void set(double value) {
       // Leave this for Austin usage
-      //System.out.println("D:" + Timer.getFPGATimestamp() + ", " + value*12.0 + ", " + lastRpm + ":D");
+      System.out.println("D:" + Timer.getFPGATimestamp() + ", " + value*12.0 + ", " + lastRpm + ", " + controller.Xhat.get(0) + ", " + controller.Xhat.get(1) + ", " + DriverStation.getInstance().getBatteryVoltage() + ":D");
       if (value > speedLimit) {
         value = speedLimit;
       }

@@ -18,9 +18,9 @@ import com.team254.lib.util.Matrix;
  * Based on work by Austin Schuh and Parker Schuh
  */
 public abstract class StateSpaceController extends Controller {
-  int numInputs;
-  int numOutputs;
-  int numStates;
+  public int numInputs;
+  public int numOutputs;
+  public int numStates;
   boolean initialized = false;
   StateSpaceGains gains;
   public double period = 1.0/100.0;
@@ -31,12 +31,13 @@ public abstract class StateSpaceController extends Controller {
   protected Matrix C;
   protected Matrix D;
   protected Matrix L;
-  protected Matrix K;
+  public Matrix K;
 
   // Other state matrices
   protected Matrix X;
-  protected Matrix Xhat;
+  public Matrix Xhat;
   protected Matrix U;
+  public Matrix Uuncapped;
   protected Matrix Umin;
   protected Matrix Umax;
 
@@ -59,6 +60,7 @@ public abstract class StateSpaceController extends Controller {
     X = new Matrix(numStates, 1);
     Xhat = new Matrix(numStates, 1);
     U = new Matrix(numOutputs, 1);
+    Uuncapped = new Matrix(numOutputs, 1);
     Umin = new Matrix(numOutputs, 1);
     Umax = new Matrix(numOutputs, 1);
     updateGains();
@@ -83,7 +85,7 @@ public abstract class StateSpaceController extends Controller {
 
     Matrix r1 = Matrix.subtract(R, Xhat);
     U = Matrix.multiply(K, r1);
-
+    Uuncapped.flash(U.getData());
     capU();
 
     // X_hat = (A - L * C) * X_hat + L * Y + B * U;

@@ -13,6 +13,7 @@ import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.StateSpaceController;
 import com.team254.lib.control.StateSpaceGains;
+import com.team254.lib.util.Debouncer;
 import com.team254.lib.util.Matrix;
 
 /**
@@ -31,7 +32,8 @@ public class FlywheelController extends StateSpaceController {
   double curVel;
   double period = 1 / 50.0;
   double outputVoltage = 0.0;
-  double targetError = 15;
+  double targetError = 25;
+  Debouncer filter = new Debouncer(.15);
 
   public FlywheelController(String name, ControlOutput output, ControlSource sensor, StateSpaceGains gains) {
     this(name, output, sensor, gains, 1 / 100.0);
@@ -87,6 +89,8 @@ public class FlywheelController extends StateSpaceController {
     } else {
       this.output.set(outputVoltage / 12.0);
     }
+    
+    onTarget = filter.update(onTargetRaw());
   }
 
   public double getVelocity() {
@@ -107,8 +111,12 @@ public class FlywheelController extends StateSpaceController {
     curVel = 0;
   }
 
+  public boolean onTargetRaw() {
+    return enabled && Math.abs(Xhat.get(1) - velGoal) < targetError; //Math.abs(curVel - velGoal) < targetError;
+  }
+  boolean onTarget = false;
   public boolean onTarget() {
-    return enabled && Math.abs(curVel - velGoal) < targetError;
+    return onTarget;
   }
 
   public double getVelocityGoal() {

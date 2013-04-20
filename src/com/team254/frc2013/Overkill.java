@@ -163,6 +163,7 @@ public class Overkill extends IterativeRobot {
     autoHangCommand = new AutoHangCommand();
     autoHangStarted = false;
     CommandBase.shooter.retract();
+    CommandBase.shooter.setIndexerUp(false);
   }
 
   /**
@@ -214,9 +215,9 @@ public class Overkill extends IterativeRobot {
   }
 
   private void updateLCD(){
-    String driveEncoders = "L: " + Math.floor(CommandBase.motors.getLeftEncoder().get());
-    driveEncoders += " R: " + Math.floor(CommandBase.drive.getRightEncoderDistance());
-    driveEncoders += " U" + (CommandBase.shooter.isIndexerSensedUp() ? 1 : 0) + " D" + (CommandBase.shooter.isIndexerSensedDown() ? 1 : 0);
+    String driveEncoders = "U" + (CommandBase.shooter.isIndexerSensedUp() ? 1 : 0) + " D" + (CommandBase.shooter.isIndexerSensedDown() ? 1 : 0);
+    driveEncoders += " L: " + (Math.floor(CommandBase.motors.getLeftEncoder().get()) * 10 )/ 10.0;
+    driveEncoders += " R: " + (Math.floor(CommandBase.drive.getRightEncoderDistance()) * 10) / 10.0;
     DriverStationLCD lcd = DriverStationLCD.getInstance();
     lcd.println(DriverStationLCD.Line.kUser2, 1, driveEncoders + "     ");
     lcd.println(DriverStationLCD.Line.kUser3, 1,

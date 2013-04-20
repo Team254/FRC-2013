@@ -38,7 +38,6 @@ public class DriveProfiledCommand extends CommandBase {
   }
 
   protected void execute() {
-    System.out.println(Timer.getFPGATimestamp() + ", " + drive.getLeftEncoderDistance() + ", " + drive.getGyroAngle() + ", " + motors.getLeftPower() + ", " + motors.getRightPower());
   }
 
   protected boolean isFinished() {

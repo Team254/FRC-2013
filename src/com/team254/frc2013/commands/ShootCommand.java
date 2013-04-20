@@ -19,6 +19,7 @@ public class ShootCommand extends CommandBase {
   protected void initialize() {
     // Don't fire the piston if the shooter is not turned on.
     if (shooter.isOn()) {
+          System.out.println("RPM of shot: " + shooter.getRpm());
       shooter.extend();
       shooterTimer.reset();
       shooterTimer.start();
@@ -29,11 +30,11 @@ public class ShootCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return shooterTimer.get() > 0.2 || !shooter.isOn();
+    return shooterTimer.get() > 0.25 || !shooter.isOn();
   }
 
   protected void end() {
-    System.out.println("RPM of shot: " + shooter.getRpm());
+
     shooter.retract();
   }
 
