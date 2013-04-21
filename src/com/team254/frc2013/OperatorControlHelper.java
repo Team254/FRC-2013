@@ -16,7 +16,7 @@ import com.team254.frc2013.commands.ShootSequenceCommand;
  */
 public class OperatorControlHelper {
   public static void setupOperationMap(ControlBoard c) {
-    c.operatorJoystick.getIntakeUpButton().whenPressed(
+  /*  c.operatorJoystick.getIntakeUpButton().whenPressed(
         new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_UP));
     c.operatorJoystick.getIntakeUpButton().whenReleased(
         new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_OFF));
@@ -35,7 +35,7 @@ public class OperatorControlHelper {
     c.operatorJoystick.getIntakeOutButton().whenReleased(new RunIntakeCommand(0));
 
     c.operatorJoystick.getRapidFireButton().whenPressed(new ContinuousShootCommand());
-
+*/
 
     c.operatorJoystick.ptoOnSwitch.whenPressed(new PtoCommand());
     c.operatorJoystick.ptoOnSwitch.whenReleased(new CheesyDriveCommand());

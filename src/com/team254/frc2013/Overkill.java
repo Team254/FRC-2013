@@ -173,26 +173,34 @@ public class Overkill extends IterativeRobot {
     Scheduler.getInstance().run();
     updateLCD();
 
-    // Set shooter presets.
+    // Run shooter slowly
     if (CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState()) {
       CommandBase.shooter.setSpeedLimit(.35);
     } else {
       CommandBase.shooter.setSpeedLimit(1);
     }
 
+    // Shooter presets
     if (CommandBase.controlBoard.operatorJoystick.getBackPyramidButtonState()) {
       CommandBase.shooter.setPreset(Shooter.PRESET_BACK_PYRAMID);
     } else if (CommandBase.controlBoard.operatorJoystick.getFrontPyramidButtonState()) {
       CommandBase.shooter.setPreset(Shooter.PRESET_FRONT_PYRAMID);
     }
 
-    if (!CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState()) {
-      CommandBase.rapidFireShots = 0;
-    }
-
     // Set shooter on/off.
     CommandBase.shooter.setShooterOn(CommandBase.controlBoard.operatorJoystick.getShooterSwitch());
 
+    // Do we want to shoot?
+    CommandBase.sc.wantRapidFire = CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState();
+    CommandBase.sc.wantShoot = CommandBase.controlBoard.operatorJoystick.getShootButtonState() || CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState(); 
+    if (!CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState()) {
+      CommandBase.rapidFireShots = 0;
+    }
+    
+    // Intake
+    CommandBase.sc.wantIntake = CommandBase.controlBoard.operatorJoystick.getIntakeButtonState();
+    CommandBase.sc.wantExhaust = CommandBase.controlBoard.operatorJoystick.getIntakeOutButtonState();
+    CommandBase.sc.wantManualIndex = CommandBase.controlBoard.operatorJoystick.getIndexButtonState();
 
     // Set 10pt hang up/down.
     CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
