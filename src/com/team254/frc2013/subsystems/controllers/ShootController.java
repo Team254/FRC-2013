@@ -35,11 +35,16 @@ public class ShootController extends PeriodicSubsystem {
   static final int LOAD_DISC_RAPID = 9;
   static final int FEED_DISC = 10;
   static final int MANUAL_INDEX = 11;
+  static final int MANUAL_INDEX_DOWN_OUT = 12;
+  static final int MANUAL_INDEX_DOWN_IN = 13;
+  static final int START_FED_SHOT = 14;
+
   public boolean wantIntake = false;
   public boolean wantExhaust = false;
   public boolean wantRapidFire = false;
   public boolean wantShoot = false;
   public boolean wantManualIndex = false;
+  public boolean wantFedShoot = false;
   public int shotCount = 0;
   boolean firstRun = true;
   public boolean wantFeed = false;
@@ -69,7 +74,7 @@ public class ShootController extends PeriodicSubsystem {
       stopShotCount = shotCount + 1;
     }
 
-   // System.out.println(state + " " + wantManualIndex + " " + wantIntake);
+    // System.out.println(state + " " + wantManualIndex + " " + wantIntake);
     switch (state) {
       case IDLE:
 
@@ -85,12 +90,16 @@ public class ShootController extends PeriodicSubsystem {
           state = MANUAL_INDEX;
         }
 
+
         if (wantShoot && s.isOn()) {
           if (wantRapidFire && shotCount <= rapidFireStopShotCount) {
             state = LOAD_DISC_RAPID;
           } else if (stopShotCount > shotCount) {
             state = SHOOT_GO_UP;
           }
+        }
+        if (wantFedShoot && s.isOn()) {
+          state = START_FED_SHOT;
         }
         if (wantFeed) {
           state = FEED_DISC;
@@ -100,12 +109,22 @@ public class ShootController extends PeriodicSubsystem {
 
       case INTAKE:
         intake = 1;
-        state = IDLE;
+        if (!wantIntake) {
+          state = IDLE;
+        }
+        if (wantManualIndex) {
+          state = MANUAL_INDEX;
+        }
         break;
 
       case EXHAUST:
         intake = -1;
-        state = IDLE;
+        if (!wantExhaust) {
+          state = IDLE;
+        }
+        if (wantManualIndex) {
+          state = MANUAL_INDEX;
+        }
         break;
 
       case LOAD_DISC_RAPID:
@@ -135,9 +154,8 @@ public class ShootController extends PeriodicSubsystem {
         break;
 
       case SHOOT_EXTEND:
-        if (firstRun) {
+        if (firstRun)
           shotCount++;
-        }
         wantIndexerUp = true;
         wantExtend = true;
         wantShoot = false;
@@ -146,6 +164,18 @@ public class ShootController extends PeriodicSubsystem {
         }
         break;
 
+      case MANUAL_INDEX_DOWN_OUT:
+        intake = -.3;
+        if (timedOut(.2)) {
+          state = MANUAL_INDEX_DOWN_IN;
+        }
+        break;
+      case MANUAL_INDEX_DOWN_IN:
+        intake = .3;
+        if (timedOut(.2) || s.isIndexerLoaded()) {
+          state = IDLE;
+        }
+        break;
       case SHOOT_GO_DOWN:
         if (s.isIndexerSensedDown()) {
           System.out.println("sensed down;");
@@ -187,10 +217,27 @@ public class ShootController extends PeriodicSubsystem {
       case MANUAL_INDEX:
         wantIndexerUp = true;
         if (!wantManualIndex) {
-          state = SHOOT_GO_DOWN;
+          state = MANUAL_INDEX_DOWN_OUT;
         }
         if (wantShoot) {
           state = SHOOT_GO_UP;
+        }
+        break;
+
+      case START_FED_SHOT:
+
+        if (firstShot) {
+          System.out.println("first shot");
+          wantFedShoot = false;
+          state = SHOOT_GO_UP;
+        }
+        else {
+          System.out.println("NOTOTOTTTOTOOT first shot");
+          intake = 1;
+          if (timedOut(.75) || s.isIndexerLoaded()) {
+            wantFedShoot = false;
+            state = SHOOT_GO_UP;
+          }
         }
         break;
     }
@@ -223,5 +270,15 @@ public class ShootController extends PeriodicSubsystem {
   }
 
   protected void initDefaultCommand() {
+  }
+
+  public void reset() {
+    wantShoot = false;
+    shotCount = 0;
+    firstShot = true;
+    wantManualIndex = false;
+    wantFedShoot = false;
+    wantIntake = false;
+    wantExhaust = false;
   }
 }

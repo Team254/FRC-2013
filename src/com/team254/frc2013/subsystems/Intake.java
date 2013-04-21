@@ -47,6 +47,6 @@ public class Intake extends Subsystem {
 
   public void setRawPivot(double power) {
     double output = Util.limit(power, 1.0);
-    intakePivotMotor.set(output);
+    intakePivotMotor.set(0);//output);
   }
 }

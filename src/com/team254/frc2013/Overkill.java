@@ -134,6 +134,8 @@ public class Overkill extends IterativeRobot {
       currentAutoMode = null;
     }
 
+    CommandBase.sc.reset();
+
     CommandBase.drive.resetEncoders();
     CommandBase.drive.resetGyro();
     currentAutoMode = autoModeSelector.getCurrentAutoModeNewInstance();
@@ -163,7 +165,6 @@ public class Overkill extends IterativeRobot {
     autoHangCommand = new AutoHangCommand();
     autoHangStarted = false;
     CommandBase.shooter.retract();
-    CommandBase.shooter.setIndexerUp(false);
   }
 
   /**
@@ -192,11 +193,11 @@ public class Overkill extends IterativeRobot {
 
     // Do we want to shoot?
     CommandBase.sc.wantRapidFire = CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState();
-    CommandBase.sc.wantShoot = CommandBase.controlBoard.operatorJoystick.getShootButtonState() || CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState(); 
+    CommandBase.sc.wantShoot = CommandBase.controlBoard.operatorJoystick.getShootButtonState() || CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState();
     if (!CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState()) {
       CommandBase.rapidFireShots = 0;
     }
-    
+
     // Intake
     CommandBase.sc.wantIntake = CommandBase.controlBoard.operatorJoystick.getIntakeButtonState();
     CommandBase.sc.wantExhaust = CommandBase.controlBoard.operatorJoystick.getIntakeOutButtonState();

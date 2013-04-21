@@ -24,9 +24,9 @@ public class ShootSequenceCommand extends CommandBase {
   }
 
   protected void initialize() {
-    sc.wantFeed = doFeed;
-    sc.wantShoot = true;
+    sc.wantFedShoot = true;
     shotCount = sc.shotCount;
+    System.out.println("shoot sequence init " + shotCount);
   }
 
   protected void execute() {
@@ -37,8 +37,8 @@ public class ShootSequenceCommand extends CommandBase {
   }
 
   protected void end() {
-    sc.wantShoot = false;
-    sc.wantFeed = false;
+    System.out.println("shoot sequence end");
+    sc.wantFedShoot = false;
   }
 
   protected void interrupted() {
