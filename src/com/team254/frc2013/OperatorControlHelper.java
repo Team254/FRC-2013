@@ -25,7 +25,7 @@ public class OperatorControlHelper {
     c.operatorJoystick.getIntakeDownButton().whenReleased(
         new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_OFF));
 
-    c.operatorJoystick.getShootButton().whenPressed(new ShootSequenceCommand());
+    c.operatorJoystick.getShootButton().whenPressed(new ShootSequenceCommand(false));
     c.operatorJoystick.getIndexButton().whenPressed(new SetIndexerDownCommand(false));
     c.operatorJoystick.getIndexButton().whenReleased(new SetIndexerDownCommand(true));
 
@@ -35,6 +35,7 @@ public class OperatorControlHelper {
     c.operatorJoystick.getIntakeOutButton().whenReleased(new RunIntakeCommand(0));
 
     c.operatorJoystick.getRapidFireButton().whenPressed(new ContinuousShootCommand());
+
 
     c.operatorJoystick.ptoOnSwitch.whenPressed(new PtoCommand());
     c.operatorJoystick.ptoOnSwitch.whenReleased(new CheesyDriveCommand());

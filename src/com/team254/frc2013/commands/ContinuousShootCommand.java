@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class ContinuousShootCommand extends CommandGroup {
   public ContinuousShootCommand() {
-    addSequential(new ShootSequenceCommand(false));
+    addSequential(new ShootSequenceCommand(true));
   }
 
   protected void initialize() {
