@@ -66,12 +66,20 @@ public class Shooter extends Subsystem {
     public void updateFilter() {
 
     }
+
+    public boolean getLowerLimit() {
+      return false;
+    }
+
+    public boolean getUpperLimit() {
+      return false;
+    }
   }
 
   private class ShooterOutput implements ControlOutput {
     public void set(double value) {
       // Leave this for Austin usage
-      System.out.println("D:" + Timer.getFPGATimestamp() + ", " + value*12.0 + ", " + lastRpm + ", " + controller.Xhat.get(0) + ", " + controller.Xhat.get(1) + ", " + DriverStation.getInstance().getBatteryVoltage() + ":D");
+      //System.out.println("D:" + Timer.getFPGATimestamp() + ", " + value*12.0 + ", " + lastRpm + ", " + controller.Xhat.get(0) + ", " + controller.Xhat.get(1) + ", " + DriverStation.getInstance().getBatteryVoltage() + ":D");
       if (value > speedLimit) {
         value = speedLimit;
       }

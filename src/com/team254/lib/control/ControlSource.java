@@ -8,4 +8,6 @@ package com.team254.lib.control;
 public interface ControlSource {
   public double get();
   public void updateFilter();
+  public boolean getLowerLimit();
+  public boolean getUpperLimit();
 }

@@ -34,6 +34,14 @@ public class Hanger extends PeriodicSubsystem {
 
     public void updateFilter() {
     }
+
+    public boolean getLowerLimit() {
+      return false;
+    }
+
+    public boolean getUpperLimit() {
+      return false;
+    }
   }
 
   private class HangControlOutput implements ControlOutput {

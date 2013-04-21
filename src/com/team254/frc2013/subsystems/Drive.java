@@ -45,6 +45,14 @@ public class Drive extends Subsystem {
 
     public void updateFilter() {
     }
+
+    public boolean getLowerLimit() {
+      return false;
+    }
+
+    public boolean getUpperLimit() {
+      return false;
+    }
   }
 
   double lastStraight = 0;
