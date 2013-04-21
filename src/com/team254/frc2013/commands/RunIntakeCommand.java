@@ -6,6 +6,7 @@ package com.team254.frc2013.commands;
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class RunIntakeCommand extends CommandBase {
+
   private double speed;
   private boolean runConveyor = true;
 
@@ -17,20 +18,20 @@ public class RunIntakeCommand extends CommandBase {
   public RunIntakeCommand(double speed) {
     this(speed, true);
   }
+
   protected void initialize() {
+    if (speed > 0) {
+      sc.wantIntake = true;
+      sc.wantExhaust = false;
+    } else if (speed < 0) {
+      sc.wantExhaust = true;
+      sc.wantIntake = false;
+    } else {
+      sc.wantIntake = sc.wantExhaust = false;
+    }
   }
 
   protected void execute() {
-    double tmpSpeed = speed;
-    if (!shooter.isIndexerSetDown() && tmpSpeed > 0) {
-    }
-    intake.setIntakePower(tmpSpeed);
-    if (runConveyor) {
-      conveyor.setMotor(tmpSpeed);
-    }
-    else {
-      conveyor.setMotor(0);
-    }
   }
 
   protected boolean isFinished() {

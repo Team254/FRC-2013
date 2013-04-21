@@ -1,7 +1,5 @@
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.command.CommandGroup;
-
 /**
  * Runs the shooting sequence once.
  * Raises the indexer to prepare for shooting, shoots the loaded disc, sets
@@ -9,25 +7,40 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  * @author tom@team254.com (Tom Bottiglieri)
  */
-public class ShootSequenceCommand extends CommandGroup {
+public class ShootSequenceCommand extends CommandBase {
 
+  boolean doFeed;
+  int shotCount = 0;
   public ShootSequenceCommand(boolean doFeed) {
+    this.doFeed = doFeed;
     requires(CommandBase.shooter);
     requires(CommandBase.intake);
     requires(CommandBase.conveyor);
-    addSequential(new ResetTimerCommand(CommandBase.shotTimer));
-    if (doFeed)
-      addSequential(new LoadDiscIntoIndexerCommand());
-    addSequential(new CheckAutonTimerCommand(.25));
-    addSequential(new SensedIndexerUpCommand(.3));
-    addSequential(new WaitForShooterSpinUpCommand(.5));
-    addSequential(new ShootCommand());
-    addSequential(new SensedIndexerDownCommand(.2));
-    addSequential(new FixIndexerCommand(.2));
-    addSequential(new PrintTimerCommand(CommandBase.shotTimer));
+   // setTimeout(1.5);
   }
 
   public ShootSequenceCommand() {
     this(true);
+  }
+
+  protected void initialize() {
+    sc.wantFeed = doFeed;
+    sc.wantShoot = true;
+    shotCount = sc.shotCount;
+  }
+
+  protected void execute() {
+  }
+
+  protected boolean isFinished() {
+    return sc.shotCount > shotCount;// || isTimedOut();
+  }
+
+  protected void end() {
+    sc.wantShoot = false;
+    sc.wantFeed = false;
+  }
+
+  protected void interrupted() {
   }
 }

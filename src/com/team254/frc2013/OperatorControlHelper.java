@@ -1,7 +1,6 @@
 package com.team254.frc2013;
 
 import com.team254.frc2013.commands.CheesyDriveCommand;
-import com.team254.frc2013.commands.ContinuousShootCommand;
 import com.team254.frc2013.commands.IntakeRaiseCommand;
 import com.team254.frc2013.commands.PtoCommand;
 import com.team254.frc2013.commands.ResetRapidFireCommand;
