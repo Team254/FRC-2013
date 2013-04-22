@@ -42,7 +42,7 @@ public class WristController extends StateSpaceController {
   double moving_on_speed = -2.0;
   final double zero_sensor_position = 0.2658;
   final double max_zeroing_voltage = 3;
-  double minGoal = -.05, maxGoal = 2.1;
+  double minGoal = -.06, maxGoal = 2.1;
   int index = 0;
 
   public WristController(String name, ControlOutput output, ControlSource sensor, StateSpaceGains gains) {
