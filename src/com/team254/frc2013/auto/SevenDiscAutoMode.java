@@ -57,7 +57,8 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new RunIntakeCommand(0.0));
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand());
-    addSequential(new ShootSequenceCommand(false));
+    addSequential(new ShootSequenceCommand());
+    addSequential(new ShootSequenceCommand());
 
     addSequential(new ShooterOnCommand(false));
     addSequential(new RunIntakeCommand(0.0));
