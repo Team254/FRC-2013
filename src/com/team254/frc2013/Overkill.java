@@ -28,6 +28,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  * @author richard@team254.com (Richard Lin)
  */
 public class Overkill extends IterativeRobot {
+
   private AutoModeSelector autoModeSelector;
   private CommandGroup currentAutoMode;
   private AutoHangCommand autoHangCommand;
@@ -40,7 +41,8 @@ public class Overkill extends IterativeRobot {
   int gyroReinits = 0;
 
   /**
-   * Called when the robot is first started up and should be used for any initialization code.
+   * Called when the robot is first started up and should be used for any
+   * initialization code.
    */
   public void robotInit() {
     // Initialize all subsystems.
@@ -91,13 +93,13 @@ public class Overkill extends IterativeRobot {
     //System.out.println("HE Up: " + CommandBase.shooter.isIndexerSensedUp() + ", Down: " + CommandBase.shooter.isIndexerSensedDown());
 
     boolean autonSelectButton =
-        CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState();
+            CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState();
     if (autonSelectLatch.update(autonSelectButton)) {
       autoModeSelector.increment();
     }
 
     boolean reinitGyroButton =
-        CommandBase.controlBoard.operatorJoystick.getClimbButtonState();
+            CommandBase.controlBoard.operatorJoystick.getClimbButtonState();
     if (reinitGyroLatch.update(reinitGyroButton)) {
       System.out.println("About to reinit gyro");
       CommandBase.drive.reinitGyro();
@@ -111,7 +113,7 @@ public class Overkill extends IterativeRobot {
     CommandBase.shooter.retract();
 
     double curAngle = CommandBase.drive.getGyroAngle();
-    if (gyroDriftDetector.update(Math.abs(curAngle - lastAngle) > (.75/50.0)) && gyroReinits < 3) {
+    if (gyroDriftDetector.update(Math.abs(curAngle - lastAngle) > (.75 / 50.0)) && gyroReinits < 3) {
       gyroReinits++;
       System.out.println("!!! Sensed drift, about to auto-reinit gyro (" + gyroReinits + ")");
       CommandBase.drive.reinitGyro();
@@ -198,27 +200,34 @@ public class Overkill extends IterativeRobot {
       CommandBase.rapidFireShots = 0;
     }
 
+    if (CommandBase.controlBoard.operatorJoystick.getIntakeUpButtonState()) {
+      CommandBase.intake.rezero();
+    }
+
     // Intake
     CommandBase.sc.wantIntake = CommandBase.controlBoard.operatorJoystick.getIntakeButtonState();
     CommandBase.sc.wantExhaust = CommandBase.controlBoard.operatorJoystick.getIntakeOutButtonState();
     CommandBase.sc.wantManualIndex = CommandBase.controlBoard.operatorJoystick.getIndexButtonState();
 
+    CommandBase.sc.wantIntakeUp = CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch() == 1;
+    CommandBase.sc.wantIntakeDown = CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch() == -1;
+   // System.out.println(CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch());
     // Set 10pt hang up/down.
     CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
 
     // Handle triggering the autonomous 30-point climbing routine.
     if (CommandBase.controlBoard.getStage1Hang() && !lastStage1HangButton) {
       CommandBase.hanger.resetPitchGyro();
-    } else if (!CommandBase.controlBoard.getStage1Hang() && lastStage1HangButton &&
-        CommandBase.controlBoard.operatorJoystick.getClimbButtonState() &&
-        autoHangCommand != null) {
+    } else if (!CommandBase.controlBoard.getStage1Hang() && lastStage1HangButton
+            && CommandBase.controlBoard.operatorJoystick.getClimbButtonState()
+            && autoHangCommand != null) {
       autoHangStarted = true;
       Scheduler.getInstance().add(autoHangCommand);
     }
 
     // Kill the climb if the dead man switch is released.
-    if (autoHangStarted && !CommandBase.controlBoard.operatorJoystick.getClimbButtonState() &&
-        autoHangCommand != null) {
+    if (autoHangStarted && !CommandBase.controlBoard.operatorJoystick.getClimbButtonState()
+            && autoHangCommand != null) {
       System.out.println("Canceling climb.");
       autoHangCommand.cancel();
       autoHangCommand = null;
@@ -227,25 +236,25 @@ public class Overkill extends IterativeRobot {
     lastStage1HangButton = CommandBase.controlBoard.getStage1Hang();
   }
 
-  private void updateLCD(){
+  private void updateLCD() {
     String driveEncoders = "U" + (CommandBase.shooter.isIndexerSensedUp() ? 1 : 0) + " D" + (CommandBase.shooter.isIndexerSensedDown() ? 1 : 0);
-    driveEncoders += " L: " + (Math.floor(CommandBase.motors.getLeftEncoder().get()) * 10 )/ 10.0;
+    driveEncoders += " L: " + (Math.floor(CommandBase.motors.getLeftEncoder().get()) * 10) / 10.0;
     driveEncoders += " R: " + (Math.floor(CommandBase.drive.getRightEncoderDistance()) * 10) / 10.0;
     DriverStationLCD lcd = DriverStationLCD.getInstance();
     lcd.println(DriverStationLCD.Line.kUser2, 1, driveEncoders + "     ");
     lcd.println(DriverStationLCD.Line.kUser3, 1,
-                "Gy: " + Math.floor(CommandBase.drive.getGyroAngle() * 100) / 100 +
-                    " P: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + "     ");
+            "Gy: " + Math.floor(CommandBase.drive.getGyroAngle() * 100) / 100
+            + " Pitch: " + Math.floor(CommandBase.hanger.getPitchAngle() * 10) / 10);
     lcd.println(DriverStationLCD.Line.kUser4, 1,
-                "D:" + (CommandBase.shooter.isIndexerLoaded() ? 1 : 0) + " | " +
-                    (Math.floor(CommandBase.controlBoard.leftStick.getY() * 100) / 100.0)+ "|" +
-                    (Math.floor(CommandBase.controlBoard.rightStick.getX() * 100) / 100.0) + "    ");
+            "D:" + (CommandBase.shooter.isIndexerLoaded() ? 1 : 0) + " | "
+            + (Math.floor(CommandBase.controlBoard.leftStick.getY() * 100) / 100.0) + "|"
+            + (Math.floor(CommandBase.controlBoard.rightStick.getX() * 100) / 100.0) + "    ");
     lcd.println(DriverStationLCD.Line.kUser5, 1,
-                "?: " + CommandBase.shooter.onSpeedTarget() + " RPM: " +
-                    Math.floor(CommandBase.shooter.lastRpm * 10) / 10 + "     ");
+            "?: " + CommandBase.shooter.onSpeedTarget() + " RPM: "
+            + Math.floor(CommandBase.shooter.lastRpm * 10) / 10 + "     ");
     lcd.println(DriverStationLCD.Line.kUser6, 1,
-                "PA: " + Math.floor(CommandBase.hanger.getPitchAngle() * 10) / 10 + " PR: " +
-                    Math.floor(CommandBase.hanger.getPitchRate() * 10) / 10 + "    ");
+            "Pr: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + " Z:" + (CommandBase.intake.getZeroSensor() ? 1 : 0)
+            + " W:" + CommandBase.intake.getEncoder());
     lcd.updateLCD();
   }
 }

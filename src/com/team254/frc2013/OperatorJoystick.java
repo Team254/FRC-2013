@@ -59,8 +59,8 @@ public class OperatorJoystick extends Joystick {
   }
 
   public int getIntakePositionSwitch() {
-    boolean axis = (this.getRawAxis(Constants.intakeUpPort.getInt()) < 0.0);
-    boolean button = this.getRawButton(Constants.intakeDownPort.getInt());
+    boolean axis = (this.getRawAxis(4) < 0.1);
+    boolean button = this.getRawButton(Constants.intakeDownSwitchPort.getInt());
     if (axis) {
       return 1; // up
     }
@@ -79,19 +79,19 @@ public class OperatorJoystick extends Joystick {
   }
 
   public boolean getIntakeUpButtonState() {
-    return this.getRawButton(Constants.intakeUpPort.getInt());
+    return this.getRawButton(Constants.intakeUpButtonPort.getInt());
   }
 
   public JoystickButton getIntakeUpButton() {
-    return new JoystickButton(this, Constants.intakeUpPort.getInt());
+    return new JoystickButton(this, Constants.intakeUpButtonPort.getInt());
   }
 
   public boolean getIntakeDownButtonState() {
-    return this.getRawButton(Constants.intakeDownPort.getInt());
+    return this.getRawButton(Constants.intakeDownButtonPort.getInt());
   }
 
   public JoystickButton getIntakeDownButton() {
-    return new JoystickButton(this, Constants.intakeDownPort.getInt());
+    return new JoystickButton(this, Constants.intakeDownButtonPort.getInt());
   }
 
   public boolean getIntakeOutButtonState() {

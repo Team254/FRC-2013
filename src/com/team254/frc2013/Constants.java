@@ -45,8 +45,10 @@ public class Constants extends ConstantsBase {
 
   // Operator control mappings
   public static final Constant autonSelectControlPort = new Constant("autonSelectControlPort",11);
-  public static final Constant intakeUpPort = new Constant("intakeUpPort", 10);
-  public static final Constant intakeDownPort = new Constant("intakeDownPort", 9);
+  public static final Constant intakeUpButtonPort = new Constant("intakeUpPort", 10);
+  public static final Constant intakeDownButtonPort = new Constant("intakeDownPort", 9);
+  public static final Constant intakeUpSwitchPort = new Constant("intakeUpSwitchPort", 2);
+  public static final Constant intakeDownSwitchPort = new Constant("intakeDownSwitchPort", 12);
   public static final Constant intakeOutControlPort = new Constant("intakeOutControlPort", 8);
   public static final Constant intakeControlPort = new Constant("intakeControlPort", 7);
   public static final Constant shootControlPort = new Constant("shootControlPort", 6);
@@ -64,7 +66,7 @@ public class Constants extends ConstantsBase {
   public static final Constant indexerDownSensorPort = new Constant("indexerDownSensorPort", 10);
   public static final Constant indexerUpSensorPort = new Constant("indexerUpSensorPort", 12);
   public static final Constant rightDiscSensorPort = new Constant("rightDiscSensorPort", 13);
-  public static final Constant leftDiscSensorPort = new Constant("leftDiscSensorPort", 14);
+  public static final Constant leftDiscSensorPort = new Constant("leftDiscSensorPort", 6);
 
   // Drive encoders
   public static final Constant leftEncoderPortA = new Constant("leftEncoderPortA", 1);
@@ -73,11 +75,12 @@ public class Constants extends ConstantsBase {
   public static final Constant rightEncoderPortB = new Constant("rightEncoderPortB", 4);
 
   // Shooter encoders
-  public static final Constant shootEncoderPort = new Constant("shootEncoderPort", 6);
+  public static final Constant shootEncoderPort = new Constant("shootEncoderPort", 5);
 
   // Intake encoder
   public static final Constant intakeEncoderPortA = new Constant("intakeEncoderPortA", 7);
   public static final Constant intakeEncoderPortB = new Constant("intakeEncoderPortB", 8);
+  public static final Constant intakeZeroSensorPort = new Constant("intakeZeroSensorPort", 14);
 
   // Drive tuning
   public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .85);

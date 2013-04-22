@@ -121,7 +121,7 @@ public class Shooter extends Subsystem {
   }
 
   public boolean isHighAngle() {
-    return angle.get();
+    return !angle.get();
   }
 
   public boolean getLoaderState() {

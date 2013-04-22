@@ -8,6 +8,7 @@ import com.team254.frc2013.subsystems.Conveyor;
 import com.team254.frc2013.subsystems.Intake;
 import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.control.PeriodicSubsystem;
+import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
@@ -38,13 +39,15 @@ public class ShootController extends PeriodicSubsystem {
   static final int MANUAL_INDEX_DOWN_OUT = 12;
   static final int MANUAL_INDEX_DOWN_IN = 13;
   static final int START_FED_SHOT = 14;
-
   public boolean wantIntake = false;
   public boolean wantExhaust = false;
   public boolean wantRapidFire = false;
   public boolean wantShoot = false;
   public boolean wantManualIndex = false;
   public boolean wantFedShoot = false;
+  public boolean wantIntakeUp = false;
+  public boolean wantIntakeDown = false;
+  public boolean dontTouchIntake = false;
   public int shotCount = 0;
   boolean firstRun = true;
   public boolean wantFeed = false;
@@ -62,11 +65,51 @@ public class ShootController extends PeriodicSubsystem {
   private boolean timedOut(double time) {
     return stateTimer.get() > time;
   }
+  public static final int FLOOR = 0;
+  public static final int STOWED = 1;
+  public static final int HANG = 2;
+  public static final int FORCE_FLOOR = 3;
+  private int wristState = FLOOR;
+  public boolean doingHang = false;
+  ThrottledPrinter p = new ThrottledPrinter(.25);
+  private void updateAngle() {
+
+    if (doingHang) {
+    } else if (wantIntakeDown) {
+      wristState = FLOOR;
+    } else if (wantIntakeUp) {
+      wristState = STOWED;
+    }
+    double angle = 0;
+    switch (wristState) {
+      case FLOOR:
+        angle = 0;
+        if (wantIntake) {
+          angle = -.03;
+        }
+        break;
+      case STOWED:
+        if (s.isOn() && s.isHighAngle()) {
+          angle = 1.65;
+        } else if (s.isOn() && !s.isHighAngle()) {
+          angle = 1.35;
+        } else {
+          angle = 2.0;
+        }
+        break;
+    }
+    // stow 2.0
+    // far 1.36
+    // high 1.65
+    i.setAngle(angle);
+   // p.println("" + angle + " | " + wristState);
+  }
 
   public void update() {
     boolean wantIndexerUp = false || firstShot;
     boolean wantExtend = false;
     double intake = 0;
+    double angle = i.getAngle();
     if (!wantRapidFire) {
       rapidFireStopShotCount = shotCount + 4;
     }
@@ -93,6 +136,10 @@ public class ShootController extends PeriodicSubsystem {
 
         if (wantShoot && s.isOn()) {
           if (wantRapidFire && shotCount <= rapidFireStopShotCount) {
+            if (rapidFireStopShotCount - shotCount < 2) {
+              System.out.println("setting wrist to stow");
+              wristState = STOWED;
+            }
             state = LOAD_DISC_RAPID;
           } else if (stopShotCount > shotCount) {
             state = SHOOT_GO_UP;
@@ -109,6 +156,7 @@ public class ShootController extends PeriodicSubsystem {
 
       case INTAKE:
         intake = 1;
+        wristState = FLOOR;
         if (!wantIntake) {
           state = IDLE;
         }
@@ -118,6 +166,7 @@ public class ShootController extends PeriodicSubsystem {
         break;
 
       case EXHAUST:
+        wristState = FLOOR;
         intake = -1;
         if (!wantExhaust) {
           state = IDLE;
@@ -154,8 +203,9 @@ public class ShootController extends PeriodicSubsystem {
         break;
 
       case SHOOT_EXTEND:
-        if (firstRun)
+        if (firstRun) {
           shotCount++;
+        }
         wantIndexerUp = true;
         wantExtend = true;
         wantShoot = false;
@@ -170,6 +220,7 @@ public class ShootController extends PeriodicSubsystem {
           state = MANUAL_INDEX_DOWN_IN;
         }
         break;
+
       case MANUAL_INDEX_DOWN_IN:
         intake = .3;
         if (timedOut(.2) || s.isIndexerLoaded()) {
@@ -230,8 +281,7 @@ public class ShootController extends PeriodicSubsystem {
           System.out.println("first shot");
           wantFedShoot = false;
           state = SHOOT_GO_UP;
-        }
-        else {
+        } else {
           System.out.println("NOTOTOTTTOTOOT first shot");
           intake = 1;
           if (timedOut(.75) || s.isIndexerLoaded()) {
@@ -257,6 +307,8 @@ public class ShootController extends PeriodicSubsystem {
     if (wantIndexerUp && intake > 0) {
       intake = 0;
     }
+
+    updateAngle();
 
     c.setMotor(intake);
     i.setIntakePower(intake);

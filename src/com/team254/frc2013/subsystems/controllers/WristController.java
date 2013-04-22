@@ -2,13 +2,15 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.team254.frc2013.subsystems;
+package com.team254.frc2013.subsystems.controllers;
 
 import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.control.StateSpaceController;
 import com.team254.lib.control.StateSpaceGains;
 import com.team254.lib.util.Matrix;
+import com.team254.lib.util.ThrottledPrinter;
+import edu.wpi.first.wpilibj.DriverStation;
 
 /**
  *
@@ -25,8 +27,8 @@ public class WristController extends StateSpaceController {
   boolean calibrated = false;
   // Enum to store the state of the internal zeroing state machine.
   private final static int UNINITIALIZED = 0;
-  private final static int MOVING_OFF = 1;
-  private final static int ZEROING = 2;
+  private final static int ZEROING = 1;
+  private final static int MOVING_ON = 2;
   private final static int READY = 3;
   int state;
   // Offset from the raw encoder value to the absolute angle.
@@ -36,11 +38,12 @@ public class WristController extends StateSpaceController {
   double zeroing_position_;
   // Last position at which the hall effect sensor was off.
   double last_off_position_;
-  double zeroing_off_speed = -.05;
-  double zeroing_speed = -.1;
-  final double zero_sensor_position = 0;
+  double zeroing_speed = -.2;
+  double moving_on_speed = -2.0;
+  final double zero_sensor_position = 0.2658;
   final double max_zeroing_voltage = 3;
-  double minGoal = 0, maxGoal = 1.9;
+  double minGoal = -.05, maxGoal = 2.1;
+  int index = 0;
 
   public WristController(String name, ControlOutput output, ControlSource sensor, StateSpaceGains gains) {
     this(name, output, sensor, gains, 1 / 100.0);
@@ -61,8 +64,8 @@ public class WristController extends StateSpaceController {
       double u_max = Umax.get(i);
       double u_min = Umin.get(i);
       if (!calibrated) {
-        u_max /= 4.0;
-        u_min /= 4.0;
+        u_max /= 1.0;
+        u_min /= 1.0;
       }
       if (u_i > u_max) {
         u_i = u_max;
@@ -82,15 +85,21 @@ public class WristController extends StateSpaceController {
     }
     return g;
   }
+  ThrottledPrinter p = new ThrottledPrinter(.25);
+
+  public void reset() {
+    state = UNINITIALIZED;
+  }
 
   private void Debug(String s) {
-    if (true) {
+    if (false) {
       System.out.println(s);
     }
   }
+  boolean lastZeroSensor = false;
 
   public void update() {
-
+    boolean zeroSensor = sensor.getLowerLimit();
     double cur_position = sensor.get();
     double absolute_position = cur_position;
     if (state == READY) {
@@ -101,8 +110,8 @@ public class WristController extends StateSpaceController {
     if (!sensor.getLowerLimit()) {
       last_off_position_ = cur_position;
     }
-
-    boolean enabled = true; // DriverStation.getInstance().isEnabled();
+    double limited_goal = 0;
+    boolean robotEnabled = DriverStation.getInstance().isEnabled();
     switch (state) {
       case UNINITIALIZED: {
         calibrated = false;
@@ -116,41 +125,24 @@ public class WristController extends StateSpaceController {
         r.set(0, 0, absolute_position);
         r.set(1, 0, 0);
         // Only progress if we are enabled.
-        if (enabled) {
-          System.out.println("make this only work in enabled");
+        if (robotEnabled) {
           if (sensor.getLowerLimit()) {
-            state = MOVING_OFF;
-          } else {
             state = ZEROING;
+          } else {
+            state = MOVING_ON;
           }
         }
         break;
       }
 
-      case MOVING_OFF: {
+      case ZEROING: {
         Debug("Moving off");
         // Move off the hall effect sensor.
-        if (!enabled) {
+        if (!robotEnabled) {
           // Start over if disabled.
           state = UNINITIALIZED;
           break;
         } else if (!sensor.getLowerLimit()) {
-          // We are now off the sensor.  Time to zero now.
-          state = ZEROING;
-        } else {
-          // Slowly creep off the sensor.
-          zeroing_position_ -= zeroing_off_speed * period;
-          r.set(0, 0, zeroing_position_);
-          r.set(1, 0, -zeroing_off_speed);
-          break;
-        }
-      }
-      case ZEROING: {
-        Debug("zeroing");
-        if (!enabled) {
-          // Start over if disabled.
-          state = UNINITIALIZED;
-        } else if (sensor.getLowerLimit()) {
           state = READY;
           // Save the zero, and then offset the observer to deal with the
           // phantom step change.
@@ -160,21 +152,48 @@ public class WristController extends StateSpaceController {
           Xhat.set(0, 0, Xhat.get(0, 0) + old_zero_offset - zero_offset_);
           y.set(0, 0, y.get(0, 0) + old_zero_offset - zero_offset_);
         } else {
-          // Slowly creep towards the sensor.
-          zeroing_position_ += zeroing_speed * period;
+          // Slowly creep off the sensor.
+          zeroing_position_ -= zeroing_speed * period;
           r.set(0, 0, zeroing_position_);
-          r.set(1, 0, zeroing_speed);
+          r.set(1, 0, -zeroing_speed);
+          break;
+        }
+      }
+      case MOVING_ON: {
+        Debug("zeroing");
+        if (!robotEnabled) {
+          // Start over if disabled.
+          state = UNINITIALIZED;
+        } else if (sensor.getLowerLimit()) {
+          state = ZEROING;
+        } else {
+          // Slowly creep towards the sensor.
+          zeroing_position_ += moving_on_speed * period;
+          r.set(0, 0, zeroing_position_);
+          r.set(1, 0, moving_on_speed);
         }
         break;
       }
       case READY: {
         calibrated = true;
         Debug("ready");
-        double limited_goal = clipGoal(goal);
-        r.flash(new double[]{goal, 0});
+        limited_goal = clipGoal(goal);
+        r.set(0, 0, limited_goal);
+        r.set(1, 0, 0);
+
+        if (zeroSensor != lastZeroSensor) {
+          System.out.println("EDGE " + zeroSensor + " " + absolute_position + "  " + cur_position + " " + zero_offset_ + " " + DriverStation.getInstance().getBatteryVoltage());
+          if (Math.abs(absolute_position - zero_sensor_position) > 0.15) {
+            System.out.println("Would be REZEROING");
+          }
+
+        }
+        lastZeroSensor = zeroSensor;
         break;
       }
     }
+
+    //p.println("" + r.get(0,0) + " | " + cur_position + " | " + absolute_position + " | " + zero_offset_ + " | " + DriverStation.getInstance().getBatteryVoltage());
 
     // Update the observer
     super.update(r, y);
@@ -185,22 +204,25 @@ public class WristController extends StateSpaceController {
       case UNINITIALIZED:
       case READY:
         break;
-      case MOVING_OFF:
       case ZEROING:
+
+      case MOVING_ON:
         // Check if we have cliped and adjust the goal.
-        double uncapped_voltage = Uuncapped.get(0,0);
+        double uncapped_voltage = Uuncapped.get(0, 0);
         if (uncapped_voltage > max_zeroing_voltage) {
-          Debug("fixing zero up");
+          Debug("--fixing zero up");
           double dx = (uncapped_voltage - max_zeroing_voltage) / K.get(0, 0);
           zeroing_position_ -= dx;
         } else if (uncapped_voltage < -max_zeroing_voltage) {
-          Debug("fixing zero down");
-          double dx = (uncapped_voltage + max_zeroing_voltage) /  K.get(0, 0);
+          Debug("--fixing zero down");
+          double dx = (uncapped_voltage + max_zeroing_voltage) / K.get(0, 0);
           zeroing_position_ -= dx;
         }
         break;
     }
 
+    // System.out.println("D:" + index + ", "+ Timer.getFPGATimestamp() + ", " + U.get(0, 0) + ", " + cur_position + ", " + absolute_position +  ":D");
+    index++;
     output.set(U.get(0, 0) / 12.0);
   }
 }
