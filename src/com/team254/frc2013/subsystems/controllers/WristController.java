@@ -26,11 +26,11 @@ public class WristController extends StateSpaceController {
   Matrix r;
   boolean calibrated = false;
   // Enum to store the state of the internal zeroing state machine.
-  private final static int UNINITIALIZED = 0;
-  private final static int ZEROING = 1;
-  private final static int MOVING_ON = 2;
-  private final static int READY = 3;
-  int state;
+  public final static int UNINITIALIZED = 0;
+  public final static int ZEROING = 1;
+  public final static int MOVING_ON = 2;
+  public final static int READY = 3;
+  public int state;
   // Offset from the raw encoder value to the absolute angle.
   double zero_offset_ = 0;
   // Position that gets incremented when zeroing the wrist to slowly move it to
@@ -224,5 +224,9 @@ public class WristController extends StateSpaceController {
     // System.out.println("D:" + index + ", "+ Timer.getFPGATimestamp() + ", " + U.get(0, 0) + ", " + cur_position + ", " + absolute_position +  ":D");
     index++;
     output.set(U.get(0, 0) / 12.0);
+  }
+  
+  public int getState() {
+    return state;
   }
 }

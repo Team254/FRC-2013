@@ -24,6 +24,7 @@ public class ShootSequenceCommand extends CommandBase {
   }
 
   protected void initialize() {
+    sc.wantIntake = false;
     sc.wantFedShoot = true;
     shotCount = sc.shotCount;
     System.out.println("shoot sequence init " + shotCount);

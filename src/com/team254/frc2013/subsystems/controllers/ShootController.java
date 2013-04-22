@@ -284,9 +284,13 @@ public class ShootController extends PeriodicSubsystem {
         } else {
           System.out.println("NOTOTOTTTOTOOT first shot");
           intake = 1;
-          if (timedOut(.75) || s.isIndexerLoaded()) {
+          if (s.isIndexerLoaded()) {
             wantFedShoot = false;
             state = SHOOT_GO_UP;
+          } else if (timedOut(1)) {
+            wantFedShoot = false;
+            state = IDLE;
+            shotCount++; 
           }
         }
         break;

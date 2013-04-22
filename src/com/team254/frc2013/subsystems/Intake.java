@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author maskoken@gmail.com (Matthew Koken)
  */
 public class Intake extends Subsystem {
+
   private Talon intakeMotor = new Talon(Constants.intakePort.getInt());
   private Talon intakePivotMotor = new Talon(Constants.intakePivotPort.getInt());
   private Encoder encoder = new Encoder(Constants.intakeEncoderPortA.getInt(), Constants.intakeEncoderPortB.getInt());
@@ -32,7 +33,7 @@ public class Intake extends Subsystem {
 
     public double get() {
       double v = -encoder.get() * (2 * Math.PI / 921.6);
-    //  System.out.println("v : " + v);
+      //  System.out.println("v : " + v);
 
       return v;
     }
@@ -47,30 +48,26 @@ public class Intake extends Subsystem {
     public boolean getUpperLimit() {
       return false;
     }
-
   }
 
   class WristOutput implements ControlOutput {
 
     public void set(double value) {
-     // System.out.println("out: " + value);
+      // System.out.println("out: " + value);
       intakePivotMotor.set(-value);
     }
-
   }
-
-  WristController controller =  new WristController("wrist", new WristOutput(), new WristSource(), WristGains.getGains()[0], 1.0 / 100.0);
+  WristController controller = new WristController("wrist", new WristOutput(), new WristSource(), WristGains.getGains()[0], 1.0 / 100.0);
 
   protected void initDefaultCommand() {
   }
 
-  public void setIntakePower(double power){
+  public void setIntakePower(double power) {
     double output = Util.limit(power, 1.0);
     intakeMotor.set(output);
   }
 
   public void setRawPivot(double power) {
-
   }
 
   public void setAngle(double angle) {
@@ -91,5 +88,9 @@ public class Intake extends Subsystem {
 
   public void rezero() {
     controller.reset();
+  }
+
+  public boolean ready() {
+    return controller.getState() == WristController.READY;
   }
 }

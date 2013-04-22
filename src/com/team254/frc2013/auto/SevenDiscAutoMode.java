@@ -1,8 +1,9 @@
 package com.team254.frc2013.auto;
 
+import com.team254.frc2013.commands.CheckIntakeCalibratedCommand;
 import com.team254.frc2013.commands.DriveAtSpeedCommand;
 import com.team254.frc2013.commands.DriveProfiledCommand;
-import com.team254.frc2013.commands.IntakeRaiseCommand;
+import com.team254.frc2013.commands.SetIntakeDownCommand;
 import com.team254.frc2013.commands.ResetDriveEncodersCommand;
 import com.team254.frc2013.commands.ResetGyroCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
@@ -10,7 +11,6 @@ import com.team254.frc2013.commands.ShiftCommand;
 import com.team254.frc2013.commands.ShootSequenceCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
-import com.team254.frc2013.commands.WaitCommand;
 import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.control.impl.CustomProfile;
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -29,13 +29,14 @@ public class SevenDiscAutoMode extends CommandGroup {
     // Shoot first discs
     addSequential(new ShooterOnCommand(true));
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
-    addSequential(new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_DOWN));
+    addSequential(new SetIntakeDownCommand());
     addSequential(new ShiftCommand(false));
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand(false));
 
     // Pick up 2 middle discs
+    addSequential(new CheckIntakeCalibratedCommand(.5));
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
     addSequential(new RunIntakeCommand(1));

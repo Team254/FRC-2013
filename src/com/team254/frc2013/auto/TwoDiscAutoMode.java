@@ -1,6 +1,6 @@
 package com.team254.frc2013.auto;
 
-import com.team254.frc2013.commands.IntakeRaiseCommand;
+import com.team254.frc2013.commands.SetIntakeDownCommand;
 import com.team254.frc2013.commands.ResetDriveEncodersCommand;
 import com.team254.frc2013.commands.ResetGyroCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
@@ -22,7 +22,7 @@ public class TwoDiscAutoMode extends CommandGroup {
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
     addSequential(new ShooterOnCommand(true));
-    addSequential(new IntakeRaiseCommand(IntakeRaiseCommand.INTAKE_DOWN));
+    addSequential(new SetIntakeDownCommand());
     addSequential(new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
     addSequential(new WaitCommand(0.25));
     addSequential(new ShootSequenceCommand());

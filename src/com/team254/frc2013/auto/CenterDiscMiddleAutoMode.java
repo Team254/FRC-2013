@@ -25,8 +25,10 @@ public class CenterDiscMiddleAutoMode extends CommandGroup {
      addSequential(new CenterDiscPartialAutoMode());
 
     // Drive to back of pyramid
+  
     addSequential(new TurnMinAngleCommand(15, 1.25));
     addSequential(new ResetDriveEncodersCommand());
+    addSequential(new RunIntakeCommand(0));
     addSequential(new ShooterOnCommand(true));
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
     addSequential(new DriveProfiledCommand(8.9, 6.4, 15, 3));
