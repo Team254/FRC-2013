@@ -27,6 +27,8 @@ public class DriveGearbox extends Subsystem{
 
   private boolean isDriveMode = true;
 
+  private boolean zeroed = false;
+
   public Encoder getLeftEncoder() {
     return leftEncoder;
   }
@@ -47,6 +49,10 @@ public class DriveGearbox extends Subsystem{
 
   public void set(double allPower){
     if (!isDriveMode) {
+      if (allPower  < 0 && leftEncoder.get() < -3190) // go up power, go down encoder
+        allPower = 0;
+      if (allPower > 0 && leftEncoder.get() > -4)
+        allPower = 0;
       leftDriveA.set(allPower);
       leftDriveB.set(allPower);
       leftDriveC.set(allPower);
@@ -77,6 +83,11 @@ public class DriveGearbox extends Subsystem{
 
   public void setDriveMode(boolean wantsDrive) {
     isDriveMode = wantsDrive;
+    if (!isDriveMode && !zeroed) {
+      System.out.println("ZERORING LEFT ENCODER in motors");
+      leftEncoder.reset();
+      zeroed = true;
+    }
   }
 
   public boolean isDriveMode() {

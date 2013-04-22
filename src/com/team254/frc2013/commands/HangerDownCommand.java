@@ -23,14 +23,19 @@ public class HangerDownCommand extends CommandBase {
   }
 
   protected void execute() {
+    System.out.println("Hanger down " + motors.getLeftEncoder().get() + " " + goal);
   }
 
+
   protected boolean isFinished() {
-    return motors.getLeftEncoder().get() > goal;
+    boolean done = motors.getLeftEncoder().get() > goal;
+    return done;
   }
 
   protected void end() {
+    System.out.println("Hanger down done");
     motors.set(0);
+
   }
 
   protected void interrupted() {

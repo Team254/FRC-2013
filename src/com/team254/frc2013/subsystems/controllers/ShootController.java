@@ -71,15 +71,17 @@ public class ShootController extends PeriodicSubsystem {
   public static final int HANG = 2;
   public static final int FORCE_FLOOR = 3;
   private int wristState = FLOOR;
-  public boolean doingHang = false;
+  public boolean wantHang = false;
   ThrottledPrinter p = new ThrottledPrinter(.25);
+
   private void updateAngle() {
 
-    if (doingHang) {
-    } else if (wantIntakeDown) {
+    if (wantIntakeDown) {
       wristState = FLOOR;
     } else if (wantIntakeUp) {
       wristState = STOWED;
+    } else if (wantHang) {
+      wristState = HANG;
     }
     double angle = 0;
     switch (wristState) {
@@ -87,8 +89,7 @@ public class ShootController extends PeriodicSubsystem {
         angle = 0;
         if (wantForceFloor) {
           angle = -.06;
-        }
-        else if (wantIntake) {
+        } else if (wantIntake) {
           angle = -.03;
         }
         break;
@@ -101,12 +102,16 @@ public class ShootController extends PeriodicSubsystem {
           angle = 2.0;
         }
         break;
+      case HANG:
+        angle = 1.34;
+        break;
+
     }
     // stow 2.0
     // far 1.36
     // high 1.65
     i.setAngle(angle);
-   // p.println("" + angle + " | " + wristState);
+    // p.println("" + angle + " | " + wristState);
   }
 
   public void update() {
@@ -294,7 +299,7 @@ public class ShootController extends PeriodicSubsystem {
           } else if (timedOut(1)) {
             wantFedShoot = false;
             state = IDLE;
-            shotCount++; 
+            shotCount++;
           }
         }
         break;

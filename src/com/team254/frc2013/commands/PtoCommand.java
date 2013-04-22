@@ -5,12 +5,22 @@ package com.team254.frc2013.commands;
  *
  * @author richard@team254.com (Richard Lin)
  */
-public class PtoCommand extends CommandBase{
-  public PtoCommand() {
+public class PtoCommand extends CommandBase {
+
+  boolean reset = false;
+  public PtoCommand(boolean reset) {
     requires(drive);
+    requires(motors);
+    this.reset = reset;
+  }
+
+  public PtoCommand() {
+    this(false);
   }
 
   protected void initialize() {
+    if (reset)
+      motors.getLeftEncoder().reset();
   }
 
   protected void execute() {

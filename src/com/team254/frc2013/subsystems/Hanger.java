@@ -59,6 +59,8 @@ public class Hanger extends PeriodicSubsystem {
     controller.disable();
   }
 
+
+
   public void setGoal(double goal) {
     controller.setGoal(goal);
   }

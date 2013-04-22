@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoHangCommand extends CommandGroup {
   public AutoHangCommand() {
     addSequential(new ShiftCommand(true));
+    addSequential(new StopDriveCommand());
     addSequential(new WaitForLiftCommand());
+    addSequential(new StowIntakeForHangCommand());
     addSequential(new EngagePtoCommand());
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new HangerGrabBarCommand(-2485, -3180, -2, 5));

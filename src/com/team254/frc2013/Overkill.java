@@ -12,6 +12,7 @@ import com.team254.frc2013.auto.TuneDriveAutoMode;
 import com.team254.frc2013.auto.TwoDiscAutoMode;
 import com.team254.frc2013.commands.AutoHangCommand;
 import com.team254.frc2013.commands.CommandBase;
+import com.team254.frc2013.commands.PtoCommand;
 import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.control.ControlUpdater;
 import com.team254.lib.util.Debouncer;
@@ -85,6 +86,8 @@ public class Overkill extends IterativeRobot {
     CommandBase.conveyor.setMotor(0);
     CommandBase.compressor.start();
     CommandBase.autonTimer.reset();
+    CommandBase.drive.setLeftRightPower(0, 0);
+    CommandBase.motors.set(0);
 
     lastAngle = CommandBase.drive.getGyroAngle();
   }
@@ -224,6 +227,13 @@ public class Overkill extends IterativeRobot {
             && autoHangCommand != null) {
       autoHangStarted = true;
       Scheduler.getInstance().add(autoHangCommand);
+    }
+
+    if (autoHangStarted && autoHangCommand != null && CommandBase.startedAutoHang && Math.abs(CommandBase.controlBoard.leftStick.getY()) > .5) {
+      System.out.println("Canceling climb due to joystick.");
+      autoHangCommand.cancel();
+      autoHangCommand = null;
+      Scheduler.getInstance().add(new PtoCommand());
     }
 
     // Kill the climb if the dead man switch is released.

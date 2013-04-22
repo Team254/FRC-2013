@@ -225,7 +225,7 @@ public class WristController extends StateSpaceController {
     index++;
     output.set(U.get(0, 0) / 12.0);
   }
-  
+
   public int getState() {
     return state;
   }

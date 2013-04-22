@@ -12,6 +12,7 @@ public class WaitForBackwardSwingCommand extends CommandBase {
     this.angle = angle;
   }
   protected void initialize() {
+    startedAutoHang = true;
   }
 
   protected void execute() {
