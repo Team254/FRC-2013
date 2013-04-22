@@ -8,19 +8,20 @@ package com.team254.frc2013.commands;
 public class RunIntakeCommand extends CommandBase {
 
   private double speed;
-  private boolean runConveyor = true;
+  private boolean pastFloor = false;
 
-  public RunIntakeCommand(double speed, boolean runConveyor) {
+  public RunIntakeCommand(double speed, boolean pastFloor) {
     this.speed = speed;
-    this.runConveyor = runConveyor;
+    this.pastFloor = pastFloor;
   }
 
   public RunIntakeCommand(double speed) {
-    this(speed, true);
+    this(speed, false);
   }
 
   protected void initialize() {
     if (speed > 0) {
+      sc.wantForceFloor = pastFloor;
       sc.wantIntake = true;
       sc.wantExhaust = false;
     } else if (speed < 0) {

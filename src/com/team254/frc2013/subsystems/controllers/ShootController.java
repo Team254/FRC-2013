@@ -48,6 +48,7 @@ public class ShootController extends PeriodicSubsystem {
   public boolean wantIntakeUp = false;
   public boolean wantIntakeDown = false;
   public boolean dontTouchIntake = false;
+  public boolean wantForceFloor = false;
   public int shotCount = 0;
   boolean firstRun = true;
   public boolean wantFeed = false;
@@ -84,7 +85,10 @@ public class ShootController extends PeriodicSubsystem {
     switch (wristState) {
       case FLOOR:
         angle = 0;
-        if (wantIntake) {
+        if (wantForceFloor) {
+          angle = -.06;
+        }
+        else if (wantIntake) {
           angle = -.03;
         }
         break;
