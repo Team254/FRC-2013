@@ -111,7 +111,6 @@ public class ShootController extends PeriodicSubsystem {
     // far 1.36
     // high 1.65
     i.setAngle(angle);
-    // p.println("" + angle + " | " + wristState);
   }
 
   public void update() {
@@ -126,7 +125,6 @@ public class ShootController extends PeriodicSubsystem {
       stopShotCount = shotCount + 1;
     }
 
-    // System.out.println(state + " " + wantManualIndex + " " + wantIntake);
     switch (state) {
       case IDLE:
 
@@ -291,7 +289,6 @@ public class ShootController extends PeriodicSubsystem {
           wantFedShoot = false;
           state = SHOOT_GO_UP;
         } else {
-          System.out.println("NOTOTOTTTOTOOT first shot");
           intake = 1;
           if (s.isIndexerLoaded()) {
             wantFedShoot = false;
