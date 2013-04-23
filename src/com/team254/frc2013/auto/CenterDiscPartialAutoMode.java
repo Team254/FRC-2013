@@ -16,6 +16,7 @@ import com.team254.frc2013.commands.ShootSequenceCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
 import com.team254.frc2013.commands.TurnMinAngleCommand;
+import com.team254.frc2013.commands.WaitCommand;
 import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -36,6 +37,7 @@ public class CenterDiscPartialAutoMode extends CommandGroup {
     addSequential(new ShooterOnCommand(false));
 
     // Drive to center line
+    addSequential(new WaitCommand(.5));
     addSequential(new CheckIntakeCalibratedCommand(.5));
     addSequential(new ShiftCommand(false));
     addSequential(new ResetDriveEncodersCommand());

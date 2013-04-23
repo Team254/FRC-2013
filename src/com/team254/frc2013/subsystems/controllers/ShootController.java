@@ -143,7 +143,7 @@ public class ShootController extends PeriodicSubsystem {
 
         if (wantShoot && s.isOn()) {
           if (wantRapidFire && shotCount <= rapidFireStopShotCount) {
-            if (rapidFireStopShotCount - shotCount < 2) {
+            if (rapidFireStopShotCount - shotCount < 1) {
               System.out.println("setting wrist to stow");
               wristState = STOWED;
             }
@@ -210,27 +210,25 @@ public class ShootController extends PeriodicSubsystem {
         break;
 
       case SHOOT_EXTEND:
-        if (firstRun) {
-          shotCount++;
-        }
         wantIndexerUp = true;
         wantExtend = true;
         wantShoot = false;
-        if (timedOut(.25)) {
+        if (timedOut(.4) || ((s.getRpmGoal() - s.getRpm() > 250) && s.getRpmGoal() > 100)) {
+          shotCount++;
           state = SHOOT_GO_DOWN;
         }
         break;
 
       case MANUAL_INDEX_DOWN_OUT:
-        intake = -.3;
-        if (timedOut(.2)) {
+        intake = -.15;
+        if (timedOut(.1)) {
           state = MANUAL_INDEX_DOWN_IN;
         }
         break;
 
       case MANUAL_INDEX_DOWN_IN:
-        intake = .3;
-        if (timedOut(.2) || s.isIndexerLoaded()) {
+        intake = 0;
+        if (timedOut(.1) || s.isIndexerLoaded()) {
           state = IDLE;
         }
         break;

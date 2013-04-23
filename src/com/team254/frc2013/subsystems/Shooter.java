@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-
 /**
  * Class representing the shooter wheels, managing its motors and sensors.
  *
@@ -29,7 +28,6 @@ public class Shooter extends Subsystem {
   public static final int PRESET_BACK_PYRAMID = 0;
   public static final int PRESET_FRONT_PYRAMID = 1;
   public static final int SLOW_SHOOT = 2;
-
   // Actuators
   private Talon frontMotor = new Talon(Constants.frontShooterPort.getInt());
   private Talon backMotor = new Talon(Constants.backShooterPort.getInt());
@@ -37,7 +35,6 @@ public class Shooter extends Subsystem {
   private Solenoid angle = new Solenoid(Constants.shooterAnglePort.getInt());
   private Solenoid indexerLeft = new Solenoid(Constants.indexerLeftPort.getInt());
   private Solenoid indexerRight = new Solenoid(Constants.indexerRightPort.getInt());
-
   // Sensors
   public DigitalInput indexerDownSensor =
           new DigitalInput(Constants.indexerDownSensorPort.getInt());
@@ -48,7 +45,6 @@ public class Shooter extends Subsystem {
   private DigitalInput leftDiscSensor =
           new DigitalInput(Constants.leftDiscSensorPort.getInt());
   public Counter counter = new Counter(Constants.shootEncoderPort.getInt());
-
   // Controller helpers
   double goal = 0;
 
@@ -58,13 +54,13 @@ public class Shooter extends Subsystem {
       int kCountsPerRev = 1;
       double period = counter.getPeriod();
       double rpm = 60.0 / (period * (double) kCountsPerRev);
-      if (rpm < 20000)
+      if (rpm < 20000) {
         lastRpm = rpm;
+      }
       return (lastRpm * Math.PI * 2.0) / 60.0;
     }
 
     public void updateFilter() {
-
     }
 
     public boolean getLowerLimit() {
@@ -77,6 +73,7 @@ public class Shooter extends Subsystem {
   }
 
   private class ShooterOutput implements ControlOutput {
+
     public void set(double value) {
       // Leave this for Austin usage
       //System.out.println("D:" + Timer.getFPGATimestamp() + ", " + value*12.0 + ", " + lastRpm + ", " + controller.Xhat.get(0) + ", " + controller.Xhat.get(1) + ", " + DriverStation.getInstance().getBatteryVoltage() + ":D");
@@ -92,8 +89,7 @@ public class Shooter extends Subsystem {
       backMotor.set(-value);
     }
   }
-
-  FlywheelController controller = new FlywheelController("shooter", new ShooterOutput(), new ShooterSource(), ShooterGains.getGains()[0], 1.0/100.0);
+  FlywheelController controller = new FlywheelController("shooter", new ShooterOutput(), new ShooterSource(), ShooterGains.getGains()[0], 1.0 / 100.0);
   private double frontPower;
   private double backPower;
   private boolean shooterOn;
@@ -186,7 +182,6 @@ public class Shooter extends Subsystem {
   }
 
   private void setPowers(double frontPower, double backPower) {
-
   }
 
   public void setShooterOn(boolean isOn) {
@@ -203,8 +198,13 @@ public class Shooter extends Subsystem {
 
   protected void initDefaultCommand() {
   }
+
   public double getRpm() {
     return lastRpm;
+  }
+  public double getRpmGoal()
+  {
+    return controller.getVelocityGoal();
   }
 
   public boolean onSpeedTarget() {

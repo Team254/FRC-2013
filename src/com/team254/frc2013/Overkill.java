@@ -209,8 +209,10 @@ public class Overkill extends IterativeRobot {
     }
 
     // Intake
-    CommandBase.sc.wantIntake = CommandBase.controlBoard.operatorJoystick.getIntakeButtonState();
-    CommandBase.sc.wantExhaust = CommandBase.controlBoard.operatorJoystick.getIntakeOutButtonState();
+    CommandBase.sc.wantIntake = CommandBase.controlBoard.operatorJoystick.getIntakeButtonState() ||
+            CommandBase.controlBoard.leftStick.getRawButton(2);
+    CommandBase.sc.wantExhaust = CommandBase.controlBoard.operatorJoystick.getIntakeOutButtonState() ||
+            CommandBase.controlBoard.leftStick.getTrigger();
     CommandBase.sc.wantManualIndex = CommandBase.controlBoard.operatorJoystick.getIndexButtonState();
 
     CommandBase.sc.wantIntakeUp = CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch() == 1;

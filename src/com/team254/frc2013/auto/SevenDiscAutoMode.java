@@ -11,18 +11,20 @@ import com.team254.frc2013.commands.ShiftCommand;
 import com.team254.frc2013.commands.ShootSequenceCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;
+import com.team254.frc2013.commands.WaitCommand;
 import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.control.impl.CustomProfile;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * Scores three starting discs from the back of the pyramid, picks up four more, then scores them
- * from the front of the pyramid.
-
+ * Scores three starting discs from the back of the pyramid, picks up four more,
+ * then scores them from the front of the pyramid.
+ *
  * @author tom@team254.com (Tom Bottiglieri)
  * @author pat@team254.com (Patrick Fairbank)
  */
 public class SevenDiscAutoMode extends CommandGroup {
+
   CustomProfile profile = new CustomProfile();
 
   public SevenDiscAutoMode() {
@@ -37,6 +39,7 @@ public class SevenDiscAutoMode extends CommandGroup {
 
     // Pick up 2 middle discs
     addSequential(new CheckIntakeCalibratedCommand(.5));
+    addSequential(new WaitCommand(.5));
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
     addSequential(new RunIntakeCommand(1));
