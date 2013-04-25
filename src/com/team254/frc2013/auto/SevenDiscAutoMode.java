@@ -33,6 +33,7 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
     addSequential(new SetIntakeDownCommand());
     addSequential(new ShiftCommand(false));
+    addSequential(new WaitCommand(.25));
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand(false));
