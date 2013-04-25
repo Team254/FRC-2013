@@ -55,6 +55,7 @@ public class ShootController extends PeriodicSubsystem {
   int rapidFireStopShotCount = 4;
   int stopShotCount = 1;
   private boolean firstShot = true;
+  public boolean wantControlOverride = false;
 
   public ShootController(Shooter s, Conveyor c, Intake i) {
     this.s = s;
@@ -65,6 +66,10 @@ public class ShootController extends PeriodicSubsystem {
 
   private boolean timedOut(double time) {
     return stateTimer.get() > time;
+  }
+
+  private boolean controlTimedOut(double time) {
+    return wantControlOverride && stateTimer.get() > time;
   }
   public static final int FLOOR = 0;
   public static final int STOWED = 1;
@@ -197,14 +202,14 @@ public class ShootController extends PeriodicSubsystem {
         wantIndexerUp = true;
         if (s.isIndexerSensedUp()) {
           state = SHOOT_WAIT_FOR_SPEED;
-        } else if (timedOut(1.0)) {
+        } else if (controlTimedOut(1.0)) {
           state = FIX_INDEXER_OUT;
         }
         break;
 
       case SHOOT_WAIT_FOR_SPEED:
         wantIndexerUp = true;
-        if (s.onSpeedTarget() || timedOut(.5)) {
+        if (s.onSpeedTarget() || controlTimedOut(1.5)) {
           state = SHOOT_EXTEND;
         }
         break;
@@ -213,7 +218,7 @@ public class ShootController extends PeriodicSubsystem {
         wantIndexerUp = true;
         wantExtend = true;
         wantShoot = false;
-        if (timedOut(.4) || ((s.getRpmGoal() - s.getRpm() > 250) && s.getRpmGoal() > 100)) {
+        if (timedOut(.5) || ((s.getRpmGoal() - s.getRpm() > 250) && s.getRpmGoal() > 100)) {
           shotCount++;
           state = SHOOT_GO_DOWN;
         }

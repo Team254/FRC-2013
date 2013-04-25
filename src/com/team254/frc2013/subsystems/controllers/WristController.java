@@ -40,7 +40,7 @@ public class WristController extends StateSpaceController {
   double last_off_position_;
   double zeroing_speed = -.2;
   double moving_on_speed = -2.0;
-  final double zero_sensor_position = 0.2658;
+  final double zero_sensor_position = 0.2658 +.0137;
   final double max_zeroing_voltage = 3;
   double minGoal = -.06, maxGoal = 2.1;
   int index = 0;
@@ -193,11 +193,8 @@ public class WristController extends StateSpaceController {
       }
     }
 
-    //p.println("" + r.get(0,0) + " | " + cur_position + " | " + absolute_position + " | " + zero_offset_ + " | " + DriverStation.getInstance().getBatteryVoltage());
-
     // Update the observer
     super.update(r, y);
-
 
     // Verify that the zeroing goal hasn't run away.
     switch (state) {

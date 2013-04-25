@@ -9,6 +9,9 @@ import com.team254.lib.util.ConstantsBase;
  *
  * @author brandon.gonzalez.451@gmail.com (Brandon Gonzalez)
  */
+
+// Intake down - 10
+// Intake up -
 public class Constants extends ConstantsBase {
   // Declare the constants and their default values here.
   // Control board mappings
@@ -65,8 +68,8 @@ public class Constants extends ConstantsBase {
   public static final Constant pressureTransducerPort = new Constant("pressureTransducerPort", 3);
   public static final Constant indexerDownSensorPort = new Constant("indexerDownSensorPort", 10);
   public static final Constant indexerUpSensorPort = new Constant("indexerUpSensorPort", 11);
-  public static final Constant rightDiscSensorPort = new Constant("rightDiscSensorPort", 13);
-  public static final Constant leftDiscSensorPort = new Constant("leftDiscSensorPort", 6);
+  public static final Constant rightDiscSensorPort = new Constant("rightDiscSensorPort", 12);
+  public static final Constant leftDiscSensorPort = new Constant("leftDiscSensorPort", 14);
 
   // Drive encoders
   public static final Constant leftEncoderPortA = new Constant("leftEncoderPortA", 1);
@@ -75,12 +78,12 @@ public class Constants extends ConstantsBase {
   public static final Constant rightEncoderPortB = new Constant("rightEncoderPortB", 4);
 
   // Shooter encoders
-  public static final Constant shootEncoderPort = new Constant("shootEncoderPort", 5);
+  public static final Constant shootEncoderPort = new Constant("shootEncoderPort", 6);
 
   // Intake encoder
   public static final Constant intakeEncoderPortA = new Constant("intakeEncoderPortA", 7);
   public static final Constant intakeEncoderPortB = new Constant("intakeEncoderPortB", 8);
-  public static final Constant intakeZeroSensorPort = new Constant("intakeZeroSensorPort", 14);
+  public static final Constant intakeZeroSensorPort = new Constant("intakeZeroSensorPort", 13);
 
   // Drive tuning
   public static final Constant sensitivityHigh = new Constant("sensitivityHigh", .85);
@@ -115,7 +118,7 @@ public class Constants extends ConstantsBase {
   public static final Constant intakeKD = new Constant("intakeKD", 0.24);
 
   public static final Constant minShootRpm = new Constant("minShootRpm", 11750);
-  public static final Constant shootRpm = new Constant("shootRpm", 9900);
+  public static final Constant shootRpm = new Constant("shootRpm", 10200);
 
   public static final Constant testBumpSensor = new Constant("testBumpSensor", 0);
 

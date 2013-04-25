@@ -209,15 +209,15 @@ public class Overkill extends IterativeRobot {
     }
 
     // Intake
-    CommandBase.sc.wantIntake = CommandBase.controlBoard.operatorJoystick.getIntakeButtonState() ||
-            CommandBase.controlBoard.leftStick.getRawButton(2);
-    CommandBase.sc.wantExhaust = CommandBase.controlBoard.operatorJoystick.getIntakeOutButtonState() ||
-            CommandBase.controlBoard.leftStick.getTrigger();
+    CommandBase.sc.wantIntake = CommandBase.controlBoard.operatorJoystick.getIntakeButtonState()
+            || CommandBase.controlBoard.leftStick.getRawButton(2);
+    CommandBase.sc.wantExhaust = CommandBase.controlBoard.operatorJoystick.getIntakeOutButtonState()
+            || CommandBase.controlBoard.leftStick.getTrigger();
     CommandBase.sc.wantManualIndex = CommandBase.controlBoard.operatorJoystick.getIndexButtonState();
 
     CommandBase.sc.wantIntakeUp = CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch() == 1;
     CommandBase.sc.wantIntakeDown = CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch() == -1;
-   // System.out.println(CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch());
+    // System.out.println(CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch());
     // Set 10pt hang up/down.
     CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
 
@@ -237,6 +237,9 @@ public class Overkill extends IterativeRobot {
       autoHangCommand = null;
       Scheduler.getInstance().add(new PtoCommand());
     }
+
+    // Control override
+    CommandBase.sc.wantControlOverride = CommandBase.controlBoard.operatorJoystick.getControlLoopsSwitchState();
 
     // Kill the climb if the dead man switch is released.
     if (autoHangStarted && !CommandBase.controlBoard.operatorJoystick.getClimbButtonState()
