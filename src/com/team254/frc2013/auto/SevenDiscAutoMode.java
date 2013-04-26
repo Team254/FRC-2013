@@ -33,21 +33,20 @@ public class SevenDiscAutoMode extends CommandGroup {
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
     addSequential(new SetIntakeDownCommand());
     addSequential(new ShiftCommand(false));
-    addSequential(new WaitCommand(.25));
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand(false));
 
     // Pick up 2 middle discs
     addSequential(new CheckIntakeCalibratedCommand(.5));
-    addSequential(new WaitCommand(.5));
+    addSequential(new WaitCommand(.35));
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new ResetGyroCommand());
     addSequential(new RunIntakeCommand(1));
     addSequential(new ShooterPresetCommand(Shooter.PRESET_FRONT_PYRAMID));
 
     // Drive to front of pyramid and shoot 2
-    addSequential(new DriveProfiledCommand(6.05, 3.5, 0, 5));
+    addSequential(new DriveProfiledCommand(6.05, 2.75, 0, 5));
     addSequential(new RunIntakeCommand(0.0));
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand(false));

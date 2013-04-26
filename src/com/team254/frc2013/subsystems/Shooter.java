@@ -204,7 +204,7 @@ public class Shooter extends Subsystem {
   }
   public double getRpmGoal()
   {
-    return controller.getVelocityGoal();
+    return (controller.getVelocityGoal() * 60.0) / (2 * Math.PI);
   }
 
   public boolean onSpeedTarget() {

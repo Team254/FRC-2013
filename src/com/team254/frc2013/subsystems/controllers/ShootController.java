@@ -218,7 +218,9 @@ public class ShootController extends PeriodicSubsystem {
         wantIndexerUp = true;
         wantExtend = true;
         wantShoot = false;
-        if (timedOut(.5) || ((s.getRpmGoal() - s.getRpm() > 250) && s.getRpmGoal() > 100)) {
+        System.out.println("r " +s.getRpm() + " " + (s.getRpm() < (s.getRpmGoal() - 2500)) + " " + (s.getRpmGoal() - 2500));
+        if ((s.getRpm() < (s.getRpmGoal() - 2500)) || timedOut(.5)) {
+          System.out.println("SHOT " + s.getRpmGoal() + " , " + s.getRpm() + " , " + stateTimer.get());
           shotCount++;
           state = SHOOT_GO_DOWN;
         }
