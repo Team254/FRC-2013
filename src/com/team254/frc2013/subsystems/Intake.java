@@ -57,7 +57,7 @@ public class Intake extends Subsystem {
       intakePivotMotor.set(-value);
     }
   }
-  WristController controller = new WristController("wrist", new WristOutput(), new WristSource(), WristGains.getGains()[0], 1.0 / 100.0);
+  public WristController controller = new WristController("wrist", new WristOutput(), new WristSource(), WristGains.getGains()[0], 1.0 / 100.0);
 
   protected void initDefaultCommand() {
   }

@@ -44,6 +44,7 @@ public class WristController extends StateSpaceController {
   final double max_zeroing_voltage = 3;
   double minGoal = -.06, maxGoal = 2.1;
   int index = 0;
+  public double pos = 0;
 
   public WristController(String name, ControlOutput output, ControlSource sensor, StateSpaceGains gains) {
     this(name, output, sensor, gains, 1 / 100.0);
@@ -102,6 +103,7 @@ public class WristController extends StateSpaceController {
     boolean zeroSensor = sensor.getLowerLimit();
     double cur_position = sensor.get();
     double absolute_position = cur_position;
+
     if (state == READY) {
       absolute_position -= zero_offset_;
     }
@@ -221,6 +223,7 @@ public class WristController extends StateSpaceController {
     // System.out.println("D:" + index + ", "+ Timer.getFPGATimestamp() + ", " + U.get(0, 0) + ", " + cur_position + ", " + absolute_position +  ":D");
     index++;
     output.set(U.get(0, 0) / 12.0);
+    pos = absolute_position;
   }
 
   public int getState() {
