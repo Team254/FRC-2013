@@ -51,8 +51,6 @@ public class DriveGearbox extends Subsystem{
     if (!isDriveMode) {
       if (allPower  < 0 && leftEncoder.get() < -3190) // go up power, go down encoder
         allPower = 0;
-      if (allPower > 0 && leftEncoder.get() > -4)
-        allPower = 0;
       leftDriveA.set(allPower);
       leftDriveB.set(allPower);
       leftDriveC.set(allPower);
