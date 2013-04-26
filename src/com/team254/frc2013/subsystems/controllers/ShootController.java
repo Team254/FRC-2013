@@ -93,9 +93,9 @@ public class ShootController extends PeriodicSubsystem {
       case FLOOR:
         angle = 0;
         if (wantForceFloor) {
-          angle = -.06;
+          angle = -.09;
         } else if (wantIntake) {
-          angle = -.03;
+          angle = -.06;
         }
         break;
       case STOWED:
