@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  * @author pat@team254.com (Patrick Fairbank)
  */
 public class AutoHangCommand extends CommandGroup {
+
   public AutoHangCommand() {
     addSequential(new ShiftCommand(true));
     addSequential(new StopDriveCommand());
@@ -17,6 +18,8 @@ public class AutoHangCommand extends CommandGroup {
     addSequential(new ResetDriveEncodersCommand());
     addSequential(new HangerGrabBarCommand(-2485, -3180, -2, 5));
     addSequential(new WaitForBackwardSwingCommand(-0.5));
+    addSequential(new HangerDownCommand(-2980, 0.75));
+    addSequential(new WaitForButtonCommand(CommandBase.controlBoard.operatorJoystick.getIntakeButton()));
     addSequential(new HangerDownCommand(-5, 1));
     addSequential(new WaitCommand(0.25));
     addSequential(new HangerGrabBarCommand(-2485, -3180, -5, 15));

@@ -88,6 +88,7 @@ public class Overkill extends IterativeRobot {
     CommandBase.autonTimer.reset();
     CommandBase.drive.setLeftRightPower(0, 0);
     CommandBase.motors.set(0);
+    CommandBase.sc.wantHang = false;
 
     lastAngle = CommandBase.drive.getGyroAngle();
   }
@@ -171,6 +172,7 @@ public class Overkill extends IterativeRobot {
     autoHangStarted = false;
     CommandBase.shooter.retract();
     CommandBase.sc.wantForceFloor = false;
+        CommandBase.sc.wantHang = false;
   }
 
   /**
