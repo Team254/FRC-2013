@@ -172,7 +172,7 @@ public class Overkill extends IterativeRobot {
     autoHangStarted = false;
     CommandBase.shooter.retract();
     CommandBase.sc.wantForceFloor = false;
-        CommandBase.sc.wantHang = false;
+    CommandBase.sc.wantHang = false;
   }
 
   /**
