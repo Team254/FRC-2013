@@ -2,6 +2,7 @@ package com.team254.frc2013;
 
 import com.team254.frc2013.auto.CenterDiscMiddleAutoMode;
 import com.team254.frc2013.auto.CenterDiscSideAutoMode;
+import com.team254.frc2013.auto.CenterLineBlockAutoMode;
 import com.team254.frc2013.auto.DriveMotorTestAutoMode;
 import com.team254.frc2013.auto.FiveDiscAutoMode;
 import com.team254.frc2013.auto.FourDiscAutoMode;
@@ -55,11 +56,13 @@ public class Overkill extends IterativeRobot {
     autoModeSelector = new AutoModeSelector();
     autoModeSelector.addAutoCommand("7 Disc", SevenDiscAutoMode.class);
     autoModeSelector.addAutoCommand("3 Disc", ThreeDiscAutoMode.class);
+    autoModeSelector.addAutoCommand("Center (Middle)", CenterDiscMiddleAutoMode.class);
+    autoModeSelector.addAutoCommand("Center (Side)", CenterDiscSideAutoMode.class);
+    autoModeSelector.addAutoCommand("Center BLOCK", CenterLineBlockAutoMode.class);
     autoModeSelector.addAutoCommand("5 Disc", FiveDiscAutoMode.class);
     autoModeSelector.addAutoCommand("4 Disc", FourDiscAutoMode.class);
     autoModeSelector.addAutoCommand("2 Disc", TwoDiscAutoMode.class);
-    autoModeSelector.addAutoCommand("Center (Side)", CenterDiscSideAutoMode.class);
-    autoModeSelector.addAutoCommand("Center (Middle)", CenterDiscMiddleAutoMode.class);
+
     autoModeSelector.addAutoCommand("Test Auto", TestAutoMode.class);
     autoModeSelector.addAutoCommand("Drive Test", DriveMotorTestAutoMode.class);
     autoModeSelector.addAutoCommand("Tune Drive", TuneDriveAutoMode.class);

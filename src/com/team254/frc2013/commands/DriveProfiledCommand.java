@@ -14,14 +14,20 @@ public class DriveProfiledCommand extends CommandBase {
   private double timeout;
   private double angle;
   MotionProfile profile = null;
+  boolean doEnd = true;
 
-  public DriveProfiledCommand(double distance, double speed, double angle, double timeout) {
+  public DriveProfiledCommand(double distance, double speed, double angle, double timeout, boolean doEnd) {
     requires(drive);
     this.distance = distance;
     this.speed = speed;
     this.timeout = timeout;
     this.angle = angle;
+    this.doEnd = doEnd;
   }
+
+   public DriveProfiledCommand(double distance, double speed, double angle, double timeout) {
+     this(distance, speed, angle, timeout, true);
+   }
 
   public DriveProfiledCommand(double distance, double speed, double angle, double timeout,
                               MotionProfile profile) {
@@ -41,7 +47,7 @@ public class DriveProfiledCommand extends CommandBase {
   }
 
   protected boolean isFinished() {
-    return drive.onTarget() || isTimedOut();
+    return doEnd && (drive.onTarget() || isTimedOut());
   }
 
   protected void end() {
