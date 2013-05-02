@@ -1,12 +1,3 @@
-/*
- * FIRST Team 254 - The Cheesy Poofs
- * Team 254 Lib
- * Control
- * Mechanisms
- * Flywheel Controller
- *
- * Controls a flywheel using full state feedback.
- */
 package com.team254.lib.control.impl;
 
 import com.team254.lib.control.ControlOutput;
@@ -18,11 +9,11 @@ import com.team254.lib.util.Matrix;
 import edu.wpi.first.wpilibj.DriverStation;
 
 /**
+ * Controls a flywheel using full state feedback.
  *
- * @author Tom Bottiglieri
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class FlywheelController extends StateSpaceController {
-
   ControlOutput output;
   ControlSource sensor;
   double velGoal; // Radians per second
@@ -36,11 +27,13 @@ public class FlywheelController extends StateSpaceController {
   double targetError = 25;
   Debouncer filter = new Debouncer(.15);
 
-  public FlywheelController(String name, ControlOutput output, ControlSource sensor, StateSpaceGains gains) {
+  public FlywheelController(String name, ControlOutput output,
+          ControlSource sensor, StateSpaceGains gains) {
     this(name, output, sensor, gains, 1 / 100.0);
   }
 
-  public FlywheelController(String name, ControlOutput output, ControlSource sensor, StateSpaceGains gains, double period) {
+  public FlywheelController(String name, ControlOutput output,
+          ControlSource sensor, StateSpaceGains gains, double period) {
     super(name, 1, 1, 2, gains, period);
     this.output = output;
     this.sensor = sensor;
@@ -51,21 +44,21 @@ public class FlywheelController extends StateSpaceController {
   }
 
   public void capU() {
-      double deltaU = U.get(0);
-      double u_max = Umax.get(0);
-      double u_min = Umin.get(0);
-      double u = Xhat.get(0);
+    double deltaU = U.get(0);
+    double u_max = Umax.get(0);
+    double u_min = Umin.get(0);
+    double u = Xhat.get(0);
 
-      double upWindow = u_max - outputVoltage;
-      double downWindow = u_min - outputVoltage;
+    double upWindow = u_max - outputVoltage;
+    double downWindow = u_min - outputVoltage;
 
-      if (deltaU > upWindow) {
-        deltaU = upWindow ;
-      } else if (deltaU < downWindow) {
-        deltaU = downWindow;
-      }
-      outputVoltage += deltaU;
-      U.set(0, deltaU);
+    if (deltaU > upWindow) {
+      deltaU = upWindow ;
+    } else if (deltaU < downWindow) {
+      deltaU = downWindow;
+    }
+    outputVoltage += deltaU;
+    U.set(0, deltaU);
   }
 
   public void update() {
@@ -79,12 +72,12 @@ public class FlywheelController extends StateSpaceController {
 
     this.y.set(0,0, curSensorVel); //flash(new double[]{curSensorVel});
 
- //   r.flash(new double[]{(velGoal * (1 - A.get(1,1)))/ A.get(1,0), velGoal});
+    //r.flash(new double[]{(velGoal * (1 - A.get(1,1)))/ A.get(1,0), velGoal});
     r.set(0,0, (velGoal * (1 - A.get(1,1)))/ A.get(1,0) );
     r.set(1,0, velGoal);
 
 
-    // Update SSC
+    // Update state space controller
     update(r, y);
 
     double voltage = DriverStation.getInstance().getBatteryVoltage();

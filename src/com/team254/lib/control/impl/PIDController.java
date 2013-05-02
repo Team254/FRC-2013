@@ -154,7 +154,8 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
   }
 
   public boolean onTarget() {
-    boolean done = !enabled || (Math.abs(goal - lastSource) < onTargetError) && (Math.abs(lastDeltaError) < onTargetDeltaError);
+    boolean done = !enabled || (Math.abs(goal - lastSource) < onTargetError) &&
+            (Math.abs(lastDeltaError) < onTargetDeltaError);
     if (done) {
       System.out.println(name + " DONE");
     }

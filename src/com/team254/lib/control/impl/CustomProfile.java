@@ -17,7 +17,6 @@ public class CustomProfile implements MotionProfile {
 
 
   public double updateSetpoint(double curSetpoint, double curSource, double curTime) {
-
     double period = Math.abs(curTime - lastTime);
     double vel = i.get(curSource);
 
@@ -30,7 +29,8 @@ public class CustomProfile implements MotionProfile {
       done = true;
     }
     lastTime = curTime;
-    System.out.println(goal + " " + setpoint + " " + (vel * period * sign) +  " " + curSource + " " + vel + " " + curSetpoint);
+    System.out.println(goal + " " + setpoint + " " + (vel * period * sign) +
+            " " + curSource + " " + vel + " " + curSetpoint);
     if (done) {
       return goal;
     }

@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
+ * Wait for a button to be pressed before acting.
  *
  * @author tom@team254.com (Tom Bottiglieri)
  */

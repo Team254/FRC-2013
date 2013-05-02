@@ -29,8 +29,6 @@ public class CheesyDriveCommand extends CommandBase {
     if (DriverStation.getInstance().isAutonomous()) {
       return;
     }
-   // p.println(intake.getEncoderCount() + "");
-   // p.println(drive.getLeftEncoderDistance() + " " + drive.getRightEncoderDistance());
     boolean isQuickTurn = controlBoard.getQuickTurn();
     boolean isHighGear = controlBoard.getHighGear();
     drive.shift(isHighGear);
@@ -39,7 +37,6 @@ public class CheesyDriveCommand extends CommandBase {
 
     double wheel = handleDeadband(controlBoard.rightStick.getX(), wheelDeadband);
     double throttle = -handleDeadband(controlBoard.leftStick.getY(), throttleDeadband);
-   // System.out.println("Throttle: " + throttle + ", wheel: " + wheel);
 
     double negInertia = wheel - oldWheel;
     oldWheel = wheel;

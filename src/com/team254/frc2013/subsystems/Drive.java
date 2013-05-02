@@ -74,14 +74,18 @@ public class Drive extends Subsystem {
   }
 
   TrapezoidProfile profile = new TrapezoidProfile(6 * 12.0, .25);
-  PIDGains lowStraightGains = new PIDGains(Constants.driveStraightKPLow, Constants.driveStraightKILow, Constants.driveStraightKDLow);
-  PIDGains highStraightGains = new PIDGains(Constants.driveStraightKPHigh, Constants.driveStraightKIHigh, Constants.driveStraightKDHigh);
+  PIDGains lowStraightGains = new PIDGains(Constants.driveStraightKPLow,
+          Constants.driveStraightKILow, Constants.driveStraightKDLow);
+  PIDGains highStraightGains = new PIDGains(Constants.driveStraightKPHigh,
+          Constants.driveStraightKIHigh, Constants.driveStraightKDHigh);
   ProfiledPIDController straightController = new ProfiledPIDController("straightController",
           highStraightGains,
           new DriveControlSource(true), new DriveControlOutput(true), profile);
 
-  PIDGains lowTurnGains = new PIDGains(Constants.driveTurnKPLow, Constants.driveTurnKILow, Constants.driveTurnKDLow);
-  PIDGains highTurnGains = new PIDGains(Constants.driveTurnKPHigh, Constants.driveTurnKIHigh, Constants.driveTurnKDHigh);
+  PIDGains lowTurnGains = new PIDGains(Constants.driveTurnKPLow,
+          Constants.driveTurnKILow, Constants.driveTurnKDLow);
+  PIDGains highTurnGains = new PIDGains(Constants.driveTurnKPHigh,
+          Constants.driveTurnKIHigh, Constants.driveTurnKDHigh);
   PIDController turnController = new PIDController("turnController",
           highTurnGains,
           new DriveControlSource(false), new DriveControlOutput(false));;

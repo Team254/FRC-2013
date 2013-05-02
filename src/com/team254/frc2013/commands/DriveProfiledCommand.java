@@ -1,7 +1,6 @@
 package com.team254.frc2013.commands;
 
 import com.team254.lib.control.MotionProfile;
-import edu.wpi.first.wpilibj.Timer;
 
 /**
  * Controls the robot drivetrain to drive in a straight line to a certain distance.

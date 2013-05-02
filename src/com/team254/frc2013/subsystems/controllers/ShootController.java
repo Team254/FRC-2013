@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.subsystems.controllers;
 
 import com.team254.frc2013.subsystems.Conveyor;
@@ -12,8 +8,9 @@ import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
+ * Represents the shooter as a state machine.
  *
- * @author tombot
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class ShootController extends PeriodicSubsystem {
 
@@ -218,9 +215,11 @@ public class ShootController extends PeriodicSubsystem {
         wantIndexerUp = true;
         wantExtend = true;
         wantShoot = false;
-        System.out.println("r " +s.getRpm() + " " + (s.getRpm() < (s.getRpmGoal() - 2500)) + " " + (s.getRpmGoal() - 2500));
+        System.out.println("r " +s.getRpm() + " " + (s.getRpm() <
+                (s.getRpmGoal() - 2500)) + " " + (s.getRpmGoal() - 2500));
         if ((s.getRpm() < (s.getRpmGoal() - 2500)) || timedOut(.5)) {
-          System.out.println("SHOT " + s.getRpmGoal() + " , " + s.getRpm() + " , " + stateTimer.get());
+          System.out.println("SHOT " + s.getRpmGoal() + " , " +
+                  s.getRpm() + " , " + stateTimer.get());
           shotCount++;
           state = SHOOT_GO_DOWN;
         }

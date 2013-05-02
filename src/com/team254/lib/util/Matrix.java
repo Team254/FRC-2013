@@ -1,15 +1,8 @@
-/*
- * FIRST Team 254 - The Cheesy Poofs
- * Team 254 Lib
- * Matrix
- *
- * This is a matrix implementation. All fields are doubles.
- */
-
 package com.team254.lib.util;
 
 /**
- *
+ * Matrix implementation. All fields are doubles.
+ * 
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class Matrix {

@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
+ * Load disk into indexer by running the conveyor.
  *
- * @author tombot
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class LoadDiscIntoIndexerCommand extends CommandGroup {
   public LoadDiscIntoIndexerCommand() {

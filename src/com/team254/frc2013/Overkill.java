@@ -30,7 +30,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
  * @author richard@team254.com (Richard Lin)
  */
 public class Overkill extends IterativeRobot {
-
   private AutoModeSelector autoModeSelector;
   private CommandGroup currentAutoMode;
   private AutoHangCommand autoHangCommand;
@@ -97,8 +96,6 @@ public class Overkill extends IterativeRobot {
   }
 
   public void disabledPeriodic() {
-    //System.out.println("HE Up: " + CommandBase.shooter.isIndexerSensedUp() + ", Down: " + CommandBase.shooter.isIndexerSensedDown());
-
     boolean autonSelectButton =
             CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState();
     if (autonSelectLatch.update(autonSelectButton)) {
@@ -128,7 +125,6 @@ public class Overkill extends IterativeRobot {
       gyroDriftDetector.reset();
       curAngle = CommandBase.drive.getGyroAngle();
       System.out.println("Finished auto-reinit gyro");
-
     }
     lastAngle = curAngle;
   }
@@ -204,7 +200,8 @@ public class Overkill extends IterativeRobot {
 
     // Do we want to shoot?
     CommandBase.sc.wantRapidFire = CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState();
-    CommandBase.sc.wantShoot = CommandBase.controlBoard.operatorJoystick.getShootButtonState() || CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState();
+    CommandBase.sc.wantShoot = CommandBase.controlBoard.operatorJoystick.getShootButtonState() ||
+            CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState();
     if (!CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState()) {
       CommandBase.rapidFireShots = 0;
     }
@@ -222,7 +219,6 @@ public class Overkill extends IterativeRobot {
 
     CommandBase.sc.wantIntakeUp = CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch() == 1;
     CommandBase.sc.wantIntakeDown = CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch() == -1;
-    // System.out.println(CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch());
     // Set 10pt hang up/down.
     CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
 
@@ -236,7 +232,8 @@ public class Overkill extends IterativeRobot {
       Scheduler.getInstance().add(autoHangCommand);
     }
 
-    if (autoHangStarted && autoHangCommand != null && CommandBase.startedAutoHang && Math.abs(CommandBase.controlBoard.leftStick.getY()) > .5) {
+    if (autoHangStarted && autoHangCommand != null && CommandBase.startedAutoHang &&
+            Math.abs(CommandBase.controlBoard.leftStick.getY()) > .5) {
       System.out.println("Canceling climb due to joystick.");
       autoHangCommand.cancel();
       autoHangCommand = null;
@@ -258,24 +255,31 @@ public class Overkill extends IterativeRobot {
   }
 
   private void updateLCD() {
-    String driveEncoders = "U" + (CommandBase.shooter.isIndexerSensedUp() ? 1 : 0) + " D" + (CommandBase.shooter.isIndexerSensedDown() ? 1 : 0);
+    String driveEncoders = "U" + (CommandBase.shooter.isIndexerSensedUp() ? 1 : 0) +
+            " D" + (CommandBase.shooter.isIndexerSensedDown() ? 1 : 0);
     driveEncoders += " L: " + (Math.floor(CommandBase.motors.getLeftEncoder().get()) * 10) / 10.0;
     driveEncoders += " R: " + (Math.floor(CommandBase.drive.getRightEncoderDistance()) * 10) / 10.0;
     DriverStationLCD lcd = DriverStationLCD.getInstance();
+
     lcd.println(DriverStationLCD.Line.kUser2, 1, driveEncoders + "     ");
+    
     lcd.println(DriverStationLCD.Line.kUser3, 1,
             "Gy: " + Math.floor(CommandBase.drive.getGyroAngle() * 100) / 100
             + " Pitch: " + Math.floor(CommandBase.hanger.getPitchAngle() * 10) / 10);
+
     lcd.println(DriverStationLCD.Line.kUser4, 1,
             "D:" + (CommandBase.shooter.isIndexerLoaded() ? 1 : 0) + " | "
             + (Math.floor(CommandBase.controlBoard.leftStick.getY() * 100) / 100.0) + "|"
             + (Math.floor(CommandBase.controlBoard.rightStick.getX() * 100) / 100.0) + "    ");
+
     lcd.println(DriverStationLCD.Line.kUser5, 1,
             "?: " + CommandBase.shooter.onSpeedTarget() + " RPM: "
             + Math.floor(CommandBase.shooter.lastRpm * 10) / 10 + "     ");
+
     lcd.println(DriverStationLCD.Line.kUser6, 1,
-            "Pr: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + " Z:" + (CommandBase.intake.getZeroSensor() ? 1 : 0)
-            + " W:" + CommandBase.intake.controller.pos);
+            "Pr: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + 
+            " Z:" + (CommandBase.intake.getZeroSensor() ? 1 : 0) +
+            " W:" + CommandBase.intake.controller.pos);
     lcd.updateLCD();
   }
 }

@@ -3,8 +3,8 @@ package com.team254.frc2013.commands;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
- * Checks the pitch of the robot and waits for it to be swinging, indicating that the robot is off
- * the ground.
+ * Checks the pitch of the robot and waits for it to be swinging,
+ *  indicating that the robot is off the ground.
  *
  * @author pat@team254.com (Patrick Fairbank)
  */

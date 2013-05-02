@@ -15,7 +15,8 @@ public class PressureTransducer {
   }
 
   public double getPsi() {
-    // Voltage scales linearly; this number came from taking sensor readings and plotting in Excel.
+    // Voltage scales linearly
+    // This number came from taking sensor readings and plotting data.
     return 38.823 * sensor.getVoltage() - 32.976;
   }
 }

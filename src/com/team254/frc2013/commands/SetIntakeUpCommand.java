@@ -1,7 +1,5 @@
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.Timer;
-
 /**
  * Raises the intake.
  *

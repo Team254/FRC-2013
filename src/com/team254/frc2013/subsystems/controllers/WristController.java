@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.subsystems.controllers;
 
 import com.team254.lib.control.ControlOutput;
@@ -13,10 +9,10 @@ import com.team254.lib.util.ThrottledPrinter;
 import edu.wpi.first.wpilibj.DriverStation;
 
 /**
+ * Model intake wrist as a state space controller.
  *
- * @author tombot
- *
- * Thanks Austin.
+ * @author tom@team254.com (Tom Bottiglieri)
+ * @author austin.linux@gmail.com (Austin Schuh)
  */
 public class WristController extends StateSpaceController {
 
@@ -46,11 +42,13 @@ public class WristController extends StateSpaceController {
   int index = 0;
   public double pos = 0;
 
-  public WristController(String name, ControlOutput output, ControlSource sensor, StateSpaceGains gains) {
+  public WristController(String name, ControlOutput output,
+          ControlSource sensor, StateSpaceGains gains) {
     this(name, output, sensor, gains, 1 / 100.0);
   }
 
-  public WristController(String name, ControlOutput output, ControlSource sensor, StateSpaceGains gains, double period) {
+  public WristController(String name, ControlOutput output,
+          ControlSource sensor, StateSpaceGains gains, double period) {
     super(name, 1, 1, 2, gains, period);
     this.output = output;
     this.sensor = sensor;
@@ -184,7 +182,9 @@ public class WristController extends StateSpaceController {
         r.set(1, 0, 0);
 
         if (zeroSensor != lastZeroSensor) {
-          System.out.println("EDGE " + zeroSensor + " " + absolute_position + "  " + cur_position + " " + zero_offset_ + " " + DriverStation.getInstance().getBatteryVoltage());
+          System.out.println("EDGE " + zeroSensor + " " + absolute_position + 
+                  "  " + cur_position + " " + zero_offset_ + " " +
+                  DriverStation.getInstance().getBatteryVoltage());
           if (Math.abs(absolute_position - zero_sensor_position) > 0.15) {
             System.out.println("Would be REZEROING");
           }

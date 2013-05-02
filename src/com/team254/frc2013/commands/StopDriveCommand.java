@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 /**
+ * Stop driving.
  *
- * @author tombot
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class StopDriveCommand extends CommandBase {
 

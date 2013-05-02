@@ -22,7 +22,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CenterDiscMiddleAutoMode extends CommandGroup {
 
   public CenterDiscMiddleAutoMode(int numLastDiscs) {
-     addSequential(new CenterDiscPartialAutoMode());
+    addSequential(new CenterDiscPartialAutoMode());
 
     // Drive to back of pyramid
 

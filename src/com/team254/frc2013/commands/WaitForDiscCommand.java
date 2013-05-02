@@ -1,14 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 import com.team254.lib.util.Debouncer;
 
 /**
+ * Checks if a disc is sensed in the indexer.
  *
- * @author tombot
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class WaitForDiscCommand extends CommandBase {
 
@@ -27,8 +24,11 @@ public class WaitForDiscCommand extends CommandBase {
   protected boolean isFinished() {
     boolean indexerUp = !shooter.isIndexerSetDown();
     boolean sensor = d.update(shooter.isIndexerLoaded()) ;
-    boolean timedOut = CommandBase.controlBoard.operatorJoystick.getControlLoopsSwitchState() && isTimedOut();
-    if (indexerUp || sensor || timedOut || !CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState())  // indexer up OR disk sensor OR timeout
+    boolean timedOut = CommandBase.controlBoard.operatorJoystick.getControlLoopsSwitchState() && 
+            isTimedOut();
+    // check if indexer up OR disk sensor OR timeout
+    if (indexerUp || sensor || timedOut ||
+            !CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState())
     {
       System.out.println("Has disc: " + indexerUp + " " + sensor + " " + timedOut);
       return true;

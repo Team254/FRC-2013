@@ -12,8 +12,8 @@ import com.team254.lib.control.impl.CustomProfile;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * Scores three starting discs from the back of the pyramid, picks up four more, then scores them
- * from the front of the pyramid.
+ * Scores three starting discs from the back of the pyramid, picks up four more,
+ * then scores them from the front of the pyramid.
 
  * @author tom@team254.com (Tom Bottiglieri)
  * @author pat@team254.com (Patrick Fairbank)

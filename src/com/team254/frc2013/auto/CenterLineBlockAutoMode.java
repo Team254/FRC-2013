@@ -1,6 +1,3 @@
-/*
- * Sit on the center line to block opponents in auto mode
- */
 package com.team254.frc2013.auto;
 
 import com.team254.frc2013.commands.CheckIntakeCalibratedCommand;
@@ -21,8 +18,9 @@ import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
+ * Sit on the center line to block opponents in auto mode.
  *
- * @author tom@team254.com
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class CenterLineBlockAutoMode extends CommandGroup {
 

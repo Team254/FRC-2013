@@ -3,6 +3,7 @@ package com.team254.lib.util;
 import java.util.Vector;
 
 /**
+ * 
  *
  * @author tom@team254.com (Tom Bottiglieri)
  */
@@ -65,7 +66,8 @@ public class Interpolator {
     if (ceiling.equals(floor)) {
       return floor.value;
     }
-    double val = (((floor.value - ceiling.value) / (floor.key - ceiling.key)) * (k - floor.key)) + floor.value;
+    double val = (((floor.value - ceiling.value) / (floor.key - ceiling.key)) *
+            (k - floor.key)) + floor.value;
     return val;
   }
 

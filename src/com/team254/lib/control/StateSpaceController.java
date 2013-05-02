@@ -42,7 +42,8 @@ public abstract class StateSpaceController extends Controller {
   protected Matrix Umax;
 
 
-  public StateSpaceController(String name, int nIn, int nOut, int nStates, StateSpaceGains ssg, double period) {
+  public StateSpaceController(String name, int nIn, int nOut, int nStates,
+          StateSpaceGains ssg, double period) {
     super(name);
     numInputs = nIn;
     numOutputs = nOut;

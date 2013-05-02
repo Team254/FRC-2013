@@ -1,8 +1,8 @@
 package com.team254.frc2013.subsystems;
 
-import com.team254.frc2013.subsystems.controllers.WristController;
 import com.team254.frc2013.Constants;
 import com.team254.frc2013.WristGains;
+import com.team254.frc2013.subsystems.controllers.WristController;
 import com.team254.lib.control.ControlOutput;
 import com.team254.lib.control.ControlSource;
 import com.team254.lib.util.Util;
@@ -21,7 +21,8 @@ public class Intake extends Subsystem {
 
   private Talon intakeMotor = new Talon(Constants.intakePort.getInt());
   private Talon intakePivotMotor = new Talon(Constants.intakePivotPort.getInt());
-  private Encoder encoder = new Encoder(Constants.intakeEncoderPortA.getInt(), Constants.intakeEncoderPortB.getInt());
+  private Encoder encoder = new Encoder(Constants.intakeEncoderPortA.getInt(),
+          Constants.intakeEncoderPortB.getInt());
   private DigitalInput zeroSensor = new DigitalInput(Constants.intakeZeroSensorPort.getInt());
 
   public Intake() {
@@ -33,7 +34,6 @@ public class Intake extends Subsystem {
 
     public double get() {
       double v = -encoder.get() * (2 * Math.PI / 921.6);
-      //  System.out.println("v : " + v);
 
       return v;
     }
@@ -53,7 +53,6 @@ public class Intake extends Subsystem {
   class WristOutput implements ControlOutput {
 
     public void set(double value) {
-      // System.out.println("out: " + value);
       intakePivotMotor.set(-value);
     }
   }

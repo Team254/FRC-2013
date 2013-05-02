@@ -44,7 +44,8 @@ public class ProfiledPIDController extends PIDController {
   }
 
   public boolean onTarget() {
-    boolean done = !enabled || (Math.abs(origGoal - lastSource) < onTargetError) && (Math.abs(lastDeltaError) < onTargetDeltaError);
+    boolean done = !enabled || (Math.abs(origGoal - lastSource) < onTargetError)
+            && (Math.abs(lastDeltaError) < onTargetDeltaError);
     if (done) {
       System.out.println(name + " DONE");
     }

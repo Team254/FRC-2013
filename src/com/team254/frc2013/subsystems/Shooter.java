@@ -89,7 +89,8 @@ public class Shooter extends Subsystem {
       backMotor.set(-value);
     }
   }
-  FlywheelController controller = new FlywheelController("shooter", new ShooterOutput(), new ShooterSource(), ShooterGains.getGains()[0], 1.0 / 100.0);
+  FlywheelController controller = new FlywheelController("shooter", new ShooterOutput(),
+          new ShooterSource(), ShooterGains.getGains()[0], 1.0 / 100.0);
   private double frontPower;
   private double backPower;
   private boolean shooterOn;

@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.auto;
 
 import com.team254.frc2013.commands.CheckIntakeCalibratedCommand;
@@ -21,8 +17,9 @@ import com.team254.frc2013.subsystems.Shooter;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
+ * Shoots 3 discs, drives to center line, then pick up discs.
  *
- * @author tom@team254.com
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class CenterDiscPartialAutoMode extends CommandGroup {
 
