@@ -3,7 +3,7 @@ package com.team254.lib.util;
 import java.util.Vector;
 
 /**
- * 
+ *
  *
  * @author tom@team254.com (Tom Bottiglieri)
  */

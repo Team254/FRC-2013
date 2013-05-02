@@ -182,7 +182,7 @@ public class WristController extends StateSpaceController {
         r.set(1, 0, 0);
 
         if (zeroSensor != lastZeroSensor) {
-          System.out.println("EDGE " + zeroSensor + " " + absolute_position + 
+          System.out.println("EDGE " + zeroSensor + " " + absolute_position +
                   "  " + cur_position + " " + zero_offset_ + " " +
                   DriverStation.getInstance().getBatteryVoltage());
           if (Math.abs(absolute_position - zero_sensor_position) > 0.15) {

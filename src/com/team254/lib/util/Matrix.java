@@ -2,7 +2,7 @@ package com.team254.lib.util;
 
 /**
  * Matrix implementation. All fields are doubles.
- * 
+ *
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class Matrix {

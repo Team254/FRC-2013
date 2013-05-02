@@ -262,7 +262,7 @@ public class Overkill extends IterativeRobot {
     DriverStationLCD lcd = DriverStationLCD.getInstance();
 
     lcd.println(DriverStationLCD.Line.kUser2, 1, driveEncoders + "     ");
-    
+
     lcd.println(DriverStationLCD.Line.kUser3, 1,
             "Gy: " + Math.floor(CommandBase.drive.getGyroAngle() * 100) / 100
             + " Pitch: " + Math.floor(CommandBase.hanger.getPitchAngle() * 10) / 10);
@@ -277,7 +277,7 @@ public class Overkill extends IterativeRobot {
             + Math.floor(CommandBase.shooter.lastRpm * 10) / 10 + "     ");
 
     lcd.println(DriverStationLCD.Line.kUser6, 1,
-            "Pr: " + Math.floor(CommandBase.pressureTransducer.getPsi()) + 
+            "Pr: " + Math.floor(CommandBase.pressureTransducer.getPsi()) +
             " Z:" + (CommandBase.intake.getZeroSensor() ? 1 : 0) +
             " W:" + CommandBase.intake.controller.pos);
     lcd.updateLCD();
