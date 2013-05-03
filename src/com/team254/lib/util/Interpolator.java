@@ -3,7 +3,7 @@ package com.team254.lib.util;
 import java.util.Vector;
 
 /**
- *
+ * Map that stores keys and values.
  *
  * @author tom@team254.com (Tom Bottiglieri)
  */

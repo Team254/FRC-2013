@@ -50,7 +50,8 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
   }
 
   public void update() {
-    lastSource = source.get();
+    lastSource = source.get(); // get the source
+    // perform calculations on the source
     double out = 0;
     double error = goal - lastSource;
     double p = gains.getP() * error;
@@ -64,7 +65,7 @@ public class PIDController extends Controller implements IUtility, LiveWindowSen
     double ff = gains.getF() * goal;
     if (enabled) {
       out = ff + p + i + d;
-      output.set(out);
+      output.set(out); // set output
       lastOut = out;
     }
     lastDeltaError = dError;

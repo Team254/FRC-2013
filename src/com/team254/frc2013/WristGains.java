@@ -2,6 +2,11 @@ package com.team254.frc2013;
 
 import com.team254.lib.control.StateSpaceGains;
 
+/**
+ * Gains for the wrist state space controller.
+ *
+ * @author richard@team254.com (Richard Lin)
+ */
 public class WristGains {
   static public StateSpaceGains[] getGains() {
     return new StateSpaceGains[] {
