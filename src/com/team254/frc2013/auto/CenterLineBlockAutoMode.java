@@ -5,8 +5,6 @@ import com.team254.frc2013.commands.DriveAtSpeedCommand;
 import com.team254.frc2013.commands.DriveProfiledCommand;
 import com.team254.frc2013.commands.ResetDriveEncodersCommand;
 import com.team254.frc2013.commands.ResetGyroCommand;
-import com.team254.frc2013.commands.RunIntakeCommand;
-import com.team254.frc2013.commands.SetIntakeDownCommand;
 import com.team254.frc2013.commands.SetIntakeUpCommand;
 import com.team254.frc2013.commands.ShiftCommand;
 import com.team254.frc2013.commands.ShootSequenceCommand;

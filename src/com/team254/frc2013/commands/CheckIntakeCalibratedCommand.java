@@ -1,7 +1,5 @@
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.DriverStation;
-
 /**
  * Checks to see if intake is ready
  *

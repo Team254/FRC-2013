@@ -8,28 +8,28 @@ import edu.wpi.first.wpilibj.Encoder;
  * @author tom@team254.com (Tom Bottiglieri)
  */
 public class RelativeEncoder {
-  private Encoder e;
+  private Encoder encoder;
   int val;
 
   public RelativeEncoder(Encoder e) {
-    this.e = e;
+    this.encoder = e;
     val = 0;
   }
 
   public void reset() {
-    val = e.get();
+    val = encoder.get();
   }
 
   public void resetAbsolute() {
-    e.reset();
+    encoder.reset();
     reset();
   }
 
   public int get() {
-    return e.get() - val;
+    return encoder.get() - val;
   }
 
   public void start() {
-    e.start();
+    encoder.start();
   }
 }

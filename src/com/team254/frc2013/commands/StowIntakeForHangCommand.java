@@ -1,7 +1,5 @@
 package com.team254.frc2013.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
  * Stow the intake when preparing to hang.
  *

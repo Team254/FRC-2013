@@ -15,8 +15,9 @@ public class Matrix {
     width = nCols;
     height = nRows;
     data = new double[width * height];
-    for(i = 0; i<nRows*nCols; i++)
+    for(i = 0; i<nRows*nCols; i++) {
       data[i] = 0.0;
+    }
   }
 
   public double[] getData() {

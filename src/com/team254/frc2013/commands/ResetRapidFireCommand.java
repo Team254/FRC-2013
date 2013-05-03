@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.team254.frc2013.commands;
 
 /**
  * Resets the rapid fire counter
  *
- * @author tom@team254.com
+ * @author tom@team254.com (Tom Bottiglieri)
  */
 public class ResetRapidFireCommand extends CommandBase {
 

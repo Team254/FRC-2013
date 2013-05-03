@@ -1,19 +1,11 @@
-/*
- * FIRST Team 254 - The Cheesy Poofs
- * Team 254 Lib
- * Control
- * StateSpaceController
- *
- * This class contains the control logic for a State Space Controller.
- */
-
 package com.team254.lib.control;
 
 import com.team254.lib.util.Matrix;
 
 
 /**
- *
+ * Contains the control logic for a State Space Controller.
+ * 
  * @author tom@team254.com (Tom Bottiglieri)
  * Based on work by Austin Schuh and Parker Schuh
  */

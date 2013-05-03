@@ -1,9 +1,9 @@
 package com.team254.frc2013.auto;
 
-import com.team254.frc2013.commands.SetIntakeDownCommand;
 import com.team254.frc2013.commands.ResetDriveEncodersCommand;
 import com.team254.frc2013.commands.ResetGyroCommand;
 import com.team254.frc2013.commands.RunIntakeCommand;
+import com.team254.frc2013.commands.SetIntakeDownCommand;
 import com.team254.frc2013.commands.ShootSequenceCommand;
 import com.team254.frc2013.commands.ShooterOnCommand;
 import com.team254.frc2013.commands.ShooterPresetCommand;

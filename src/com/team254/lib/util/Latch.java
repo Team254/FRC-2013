@@ -1,7 +1,7 @@
-// Latches a boolean
 package com.team254.lib.util;
 
 /**
+ * Latches a boolean.
  *
  * @author richard@team254.com (Richard Lin)
  */
