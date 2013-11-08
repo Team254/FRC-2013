@@ -147,6 +147,11 @@ public class Overkill extends IterativeRobot {
     CommandBase.drive.resetGyro();
     currentAutoMode = autoModeSelector.getCurrentAutoModeNewInstance();
     currentAutoMode.start();
+    if (currentAutoMode.getClass() == EightDiscAutoMode.class) {
+      // Be safe about this to not jam a disc
+      CommandBase.sc.wantIntakeDown = true;
+      CommandBase.sc.wantIntakeUp = false;
+    }
     CommandBase.autonTimer.start();
   }
 

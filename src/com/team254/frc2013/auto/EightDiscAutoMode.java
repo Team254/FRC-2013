@@ -29,9 +29,9 @@ public class EightDiscAutoMode extends CommandGroup {
 
   public EightDiscAutoMode() {
     // Shoot first discs
+    addSequential(new SetIntakeDownCommand());
     addSequential(new ShooterOnCommand(true));
     addSequential(new ShooterPresetCommand(Shooter.PRESET_BACK_PYRAMID));
-    addSequential(new SetIntakeDownCommand());
     addSequential(new ShiftCommand(false));
     addSequential(new ShootSequenceCommand());
     addSequential(new ShootSequenceCommand());
