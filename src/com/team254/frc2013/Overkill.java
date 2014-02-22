@@ -277,7 +277,7 @@ public class Overkill extends IterativeRobot {
     lcd.println(DriverStationLCD.Line.kUser4, 1,
             "D:" + (CommandBase.shooter.isIndexerLoaded() ? 1 : 0) + " | "
             + (Math.floor(CommandBase.controlBoard.leftStick.getY() * 100) / 100.0) + "|"
-            + (Math.floor(CommandBase.controlBoard.rightStick.getX() * 100) / 100.0) + "    ");
+            + (Math.floor(CommandBase.controlBoard.rightStick.getY() * 100) / 100.0) + "    ");
 
     lcd.println(DriverStationLCD.Line.kUser5, 1,
             "?: " + CommandBase.shooter.onSpeedTarget() + " RPM: "
