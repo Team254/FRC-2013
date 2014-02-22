@@ -144,9 +144,9 @@ public class CheesyDriveCommand extends CommandBase {
       rightPwm = -1.0;
     }
 
-    drive.setLeftRightPower(leftPwm, rightPwm);
+    drive.setLeftRightPower(CommandBase.controlBoard.leftStick.getY(), CommandBase.controlBoard.rightStick.getY());
   }
-
+  
   protected boolean isFinished() {
     return false;
   }
