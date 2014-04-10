@@ -189,7 +189,7 @@ public class Overkill extends IterativeRobot {
     updateLCD();
     
     double roller=  0;
-    if (CommandBase.controlBoard.leftStick.getTrigger()) {
+    if (CommandBase.controlBoard.gamePad.getTrigger()) {
       roller = 1;
     } else if( CommandBase.controlBoard.rightStick.getTrigger()) {
       roller = -1;
@@ -229,9 +229,9 @@ public class Overkill extends IterativeRobot {
 
     // Intake
     CommandBase.sc.wantIntake = CommandBase.controlBoard.operatorJoystick.getIntakeButtonState()
-            || CommandBase.controlBoard.leftStick.getRawButton(2);
+            || CommandBase.controlBoard.gamePad.getRawButton(2);
     CommandBase.sc.wantExhaust = CommandBase.controlBoard.operatorJoystick.getIntakeOutButtonState()
-            || CommandBase.controlBoard.leftStick.getTrigger();
+            || CommandBase.controlBoard.gamePad.getTrigger();
     CommandBase.sc.wantManualIndex = CommandBase.controlBoard.operatorJoystick.getIndexButtonState();
 
     CommandBase.sc.wantIntakeUp = CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch() == 1;
@@ -250,7 +250,7 @@ public class Overkill extends IterativeRobot {
     }
 
     if (autoHangStarted && autoHangCommand != null && CommandBase.startedAutoHang &&
-            Math.abs(CommandBase.controlBoard.leftStick.getY()) > .5) {
+            Math.abs(CommandBase.controlBoard.gamePad.getY()) > .5) {
       System.out.println("Canceling climb due to joystick.");
       autoHangCommand.cancel();
       autoHangCommand = null;
@@ -286,8 +286,8 @@ public class Overkill extends IterativeRobot {
 
     lcd.println(DriverStationLCD.Line.kUser4, 1,
             "D:" + (CommandBase.shooter.isIndexerLoaded() ? 1 : 0) + " | "
-            + (Math.floor(CommandBase.controlBoard.leftStick.getY() * 100) / 100.0) + "|"
-            + (Math.floor(CommandBase.controlBoard.rightStick.getX() * 100) / 100.0) + "    ");
+            + (Math.floor(CommandBase.controlBoard.gamePad.getY() * 100) / 100.0) + "|"
+            + (Math.floor(CommandBase.controlBoard.gamePad.getZ() * 100) / 100.0) + "    ");
 
     lcd.println(DriverStationLCD.Line.kUser5, 1,
             "?: " + CommandBase.shooter.onSpeedTarget() + " RPM: "
