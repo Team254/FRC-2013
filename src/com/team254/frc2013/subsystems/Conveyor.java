@@ -17,7 +17,6 @@ public class Conveyor extends Subsystem {
   }
 
   public void setMotor(double power) {
-    conveyorMotor.set(Util.limit(power, 1.0));
   }
 
   protected void initDefaultCommand() {

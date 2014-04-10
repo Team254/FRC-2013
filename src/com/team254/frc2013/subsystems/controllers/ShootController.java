@@ -325,7 +325,6 @@ public class ShootController extends PeriodicSubsystem {
     updateAngle();
 
     c.setMotor(intake);
-    i.setIntakePower(intake);
 
     firstRun = false;
     if (state != oldState) {

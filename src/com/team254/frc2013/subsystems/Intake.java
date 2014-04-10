@@ -53,7 +53,6 @@ public class Intake extends Subsystem {
   class WristOutput implements ControlOutput {
 
     public void set(double value) {
-      intakePivotMotor.set(-value);
     }
   }
   public WristController controller = new WristController("wrist", new WristOutput(), new WristSource(), WristGains.getGains()[0], 1.0 / 100.0);

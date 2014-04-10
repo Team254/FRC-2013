@@ -84,8 +84,6 @@ public class Shooter extends Subsystem {
       }
       value = Util.limit(value, 1.0);
 
-      frontMotor.set(-value);
-      backMotor.set(-value);
     }
   }
   FlywheelController controller = new FlywheelController("shooter", new ShooterOutput(),

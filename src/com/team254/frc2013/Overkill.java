@@ -187,6 +187,16 @@ public class Overkill extends IterativeRobot {
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
     updateLCD();
+    
+    double roller=  0;
+    if (CommandBase.controlBoard.leftStick.getTrigger()) {
+      roller = 1;
+    } else if( CommandBase.controlBoard.rightStick.getTrigger()) {
+      roller = -1;
+    }
+    CommandBase.intake.setIntakePower(roller);
+    
+ 
 
     // Run shooter slowly
     if (CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState()) {
