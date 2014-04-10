@@ -1,27 +1,14 @@
 package com.team254.frc2013;
 
-import com.team254.frc2013.auto.CenterDiscMiddleAutoMode;
-import com.team254.frc2013.auto.CenterDiscSideAutoMode;
-import com.team254.frc2013.auto.CenterLineBlockAutoMode;
-import com.team254.frc2013.auto.DriveMotorTestAutoMode;
-import com.team254.frc2013.auto.EightDiscAutoMode;
-import com.team254.frc2013.auto.FiveDiscAutoMode;
-import com.team254.frc2013.auto.FourDiscAutoMode;
-import com.team254.frc2013.auto.SevenDiscAutoMode;
-import com.team254.frc2013.auto.TestAutoMode;
-import com.team254.frc2013.auto.ThreeDiscAutoMode;
-import com.team254.frc2013.auto.TuneDriveAutoMode;
-import com.team254.frc2013.auto.TwoDiscAutoMode;
-import com.team254.frc2013.commands.AutoHangCommand;
+
 import com.team254.frc2013.commands.CommandBase;
-import com.team254.frc2013.commands.PtoCommand;
-import com.team254.frc2013.subsystems.Shooter;
 import com.team254.lib.control.ControlUpdater;
 import com.team254.lib.util.Debouncer;
 import com.team254.lib.util.Latch;
 import com.team254.lib.util.PIDTuner;
 import edu.wpi.first.wpilibj.DriverStationLCD;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
@@ -33,7 +20,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class Overkill extends IterativeRobot {
   private AutoModeSelector autoModeSelector;
   private CommandGroup currentAutoMode;
-  private AutoHangCommand autoHangCommand;
   private boolean autoHangStarted;
   private boolean lastStage1HangButton;
   private Latch autonSelectLatch = new Latch();
@@ -54,19 +40,7 @@ public class Overkill extends IterativeRobot {
 
     // Set up autonomous modes.
     autoModeSelector = new AutoModeSelector();
-    autoModeSelector.addAutoCommand("8 Disc", EightDiscAutoMode.class);
-    autoModeSelector.addAutoCommand("7 Disc", SevenDiscAutoMode.class);
-    autoModeSelector.addAutoCommand("3 Disc", ThreeDiscAutoMode.class);
-    autoModeSelector.addAutoCommand("Center (Middle)", CenterDiscMiddleAutoMode.class);
-    autoModeSelector.addAutoCommand("Center (Side)", CenterDiscSideAutoMode.class);
-    autoModeSelector.addAutoCommand("Center BLOCK", CenterLineBlockAutoMode.class);
-    autoModeSelector.addAutoCommand("5 Disc", FiveDiscAutoMode.class);
-    autoModeSelector.addAutoCommand("4 Disc", FourDiscAutoMode.class);
-    autoModeSelector.addAutoCommand("2 Disc", TwoDiscAutoMode.class);
 
-    autoModeSelector.addAutoCommand("Test Auto", TestAutoMode.class);
-    autoModeSelector.addAutoCommand("Drive Test", DriveMotorTestAutoMode.class);
-    autoModeSelector.addAutoCommand("Tune Drive", TuneDriveAutoMode.class);
 
     // Choose the first non-none autonomous.
     autoModeSelector.increment();
@@ -76,7 +50,7 @@ public class Overkill extends IterativeRobot {
     System.out.println("Disabled init.. reloading constants...");
     Constants.readConstantsFromFile();
     CommandBase.drive.disableControllers();
-    CommandBase.shooter.setIndexerUp(true); // Disabled is default up
+
     // Make sure that the autonomous stops running.
     if (currentAutoMode != null) {
       currentAutoMode.cancel();
@@ -84,15 +58,14 @@ public class Overkill extends IterativeRobot {
     }
 
     // Reset all things to their default positions, so that they're not left on from autonomous.
-    CommandBase.shooter.setShooterOn(false);
-    CommandBase.shooter.setPreset(Shooter.PRESET_FRONT_PYRAMID);
+
     CommandBase.intake.setIntakePower(0);
-    CommandBase.conveyor.setMotor(0);
+
     CommandBase.compressor.start();
     CommandBase.autonTimer.reset();
     CommandBase.drive.setLeftRightPower(0, 0);
     CommandBase.motors.set(0);
-    CommandBase.sc.wantHang = false;
+
 
     lastAngle = CommandBase.drive.getGyroAngle();
   }
@@ -115,8 +88,6 @@ public class Overkill extends IterativeRobot {
 
     lastStage1HangButton = CommandBase.controlBoard.getStage1Hang();
     updateLCD();
-    CommandBase.shooter.setSpeedLimit(1);
-    CommandBase.shooter.retract();
 
     double curAngle = CommandBase.drive.getGyroAngle();
     if (gyroDriftDetector.update(Math.abs(curAngle - lastAngle) > (.75 / 50.0)) && gyroReinits < 3) {
@@ -141,17 +112,13 @@ public class Overkill extends IterativeRobot {
       currentAutoMode = null;
     }
 
-    CommandBase.sc.reset();
+
 
     CommandBase.drive.resetEncoders();
     CommandBase.drive.resetGyro();
     currentAutoMode = autoModeSelector.getCurrentAutoModeNewInstance();
     currentAutoMode.start();
-    if (currentAutoMode.getClass() == EightDiscAutoMode.class) {
-      // Be safe about this to not jam a disc
-      CommandBase.sc.wantIntakeDown = true;
-      CommandBase.sc.wantIntakeUp = false;
-    }
+
     CommandBase.autonTimer.start();
   }
 
@@ -173,12 +140,6 @@ public class Overkill extends IterativeRobot {
       currentAutoMode = null;
     }
 
-    // Set up the one-shot autonomous 30-point climbing routine.
-    autoHangCommand = new AutoHangCommand();
-    autoHangStarted = false;
-    CommandBase.shooter.retract();
-    CommandBase.sc.wantForceFloor = false;
-    CommandBase.sc.wantHang = false;
   }
 
   /**
@@ -189,114 +150,25 @@ public class Overkill extends IterativeRobot {
     updateLCD();
     
     double roller=  0;
-    if (CommandBase.controlBoard.gamePad.getTrigger()) {
+    if (CommandBase.controlBoard.gamePad.getRawButton(8)) {
       roller = 1;
-    } else if( CommandBase.controlBoard.rightStick.getTrigger()) {
+    } else if( CommandBase.controlBoard.gamePad.getRawButton(7)) {
       roller = -1;
     }
     CommandBase.intake.setIntakePower(roller);
     
  
 
-    // Run shooter slowly
-    if (CommandBase.controlBoard.operatorJoystick.getAutonSelectButtonState()) {
-      CommandBase.shooter.setSpeedLimit(.35);
-    } else {
-      CommandBase.shooter.setSpeedLimit(1);
-    }
-
-    // Shooter presets
-    if (CommandBase.controlBoard.operatorJoystick.getBackPyramidButtonState()) {
-      CommandBase.shooter.setPreset(Shooter.PRESET_BACK_PYRAMID);
-    } else if (CommandBase.controlBoard.operatorJoystick.getFrontPyramidButtonState()) {
-      CommandBase.shooter.setPreset(Shooter.PRESET_FRONT_PYRAMID);
-    }
-
-    // Set shooter on/off.
-    CommandBase.shooter.setShooterOn(CommandBase.controlBoard.operatorJoystick.getShooterSwitch());
-
-    // Do we want to shoot?
-    CommandBase.sc.wantRapidFire = CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState();
-    CommandBase.sc.wantShoot = CommandBase.controlBoard.operatorJoystick.getShootButtonState() ||
-            CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState();
-    if (!CommandBase.controlBoard.operatorJoystick.getRapidFireButtonState()) {
-      CommandBase.rapidFireShots = 0;
-    }
-
-    if (CommandBase.controlBoard.operatorJoystick.getIntakeUpButtonState()) {
-      CommandBase.intake.rezero();
-    }
-
-    // Intake
-    CommandBase.sc.wantIntake = CommandBase.controlBoard.operatorJoystick.getIntakeButtonState()
-            || CommandBase.controlBoard.gamePad.getRawButton(2);
-    CommandBase.sc.wantExhaust = CommandBase.controlBoard.operatorJoystick.getIntakeOutButtonState()
-            || CommandBase.controlBoard.gamePad.getTrigger();
-    CommandBase.sc.wantManualIndex = CommandBase.controlBoard.operatorJoystick.getIndexButtonState();
-
-    CommandBase.sc.wantIntakeUp = CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch() == 1;
-    CommandBase.sc.wantIntakeDown = CommandBase.controlBoard.operatorJoystick.getIntakePositionSwitch() == -1;
-    // Set 10pt hang up/down.
-    CommandBase.hanger.setHookUp(CommandBase.controlBoard.getStage1Hang());
-
-    // Handle triggering the autonomous 30-point climbing routine.
-    if (CommandBase.controlBoard.getStage1Hang() && !lastStage1HangButton) {
-      CommandBase.hanger.resetPitchGyro();
-    } else if (!CommandBase.controlBoard.getStage1Hang() && lastStage1HangButton
-            && CommandBase.controlBoard.operatorJoystick.getClimbButtonState()
-            && autoHangCommand != null) {
-      autoHangStarted = true;
-      Scheduler.getInstance().add(autoHangCommand);
-    }
-
-    if (autoHangStarted && autoHangCommand != null && CommandBase.startedAutoHang &&
-            Math.abs(CommandBase.controlBoard.gamePad.getY()) > .5) {
-      System.out.println("Canceling climb due to joystick.");
-      autoHangCommand.cancel();
-      autoHangCommand = null;
-      Scheduler.getInstance().add(new PtoCommand());
-    }
-
-    // Control override
-    CommandBase.sc.wantControlOverride = CommandBase.controlBoard.operatorJoystick.getControlLoopsSwitchState();
-
-    // Kill the climb if the dead man switch is released.
-    if (autoHangStarted && !CommandBase.controlBoard.operatorJoystick.getClimbButtonState()
-            && autoHangCommand != null) {
-      System.out.println("Canceling climb.");
-      autoHangCommand.cancel();
-      autoHangCommand = null;
-    }
-
+ 
     lastStage1HangButton = CommandBase.controlBoard.getStage1Hang();
   }
 
   private void updateLCD() {
-    String driveEncoders = "U" + (CommandBase.shooter.isIndexerSensedUp() ? 1 : 0) +
-            " D" + (CommandBase.shooter.isIndexerSensedDown() ? 1 : 0);
-    driveEncoders += " L: " + (Math.floor(CommandBase.motors.getLeftEncoder().get()) * 10) / 10.0;
-    driveEncoders += " R: " + (Math.floor(CommandBase.drive.getRightEncoderDistance()) * 10) / 10.0;
+    
     DriverStationLCD lcd = DriverStationLCD.getInstance();
 
-    lcd.println(DriverStationLCD.Line.kUser2, 1, driveEncoders + "     ");
+    lcd.println(DriverStationLCD.Line.kUser2, 1, Timer.getFPGATimestamp() + "          ");
 
-    lcd.println(DriverStationLCD.Line.kUser3, 1,
-            "Gy: " + Math.floor(CommandBase.drive.getGyroAngle() * 100) / 100
-            + " Pitch: " + Math.floor(CommandBase.hanger.getPitchAngle() * 10) / 10);
-
-    lcd.println(DriverStationLCD.Line.kUser4, 1,
-            "D:" + (CommandBase.shooter.isIndexerLoaded() ? 1 : 0) + " | "
-            + (Math.floor(CommandBase.controlBoard.gamePad.getY() * 100) / 100.0) + "|"
-            + (Math.floor(CommandBase.controlBoard.gamePad.getZ() * 100) / 100.0) + "    ");
-
-    lcd.println(DriverStationLCD.Line.kUser5, 1,
-            "?: " + CommandBase.shooter.onSpeedTarget() + " RPM: "
-            + Math.floor(CommandBase.shooter.lastRpm * 10) / 10 + "     ");
-
-    lcd.println(DriverStationLCD.Line.kUser6, 1,
-            "Pr: " + Math.floor(CommandBase.pressureTransducer.getPsi()) +
-            " Z:" + (CommandBase.intake.getZeroSensor() ? 1 : 0) +
-            " W:" + CommandBase.intake.controller.pos);
     lcd.updateLCD();
   }
 }
