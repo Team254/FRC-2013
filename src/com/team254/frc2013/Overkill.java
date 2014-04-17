@@ -150,9 +150,9 @@ public class Overkill extends IterativeRobot {
     updateLCD();
     
     double roller=  0;
-    if (CommandBase.controlBoard.gamePad.getRawButton(8)) {
+    if (CommandBase.controlBoard.rightStick.getRawButton(1)) {
       roller = 1;
-    } else if( CommandBase.controlBoard.gamePad.getRawButton(7)) {
+    } else if( CommandBase.controlBoard.leftStick.getRawButton(1)) {
       roller = -1;
     }
     CommandBase.intake.setIntakePower(roller);

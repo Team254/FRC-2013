@@ -30,13 +30,20 @@ public class CheesyDriveCommand extends CommandBase {
       return;
     }
     boolean isQuickTurn = controlBoard.getQuickTurn();
-    boolean isHighGear = controlBoard.getHighGear();
-    drive.shift(isHighGear);
+    boolean isHighGear = !controlBoard.leftStick.getRawButton(3);
+   /* if (controlBoard.leftStick.getRawButton(4) || controlBoard.rightStick.getRawButton(4)) {
+      drive.relayShift(false);  
+    } else if (controlBoard.leftStick.getRawButton(5) || controlBoard.rightStick.getRawButton(5)){
+        drive.relayShift(true);
+    }
+           */
+    drive.relayShift(isHighGear);
+    
 
     double wheelNonLinearity;
 
-    double wheel = handleDeadband(controlBoard.gamePad.getZ(), wheelDeadband);
-    double throttle = -handleDeadband(controlBoard.gamePad.getY(), throttleDeadband);
+    double wheel = handleDeadband(controlBoard.rightStick.getX(), wheelDeadband);
+    double throttle = -handleDeadband(controlBoard.leftStick.getY(), throttleDeadband);
 
     double negInertia = wheel - oldWheel;
     oldWheel = wheel;

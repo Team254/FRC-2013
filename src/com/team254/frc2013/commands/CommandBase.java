@@ -29,7 +29,7 @@ public abstract class CommandBase extends Command {
   public static Intake intake = new Intake();
 
   public static Compressor compressor = new Compressor(Constants.pressureSwitch.getInt(),
-                                                       Constants.compressorRelay.getInt());
+                                                       2);
   public static PressureTransducer pressureTransducer =
       new PressureTransducer(Constants.pressureTransducerPort.getInt());
 

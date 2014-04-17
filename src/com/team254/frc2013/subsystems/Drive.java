@@ -12,6 +12,7 @@ import com.team254.lib.control.impl.TrapezoidProfile;
 import com.team254.lib.util.ChezyGyro;
 import com.team254.lib.util.RelativeEncoder;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -26,6 +27,7 @@ public class Drive extends Subsystem {
   RelativeEncoder rightEncoder;
 
   private Solenoid shifter = new Solenoid(Constants.shifterPort.getInt());
+  private Relay relayShifter = new Relay(Constants.compressorRelay.getInt());
   private ChezyGyro gyro = new ChezyGyro(Constants.gyroPort.getInt());
   private boolean isHighGear = true;
 
@@ -132,7 +134,14 @@ public class Drive extends Subsystem {
     System.out.println("Resetting gyro!!!!" + resets++);
     gyro.reset();
   }
-
+  
+   public void relayShift(boolean highGear) {
+    isHighGear = highGear;
+    relayShifter.set(isHighGear ? Relay.Value.kOff : Relay.Value.kForward);
+    straightController.setGains(highGear ? highStraightGains : lowStraightGains);
+    turnController.setGains(highGear ? highTurnGains : lowTurnGains);
+  }
+   
   public void shift(boolean highGear) {
     isHighGear = highGear;
     shifter.set(!isHighGear);
